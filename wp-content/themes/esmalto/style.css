@@ -255,3 +255,16 @@ body.admin-bar .esmalto-cabecera { top: 32px; }
 /* Ocultar restos de Astra que ya no se usan */
 .ast-scroll-to-top-right { background: #154734; color: #fec30c; }
 #ast-scroll-top { background-color: #154734; color: #fec30c; }
+
+/* ==========================================================================
+   4. Ajustes tras la revisión en esmalto.com
+   ========================================================================== */
+/* Astra añade 30px/20px de relleno al <article>: las secciones van a sangre */
+body.esmalto-bloques #primary .site-main > article,
+body.esmalto-bloques .site-main > article.page { padding: 0 !important; margin: 0 !important; }
+/* Astra subraya los enlaces del contenido: el diseño no */
+body.esmalto .entry-content a:not(.wp-element-button),
+body.esmalto.ast-single-post .entry-content a:not(.wp-element-button) { text-decoration: none; }
+/* Mini-cesta de la cabecera: icono, no botón amarillo */
+body.esmalto .esm-cabecera .wc-block-mini-cart__button { background: transparent !important; color: #c8d2c8 !important; padding: 8px !important; }
+body.esmalto .esm-cabecera .wc-block-mini-cart__button:hover { color: #fec30c !important; }

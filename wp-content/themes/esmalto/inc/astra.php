@@ -93,3 +93,15 @@ function esmalto_astra_defaults( $defaults ) {
 	$defaults['single-product-breadcrumb-disable'] = false;
 	return $defaults;
 }
+
+/**
+ * WooCommerce inserta automáticamente su bloque «Mi cuenta» en las cabeceras de bloques.
+ * El diseño ya tiene el botón «Clientes», así que se retira.
+ */
+add_filter( 'hooked_block_types', 'esmalto_sin_bloques_insertados', 20, 4 );
+function esmalto_sin_bloques_insertados( $hooked, $posicion, $ancla, $contexto ) {
+	if ( $contexto instanceof WP_Block_Template && 'wp_template_part' === $contexto->type && in_array( $contexto->slug, array( 'header', 'footer' ), true ) ) {
+		return array_values( array_diff( $hooked, array( 'woocommerce/customer-account', 'woocommerce/mini-cart' ) ) );
+	}
+	return $hooked;
+}
