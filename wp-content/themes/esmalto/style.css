@@ -1,0 +1,257 @@
+/*
+Theme Name: Esmalto
+Theme URI: https://www.esmalto.com
+Description: Tema hijo de Astra para Esmalto (tienda B2C + B2B de cerámica). Diseño en theme.json, secciones como patrones de bloques y cabecera/pie editables como partes de plantilla.
+Author: Kumen360
+Author URI: https://www.esmalto.com
+Template: astra
+Version: 1.0.0
+Requires at least: 6.6
+Tested up to: 7.1
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: esmalto
+*/
+
+/* ==========================================================================
+   1. Colores globales de Astra → paleta Esmalto (theme.json)
+   ========================================================================== */
+:root {
+	--ast-global-color-0: #fec30c;
+	--ast-global-color-1: #ffd75c;
+	--ast-global-color-2: #f1f1f1;
+	--ast-global-color-3: #c8d2c8;
+	--ast-global-color-4: #00330f;
+	--ast-global-color-5: #002100;
+	--ast-global-color-6: #154734;
+	--ast-global-color-7: #001a00;
+	--ast-global-color-8: #181818;
+	--esm-margen: clamp(16px, 4vw, 40px);
+	--esm-max: 1280px;
+	--esm-borde: rgba(255, 255, 255, 0.08);
+	--esm-borde-medio: rgba(255, 255, 255, 0.16);
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+html { background: #002100; }
+body,
+body.ast-separate-container,
+body.ast-plain-container,
+body.ast-page-builder-template {
+	background: var(--wp--preset--color--fondo, #002100);
+	color: var(--wp--preset--color--texto, #f1f1f1);
+	font-family: var(--wp--preset--font-family--texto);
+	font-size: 15px;
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: clip;
+}
+body .site,
+body .site-content,
+.ast-separate-container .ast-article-single,
+.ast-separate-container .ast-article-post,
+.ast-separate-container .comments-area,
+.ast-separate-container .ast-woocommerce-container,
+.ast-plain-container .site-content,
+.ast-separate-container .site-main > .ast-row {
+	background: transparent;
+}
+::selection { background: #fec30c; color: #181818; }
+
+body,
+button,
+input,
+select,
+textarea,
+.ast-button,
+.ast-custom-button {
+	font-family: var(--wp--preset--font-family--texto);
+}
+h1, h2, h3, h4, h5, h6,
+.entry-content :where(h1, h2, h3, h4, h5, h6),
+.entry-title,
+.woocommerce .product_title {
+	font-family: var(--wp--preset--font-family--titulos);
+	font-weight: 500;
+	color: var(--wp--preset--color--texto, #f1f1f1);
+}
+p { font-weight: 300; }
+a { color: #fec30c; text-decoration: none; transition: color .18s ease; }
+a:hover, a:focus { color: #ffd75c; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+	outline: 2px solid #ffd75c;
+	outline-offset: 2px;
+}
+img { max-width: 100%; height: auto; }
+
+/* Contenedor Astra al ancho del diseño */
+.ast-container,
+.ast-container-fluid {
+	max-width: calc(var(--esm-max) + 2 * var(--esm-margen));
+	padding-left: var(--esm-margen);
+	padding-right: var(--esm-margen);
+}
+
+/* Páginas de bloques: sin márgenes de Astra, las secciones mandan */
+.esmalto-bloques .site-content > .ast-container { max-width: 100%; padding: 0; }
+.esmalto-bloques .entry-header,
+.esmalto-bloques .ast-single-entry-banner { display: none; }
+.esmalto-bloques .site-main > article,
+.esmalto-bloques .entry-content { margin: 0; padding: 0; }
+.esmalto-bloques .entry-content > * { margin-block: 0; }
+.esmalto-bloques .entry-content > .alignfull { margin-left: 0; margin-right: 0; width: 100%; max-width: 100%; }
+.ast-page-builder-template .entry-content[data-ast-blocks-layout] > *,
+.ast-page-builder-template .entry-content > .alignfull { max-width: 100%; }
+
+/* Título de páginas de WooCommerce (cesta, pago, mi cuenta) */
+.ast-separate-container .entry-header,
+.ast-plain-container .entry-header { margin-bottom: 24px; }
+.page .entry-title {
+	font-size: clamp(28px, 4vw, 56px);
+	line-height: 1.1;
+}
+
+/* ==========================================================================
+   3. Formularios (Woo, WPForms, registro profesional)
+   ========================================================================== */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+select,
+textarea,
+.select2-container .select2-selection,
+.woocommerce form .form-row .input-text,
+.woocommerce form .form-row select,
+.wpforms-container input.wpforms-field-medium,
+.wpforms-container .wpforms-field input,
+.wpforms-container .wpforms-field select,
+.wpforms-container .wpforms-field textarea {
+	background: #002100;
+	color: #f1f1f1;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 0;
+	padding: 12px 14px;
+	font-size: 14px;
+	box-shadow: none;
+}
+input::placeholder, textarea::placeholder { color: #7c877c; opacity: 1; }
+input:focus, select:focus, textarea:focus,
+.woocommerce form .form-row .input-text:focus {
+	border-color: #fec30c;
+	box-shadow: none;
+	outline: none;
+}
+select { background-image: linear-gradient(45deg, transparent 50%, #c8d2c8 50%), linear-gradient(135deg, #c8d2c8 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; appearance: none; -webkit-appearance: none; padding-right: 36px; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { color: #f1f1f1; line-height: 1.4; }
+.select2-dropdown { background: #00330f; color: #f1f1f1; border-color: rgba(255, 255, 255, 0.16); }
+.select2-container--default .select2-results__option--highlighted[aria-selected] { background: #fec30c; color: #181818; }
+input[type="checkbox"], input[type="radio"] { accent-color: #fec30c; }
+label, legend { color: #c8d2c8; font-weight: 400; }
+fieldset { border-color: rgba(255, 255, 255, 0.12); }
+
+/* Botones de Astra y WooCommerce con el estilo del diseño */
+button,
+.button,
+.ast-button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.wpforms-container button[type="submit"],
+.wp-element-button {
+	background-color: #fec30c;
+	color: #181818;
+	border: 0;
+	border-radius: 0;
+	font-family: var(--wp--preset--font-family--texto);
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	line-height: 1.3;
+	padding: 15px 28px;
+	transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+button:hover,
+.button:hover,
+.ast-button:hover,
+input[type="submit"]:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.wpforms-container button[type="submit"]:hover {
+	background-color: #ffd75c;
+	color: #181818;
+}
+.woocommerce a.button.disabled,
+.woocommerce button.button:disabled,
+.woocommerce button.button.disabled,
+.woocommerce button.button:disabled[disabled] {
+	background-color: #8a968a;
+	color: #181818;
+	opacity: .6;
+}
+/* Botones de interfaz que no deben parecer CTA */
+.wp-block-navigation button,
+.wc-block-mini-cart__button,
+.wp-block-navigation__responsive-container-open,
+.wp-block-navigation__responsive-container-close,
+.pswp button,
+.flex-control-nav button,
+.wc-block-components-button.wc-block-components-panel__button,
+.wc-block-components-totals-coupon-link,
+button.wc-block-components-panel__button,
+.woocommerce-product-gallery__trigger {
+	background: none;
+	color: inherit;
+	padding: 0;
+	letter-spacing: normal;
+	text-transform: none;
+}
+
+/* Avisos */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error,
+.wc-block-components-notice-banner {
+	background: #00330f;
+	color: #f1f1f1;
+	border: 0;
+	border-left: 2px solid #fec30c;
+	border-radius: 0;
+}
+.woocommerce-error,
+.wc-block-components-notice-banner.is-error { border-left-color: #ff7b6b; }
+.woocommerce-message::before,
+.woocommerce-info::before { color: #fec30c; }
+
+/* Tablas */
+table, th, td { border-color: rgba(255, 255, 255, 0.1); }
+th { color: #f1f1f1; font-weight: 500; }
+td { color: #c8d2c8; font-weight: 300; }
+.entry-content table { border-collapse: collapse; }
+.entry-content th, .entry-content td { padding: 10px 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+
+/* Barra de administración + cabecera fija */
+.esmalto-cabecera { position: sticky; top: 0; z-index: 60; }
+body.admin-bar .esmalto-cabecera { top: 32px; }
+@media (max-width: 782px) { body.admin-bar .esmalto-cabecera { top: 46px; } }
+@media (max-width: 600px) { body.admin-bar .esmalto-cabecera { top: 0; } }
+
+/* Ocultar restos de Astra que ya no se usan */
+.ast-scroll-to-top-right { background: #154734; color: #fec30c; }
+#ast-scroll-top { background-color: #154734; color: #fec30c; }

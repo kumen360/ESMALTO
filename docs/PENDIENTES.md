@@ -22,3 +22,8 @@ Se editan en el pie (patrón sincronizado «Pie Esmalto»), en Contacto y en las
 
 ## Envíos
 - Ajustar los tramos de peso y sus precios (*WooCommerce → Ajustes → Envío → España peninsular*).
+
+## Técnico
+- Tipografías servidas desde Google Fonts. Para cumplir el RGPD conviene alojarlas en el servidor: cambia `esmalto_fonts_url` o añade los `woff2` en `theme.json`.
+- Si se añade analítica o publicidad, hará falta un banner de consentimiento de cookies.
+- WholesaleX: **no** configures descuentos en «Wholesale Pricing», porque los aplica Esmalto Core (ver `B2B.md`).

@@ -1,0 +1,8 @@
+/* Editor de bloques: lienzo con los colores y tipografías del diseño. */
+body {
+	background: #002100;
+	color: #f1f1f1;
+	font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+}
+.editor-styles-wrapper .wp-block-shortcode { background: #00330f; color: #c8d2c8; }
+.editor-styles-wrapper .wp-block-shortcode label { color: #fec30c; }

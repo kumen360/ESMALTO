@@ -15,6 +15,6 @@ Empieza por [`docs/BRIEF.md`](docs/BRIEF.md). Pendientes de la empresa: [`docs/P
 
 ## Fases
 1. Repositorio, documentación y catálogo normalizado ✅
-2. Tema hijo, `theme.json`, patrones y plugin `esmalto-core`
+2. Tema hijo, `theme.json`, patrones y plugin `esmalto-core` ✅ (probados en WordPress Playground: importación, B2B, palés, envíos, alta con CNAE)
 3. Instalación en esmalto.com: plugins, páginas, importación del catálogo, B2B, pagos y envíos
 4. Revisión final y documentación
