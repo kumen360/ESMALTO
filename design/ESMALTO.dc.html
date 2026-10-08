@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/esmalto-iso-amarillo.png">
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:#002100;overflow-x:hidden;}
+    ::selection{background:#fec30c;color:#181818;}
+    a{color:#fec30c;text-decoration:none;}
+    a:hover{color:#ffd75c;}
+    img{max-width:100%;}
+    ::-webkit-scrollbar{width:10px;height:10px;}
+    ::-webkit-scrollbar-track{background:#00330f;}
+    ::-webkit-scrollbar-thumb{background:#154734;}
+    input,textarea,select,button{font-family:Montserrat,sans-serif;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  </style>
+</helmet>
+<div style="background:#002100;color:#f1f1f1;font-family:Montserrat,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(0,26,0,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px);min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
+      <button onClick="{{ goHome }}" aria-label="ESMALTO · Inicio" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;flex:none;">
+        <img src="assets/esmalto-logo-amarillo.png" alt="ESMALTO · Cerámica para profesionales" style="height:clamp(34px,5vw,44px);width:auto;display:block;" />
+      </button>
+      <nav style="{{ navBarStyle }}">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+          <button onClick="{{ item.onClick }}" style="{{ item.style }}">{{ item.label }}</button>
+        </sc-for>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none;">
+        <button onClick="{{ goCliente }}" style="{{ clienteBtnStyle }}">Clientes</button>
+        <div style="{{ cartStyle }}">Cesta (0)</div>
+        <button onClick="{{ toggleMenu }}" aria-label="Menú" style="{{ burgerStyle }}">☰</button>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid rgba(255,255,255,0.08);padding:12px clamp(16px,4vw,40px) 20px;display:flex;flex-direction:column;gap:2px;">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+          <button onClick="{{ item.onClick }}" style="{{ item.mStyle }}">{{ item.label }}</button>
+        </sc-for>
+        <button onClick="{{ goCliente }}" style="{{ clienteMobStyle }}">Clientes · Mi cuenta</button>
+      </div>
+    </sc-if>
+  </header>
+
+  <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
+    <section style="position:relative;height:clamp(460px,78vh,760px);overflow:hidden;">
+      <sc-for list="{{ heroSlides }}" as="h" hint-placeholder-count="1">
+        <img src="{{ h.img }}" alt="{{ h.alt }}" style="{{ h.style }}" />
+      </sc-for>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,26,0,0.94) 0%,rgba(0,26,0,0.72) 42%,rgba(0,26,0,0.18) 78%,rgba(0,26,0,0.5) 100%);"></div>
+      <div style="position:relative;height:100%;max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;flex-direction:column;justify-content:center;">
+        <div style="max-width:620px;animation:fadeUp .8s ease both;">
+          <div style="font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:#fec30c;margin-bottom:22px;">Colección 2026 · Novedades</div>
+          <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,5.4vw,74px);line-height:1.05;margin:0;color:#f1f1f1;text-wrap:balance;">Azulejos de alta gama para proyectos excepcionales</h1>
+          <p style="max-width:520px;margin:24px 0 0;font-size:clamp(14px,1.5vw,16px);line-height:1.7;color:#c8d2c8;font-weight:300;text-wrap:pretty;">Porcelánico de gran formato y cerámica de lujo para arquitectura, hostelería y proyectos residenciales de alto nivel.</p>
+          <div style="display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;">
+            <button onClick="{{ goShop }}" style="display:inline-flex;align-items:center;padding:15px 28px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Tienda Clientes</button>
+            <button onClick="{{ goPro }}" style="display:inline-flex;align-items:center;padding:15px 28px;background:transparent;color:#f1f1f1;border:1px solid rgba(255,255,255,0.4);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="border-color:#fec30c;color:#ffd75c;">Tienda Profesional</button>
+          </div>
+        </div>
+        <div style="position:absolute;left:clamp(16px,4vw,40px);bottom:24px;display:flex;gap:8px;">
+          <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" aria-label="Ambiente" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,4vw,40px);">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#fec30c;">Compra por espacio</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,3.4vw,44px);margin:12px 0 0;color:#f1f1f1;">Soluciones para cada ambiente</h2>
+        </div>
+        <button onClick="{{ goShop }}" style="background:none;border:none;color:#fec30c;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;padding:0;">Ver todo el catálogo →</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;">
+        <sc-for list="{{ homeUseChips }}" as="u" hint-placeholder-count="5">
+          <button onClick="{{ u.onClick }}" style="{{ u.style }}">{{ u.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.onClick }}" style="position:relative;height:clamp(240px,30vw,360px);border:none;padding:0;cursor:pointer;overflow:hidden;background:#00330f;text-align:left;">
+            <img src="{{ c.img }}" alt="{{ c.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,17,0,0) 40%,rgba(0,17,0,0.92) 100%);"></div>
+            <div style="position:absolute;left:20px;right:20px;bottom:20px;">
+              <div style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,24px);color:#f1f1f1;">{{ c.name }}</div>
+              <div style="font-size:12px;color:#c8d2c8;margin-top:5px;font-weight:300;">{{ c.sub }}</div>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background:#00330f;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,4vw,40px);">
+        <div style="margin-bottom:36px;">
+          <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#fec30c;">Novedades 2026</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,3.4vw,44px);margin:12px 0 0;color:#f1f1f1;">Colecciones destacadas</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+          <sc-for list="{{ featured }}" as="f" hint-placeholder-count="4">
+            <div style="cursor:pointer;" onClick="{{ f.onClick }}">
+              <div style="position:relative;height:clamp(240px,26vw,320px);overflow:hidden;background:#002100;">
+                <img src="{{ f.img }}" alt="{{ f.name }}" style="width:100%;height:100%;object-fit:cover;" />
+                <sc-if value="{{ f.novedad }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute;top:14px;left:14px;background:#fec30c;color:#181818;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:5px 9px;">Novedad</div>
+                </sc-if>
+              </div>
+              <div style="padding:16px 2px 0;">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;">
+                  <div style="font-family:'Playfair Display',serif;font-size:21px;color:#f1f1f1;">{{ f.name }}</div>
+                  <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.1em;color:#8a968a;text-transform:uppercase;">{{ f.family }}</div>
+                </div>
+                <div style="font-size:13px;color:#a9b5a9;font-weight:300;margin-top:8px;line-height:1.5;">{{ f.short }}</div>
+                <div style="font-size:13px;color:#fec30c;margin-top:12px;">{{ f.priceLabel }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,100px) clamp(16px,4vw,40px);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border:1px solid rgba(255,255,255,0.1);">
+        <div style="min-height:380px;overflow:hidden;"><img src="assets/ambrossia-living-greige.jpg" alt="Proyecto profesional" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:clamp(30px,5vw,56px);display:flex;flex-direction:column;justify-content:center;background:#154734;">
+          <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#fec30c;">Zona profesional</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(24px,3vw,40px);margin:14px 0 0;color:#f1f1f1;line-height:1.12;">Precios y condiciones para profesionales</h2>
+          <p style="font-size:15px;line-height:1.7;color:#c8d2c8;font-weight:300;margin:18px 0 26px;">Reformistas, interioristas, constructores, aparejadores y arquitectos acceden a tarifa mayorista, trato personalizado y logística a obra.</p>
+          <div>
+            <button onClick="{{ goPro }}" style="padding:15px 28px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Solicitar acceso profesional</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showShop }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) 18px;">
+      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.12em;color:#7c877c;text-transform:uppercase;">Inicio / Catálogo</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,56px);margin:12px 0 0;color:#f1f1f1;">Catálogo de colecciones</h1>
+      <p style="font-size:15px;color:#a9b5a9;font-weight:300;margin:12px 0 0;">Gres porcelánico técnico y cerámica de gran formato. {{ shopCount }} referencias visibles.</p>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px);">
+      <div style="border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:16px 0;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8a968a;">Uso</span>
+          <sc-for list="{{ useChips }}" as="u" hint-placeholder-count="5">
+            <button onClick="{{ u.onClick }}" style="{{ u.style }}">{{ u.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8a968a;">Ordenar</span>
+          <select value="{{ sort }}" onChange="{{ setSort }}" style="padding:10px 12px;background:#00330f;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:13px;cursor:pointer;">
+            <sc-for list="{{ sortOpts }}" as="s" hint-placeholder-count="6"><option value="{{ s }}">{{ s }}</option></sc-for>
+          </select>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:24px clamp(16px,4vw,40px) clamp(60px,9vw,110px);display:grid;grid-template-columns:{{ shopCols }};gap:clamp(24px,4vw,48px);align-items:start;">
+      <aside style="{{ asideStyle }}">
+        <sc-for list="{{ filterGroups }}" as="g" hint-placeholder-count="4">
+          <div style="border-top:1px solid rgba(255,255,255,0.08);padding:18px 0;">
+            <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#c8d2c8;margin-bottom:12px;">{{ g.name }}</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4">
+                <label style="display:flex;align-items:center;gap:10px;font-size:13px;color:#8a968a;font-weight:300;cursor:pointer;min-height:24px;">
+                  <span style="width:14px;height:14px;border:1px solid rgba(255,255,255,0.24);display:inline-block;flex:none;"></span>{{ o }}
+                </label>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </aside>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;align-content:start;">
+        <sc-for list="{{ shopItems }}" as="it" hint-placeholder-count="9">
+          <div style="cursor:pointer;" onClick="{{ it.onClick }}">
+            <div style="position:relative;height:clamp(220px,24vw,290px);overflow:hidden;background:#00330f;">
+              <img src="{{ it.img }}" alt="{{ it.col }}" style="width:100%;height:100%;object-fit:cover;" />
+              <div style="{{ it.badgeStyle }}">{{ it.badge }}</div>
+            </div>
+            <div style="padding:14px 2px 0;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;">
+                <div style="font-family:'Playfair Display',serif;font-size:18px;color:#f1f1f1;">{{ it.col }}</div>
+                <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.08em;color:#8a968a;">{{ it.format }}</div>
+              </div>
+              <div style="font-size:12px;color:#a9b5a9;font-weight:300;margin-top:6px;">{{ it.family }} · {{ it.finish }}</div>
+              <div style="font-size:13px;color:#fec30c;margin-top:10px;">{{ it.priceLabel }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showProduct }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(16px,4vw,40px) 22px;">
+      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.12em;color:#7c877c;text-transform:uppercase;">Inicio / Catálogo / {{ col }}</div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px) clamp(56px,8vw,90px);display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(28px,4vw,56px);align-items:start;">
+      <div>
+        <div style="height:clamp(320px,48vw,540px);background:#00330f;overflow:hidden;"><img src="{{ productHero }}" alt="{{ col }}" style="width:100%;height:100%;object-fit:cover;" /></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;height:clamp(72px,10vw,120px);">
+          <sc-for list="{{ gallery }}" as="t" hint-placeholder-count="4">
+            <div style="overflow:hidden;background:#00330f;"><img src="{{ t }}" alt="Detalle {{ col }}" style="width:100%;height:100%;object-fit:cover;" /></div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.14em;color:#917300;text-transform:uppercase;">{{ colFamily }} · {{ colMaterial }}</div>
+        <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,5vw,64px);margin:10px 0 0;color:#f1f1f1;">{{ col }}</h1>
+        <p style="font-size:15px;line-height:1.75;color:#c8d2c8;font-weight:300;margin:18px 0 0;text-wrap:pretty;">{{ colDesc }}</p>
+        <div style="border-top:1px solid rgba(255,255,255,0.12);border-bottom:1px solid rgba(255,255,255,0.12);margin:26px 0;padding:22px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;align-items:start;">
+          <div>
+            <div style="font-size:clamp(24px,3vw,30px);color:#fec30c;font-weight:500;">{{ priceMain }}</div>
+            <div style="font-size:12px;color:#8a968a;margin-top:6px;font-weight:300;">{{ priceNote }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:14px;color:#a9b5a9;font-weight:300;">{{ priceSinIva }} <span style="color:#7c877c;">/ m² (sin IVA)</span></div>
+            <div style="font-size:14px;color:#f1f1f1;font-weight:500;">{{ priceConIva }} <span style="color:#8a968a;font-weight:300;">/ m² (IVA incluido)</span></div>
+          </div>
+        </div>
+        <div style="border-left:2px solid #fec30c;padding:4px 0 4px 22px;margin-bottom:30px;">
+          <div style="font-size:16px;color:#f1f1f1;margin-bottom:12px;">Especificaciones técnicas:</div>
+          <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{ specs }}" as="s" hint-placeholder-count="7">
+              <li style="font-size:14px;color:#a9b5a9;font-weight:300;line-height:1.5;"><span style="color:#f1f1f1;">{{ s.k }}:</span> {{ s.v }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#c8d2c8;margin-bottom:10px;">Color</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ colorOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button></sc-for></div>
+        </div>
+        <div style="margin-bottom:20px;">
+          <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#c8d2c8;margin-bottom:10px;">Formato (cm)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ formatOpts }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button></sc-for></div>
+        </div>
+        <div style="margin-bottom:26px;">
+          <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#c8d2c8;margin-bottom:10px;">Acabado</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-for list="{{ acabadoOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button></sc-for></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;">
+          <button style="flex:1;min-width:200px;padding:17px 20px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Añadir a la cesta</button>
+          <button onClick="{{ goPro }}" style="flex:1;min-width:200px;padding:17px 20px;background:transparent;color:#f1f1f1;border:1px solid rgba(255,255,255,0.3);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="border-color:#fec30c;">Solicitar presupuesto</button>
+        </div>
+        <button onClick="{{ goMuestras }}" style="width:100%;padding:15px 20px;background:#154734;border:1px solid rgba(255,255,255,0.14);color:#f1f1f1;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;margin-bottom:10px;" style-hover="border-color:#fec30c;">Solicitar una muestra</button>
+        <button style="width:100%;padding:15px 20px;background:none;border:1px dashed rgba(255,255,255,0.22);color:#fec30c;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;" style-hover="border-color:#fec30c;">↓ Descargar ficha técnica (PDF)</button>
+        <div style="margin-top:24px;padding:22px;background:#154734;">
+          <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#fec30c;margin-bottom:14px;">Calcula tu proyecto</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <input value="{{ metros }}" onChange="{{ setMetros }}" onInput="{{ setMetros }}" type="number" style="width:110px;padding:12px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:15px;">
+            <span style="font-size:13px;color:#c8d2c8;font-weight:300;">m² necesarios</span>
+            <span style="margin-left:auto;font-size:12px;color:#a9b5a9;">Estimado:</span>
+            <span style="font-size:20px;color:#fec30c;font-weight:500;">{{ totalLabel }}</span>
+          </div>
+        </div>
+        <p style="margin:20px 0 0;padding:14px 16px;border-left:2px solid #917300;background:rgba(145,115,0,0.14);font-size:12px;line-height:1.6;color:#c8d2c8;font-weight:300;">Puede tener errores en los detalles de los productos. Para cualquier duda, contacte con el departamento comercial.</p>
+      </div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px) clamp(60px,9vw,110px);">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(24px,3vw,32px);margin:0 0 26px;color:#f1f1f1;">También te puede interesar</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+          <div style="cursor:pointer;" onClick="{{ r.onClick }}">
+            <div style="height:clamp(220px,24vw,280px);background:#00330f;overflow:hidden;"><img src="{{ r.img }}" alt="{{ r.name }}" style="width:100%;height:100%;object-fit:cover;" /></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 2px 0;">
+              <div style="font-family:'Playfair Display',serif;font-size:19px;color:#f1f1f1;">{{ r.name }}</div>
+              <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:0.08em;color:#8a968a;text-transform:uppercase;">{{ r.family }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showPro }}" hint-placeholder-val="{{ false }}">
+    <section style="position:relative;padding:clamp(56px,9vw,96px) 0;border-bottom:1px solid rgba(255,255,255,0.08);overflow:hidden;">
+      <img src="assets/ambrossia-living.jpg" alt="Proyecto profesional" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,26,0,0.96),rgba(0,26,0,0.74));"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px);">
+        <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#fec30c;">Área profesional</div>
+        <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,5vw,60px);margin:14px 0 0;color:#f1f1f1;max-width:900px;line-height:1.1;">Ventajas para profesionales del sector</h1>
+        <p style="max-width:620px;margin:18px 0 0;font-size:clamp(14px,1.5vw,16px);line-height:1.7;color:#c8d2c8;font-weight:300;">Reformistas, interioristas, constructores, aparejadores, arquitectos, etc.</p>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,4vw,40px) 0;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));border:1px solid rgba(255,255,255,0.1);background:#00330f;">
+        <div style="padding:clamp(28px,4vw,44px);border-bottom:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#fec30c;">Acceso profesional</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:12px 0 0;color:#f1f1f1;">Ya tengo cuenta</h2>
+          <p style="font-size:13px;color:#a9b5a9;font-weight:300;line-height:1.65;margin:12px 0 22px;">Accede con tus credenciales para ver la tarifa mayorista y las condiciones de tu cuenta.</p>
+          <form onSubmit="{{ login }}" style="display:flex;flex-direction:column;gap:12px;">
+            <input required type="email" placeholder="Email profesional" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <input required type="password" placeholder="Contraseña" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#8a968a;font-weight:300;cursor:pointer;"><input type="checkbox" style="accent-color:#fec30c;">Recordarme</label>
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button type="submit" style="padding:15px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Acceder</button>
+          </form>
+          <p style="font-size:11px;color:#7c877c;font-weight:300;line-height:1.6;margin:18px 0 0;">Acceso gestionado con <a href="https://getwholesalex.com/" target="_blank" rel="noopener">WholesaleX</a>, el plugin de venta al por mayor nº 1 para WooCommerce, para crear tiendas híbridas B2B o B2B + B2C.</p>
+        </div>
+        <div style="padding:clamp(28px,4vw,44px);border-bottom:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#fec30c;">Alta profesional</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:12px 0 0;color:#f1f1f1;line-height:1.25;">Rellene el siguiente formulario y nos pondremos en contacto</h2>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #fec30c;padding:36px 30px;background:#002100;margin-top:22px;">
+              <div style="font-family:'Playfair Display',serif;font-size:24px;color:#fec30c;">Solicitud recibida</div>
+              <p style="font-size:14px;color:#a9b5a9;font-weight:300;margin:12px 0 0;line-height:1.7;">Gracias. Revisaremos tus datos y te contactaremos en 24–48 h con tu acceso profesional.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:22px;">
+              <input required placeholder="Nombre y apellidos" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input required placeholder="Empresa / Estudio" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="CIF / NIF" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <select style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#c8d2c8;font-size:14px;">
+                <sc-for list="{{ proTypes }}" as="t" hint-placeholder-count="6"><option>{{ t }}</option></sc-for>
+              </select>
+              <input placeholder="Teléfono" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input required type="email" placeholder="Email profesional" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <textarea placeholder="Cuéntanos tu proyecto (opcional)" rows="4" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;resize:vertical;"></textarea>
+              <label style="grid-column:1/-1;display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#8a968a;font-weight:300;line-height:1.5;cursor:pointer;"><input required type="checkbox" style="accent-color:#fec30c;margin-top:2px;">He leído y acepto la política de privacidad.</label>
+              <button type="submit" style="grid-column:1/-1;padding:16px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Enviar solicitud</button>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,4vw,40px) 0;">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(24px,3vw,34px);margin:0 0 26px;color:#f1f1f1;">Ventajas</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;">
+        <sc-for list="{{ proProps }}" as="p" hint-placeholder-count="4">
+          <div style="border:1px solid rgba(255,255,255,0.1);padding:28px 24px;min-height:190px;">
+            <div style="font-family:'Playfair Display',serif;font-size:32px;color:#fec30c;">{{ p.n }}</div>
+            <div style="font-size:15px;color:#f1f1f1;margin-top:14px;">{{ p.t }}</div>
+            <div style="font-size:13px;color:#a9b5a9;font-weight:300;margin-top:8px;line-height:1.55;">{{ p.d }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,4vw,40px) 0;">
+      <div style="background:#154734;padding:clamp(30px,5vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,52px);align-items:center;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#fec30c;">Proceso de activación</div>
+          <p style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.4vw,28px);line-height:1.35;color:#f1f1f1;margin:14px 0 0;">Verificamos tu perfil y activamos tu cuenta con precios profesionales en 24–48 h. Sin compromiso.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <sc-for list="{{ activacion }}" as="a" hint-placeholder-count="4">
+            <div style="font-size:14px;color:#c8d2c8;font-weight:300;border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:12px;">— {{ a }}</div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(16px,4vw,40px) clamp(60px,9vw,110px);">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(24px,3vw,32px);margin:0 0 22px;color:#f1f1f1;">Preguntas frecuentes</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 clamp(24px,5vw,64px);">
+        <sc-for list="{{ proFaqs }}" as="q" hint-placeholder-count="2">
+          <div style="padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:15px;color:#f1f1f1;">{{ q.q }}</div>
+            <div style="font-size:13px;color:#a9b5a9;font-weight:300;margin-top:8px;line-height:1.6;">{{ q.a }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showContacto }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) 0;">
+      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.12em;color:#7c877c;text-transform:uppercase;">Inicio / Contacto</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,56px);margin:12px 0 0;color:#f1f1f1;">Contacto</h1>
+      <p style="font-size:15px;color:#a9b5a9;font-weight:300;margin:12px 0 0;max-width:560px;line-height:1.7;">Escríbenos y te responderá el departamento correspondiente. Para pedidos en curso, indica tu número de pedido.</p>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,48px) clamp(16px,4vw,40px) clamp(60px,9vw,110px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,56px);align-items:start;">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:22px;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#fec30c;margin-bottom:8px;">Dirección</div>
+            <div style="font-size:15px;color:#f1f1f1;font-weight:300;line-height:1.65;">Esmalto<br>Castellón (España)<br>CIF 00000000</div>
+          </div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#fec30c;margin-bottom:8px;">Teléfono</div>
+            <a href="tel:600600600" style="font-size:15px;">600 600 600</a>
+          </div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#fec30c;margin-bottom:8px;">Email</div>
+            <a href="mailto:hola@esmalto.com" style="font-size:15px;">hola@esmalto.com</a>
+          </div>
+          <div>
+            <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#fec30c;margin-bottom:8px;">Enlaces útiles</div>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;align-items:flex-start;">
+              <button onClick="{{ goEnvio }}" style="background:none;border:none;padding:0;color:#fec30c;font-size:14px;cursor:pointer;">Cómo calcular gastos de envío</button>
+              <button onClick="{{ goMuestras }}" style="background:none;border:none;padding:0;color:#fec30c;font-size:14px;cursor:pointer;">Muestras</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:28px;height:clamp(240px,32vw,320px);border:1px solid rgba(255,255,255,0.12);overflow:hidden;">
+          <iframe title="Mapa Esmalto Castellón" src="https://www.google.com/maps?q=Castell%C3%B3n%20de%20la%20Plana,%20Espa%C3%B1a&output=embed" style="width:100%;height:100%;border:0;" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div style="background:#00330f;border:1px solid rgba(255,255,255,0.1);padding:clamp(24px,4vw,40px);">
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid #fec30c;padding:34px 28px;background:#002100;">
+            <div style="font-family:'Playfair Display',serif;font-size:24px;color:#fec30c;">Mensaje enviado</div>
+            <p style="font-size:14px;color:#a9b5a9;font-weight:300;margin:12px 0 0;line-height:1.7;">Gracias por escribirnos. Te responderemos lo antes posible.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;">
+            <div style="grid-column:1/-1;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#fec30c;">Formulario de contacto</div>
+            <input required placeholder="Nombre y apellidos" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <input required type="email" placeholder="Email" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <input placeholder="Teléfono" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <select style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#c8d2c8;font-size:14px;">
+              <sc-for list="{{ contactTopics }}" as="t" hint-placeholder-count="6"><option>{{ t }}</option></sc-for>
+            </select>
+            <textarea required placeholder="Mensaje" rows="6" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;resize:vertical;"></textarea>
+            <label style="grid-column:1/-1;display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#8a968a;font-weight:300;line-height:1.5;cursor:pointer;"><input required type="checkbox" style="accent-color:#fec30c;margin-top:2px;">He leído y acepto la política de privacidad.</label>
+            <button type="submit" style="grid-column:1/-1;padding:16px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Enviar mensaje</button>
+          </form>
+        </sc-if>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showFaq }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) 0;">
+      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.12em;color:#7c877c;text-transform:uppercase;">Inicio / FAQ</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,56px);margin:12px 0 0;color:#f1f1f1;">Preguntas frecuentes</h1>
+      <p style="font-size:15px;color:#a9b5a9;font-weight:300;margin:12px 0 0;line-height:1.7;">Estamos preparando esta sección. Si tienes una duda concreta, escríbenos a <a href="mailto:hola@esmalto.com">hola@esmalto.com</a> o llama al 600 600 600.</p>
+    </section>
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,5vw,48px) clamp(16px,4vw,40px) clamp(60px,9vw,110px);">
+      <sc-for list="{{ faqAll }}" as="q" hint-placeholder-count="4">
+        <div style="padding:22px 0;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:16px;color:#f1f1f1;">{{ q.q }}</div>
+          <div style="font-size:14px;color:#a9b5a9;font-weight:300;margin-top:9px;line-height:1.7;">{{ q.a }}</div>
+        </div>
+      </sc-for>
+      <div style="margin-top:40px;padding:26px;border:1px dashed rgba(255,255,255,0.2);font-size:13px;color:#8a968a;font-weight:300;line-height:1.7;">Bloque preparado para añadir nuevas preguntas y respuestas desde el editor de WordPress.</div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showDoc }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) 0;">
+      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.12em;color:#7c877c;text-transform:uppercase;">{{ docCrumb }}</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,52px);margin:12px 0 0;color:#f1f1f1;line-height:1.12;">{{ docTitle }}</h1>
+      <p style="font-size:clamp(15px,1.6vw,17px);color:#c8d2c8;font-weight:300;margin:18px 0 0;line-height:1.75;text-wrap:pretty;">{{ docIntro }}</p>
+    </section>
+    <section style="max-width:900px;margin:0 auto;padding:clamp(32px,5vw,48px) clamp(16px,4vw,40px) clamp(60px,9vw,110px);">
+      <sc-for list="{{ docBlocks }}" as="b" hint-placeholder-count="3">
+        <div style="margin-bottom:40px;">
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(20px,2.4vw,26px);margin:0 0 14px;color:#f1f1f1;">{{ b.h }}</h2>
+          <sc-if value="{{ b.p }}" hint-placeholder-val="{{ true }}">
+            <p style="font-size:15px;color:#a9b5a9;font-weight:300;line-height:1.8;margin:0 0 14px;text-wrap:pretty;">{{ b.p }}</p>
+          </sc-if>
+          <sc-if value="{{ b.hasList }}" hint-placeholder-val="{{ true }}">
+            <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:11px;">
+              <sc-for list="{{ b.list }}" as="li" hint-placeholder-count="4">
+                <li style="font-size:15px;color:#a9b5a9;font-weight:300;line-height:1.75;">{{ li }}</li>
+              </sc-for>
+            </ul>
+          </sc-if>
+        </div>
+      </sc-for>
+      <sc-if value="{{ docIsEnvio }}" hint-placeholder-val="{{ false }}">
+        <div style="aspect-ratio:16/9;background:#00330f;border:1px dashed rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#fec30c;">Vídeo explicativo</div>
+            <div style="font-size:14px;color:#8a968a;font-weight:300;margin-top:10px;">Hueco reservado para el vídeo de YouTube incrustado.</div>
+          </div>
+        </div>
+      </sc-if>
+      <div style="margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#7c877c;font-weight:300;line-height:1.8;">Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600</div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ showCliente }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,40px) 0;">
+      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.12em;color:#7c877c;text-transform:uppercase;">Inicio / Mi cuenta</div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,56px);margin:12px 0 0;color:#f1f1f1;">Mi cuenta</h1>
+      <p style="font-size:15px;color:#a9b5a9;font-weight:300;margin:12px 0 0;max-width:600px;line-height:1.7;">Accede a tu cuenta para consultar tus pedidos, direcciones de envío y descargas. ¿Eres profesional del sector? <button onClick="{{ goPro }}" style="background:none;border:none;padding:0;color:#fec30c;font-size:15px;cursor:pointer;text-decoration:underline;">Solicita tu acceso profesional</button>.</p>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,48px) clamp(16px,4vw,40px) clamp(60px,9vw,110px);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));border:1px solid rgba(255,255,255,0.1);background:#00330f;">
+        <div style="padding:clamp(28px,4vw,44px);border-bottom:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#fec30c;">Acceso cliente</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:12px 0 0;color:#f1f1f1;">Iniciar sesión</h2>
+          <form onSubmit="{{ login }}" style="display:flex;flex-direction:column;gap:12px;margin-top:22px;">
+            <input required placeholder="Nombre de usuario o email" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <input required type="password" placeholder="Contraseña" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#8a968a;font-weight:300;cursor:pointer;"><input type="checkbox" style="accent-color:#fec30c;">Recuérdame</label>
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button type="submit" style="padding:15px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Acceder</button>
+          </form>
+        </div>
+        <div style="padding:clamp(28px,4vw,44px);border-bottom:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#fec30c;">Alta cliente</div>
+          <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:12px 0 0;color:#f1f1f1;">Crear una cuenta</h2>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #fec30c;padding:34px 28px;background:#002100;margin-top:22px;">
+              <div style="font-family:'Playfair Display',serif;font-size:24px;color:#fec30c;">Cuenta creada</div>
+              <p style="font-size:14px;color:#a9b5a9;font-weight:300;margin:12px 0 0;line-height:1.7;">Te hemos enviado un email para confirmar tu registro.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:22px;">
+              <input required placeholder="Nombre" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input required placeholder="Apellidos" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input required type="email" placeholder="Email" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="Teléfono" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="NIF (opcional)" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input required type="password" placeholder="Contraseña" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <div style="grid-column:1/-1;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8a968a;margin-top:6px;">Dirección de envío</div>
+              <input placeholder="Dirección" style="grid-column:1/-1;padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="Código postal" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="Población" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="Provincia" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <input placeholder="País" style="padding:14px;background:#002100;border:1px solid rgba(255,255,255,0.16);color:#f1f1f1;font-size:14px;">
+              <label style="grid-column:1/-1;display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#8a968a;font-weight:300;line-height:1.5;cursor:pointer;"><input required type="checkbox" style="accent-color:#fec30c;margin-top:2px;">He leído y acepto las condiciones generales y la política de privacidad.</label>
+              <label style="grid-column:1/-1;display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#8a968a;font-weight:300;line-height:1.5;cursor:pointer;"><input type="checkbox" style="accent-color:#fec30c;margin-top:2px;">Quiero recibir novedades y promociones de Esmalto.</label>
+              <button type="submit" style="grid-column:1/-1;padding:16px;background:#fec30c;color:#181818;border:none;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;" style-hover="background:#ffd75c;">Crear cuenta</button>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <footer style="background:#001a00;border-top:1px solid rgba(255,255,255,0.08);">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(44px,6vw,64px) clamp(16px,4vw,40px) 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(28px,4vw,40px);">
+      <div style="grid-column:span 1;min-width:0;">
+        <img src="assets/esmalto-logo-amarillo.png" alt="ESMALTO · Cerámica para profesionales" style="height:46px;width:auto;display:block;" />
+        <p style="font-size:13px;color:#8a968a;font-weight:300;margin:18px 0 0;line-height:1.7;max-width:280px;">Porcelánico de gran formato y cerámica de alta gama para arquitectura, hostelería y proyectos residenciales.</p>
+      </div>
+      <sc-for list="{{ footerCols }}" as="fc" hint-placeholder-count="3">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f1f1f1;margin-bottom:14px;">{{ fc.title }}</div>
+          <div style="display:flex;flex-direction:column;gap:9px;align-items:flex-start;">
+            <sc-for list="{{ fc.links }}" as="l" hint-placeholder-count="5">
+              <button onClick="{{ l.onClick }}" style="background:none;border:none;padding:0;text-align:left;font-size:13px;color:#a9b5a9;font-weight:300;cursor:pointer;" style-hover="color:#fec30c;">{{ l.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <div>
+        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f1f1f1;margin-bottom:14px;">Contacto</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px;font-weight:300;">
+          <a href="mailto:hola@esmalto.com">hola@esmalto.com</a>
+          <a href="tel:600600600">600 600 600</a>
+          <span style="color:#a9b5a9;">Castellón (España)</span>
+        </div>
+        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#f1f1f1;margin:26px 0 14px;">Síguenos</div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <a href="#" aria-label="Instagram" style="width:38px;height:38px;border:1px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;" style-hover="border-color:#fec30c;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" style="width:38px;height:38px;border:1px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;" style-hover="border-color:#fec30c;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 8.9h3.2V20H4.5zM6.1 3.6a1.9 1.9 0 110 3.8 1.9 1.9 0 010-3.8zM10.2 8.9h3.06v1.52h.04c.43-.8 1.47-1.65 3.02-1.65 3.23 0 3.83 2.1 3.83 4.83V20h-3.19v-5.5c0-1.31-.03-3-1.85-3-1.85 0-2.13 1.43-2.13 2.9V20h-3.19z"></path></svg>
+          </a>
+          <button onClick="{{ goContacto }}" style="height:38px;padding:0 14px;border:1px solid rgba(255,255,255,0.18);background:none;color:#a9b5a9;font-size:12px;cursor:pointer;" style-hover="border-color:#fec30c;color:#fec30c;">Contacto</button>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1280px;margin:0 auto;padding:20px clamp(16px,4vw,40px);border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:11px;color:#7c877c;letter-spacing:0.04em;">
+      <span>© 2026 Esmalto · CIF 00000000 · Castellón (España)</span>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <sc-for list="{{ legalLinks }}" as="l" hint-placeholder-count="3">
+          <button onClick="{{ l.onClick }}" style="background:none;border:none;padding:0;color:#7c877c;font-size:11px;cursor:pointer;" style-hover="color:#fec30c;">{{ l.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  COLS = {
+    AGRA:{name:'AGRA',family:'Gravita',material:'Porcelánico efecto mármol',
+      short:'Un mármol clásico, de estética noble y atemporal.',
+      desc:'Agra es un mármol clásico, de estética noble y atemporal. Su veteado natural aporta profundidad y riqueza visual, creando superficies elegantes y equilibradas que dialogan con la arquitectura tradicional y contemporánea.',
+      uses:['Cocina','Baño','Salón','Dormitorio'],
+      formats:['120x120','60x120','60x60','30x60'],
+      finishes:['Natural / Rectificado (Honed)','Pulido (Polished)','Light Mate'],
+      colors:['Natural','Blanco','Marfil'],
+      uso:'Pavimento y revestimiento',thickness:'8,5–11 mm',deston:'V2',rect:'Sí rectificado',
+      price:26.74,novedad:true,ventas:82,oferta:false,hero:'assets/agra-kitchen-natural.jpg',
+      gallery:['assets/agra-kitchen-natural.jpg','assets/agra-natural-60x120.jpg','assets/agra-natural-120x120.jpg','assets/agra-marfil-60x120.jpg']},
+    ALBERI:{name:'ALBERI',family:'Gravita',material:'Porcelánico Calacatta canela',
+      short:'Un mármol que no busca imponerse, sino permanecer.',
+      desc:'Alberi es un mármol que no busca imponerse, sino permanecer. Su veta canela sobre fondo claro aporta calidez y sofisticación, disponible en acabado Pulido y Honed para espacios interiores de alto nivel.',
+      uses:['Dormitorio','Baño','Salón','Cocina'],
+      formats:['60x120','40x60','30x60','60x60'],
+      finishes:['Pulido (Polished)','Honed'],
+      colors:['Blanco','Crema'],
+      uso:'Pavimento y revestimiento',thickness:'9–11 mm',deston:'V2',rect:'Sí rectificado',
+      price:31.20,novedad:true,ventas:64,oferta:false,hero:'assets/alberi-dormitorio.jpg',
+      gallery:['assets/alberi-dormitorio.jpg','assets/alberi-bedroom-blanco.jpg','assets/alberi-bedroom-crema.jpg','assets/alberi-detalle-crema.jpg']},
+    AMBROSSIA:{name:'AMBROSSIA',family:'Porce Plus',material:'Porcelánico efecto piedra',
+      short:'Una piedra con memoria.',
+      desc:'Ambrossia es una piedra con memoria. Su superficie recupera la calidez de los materiales vividos, con relieve y variantes Anti-Slip (ADZ) que la hacen apta para interior y exterior sin renunciar al diseño.',
+      uses:['Salón','Cocina','Baño'],
+      formats:['120x120','100x100','60x120'],
+      finishes:['Natural','Relieve','Anti-Slip (ADZ)'],
+      colors:['Ivory','White','Greige'],
+      uso:'Pavimento y revestimiento · interior y exterior',thickness:'9–11 mm',deston:'V3',rect:'Sí rectificado',
+      price:24.35,novedad:true,ventas:91,oferta:true,hero:'assets/ambrossia-living.jpg',
+      gallery:['assets/ambrossia-living.jpg','assets/ambrossia-living-greige.jpg','assets/ambrossia-ivory.jpg','assets/ambrossia-white.jpg']},
+    BLANCO:{name:'BLANCO',family:'Blanco',material:'Cerámica de revestimiento (pasta roja)',
+      short:'Un azulejo esencial, desde la sencillez bien entendida.',
+      desc:'Blanco es un azulejo esencial, pensado para acompañar la arquitectura desde la sencillez bien entendida. Disponible en acabado Brillo y Mate, y con relieve Brick para dar textura a baños y cocinas.',
+      uses:['Baño','Cocina'],
+      formats:['33x55','20x20'],
+      finishes:['Brillo','Mate','Relieve Brick'],
+      colors:['Blanco'],
+      uso:'Revestimiento',thickness:'~9 mm',deston:'V1',rect:'No rectificado',
+      price:14.80,novedad:false,ventas:120,oferta:true,hero:'assets/blanco-bath-brillo.jpg',
+      gallery:['assets/blanco-bath-brillo.jpg','assets/blanco-bath-mate.jpg','assets/blanco-20x20.jpg','assets/blanco-20x20-brillo.jpg']},
+  };
+  DOCS = {
+    muestras:{title:'Muestras',crumb:'Inicio / Muestras',
+      intro:'Desde Esmalto entendemos que ver y tocar la cerámica es un factor clave para tomar la decisión en la elección de cualquier material para tu proyecto. Por eso ofrecemos el servicio de envío de muestras. Las muestras son gratuitas, solo se cobran los portes. Para envíos fuera de España, los portes tendrán un suplemento.',
+      blocks:[
+        {h:'¿Cómo solicitar las muestras gratuitas?',p:'Paga solo el precio de los portes.',list:['Ve a la página del producto.','Haz clic en el botón “Solicitar una muestra”.','Puedes solicitar muestras de varios productos en el mismo pedido repitiendo los pasos 1 y 2.','Realiza tu pedido y recibe las muestras en tu domicilio.']},
+        {h:'Condiciones de solicitud de muestras',list:['Los pagos realizados mediante transferencia bancaria tardarán más en procesarse, ya que esperamos a verificar el pago.','Todas las muestras enviadas tendrán un formato máximo de 25×25 (excepto los formatos pequeños). Si el formato solicitado no está disponible, enviaremos la muestra en otro formato.','Las muestras se envían para evaluar el color, la textura y el tacto. Si la muestra llega dañada, pero no impide apreciar estos aspectos, no se reembolsará el importe, ya que solo se cobra el coste de preparación y envío.','Se recomienda solicitar las muestras en el formato de interés, ya que los tonos pueden variar. Durante su fabricación, pueden tener diferentes curvas de cocción según el formato.','No se puede solicitar más de una muestra idéntica por cliente. Las muestras que no tengamos en stock serán enviadas directamente por el fabricante, por lo que podrían llegar en diferentes envíos.']},
+      ]},
+    pago:{title:'Nuestras formas de pago',crumb:'Inicio / Nuestras formas de pago',
+      intro:'Las formas de pago aceptadas por Esmalto son:',
+      blocks:[
+        {h:'Transferencia bancaria',p:'Tras realizar el pedido, Esmalto mantendrá el pedido pendiente durante 3 días a partir de la fecha de realización. Si, transcurridos esos 3 días, no se ha satisfecho el pago ni se ha enviado copia del comprobante a info@esmalto.com, el pedido se dará por no realizado y se cancelará. Trabajamos con cuentas bancarias en Banco Santander, CaixaBank y BBVA.'},
+        {h:'Tarjeta de crédito o débito',p:'A través del servidor seguro de Redsys. Válido para tarjetas VISA, Mastercard, Maestro, Diners Club, Union Pay, Discover y JCB. Al realizar el pago, confirmas que la tarjeta es tuya. Estas transacciones están sujetas a comprobaciones y autorizaciones por parte de la entidad emisora. Si esta no autoriza el pago, Esmalto no se hará responsable por ningún retraso o falta de entrega, y no se podrá formalizar ningún contrato con el cliente.'},
+        {h:'Bizum',p:'Podrás realizar el pago con tu cuenta de Bizum.'},
+        {h:'PayPal',p:'Tras confirmar el pedido, serás redirigido a la web de PayPal para completar el pago de forma segura. Podrás pagar con tu cuenta de PayPal. Una vez finalizado el proceso, serás redirigido de vuelta a Esmalto, y se iniciarán los plazos previstos para la entrega del producto. Si el pedido es inferior a 2000€, podrás pagar en 3 plazos sin intereses a través de PayPal.'},
+        {h:'Sequra',p:'Fracciona el pago con Sequra a partir de 50€ o realiza el pedido ahora y págalo más adelante.'},
+      ]},
+    envio:{title:'Cómo calcular gastos de envío',crumb:'Inicio / Cómo calcular gastos de envío',
+      intro:'Página de explicación de los gastos de envío. El contenido definitivo se publicará junto a un vídeo explicativo incrustado desde YouTube.',
+      blocks:[{h:'En preparación',p:'Aquí se explicará paso a paso cómo calcular el coste de envío según formato, peso, número de pallets y destino.'}]},
+    condiciones:{title:'Condiciones generales',crumb:'Inicio / Condiciones generales',
+      intro:'Condiciones generales de contratación de Esmalto, CIF 00000000, con domicilio en Castellón (España).',
+      blocks:[
+        {h:'Objeto',p:'Estas condiciones regulan la compra de productos a través de la tienda online de Esmalto. Contenido pendiente de redacción legal definitiva.'},
+        {h:'Pedidos y precios',p:'Los precios mostrados incluyen IVA salvo indicación contraria y no incluyen portes. Los clientes profesionales con cuenta activada visualizan su tarifa neta.'},
+        {h:'Entrega y devoluciones',p:'Contenido pendiente de redacción legal definitiva.'},
+      ]},
+    privacidad:{title:'Política de privacidad',crumb:'Inicio / Política de privacidad',
+      intro:'Responsable del tratamiento: Esmalto, CIF 00000000, Castellón (España). Contacto: hola@esmalto.com.',
+      blocks:[
+        {h:'Datos que tratamos',p:'Tratamos los datos que nos facilitas a través de los formularios de contacto, alta profesional y compra, con la finalidad de gestionar tu solicitud o pedido.'},
+        {h:'Derechos',p:'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a hola@esmalto.com. Contenido pendiente de redacción legal definitiva.'},
+      ]},
+    legal:{title:'Aviso legal',crumb:'Inicio / Aviso legal',
+      intro:'Titular del sitio web: Esmalto, CIF 00000000, Castellón (España). Email: hola@esmalto.com. Teléfono: 600 600 600.',
+      blocks:[
+        {h:'Condiciones de uso',p:'El acceso y uso de este sitio web atribuye la condición de usuario y supone la aceptación de este aviso legal. Contenido pendiente de redacción legal definitiva.'},
+        {h:'Propiedad intelectual',p:'Los contenidos, imágenes de producto y marcas son propiedad de Esmalto o de sus respectivos titulares.'},
+      ]},
+  };
+  state = {page:'home',mode:'b2c',col:'AGRA',use:'Todos',sort:'Relevancia',doc:'muestras',
+    vColor:'Natural',vFormat:'60x120',vAcabado:'Natural / Rectificado (Honed)',metros:'10',
+    sent:false,menuOpen:false,slide:0,w:1280};
+  componentDidMount(){
+    this.onR=()=>this.setState({w:window.innerWidth});
+    window.addEventListener('resize',this.onR);this.onR();
+    this.t=setInterval(()=>this.setState(s=>({slide:(s.slide+1)%3})),5200);
+  }
+  componentWillUnmount(){window.removeEventListener('resize',this.onR);clearInterval(this.t);}
+  eur(n){return n.toFixed(2).replace('.',',')+' €';}
+  precio(n){return this.eur(n)+'/m²';}
+  chip(a){return 'display:inline-flex;align-items:center;padding:10px 16px;font-size:12px;letter-spacing:0.04em;cursor:pointer;transition:all .18s;min-height:40px;'+(a
+    ? 'border:1px solid #fec30c;color:#181818;background:#fec30c;'
+    : 'border:1px solid rgba(255,255,255,0.2);color:#c8d2c8;background:transparent;');}
+  go(p,extra){this.setState(Object.assign({page:p,sent:false,menuOpen:false},extra||{}));window.scrollTo(0,0);}
+  openDoc(d){this.go('doc',{doc:d});}
+  openCol(k){const c=this.COLS[k];this.go('product',{col:k,vColor:c.colors[0],vFormat:c.formats[1]||c.formats[0],vAcabado:c.finishes[0]});}
+  renderVals(){
+    const S=this.state,set=o=>this.setState(o),C=this.COLS;
+    const order=['AGRA','ALBERI','AMBROSSIA','BLANCO'];
+    const isB2B=S.mode==='b2b',mob=S.w<900,tab=S.w<1080;
+    const nav=[['home','Inicio'],['shop','Tienda'],['pro','Profesionales'],['contacto','Contacto']];
+    const navItems=nav.map(([p,l])=>({label:l,
+      style:'background:none;border:none;cursor:pointer;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:8px 0;color:'+(S.page===p?'#f1f1f1':'#a9b5a9')+';border-bottom:1px solid '+(S.page===p?'#fec30c':'transparent')+';transition:color .2s;',
+      mStyle:'background:none;border:none;text-align:left;cursor:pointer;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;padding:13px 0;color:'+(S.page===p?'#fec30c':'#f1f1f1')+';border-bottom:1px solid rgba(255,255,255,0.07);',
+      onClick:()=>this.go(p)}));
+    const pill=a=>'padding:9px 14px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;min-height:38px;background:'+(a?'#fec30c':'transparent')+';color:'+(a?'#181818':'#a9b5a9')+';transition:all .2s;';
+    const goShopUse=u=>this.go('shop',{use:u});
+    const cats=[
+      {name:'Baño',sub:'Cerámica brillo, mate y relieve',img:'assets/blanco-bath-brillo.jpg'},
+      {name:'Cocina',sub:'Mármol de gran formato',img:'assets/agra-kitchen-natural.jpg'},
+      {name:'Salón',sub:'Efecto piedra y relieve',img:'assets/ambrossia-living.jpg'},
+      {name:'Dormitorio',sub:'Calacatta canela cálido',img:'assets/alberi-dormitorio.jpg'},
+    ].map(c=>({...c,onClick:()=>goShopUse(c.name)}));
+    const uses=['Todos','Baño','Cocina','Salón','Dormitorio'];
+    const homeUseChips=uses.map(u=>({label:u,style:this.chip(false),onClick:()=>goShopUse(u)}));
+    const useChips=uses.map(u=>({label:u,style:this.chip(S.use===u),onClick:()=>set({use:u})}));
+    const heroImgs=[
+      {img:'assets/ambrossia-living.jpg',alt:'Salón con porcelánico efecto piedra'},
+      {img:'assets/agra-kitchen-natural.jpg',alt:'Cocina con mármol de gran formato'},
+      {img:'assets/alberi-dormitorio.jpg',alt:'Dormitorio en Calacatta canela'},
+    ];
+    const heroSlides=heroImgs.map((h,i)=>({...h,style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:'+(S.slide===i?1:0)+';'}));
+    const heroDots=heroImgs.map((h,i)=>({onClick:()=>set({slide:i}),style:'width:'+(S.slide===i?'30px':'12px')+';height:3px;border:none;padding:0;cursor:pointer;transition:all .4s;background:'+(S.slide===i?'#fec30c':'rgba(255,255,255,0.35)')+';'}));
+    const featured=order.map(k=>{const c=C[k];return {key:k,name:k,family:c.family,short:c.short,novedad:c.novedad,img:c.hero,
+      priceLabel:isB2B?'Precio profesional →':('Desde '+this.precio(c.price)),onClick:()=>this.openCol(k)};});
+    let items=[];
+    order.forEach(k=>{const c=C[k];c.formats.slice(0,3).forEach((f,i)=>{items.push({key:k+'|'+f,col:k,family:c.family,format:f,finish:c.finishes[0],uses:c.uses,
+      novedad:c.novedad,oferta:c.oferta,ventas:c.ventas,price:c.price,img:c.gallery[i+1]||c.hero,
+      priceLabel:isB2B?'Solicitar presupuesto':this.precio(c.price),onClick:()=>this.openCol(k)});});});
+    let shopItems=items.filter(it=>S.use==='Todos'||it.uses.includes(S.use));
+    const sorters={'Precio más bajo':(a,b)=>a.price-b.price,'Precio más alto':(a,b)=>b.price-a.price,
+      'Más vendidos':(a,b)=>b.ventas-a.ventas,'Oferta':(a,b)=>(b.oferta?1:0)-(a.oferta?1:0),'Novedades':(a,b)=>(b.novedad?1:0)-(a.novedad?1:0)};
+    if(sorters[S.sort])shopItems=shopItems.slice().sort(sorters[S.sort]);
+    shopItems=shopItems.map(it=>{
+      const b=it.oferta?'Oferta':(it.novedad?'Novedad':'');
+      return {...it,badge:b,badgeStyle:b?('position:absolute;top:12px;left:12px;background:'+(it.oferta?'#917300':'#fec30c')+';color:'+(it.oferta?'#f1f1f1':'#181818')+';font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:5px 9px;'):'display:none;'};});
+    const c=C[S.col];
+    const colorOpts=c.colors.map(v=>({label:v,style:this.chip(S.vColor===v),onClick:()=>set({vColor:v})}));
+    const formatOpts=c.formats.map(v=>({label:v,style:this.chip(S.vFormat===v),onClick:()=>set({vFormat:v})}));
+    const acabadoOpts=c.finishes.map(v=>({label:v,style:this.chip(S.vAcabado===v),onClick:()=>set({vAcabado:v})}));
+    const specs=[['Material',c.material],['Formatos',c.formats.join(' / ')],['Acabado',S.vAcabado],['Colores',c.colors.join(' / ')],
+      ['Uso',c.uso],['Rectificado',c.rect],['Espesor',c.thickness],['Destonificación',c.deston]].map(([k,v])=>({k,v}));
+    const related=order.filter(k=>k!==S.col).slice(0,3).map(k=>({key:k,name:k,family:C[k].family,img:C[k].hero,onClick:()=>this.openCol(k)}));
+    const m=parseFloat((S.metros||'').toString().replace(',','.'))||0;
+    const d=this.DOCS[S.doc]||this.DOCS.muestras;
+    const footerCols=[
+      {title:'Catálogo',links:uses.map(u=>({label:u==='Todos'?'Todo':u,onClick:()=>goShopUse(u)}))},
+      {title:'Accesos rápidos',links:[{label:'Clientes / Registro',onClick:()=>this.go('cliente')},{label:'Profesionales / Registro Profesional',onClick:()=>this.go('pro')},{label:'Muestras',onClick:()=>this.openDoc('muestras')},{label:'Cómo calcular gastos de envío',onClick:()=>this.openDoc('envio')},{label:'FAQ · Preguntas frecuentes',onClick:()=>this.go('faq')}]},
+      {title:'Información',links:[{label:'Formas de Pago',onClick:()=>this.openDoc('pago')},{label:'Aviso legal',onClick:()=>this.openDoc('legal')},{label:'Política de Privacidad',onClick:()=>this.openDoc('privacidad')},{label:'Condiciones Generales',onClick:()=>this.openDoc('condiciones')},{label:'Contacto',onClick:()=>this.go('contacto')}]},
+    ];
+    return {
+      showHome:S.page==='home',showShop:S.page==='shop',showProduct:S.page==='product',showPro:S.page==='pro',
+      showContacto:S.page==='contacto',showFaq:S.page==='faq',showDoc:S.page==='doc',showCliente:S.page==='cliente',
+      goCliente:()=>this.go('cliente'),
+      clienteBtnStyle:(mob?'display:none;':'display:inline-flex;align-items:center;')+'padding:11px 20px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;min-height:40px;border:1px solid '+(S.page==='cliente'?'#fec30c':'rgba(255,255,255,0.28)')+';background:'+(S.page==='cliente'?'#fec30c':'transparent')+';color:'+(S.page==='cliente'?'#181818':'#f1f1f1')+';transition:all .2s;',
+      clienteMobStyle:'margin-top:14px;padding:14px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;background:#fec30c;color:#181818;',
+      navBarStyle:mob?'display:none;':'display:flex;align-items:center;gap:clamp(18px,2.6vw,36px);',
+      burgerStyle:mob?'display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:none;border:1px solid rgba(255,255,255,0.18);color:#f1f1f1;font-size:17px;cursor:pointer;':'display:none;',
+      modeBoxStyle:(mob?'display:none;':'display:flex;')+'border:1px solid rgba(255,255,255,0.18);',
+      cartStyle:tab?'display:none;':'font-size:11px;letter-spacing:0.12em;color:#c8d2c8;text-transform:uppercase;border-left:1px solid rgba(255,255,255,0.14);padding-left:16px;',
+      menuOpen:S.menuOpen,toggleMenu:()=>set({menuOpen:!S.menuOpen}),
+      b2cStyle:pill(!isB2B),b2bStyle:pill(isB2B),setB2C:()=>set({mode:'b2c',menuOpen:false}),setB2B:()=>set({mode:'b2b',menuOpen:false}),
+      navItems,cats,featured,heroSlides,heroDots,homeUseChips,
+      goHome:()=>this.go('home'),goShop:()=>this.go('shop'),goPro:()=>this.go('pro'),goContacto:()=>this.go('contacto'),
+      goMuestras:()=>this.openDoc('muestras'),goEnvio:()=>this.openDoc('envio'),
+      useChips,shopItems,shopCount:shopItems.length,
+      sort:S.sort,setSort:e=>set({sort:e.target.value}),
+      sortOpts:['Relevancia','Precio más bajo','Precio más alto','Más vendidos','Oferta','Novedades'],
+      shopCols:tab?'1fr':'240px 1fr',
+      asideStyle:tab?'display:none;':'position:sticky;top:96px;',
+      filterGroups:[
+        {name:'Familia técnica',opts:['Gravita','Porce Plus','Blanco','Eco Rustic']},
+        {name:'Formato',opts:['20x20','33x55','30x60','60x120','100x100','120x120']},
+        {name:'Acabado',opts:['Natural','Honed','Pulido','Relieve','Brillo','Mate']},
+        {name:'Color',opts:['Natural','Blanco','Marfil','Crema','Ivory','Greige']},
+      ],
+      col:c.name,colFamily:c.family,colMaterial:c.material,colDesc:c.desc,productHero:c.hero,gallery:c.gallery,
+      priceMain:isB2B?'Solicitar presupuesto':(this.precio(c.price)),
+      priceNote:isB2B?'Acceso profesional · precios mayoristas bajo registro':'IVA incluido · portes no incluidos',
+      priceSinIva:this.eur(c.price/1.21),priceConIva:this.eur(c.price),
+      colorOpts,formatOpts,acabadoOpts,specs,related,
+      metros:S.metros,setMetros:e=>set({metros:e.target.value}),totalLabel:m>0?this.eur(m*c.price):'—',
+      proTypes:['Arquitecto / Estudio','Interiorista','Constructor','Jefe de compras/obra','Distribuidor','Otros'],
+      proProps:[
+        {n:'01',t:'Tarifa mayorista',d:'Precios netos personalizados según volumen y proyecto.'},
+        {n:'02',t:'Somos especialistas',d:'Ventajas para los profesionales del sector: descuentos y promociones exclusivas.'},
+        {n:'03',t:'Trato personalizado',d:'Comercial especializado y dedicado en su cuenta. Estudio de mejora de precios por volumen.'},
+        {n:'04',t:'Logística de pallets',d:'Plazos garantizados y entrega coordinada a pie de obra.'},
+      ],
+      activacion:['Tarifa mayorista personalizada por volumen','Gestor de cuenta y soporte técnico','Facturación y envío a obra','Trato personalizado'],
+      proFaqs:[
+        {q:'¿Cómo accedo a los precios profesionales?',a:'Rellena el formulario de acceso B2B; verificamos tu perfil y activamos tu cuenta con tarifas personalizadas.'},
+        {q:'¿Enviáis a obra en toda la península?',a:'Sí. Coordinamos la entrega a pie de obra con plazos según disponibilidad de stock y formato.'},
+      ],
+      faqAll:[
+        {q:'¿Cómo accedo a los precios profesionales?',a:'Rellena el formulario de acceso profesional; verificamos tu perfil y activamos tu cuenta con tarifas personalizadas en 24–48 h.'},
+        {q:'¿Enviáis a obra en toda la península?',a:'Sí. Coordinamos la entrega a pie de obra con plazos según disponibilidad de stock y formato.'},
+        {q:'¿Puedo pedir muestras antes de comprar?',a:'Sí. Las muestras son gratuitas y solo se cobran los portes. Consulta la página de Muestras.'},
+        {q:'¿Qué formas de pago aceptáis?',a:'Transferencia bancaria, tarjeta a través de Redsys, Bizum, PayPal y Sequra.'},
+      ],
+      contactTopics:['Comercial','Contacto','Información','Muestras','Postventa','Otros'],
+      docTitle:d.title,docCrumb:d.crumb,docIntro:d.intro,docIsEnvio:S.doc==='envio',
+      docBlocks:d.blocks.map((b,i)=>({key:i,h:b.h,p:b.p||'',hasList:!!(b.list&&b.list.length),list:b.list||[]})),
+      footerCols,
+      legalLinks:[{label:'Aviso legal',onClick:()=>this.openDoc('legal')},{label:'Política de privacidad',onClick:()=>this.openDoc('privacidad')},{label:'Condiciones generales',onClick:()=>this.openDoc('condiciones')}],
+      sent:S.sent,notSent:!S.sent,
+      submit:e=>{e.preventDefault();set({sent:true});window.scrollTo(0,0);},
+      login:e=>{e.preventDefault();},
+    };
+  }
+}
+</script>
+</body>
+</html>

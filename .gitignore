@@ -1,0 +1,15 @@
+# Originales de trabajo (copias versionadas en catalogo/fuente y design/)
+/SALIDA_WEBP/
+/*.zip
+/*.xlsx
+/*.csv
+/_muestra.png
+# Python / Node
+__pycache__/
+*.pyc
+node_modules/
+.playground/
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
