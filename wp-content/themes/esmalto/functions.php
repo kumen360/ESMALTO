@@ -12,8 +12,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ESMALTO_THEME_VERSION', '1.0.0' );
+define( 'ESMALTO_THEME_VERSION', '1.1.0' );
 
 require_once __DIR__ . '/inc/setup.php';
 require_once __DIR__ . '/inc/astra.php';
 require_once __DIR__ . '/inc/woocommerce.php';
+require_once __DIR__ . '/inc/formularios.php';

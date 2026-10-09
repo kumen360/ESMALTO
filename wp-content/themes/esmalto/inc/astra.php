@@ -79,20 +79,38 @@ function esmalto_body_class( $classes ) {
 
 /**
  * Valores por defecto de Astra (solo se aplican si no se han cambiado en el Personalizador).
+ * Prioridad 20: la integración de WooCommerce de Astra fija los suyos con la prioridad por defecto.
  */
-add_filter( 'astra_theme_defaults', 'esmalto_astra_defaults' );
+add_filter( 'astra_theme_defaults', 'esmalto_astra_defaults', 20 );
 function esmalto_astra_defaults( $defaults ) {
-	$defaults['site-content-width']   = 1280;
-	$defaults['shop-grid']            = array(
+	$defaults['site-content-width']                = 1280;
+	$defaults['shop-grids']                        = array(
 		'desktop' => 3,
 		'tablet'  => 2,
-		'mobile'  => 1,
+		'mobile'  => 2,
 	);
-	$defaults['shop-no-of-products']  = 12;
-	$defaults['shop-product-structure'] = array( 'title', 'price' );
+	$defaults['shop-no-of-products']               = 12;
+	$defaults['shop-product-structure']            = array( 'title', 'price' );
 	$defaults['single-product-breadcrumb-disable'] = false;
 	return $defaults;
 }
+
+/**
+ * Estructura de las tarjetas y de la ficha según el diseño: sin categoría, valoraciones ni metadatos.
+ * El antetítulo, el bloque de precio y las especificaciones los añade esmalto-core.
+ */
+add_filter( 'astra_woo_shop_product_structure', 'esmalto_estructura_tarjeta' );
+function esmalto_estructura_tarjeta() {
+	return array( 'title', 'price' );
+}
+
+add_filter( 'astra_woo_single_product_structure', 'esmalto_estructura_ficha' );
+function esmalto_estructura_ficha() {
+	return array( 'title', 'short_desc', 'add_cart' );
+}
+
+// La ruta de la ficha va encima de la galería (inc/woocommerce.php), no dentro del resumen.
+add_filter( 'astra_get_option_single-product-breadcrumb-disable', '__return_false' );
 
 /**
  * WooCommerce inserta automáticamente su bloque «Mi cuenta» en las cabeceras de bloques.

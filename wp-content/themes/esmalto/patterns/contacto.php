@@ -10,8 +10,8 @@
 ?>
 <!-- wp:group {"align":"full","className":"esm-seccion","style":{"spacing":{"padding":{"top":"clamp(32px, 5vw, 48px)","right":"clamp(16px, 4vw, 40px)","bottom":"clamp(60px, 9vw, 110px)","left":"clamp(16px, 4vw, 40px)"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
 <div class="wp-block-group alignfull esm-seccion" style="padding-top:clamp(32px, 5vw, 48px);padding-right:clamp(16px, 4vw, 40px);padding-bottom:clamp(60px, 9vw, 110px);padding-left:clamp(16px, 4vw, 40px)"><!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"clamp(28px, 4vw, 56px)"}}}} -->
-<div class="wp-block-columns"><!-- wp:column {"width":"45%","style":{"spacing":{"blockGap":"22px"}}} -->
-<div class="wp-block-column" style="flex-basis:45%"><!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"default"}} -->
+<div class="wp-block-columns"><!-- wp:column {"style":{"spacing":{"blockGap":"22px"}}} -->
+<div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
 <p class="is-style-antetitulo">Dirección</p>
 <!-- /wp:paragraph -->
@@ -46,30 +46,28 @@
 <p class="is-style-antetitulo">Enlaces útiles</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:list {"className":"is-style-enlaces"} -->
-<ul class="wp-block-list is-style-enlaces"><!-- wp:list-item -->
+<!-- wp:list {"className":"esm-enlaces-destacados"} -->
+<ul class="wp-block-list esm-enlaces-destacados"><!-- wp:list-item -->
 <li><a href="/gastos-de-envio/">Cómo calcular gastos de envío</a></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
 <li><a href="/muestras/">Muestras</a></li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li><a href="/preguntas-frecuentes/">Preguntas frecuentes</a></li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list --></div>
 <!-- /wp:group -->
 
-<!-- wp:buttons -->
+<!-- wp:group {"className":"esm-mapa","style":{"dimensions":{"minHeight":"320px"},"border":{"color":"rgba(255,255,255,0.1)","width":"1px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
+<div class="wp-block-group esm-mapa has-border-color" style="border-color:rgba(255,255,255,0.1);border-width:1px;min-height:320px"><!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://www.google.com/maps/search/?api=1&amp;query=Castell%C3%B3n+de+la+Plana" target="_blank" rel="noreferrer noopener">Cómo llegar (Google Maps)</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"width":"55%"} -->
-<div class="wp-block-column" style="flex-basis:55%"><!-- wp:group {"style":{"spacing":{"padding":{"top":"clamp(24px, 4vw, 40px)","right":"clamp(24px, 4vw, 40px)","bottom":"clamp(24px, 4vw, 40px)","left":"clamp(24px, 4vw, 40px)"}},"border":{"color":"rgba(255,255,255,0.1)","width":"1px"}},"backgroundColor":"superficie","layout":{"type":"default"}} -->
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"padding":{"top":"clamp(24px, 4vw, 40px)","right":"clamp(24px, 4vw, 40px)","bottom":"clamp(24px, 4vw, 40px)","left":"clamp(24px, 4vw, 40px)"}},"border":{"color":"rgba(255,255,255,0.1)","width":"1px"}},"backgroundColor":"superficie","layout":{"type":"default"}} -->
 <div class="wp-block-group has-border-color has-superficie-background-color has-background" style="border-color:rgba(255,255,255,0.1);border-width:1px;padding-top:clamp(24px, 4vw, 40px);padding-right:clamp(24px, 4vw, 40px);padding-bottom:clamp(24px, 4vw, 40px);padding-left:clamp(24px, 4vw, 40px)"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
 <p class="is-style-antetitulo">Formulario de contacto</p>
 <!-- /wp:paragraph -->

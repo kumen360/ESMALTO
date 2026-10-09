@@ -24,7 +24,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
-<p class="has-texto-apagado-color has-text-color has-sm-font-size">Precios netos según tu categoría profesional y descuentos adicionales por palé completo.</p>
+<p class="has-texto-apagado-color has-text-color has-sm-font-size">Precios netos personalizados según volumen y proyecto.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -52,7 +52,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
-<p class="has-texto-apagado-color has-text-color has-sm-font-size">Comercial dedicado a tu cuenta y estudio de mejora de precios por volumen.</p>
+<p class="has-texto-apagado-color has-text-color has-sm-font-size">Comercial especializado y dedicado en su cuenta. Estudio de mejora de precios por volumen.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -62,11 +62,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"14px"}},"typography":{"fontWeight":"400"}},"fontSize":"base"} -->
-<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Logística de palés</p>
+<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Logística de pallets</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
-<p class="has-texto-apagado-color has-text-color has-sm-font-size">Plazos garantizados y entrega coordinada a pie de obra o recogida en almacén.</p>
+<p class="has-texto-apagado-color has-text-color has-sm-font-size">Plazos garantizados y entrega coordinada a pie de obra.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>

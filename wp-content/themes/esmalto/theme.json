@@ -127,8 +127,8 @@
 			},
 			"h1": { "typography": { "fontSize": "var(--wp--preset--font-size--display)" } },
 			"h2": { "typography": { "fontSize": "var(--wp--preset--font-size--xxl)" } },
-			"h3": { "typography": { "fontSize": "var(--wp--preset--font-size--xl)" } },
-			"h4": { "typography": { "fontSize": "var(--wp--preset--font-size--lg)" } },
+			"h3": { "typography": { "fontSize": "var(--wp--preset--font-size--lg)" } },
+			"h4": { "typography": { "fontSize": "var(--wp--preset--font-size--md)" } },
 			"h5": { "typography": { "fontSize": "var(--wp--preset--font-size--md)" } },
 			"h6": { "typography": { "fontSize": "var(--wp--preset--font-size--base)" } },
 			"button": {

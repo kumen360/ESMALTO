@@ -45,7 +45,7 @@
 	color: var(--wp--preset--color--acento-claro);
 	background: transparent;
 }
-.wp-block-button.is-style-chip > .wp-block-button__link {
+:is(body.esmalto, .editor-styles-wrapper) .wp-block-buttons .wp-block-button.is-style-chip > .wp-block-button__link.wp-element-button {
 	display: inline-flex;
 	align-items: center;
 	min-height: 40px;
@@ -58,21 +58,21 @@
 	text-transform: none;
 	font-weight: 400;
 }
-.wp-block-button.is-style-chip > .wp-block-button__link:hover,
-.wp-block-button.is-style-chip.is-activo > .wp-block-button__link {
+:is(body.esmalto, .editor-styles-wrapper) .wp-block-buttons .wp-block-button.is-style-chip > .wp-block-button__link.wp-element-button:hover,
+:is(body.esmalto, .editor-styles-wrapper) .wp-block-buttons .wp-block-button.is-style-chip.is-activo > .wp-block-button__link.wp-element-button {
 	background: var(--wp--preset--color--acento);
 	border-color: var(--wp--preset--color--acento);
 	color: var(--wp--preset--color--tinta);
 }
-.wp-block-button.is-style-enlace > .wp-block-button__link {
+:is(body.esmalto, .editor-styles-wrapper) .wp-block-buttons .wp-block-button.is-style-enlace > .wp-block-button__link.wp-element-button {
 	background: none;
 	padding: 0;
 	color: var(--wp--preset--color--acento);
 	font-size: 12px;
 	letter-spacing: 0.14em;
 }
-.wp-block-button.is-style-enlace > .wp-block-button__link::after { content: " →"; }
-.wp-block-button.is-style-enlace > .wp-block-button__link:hover { color: var(--wp--preset--color--acento-claro); background: none; }
+:is(body.esmalto, .editor-styles-wrapper) .wp-block-buttons .wp-block-button.is-style-enlace > .wp-block-button__link.wp-element-button::after { content: " →"; }
+:is(body.esmalto, .editor-styles-wrapper) .wp-block-buttons .wp-block-button.is-style-enlace > .wp-block-button__link.wp-element-button:hover { color: var(--wp--preset--color--acento-claro); background: none; }
 
 /* ---------- Contenedores ---------- */
 .wp-block-group.is-style-tarjeta {
@@ -220,9 +220,6 @@ ul.is-style-enlaces a:hover { color: var(--wp--preset--color--acento); }
 @media (max-width: 899px) {
 	.esm-cabecera .esm-boton-clientes { display: none; }
 }
-@media (max-width: 1079px) {
-	.esm-cabecera .esm-cesta-texto { display: none; }
-}
 .esm-cabecera .wc-block-mini-cart__button { color: var(--wp--preset--color--texto-suave); padding: 8px; }
 .esm-cabecera .wc-block-mini-cart__badge { background: var(--wp--preset--color--acento); color: var(--wp--preset--color--tinta); }
 .esm-cabecera .wp-block-button.is-style-outline > .wp-block-button__link {
@@ -249,13 +246,29 @@ ul.is-style-enlaces a:hover { color: var(--wp--preset--color--acento); }
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	border-radius: 0;
 	background: transparent !important;
-	color: var(--wp--preset--color--texto-suave) !important;
+	color: var(--wp--preset--color--acento) !important;
 }
 .esm-pie .wp-block-social-links .wp-social-link:hover { border-color: var(--wp--preset--color--acento); color: var(--wp--preset--color--acento) !important; }
 .esm-pie .wp-block-social-links .wp-social-link a { padding: 10px; }
 .esm-legal { border-top: 1px solid rgba(255, 255, 255, 0.06); }
 .esm-legal p, .esm-legal a { font-size: 11px; color: var(--wp--preset--color--texto-mudo); letter-spacing: 0.04em; }
 .esm-legal a:hover { color: var(--wp--preset--color--acento); }
+.esm-legal p a + a { margin-left: 14px; }
+.esm-pie ul.esm-pie__contacto > li { color: var(--wp--preset--color--texto-apagado); }
+.esm-pie ul.esm-pie__contacto a { color: var(--wp--preset--color--acento); }
+.esm-pie ul.esm-pie__contacto a:hover { color: var(--wp--preset--color--acento-claro); }
+.esm-pie__redes { align-items: stretch; }
+body.esmalto .esm-pie .wp-block-buttons .wp-block-button.is-style-outline > .wp-block-button__link.wp-element-button {
+	display: inline-flex;
+	align-items: center;
+	height: 100%;
+	padding: 10px 14px;
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	text-transform: none;
+	border-color: rgba(255, 255, 255, 0.18);
+}
 
 /* ---------- Ajustes de secciones de los patrones ---------- */
 .wp-block-cover.esm-hero:not(.esm-hero--pro) { min-height: clamp(460px, 78vh, 760px) !important; }
@@ -269,11 +282,44 @@ ul.is-style-enlaces a:hover { color: var(--wp--preset--color--acento); }
 .esm-placeholder--video { aspect-ratio: 16 / 9; }
 .esm-documento h2 { margin-top: 40px; }
 
-/* Formulario de acceso (bloque «Iniciar/cerrar sesión») */
-.esm-login form { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
-.esm-login form p { margin: 0; }
-.esm-login form label { display: block; font-size: 12px; color: var(--wp--preset--color--texto-tenue); margin-bottom: 6px; }
+/* Formulario de acceso profesional (bloque «Iniciar/cerrar sesión»), como el diseño */
+.esm-login form { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
+.esm-login form > p { margin: 0; flex: 1 1 100%; }
+.esm-login form .login-username { order: 1; }
+.esm-login form .login-password { order: 2; }
+.esm-login form .login-remember { order: 3; flex: 1 1 auto; }
+.esm-login form .esm-login__olvido { order: 4; flex: 0 0 auto; font-size: 14px; }
+.esm-login form .login-submit { order: 5; }
 .esm-login form input[type="text"],
-.esm-login form input[type="password"] { width: 100%; }
-.esm-login .login-remember label { display: flex; align-items: center; gap: 8px; }
-.esm-login .login-submit input[type="submit"] { width: 100%; }
+.esm-login form input[type="password"] { width: 100%; padding: 14px; }
+.esm-login .login-remember label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--wp--preset--color--texto-tenue); font-weight: 300; }
+.esm-login .login-submit input[type="submit"] { width: 100%; padding: 15px; }
+
+/* Portada del área profesional: título a 900 px e intro a 620 px, como el diseño */
+.esm-hero__texto h1 { max-width: 900px; }
+.esm-hero__texto .esm-intro { max-width: 620px; }
+
+/* Preguntas frecuentes con la respuesta visible */
+.esm-faq__item { padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.esm-faq__item > p { margin: 0; }
+.esm-faq__pregunta { font-size: 15px; font-weight: 400; color: var(--wp--preset--color--texto); }
+.esm-faq__respuesta { margin-top: 8px !important; font-size: 13px; line-height: 1.6; color: var(--wp--preset--color--texto-apagado); }
+.esm-faq--pagina { margin-top: 36px; }
+.esm-faq--pagina .esm-faq__item { padding: 24px 0; border-bottom-color: rgba(255, 255, 255, 0.1); }
+.esm-faq--pagina .esm-faq__pregunta { font-size: 16px; }
+.esm-faq--pagina .esm-faq__respuesta { font-size: 15px; line-height: 1.75; }
+
+/* Contacto: enlaces útiles en amarillo y hueco del mapa */
+ul.esm-enlaces-destacados { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+ul.esm-enlaces-destacados > li { margin: 0; font-size: 14px; }
+.esm-mapa { margin-top: 8px; }
+
+/* Documentos */
+.esm-documento .esm-documento__pie { font-size: 12px; line-height: 1.8; }
+
+/* Formularios de WPForms (contacto, muestras, presupuesto) */
+.esm-wpforms .wpforms-field { padding: 6px 0 !important; }
+.esm-wpforms .wpforms-field-checkbox li label,
+.esm-wpforms .wpforms-field-checkbox .wpforms-field-label-inline { font-size: 12px !important; color: var(--wp--preset--color--texto-tenue) !important; font-weight: 300; }
+.esm-wpforms .wpforms-submit-container { padding-top: 8px !important; }
+.esm-wpforms .wpforms-submit-container button[type="submit"] { width: 100%; letter-spacing: 0.16em; text-transform: uppercase; }

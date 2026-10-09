@@ -133,17 +133,29 @@ class Esmalto_Paginas {
 	}
 
 	public static function cabecera( $miga, $titulo, $intro = '' ) {
-		$m      = self::MARGEN;
+		$m       = self::MARGEN;
 		$bloques = array(
 			self::p( '<a href="/">Inicio</a> / ' . esc_html( $miga ), 'is-style-miga' ),
-			"<!-- wp:heading {\"level\":1,\"style\":{\"spacing\":{\"margin\":{\"top\":\"12px\",\"bottom\":\"0\"}}}} -->\n<h1 class=\"wp-block-heading\" style=\"margin-top:12px;margin-bottom:0\">" . esc_html( $titulo ) . "</h1>\n<!-- /wp:heading -->",
+			"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">" . esc_html( $titulo ) . "</h1>\n<!-- /wp:heading -->",
 		);
 		if ( $intro ) {
 			$bloques[] = self::p( $intro, 'esm-intro', 'texto-apagado' );
 		}
-		return '<!-- wp:group {"align":"full","className":"esm-seccion","style":{"spacing":{"padding":{"top":"clamp(32px, 5vw, 56px)","right":"' . $m . '","bottom":"0","left":"' . $m . '"},"blockGap":"12px"}},"layout":{"type":"constrained","contentSize":"1280px"}} -->' . "\n" .
+		return '<!-- wp:group {"align":"full","className":"esm-seccion","style":{"spacing":{"padding":{"top":"clamp(32px, 5vw, 56px)","right":"' . $m . '","bottom":"0","left":"' . $m . '"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->' . "\n" .
 			'<div class="wp-block-group alignfull esm-seccion" style="padding-top:clamp(32px, 5vw, 56px);padding-right:' . $m . ';padding-bottom:0;padding-left:' . $m . '">' .
+			'<!-- wp:group {"className":"esm-cabecera-pagina","style":{"spacing":{"blockGap":"12px"}},"layout":{"type":"default"}} -->' . "\n" .
+			'<div class="wp-block-group esm-cabecera-pagina">' .
 			implode( "\n\n", $bloques ) .
+			"</div>\n<!-- /wp:group -->" .
+			"</div>\n<!-- /wp:group -->";
+	}
+
+	/**
+	 * Pregunta con su respuesta visible (como en el diseño).
+	 */
+	public static function pregunta( $pregunta, $respuesta ) {
+		return "<!-- wp:group {\"className\":\"esm-faq__item\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group esm-faq__item\">" .
+			self::p( $pregunta, 'esm-faq__pregunta' ) . "\n\n" . self::p( $respuesta, 'esm-faq__respuesta' ) .
 			"</div>\n<!-- /wp:group -->";
 	}
 
@@ -166,8 +178,8 @@ class Esmalto_Paginas {
 			$bloques[] = $bloque;
 		}
 		$bloques[] = self::separador();
-		$bloques[] = self::p( 'Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600', '', 'texto-mudo' );
-		return self::seccion( $bloques, '900px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
+		$bloques[] = self::p( 'Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600', 'esm-documento__pie', 'texto-mudo' );
+		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
 	/* ------------------------------------------------------------------ Páginas */
@@ -242,11 +254,17 @@ class Esmalto_Paginas {
 			array( '¿Qué formas de pago aceptáis?', 'Tarjeta de crédito o débito (pago seguro con Stripe) y transferencia bancaria.' ),
 			array( '¿Hacéis envíos a Baleares, Canarias, Ceuta o Melilla?', 'Sí, bajo presupuesto. <a href="/contacto/">Escríbenos</a> con el pedido y el código postal.' ),
 		);
-		$bloques = array();
+		$items = array();
 		foreach ( $preguntas as $q ) {
-			$bloques[] = self::detalle( $q[0], $q[1] );
+			$items[] = self::pregunta( $q[0], $q[1] );
 		}
-		return self::cabecera( 'FAQ', 'Preguntas frecuentes', '¿Tienes otra duda? Escríbenos a <a href="mailto:hola@esmalto.com">hola@esmalto.com</a> o llama al 600 600 600.' ) . "\n\n" . self::seccion( $bloques, '900px' );
+		$bloques = array(
+			self::p( '<a href="/">Inicio</a> / FAQ', 'is-style-miga' ),
+			"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">Preguntas frecuentes</h1>\n<!-- /wp:heading -->",
+			self::p( '¿Tienes otra duda? Escríbenos a <a href="mailto:hola@esmalto.com">hola@esmalto.com</a> o llama al 600 600 600.', 'esm-documento__intro', 'texto-suave' ),
+			"<!-- wp:group {\"className\":\"esm-faq esm-faq--pagina\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group esm-faq esm-faq--pagina\">" . implode( "\n\n", $items ) . "</div>\n<!-- /wp:group -->",
+		);
+		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
 	public static function muestras() {

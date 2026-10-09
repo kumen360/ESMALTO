@@ -112,7 +112,7 @@ class Esmalto_Herramientas {
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 				<input type="hidden" name="action" value="esmalto_configurar">
 				<?php wp_nonce_field( 'esmalto_configurar' ); ?>
-				<label><input type="checkbox" name="forzar" value="1"> <?php esc_html_e( 'Sobrescribir el contenido de las páginas de Esmalto con la versión original', 'esmalto-core' ); ?></label><br>
+				<label><input type="checkbox" name="forzar" value="1"> <?php esc_html_e( 'Sobrescribir páginas, formularios y filtros de la tienda con la versión original de Esmalto', 'esmalto-core' ); ?></label><br>
 				<label><input type="checkbox" name="proximamente" value="1" checked> <?php esc_html_e( 'Activar el modo «Próximamente» de WooCommerce (solo los administradores ven la web)', 'esmalto-core' ); ?></label>
 				<?php submit_button( __( 'Configurar sitio', 'esmalto-core' ), 'primary', 'submit', true ); ?>
 			</form>
@@ -198,9 +198,9 @@ class Esmalto_Herramientas {
 		if ( class_exists( 'WooCommerce' ) ) {
 			$log = array_merge( $log, self::configurar_woocommerce( ! empty( $_POST['proximamente'] ) ) );
 			$log = array_merge( $log, self::configurar_envios() );
-			$log = array_merge( $log, self::configurar_filtros() );
+			$log = array_merge( $log, self::configurar_filtros( $forzar ) );
 		}
-		$formularios = Esmalto_Formularios::crear();
+		$formularios = Esmalto_Formularios::crear( $forzar );
 		$log[]       = is_wp_error( $formularios ) ? '⚠ Formularios: ' . $formularios->get_error_message() : 'Formularios de WPForms listos (contacto, muestras y presupuesto).';
 		$log         = array_merge( $log, Esmalto_Paginas::crear( $forzar ) );
 
@@ -429,21 +429,26 @@ class Esmalto_Herramientas {
 		return $log;
 	}
 
-	private static function configurar_filtros() {
+	/**
+	 * Filtros de la barra lateral en el orden del diseño (familia, formato, acabado, color) y después los demás.
+	 * El espacio (baño, cocina…) se elige con los chips «Uso» de la cabecera de la tienda.
+	 */
+	private static function configurar_filtros( $forzar = false ) {
+		$lista   = array( 'display_type' => 'list', 'query_type' => 'or' );
 		$widgets = array(
 			array( 'woocommerce_layered_nav_filters', array( 'title' => 'Filtros activos' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Espacio', 'attribute' => 'espacio', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Estilo', 'attribute' => 'estilo', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Color', 'attribute' => 'tono', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Interior / exterior', 'attribute' => 'ubicacion', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Formato (cm)', 'attribute' => 'formato', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Uso', 'attribute' => 'uso', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_layered_nav', array( 'title' => 'Antideslizante', 'attribute' => 'antideslizante', 'display_type' => 'list', 'query_type' => 'or' ) ),
-			array( 'woocommerce_product_categories', array( 'title' => 'Familia', 'orderby' => 'name', 'dropdown' => 0, 'count' => 0, 'hierarchical' => 1, 'show_children_only' => 0, 'hide_empty' => 1, 'max_depth' => '' ) ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Familia técnica', 'attribute' => 'familia' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Formato', 'attribute' => 'formato' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Acabado', 'attribute' => 'acabado' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Color', 'attribute' => 'tono' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Estilo', 'attribute' => 'estilo' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Interior / exterior', 'attribute' => 'ubicacion' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Uso', 'attribute' => 'uso' ) + $lista ),
+			array( 'woocommerce_layered_nav', array( 'title' => 'Antideslizante', 'attribute' => 'antideslizante' ) + $lista ),
 			array( 'woocommerce_price_filter', array( 'title' => 'Precio' ) ),
 		);
 		$sidebars = get_option( 'sidebars_widgets', array() );
-		if ( ! empty( $sidebars['astra-woo-shop-sidebar'] ) ) {
+		if ( ! empty( $sidebars['astra-woo-shop-sidebar'] ) && ! $forzar ) {
 			return array( 'Barra de filtros de la tienda ya configurada (sin cambios).' );
 		}
 		$ids = array();

@@ -20,11 +20,14 @@ class Esmalto_Registro_Pro {
 	public static function init() {
 		add_shortcode( 'esmalto_registro_profesional', array( __CLASS__, 'shortcode' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'procesar' ) );
+		// Al aprobar la cuenta (estado «active» de WholesaleX) se envía el enlace para crear la contraseña.
+		add_action( 'added_user_meta', array( __CLASS__, 'al_activar' ), 10, 4 );
+		add_action( 'updated_user_meta', array( __CLASS__, 'al_activar' ), 10, 4 );
 	}
 
 	public static function tipos() {
 		return array(
-			__( 'Arquitecto / estudio', 'esmalto-core' ),
+			__( 'Arquitecto / Estudio', 'esmalto-core' ),
 			__( 'Interiorista', 'esmalto-core' ),
 			__( 'Constructor / reformista', 'esmalto-core' ),
 			__( 'Instalador / alicatador', 'esmalto-core' ),
@@ -59,7 +62,6 @@ class Esmalto_Registro_Pro {
 			'proyecto'  => sanitize_textarea_field( wp_unslash( $_POST['esm_proyecto'] ?? '' ) ),
 			'privacidad' => ! empty( $_POST['esm_privacidad'] ),
 		);
-		$password = (string) wp_unslash( $_POST['esm_password'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- la contraseña no se sanea.
 		self::$valores = $v;
 
 		$e = array();
@@ -89,9 +91,6 @@ class Esmalto_Registro_Pro {
 				esc_url( esmalto_url_pagina( 'mi-cuenta' ) )
 			);
 		}
-		if ( strlen( $password ) < 8 ) {
-			$e['password'] = __( 'La contraseña debe tener al menos 8 caracteres.', 'esmalto-core' );
-		}
 		if ( ! $v['privacidad'] ) {
 			$e['privacidad'] = __( 'Debes aceptar la política de privacidad.', 'esmalto-core' );
 		}
@@ -100,6 +99,8 @@ class Esmalto_Registro_Pro {
 			return;
 		}
 
+		// La contraseña la crea el profesional con el enlace que recibe al aprobar su cuenta.
+		$password = wp_generate_password( 24 );
 		$partes   = preg_split( '/\s+/', $v['nombre'], 2 );
 		$nombre   = $partes[0];
 		$apellido = $partes[1] ?? '';
@@ -189,7 +190,60 @@ class Esmalto_Registro_Pro {
 			__( 'Hemos recibido tu solicitud profesional', 'esmalto-core' ),
 			__( 'Solicitud recibida', 'esmalto-core' ),
 			'<p>' . esc_html( sprintf( __( 'Hola %s,', 'esmalto-core' ), $v['nombre'] ) ) . '</p><p>' .
-			esc_html__( 'Gracias por solicitar tu acceso profesional en Esmalto. Revisaremos tus datos y CNAE y activaremos tu cuenta en 24–48 h. Te avisaremos por email; después podrás entrar con tu email y la contraseña que has elegido.', 'esmalto-core' ) . '</p>'
+			esc_html__( 'Gracias por solicitar tu acceso profesional en Esmalto. Revisaremos tus datos y CNAE y activaremos tu cuenta en 24–48 h. Cuando esté activa te enviaremos un enlace para crear tu contraseña.', 'esmalto-core' ) . '</p>'
+		);
+	}
+
+	/**
+	 * Campo de texto con la etiqueta solo para lectores de pantalla y el texto como marcador, como en el diseño.
+	 */
+	private static function campo( $campo, $etiqueta, $tipo = 'text', $autocompletar = '', $ancho = false ) {
+		printf(
+			'<p class="esm-form__campo%1$s"><label class="screen-reader-text" for="esm_%2$s">%3$s</label><input type="%4$s" id="esm_%2$s" name="esm_%2$s" required%5$s placeholder="%3$s" value="%6$s">%7$s</p>',
+			$ancho ? ' esm-form__campo--ancho' : '',
+			esc_attr( $campo ),
+			esc_attr( $etiqueta ),
+			esc_attr( $tipo ),
+			$autocompletar ? ' autocomplete="' . esc_attr( $autocompletar ) . '"' : '',
+			esc_attr( self::valor( $campo ) ),
+			self::error( $campo ) // phpcs:ignore WordPress.Security.EscapeOutput
+		);
+	}
+
+	/**
+	 * Cuando se aprueba la cuenta, envía al profesional el enlace para crear su contraseña (una sola vez).
+	 */
+	public static function al_activar( $meta_id, $user_id, $clave, $valor ) {
+		if ( '__wholesalex_status' !== $clave || 'active' !== $valor ) {
+			return;
+		}
+		if ( ! get_user_meta( $user_id, 'esmalto_alta_pro', true ) || get_user_meta( $user_id, 'esmalto_acceso_enviado', true ) ) {
+			return;
+		}
+		$usuario = get_userdata( $user_id );
+		$llave   = $usuario ? get_password_reset_key( $usuario ) : null;
+		if ( ! $usuario || is_wp_error( $llave ) ) {
+			return;
+		}
+		$url = function_exists( 'wc_get_endpoint_url' )
+			? add_query_arg(
+				array(
+					'key'   => $llave,
+					'id'    => $user_id,
+					'login' => rawurlencode( $usuario->user_login ),
+				),
+				wc_get_endpoint_url( 'lost-password', '', wc_get_page_permalink( 'myaccount' ) )
+			)
+			: network_site_url( 'wp-login.php?action=rp&key=' . $llave . '&login=' . rawurlencode( $usuario->user_login ), 'login' );
+		update_user_meta( $user_id, 'esmalto_acceso_enviado', current_time( 'mysql' ) );
+		esmalto_enviar_email(
+			$usuario->user_email,
+			__( 'Tu acceso profesional está activo', 'esmalto-core' ),
+			__( 'Cuenta profesional activada', 'esmalto-core' ),
+			'<p>' . esc_html( sprintf( __( 'Hola %s,', 'esmalto-core' ), $usuario->first_name ? $usuario->first_name : $usuario->display_name ) ) . '</p><p>' .
+			esc_html__( 'Hemos revisado tus datos y tu cuenta profesional ya está activa, con tu tarifa aplicada en la tienda.', 'esmalto-core' ) . '</p><p><a href="' . esc_url( $url ) . '">' .
+			esc_html__( 'Crear mi contraseña', 'esmalto-core' ) . '</a></p><p>' .
+			esc_html__( 'Después entra en «Mi cuenta» con tu email y esa contraseña.', 'esmalto-core' ) . '</p>'
 		);
 	}
 
@@ -230,24 +284,26 @@ class Esmalto_Registro_Pro {
 		<form id="alta-profesional" class="esm-form esm-form--pro" method="post" action="#alta-profesional" novalidate>
 			<?php echo self::error( 'general' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			<div class="esm-form__rejilla">
-				<p class="esm-form__campo esm-form__campo--ancho">
-					<label for="esm_nombre"><?php esc_html_e( 'Nombre y apellidos', 'esmalto-core' ); ?> *</label>
-					<input type="text" id="esm_nombre" name="esm_nombre" required autocomplete="name" value="<?php echo esc_attr( self::valor( 'nombre' ) ); ?>">
-					<?php echo self::error( 'nombre' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-				</p>
+				<?php
+				self::campo( 'nombre', __( 'Nombre y apellidos', 'esmalto-core' ), 'text', 'name', true );
+				self::campo( 'empresa', __( 'Empresa / Estudio', 'esmalto-core' ), 'text', 'organization' );
+				self::campo( 'cif', __( 'CIF / NIF', 'esmalto-core' ) );
+				?>
 				<p class="esm-form__campo">
-					<label for="esm_empresa"><?php esc_html_e( 'Empresa / estudio', 'esmalto-core' ); ?> *</label>
-					<input type="text" id="esm_empresa" name="esm_empresa" required autocomplete="organization" value="<?php echo esc_attr( self::valor( 'empresa' ) ); ?>">
-					<?php echo self::error( 'empresa' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<label class="screen-reader-text" for="esm_tipo"><?php esc_html_e( 'Tipo de profesional', 'esmalto-core' ); ?></label>
+					<select id="esm_tipo" name="esm_tipo">
+						<?php foreach ( self::tipos() as $tipo ) : ?>
+							<option <?php selected( self::valor( 'tipo' ), $tipo ); ?>><?php echo esc_html( $tipo ); ?></option>
+						<?php endforeach; ?>
+					</select>
 				</p>
+				<?php
+				self::campo( 'telefono', __( 'Teléfono', 'esmalto-core' ), 'tel', 'tel' );
+				self::campo( 'email', __( 'Email profesional', 'esmalto-core' ), 'email', 'email' );
+				?>
 				<p class="esm-form__campo">
-					<label for="esm_cif"><?php esc_html_e( 'CIF / NIF', 'esmalto-core' ); ?> *</label>
-					<input type="text" id="esm_cif" name="esm_cif" required value="<?php echo esc_attr( self::valor( 'cif' ) ); ?>">
-					<?php echo self::error( 'cif' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-				</p>
-				<p class="esm-form__campo">
-					<label for="esm_cnae"><?php esc_html_e( 'CNAE (actividad principal)', 'esmalto-core' ); ?> *</label>
-					<input type="text" id="esm_cnae" name="esm_cnae" required inputmode="numeric" list="esm_cnae_lista" placeholder="4333" value="<?php echo esc_attr( self::valor( 'cnae' ) ); ?>" aria-describedby="esm_cnae_ayuda">
+					<label class="screen-reader-text" for="esm_cnae"><?php esc_html_e( 'CNAE (actividad principal)', 'esmalto-core' ); ?></label>
+					<input type="text" id="esm_cnae" name="esm_cnae" required inputmode="numeric" list="esm_cnae_lista" placeholder="<?php esc_attr_e( 'CNAE (4 dígitos)', 'esmalto-core' ); ?>" value="<?php echo esc_attr( self::valor( 'cnae' ) ); ?>" aria-describedby="esm_cnae_ayuda">
 					<datalist id="esm_cnae_lista">
 						<?php foreach ( $lista as $codigo => $descripcion ) : ?>
 							<option value="<?php echo esc_attr( $codigo ); ?>"><?php echo esc_html( Esmalto_CNAE::formatear( $codigo ) . ' · ' . $descripcion ); ?></option>
@@ -256,32 +312,9 @@ class Esmalto_Registro_Pro {
 					<span id="esm_cnae_ayuda" class="esm-form__ayuda"></span>
 					<?php echo self::error( 'cnae' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</p>
-				<p class="esm-form__campo">
-					<label for="esm_tipo"><?php esc_html_e( 'Tipo de profesional', 'esmalto-core' ); ?></label>
-					<select id="esm_tipo" name="esm_tipo">
-						<?php foreach ( self::tipos() as $tipo ) : ?>
-							<option <?php selected( self::valor( 'tipo' ), $tipo ); ?>><?php echo esc_html( $tipo ); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</p>
-				<p class="esm-form__campo">
-					<label for="esm_telefono"><?php esc_html_e( 'Teléfono', 'esmalto-core' ); ?> *</label>
-					<input type="tel" id="esm_telefono" name="esm_telefono" required autocomplete="tel" value="<?php echo esc_attr( self::valor( 'telefono' ) ); ?>">
-					<?php echo self::error( 'telefono' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-				</p>
-				<p class="esm-form__campo">
-					<label for="esm_email"><?php esc_html_e( 'Email profesional', 'esmalto-core' ); ?> *</label>
-					<input type="email" id="esm_email" name="esm_email" required autocomplete="email" value="<?php echo esc_attr( self::valor( 'email' ) ); ?>">
-					<?php echo self::error( 'email' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-				</p>
-				<p class="esm-form__campo">
-					<label for="esm_password"><?php esc_html_e( 'Contraseña', 'esmalto-core' ); ?> *</label>
-					<input type="password" id="esm_password" name="esm_password" required minlength="8" autocomplete="new-password">
-					<?php echo self::error( 'password' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-				</p>
 				<p class="esm-form__campo esm-form__campo--ancho">
-					<label for="esm_proyecto"><?php esc_html_e( 'Cuéntanos tu proyecto (opcional)', 'esmalto-core' ); ?></label>
-					<textarea id="esm_proyecto" name="esm_proyecto" rows="4"><?php echo esc_textarea( self::valor( 'proyecto' ) ); ?></textarea>
+					<label class="screen-reader-text" for="esm_proyecto"><?php esc_html_e( 'Cuéntanos tu proyecto (opcional)', 'esmalto-core' ); ?></label>
+					<textarea id="esm_proyecto" name="esm_proyecto" rows="4" placeholder="<?php esc_attr_e( 'Cuéntanos tu proyecto (opcional)', 'esmalto-core' ); ?>"><?php echo esc_textarea( self::valor( 'proyecto' ) ); ?></textarea>
 				</p>
 				<p class="esm-form__trampa" aria-hidden="true">
 					<label for="esm_web">Web</label>
@@ -304,7 +337,7 @@ class Esmalto_Registro_Pro {
 			<input type="hidden" name="esmalto_accion" value="<?php echo esc_attr( self::ACCION ); ?>">
 			<?php wp_nonce_field( self::ACCION, '_esm_nonce' ); ?>
 			<button type="submit" class="button esm-form__enviar"><?php esc_html_e( 'Enviar solicitud', 'esmalto-core' ); ?></button>
-			<p class="esm-form__nota"><?php esc_html_e( 'Tu cuenta quedará pendiente hasta que la revisemos. Te avisaremos por email.', 'esmalto-core' ); ?></p>
+			<p class="esm-form__nota"><?php esc_html_e( 'Revisamos tu CNAE y activamos tu cuenta en 24–48 h. Te enviaremos un enlace para crear tu contraseña.', 'esmalto-core' ); ?></p>
 		</form>
 		<?php
 		return ob_get_clean();

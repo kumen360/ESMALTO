@@ -42,19 +42,30 @@ class Esmalto_Formularios {
 
 	/* ------------------------------------------------------------------ Creación */
 
+	/**
+	 * Campo con la etiqueta oculta y el texto como marcador, como en el diseño
+	 * (WPForms mantiene la etiqueta para lectores de pantalla).
+	 */
 	private static function campo( $id, $tipo, $etiqueta, $extra = array() ) {
 		return array_merge(
 			array(
 				'id'          => (string) $id,
 				'type'        => $tipo,
 				'label'       => $etiqueta,
+				'label_hide'  => '1',
 				'description' => '',
 				'size'        => 'large',
-				'placeholder' => '',
+				'placeholder' => 'select' === $tipo ? '' : $etiqueta,
+				// El campo «Nombre» de formato simple usa su propio marcador.
+				'simple_placeholder' => 'name' === $tipo ? $etiqueta : '',
 				'css'         => '',
 			),
 			$extra
 		);
+	}
+
+	private static function mitad( $primera = false ) {
+		return array( 'css' => $primera ? 'wpforms-one-half wpforms-first' : 'wpforms-one-half' );
 	}
 
 	private static function privacidad( $id ) {
@@ -100,8 +111,8 @@ class Esmalto_Formularios {
 				'gracias' => __( 'Gracias por escribirnos. Te responderemos lo antes posible.', 'esmalto-core' ),
 				'campos'  => array(
 					self::campo( 0, 'name', __( 'Nombre y apellidos', 'esmalto-core' ), array( 'format' => 'simple', 'required' => '1' ) ),
-					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1', 'size' => 'medium' ) ),
-					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), array( 'size' => 'medium' ) + $prefijo ),
+					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1' ) + self::mitad( true ) ),
+					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), $prefijo + self::mitad() ),
 					self::campo(
 						3,
 						'select',
@@ -111,9 +122,8 @@ class Esmalto_Formularios {
 							'required' => '1',
 						)
 					),
-					self::campo( 4, 'text', __( 'Producto (opcional)', 'esmalto-core' ), array( 'default_value' => '{query_var key="producto"}' ) ),
-					self::campo( 5, 'textarea', __( 'Mensaje', 'esmalto-core' ), array( 'required' => '1', 'size' => 'medium' ) + $prefijo ),
-					self::privacidad( 6 ),
+					self::campo( 4, 'textarea', __( 'Mensaje', 'esmalto-core' ), array( 'required' => '1', 'size' => 'medium' ) + $prefijo ),
+					self::privacidad( 5 ),
 				),
 			),
 			'muestras'    => array(
@@ -123,8 +133,8 @@ class Esmalto_Formularios {
 				'gracias' => __( 'Hemos recibido tu solicitud. Te enviaremos el importe de los portes para confirmar el envío de las muestras.', 'esmalto-core' ),
 				'campos'  => array(
 					self::campo( 0, 'name', __( 'Nombre y apellidos', 'esmalto-core' ), array( 'format' => 'simple', 'required' => '1' ) ),
-					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1', 'size' => 'medium' ) ),
-					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), array( 'size' => 'medium', 'required' => '1' ) + $prefijo ),
+					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1' ) + self::mitad( true ) ),
+					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), array( 'required' => '1' ) + $prefijo + self::mitad() ),
 					self::campo( 3, 'textarea', __( 'Dirección de envío (calle, CP, población, provincia)', 'esmalto-core' ), array( 'required' => '1', 'size' => 'small' ) + $prefijo ),
 					self::campo( 4, 'textarea', __( 'Productos, colores y formatos', 'esmalto-core' ), array( 'required' => '1', 'size' => 'small', 'default_value' => '{query_var key="producto"}' ) ),
 					self::privacidad( 5 ),
@@ -137,19 +147,19 @@ class Esmalto_Formularios {
 				'gracias' => __( 'Gracias. Te enviaremos el presupuesto en 24 h laborables.', 'esmalto-core' ),
 				'campos'  => array(
 					self::campo( 0, 'name', __( 'Nombre y apellidos', 'esmalto-core' ), array( 'format' => 'simple', 'required' => '1' ) ),
-					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1', 'size' => 'medium' ) ),
-					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), array( 'size' => 'medium', 'required' => '1' ) + $prefijo ),
-					self::campo( 3, 'text', __( 'Empresa (si eres profesional)', 'esmalto-core' ), array( 'size' => 'medium' ) + $prefijo ),
+					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1' ) + self::mitad( true ) ),
+					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), array( 'required' => '1' ) + $prefijo + self::mitad() ),
+					self::campo( 3, 'text', __( 'Empresa (si eres profesional)', 'esmalto-core' ), $prefijo ),
 					self::campo( 4, 'text', __( 'Producto', 'esmalto-core' ), array( 'required' => '1', 'default_value' => '{query_var key="producto"}' ) ),
-					self::campo( 5, 'text', __( 'Metros cuadrados', 'esmalto-core' ), array( 'size' => 'small', 'default_value' => '{query_var key="m2"}' ) ),
-					self::campo( 6, 'text', __( 'Cajas', 'esmalto-core' ), array( 'size' => 'small', 'default_value' => '{query_var key="cajas"}' ) ),
+					self::campo( 5, 'text', __( 'Metros cuadrados', 'esmalto-core' ), array( 'default_value' => '{query_var key="m2"}' ) + self::mitad( true ) ),
+					self::campo( 6, 'text', __( 'Cajas', 'esmalto-core' ), array( 'default_value' => '{query_var key="cajas"}' ) + self::mitad() ),
 					self::campo(
 						7,
 						'select',
 						__( 'Entrega', 'esmalto-core' ),
-						array( 'choices' => self::opciones( array( 'Entrega a domicilio / obra', 'Recogida en almacén' ) ) )
+						array( 'choices' => self::opciones( array( 'Entrega a domicilio / obra', 'Recogida en almacén' ) ) ) + self::mitad( true )
 					),
-					self::campo( 8, 'text', __( 'Código postal de entrega', 'esmalto-core' ), array( 'size' => 'small' ) + $prefijo ),
+					self::campo( 8, 'text', __( 'Código postal de entrega', 'esmalto-core' ), $prefijo + self::mitad() ),
 					self::campo( 9, 'textarea', __( 'Comentarios', 'esmalto-core' ), array( 'size' => 'small' ) + $prefijo ),
 					self::privacidad( 10 ),
 				),
@@ -158,7 +168,7 @@ class Esmalto_Formularios {
 	}
 
 	/**
-	 * Crea (o recrea si $forzar) los formularios en WPForms. Devuelve [tipo => id].
+	 * Crea los formularios en WPForms; con $forzar actualiza los existentes sin cambiar su ID. Devuelve [tipo => id].
 	 */
 	public static function crear( $forzar = false ) {
 		if ( ! post_type_exists( 'wpforms' ) ) {
@@ -166,18 +176,21 @@ class Esmalto_Formularios {
 		}
 		$ids = get_option( self::OPCION, array() );
 		foreach ( self::definiciones() as $tipo => $def ) {
-			if ( ! $forzar && self::id( $tipo ) ) {
+			$id = self::id( $tipo );
+			if ( $id && ! $forzar ) {
 				continue;
 			}
-			$id = wp_insert_post(
-				array(
-					'post_title'   => $def['titulo'],
-					'post_status'  => 'publish',
-					'post_type'    => 'wpforms',
-					'post_content' => '{}',
-				),
-				true
-			);
+			if ( ! $id ) {
+				$id = wp_insert_post(
+					array(
+						'post_title'   => $def['titulo'],
+						'post_status'  => 'publish',
+						'post_type'    => 'wpforms',
+						'post_content' => '{}',
+					),
+					true
+				);
+			}
 			if ( is_wp_error( $id ) ) {
 				return $id;
 			}
@@ -187,7 +200,7 @@ class Esmalto_Formularios {
 			}
 			$datos = array(
 				'id'       => (string) $id,
-				'field_id' => count( $campos ),
+				'field_id' => max( array_map( 'intval', array_keys( $campos ) ) ) + 1,
 				'fields'   => $campos,
 				'settings' => array(
 					'form_title'             => $def['titulo'],

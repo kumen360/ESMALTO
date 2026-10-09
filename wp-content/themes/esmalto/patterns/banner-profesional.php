@@ -15,8 +15,8 @@
 <p class="is-style-antetitulo">Zona profesional</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading {"style":{"typography":{"lineHeight":"1.12"},"spacing":{"margin":{"top":"0","bottom":"0"}}},"fontSize":"xl"} -->
-<h2 class="wp-block-heading has-xl-font-size" style="margin-top:0;margin-bottom:0;line-height:1.12">Precios y condiciones para profesionales</h2>
+<!-- wp:heading {"style":{"typography":{"lineHeight":"1.12","fontSize":"clamp(24px, 3vw, 40px)"},"spacing":{"margin":{"top":"0","bottom":"0"}}}} -->
+<h2 class="wp-block-heading" style="margin-top:0;margin-bottom:0;font-size:clamp(24px, 3vw, 40px);line-height:1.12">Precios y condiciones para profesionales</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"4px","bottom":"12px"}}},"textColor":"texto-suave"} -->

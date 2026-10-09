@@ -20,11 +20,8 @@ class Esmalto_Producto {
 		add_filter( 'woocommerce_catalog_orderby', array( __CLASS__, 'ordenacion' ) );
 		add_filter( 'woocommerce_default_catalog_orderby_options', array( __CLASS__, 'ordenacion' ) );
 
-		if ( defined( 'ASTRA_THEME_VERSION' ) ) {
-			add_action( 'astra_woo_shop_title_after', array( __CLASS__, 'meta_listado' ) );
-		} else {
-			add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'meta_listado' ), 5 );
-		}
+		// El tema se carga después de los plugins: se decide dónde va el dato de la tarjeta cuando ya está activo.
+		add_action( 'after_setup_theme', array( __CLASS__, 'enganchar_tarjeta' ) );
 		add_action( 'woocommerce_before_shop_loop_item_title', array( __CLASS__, 'insignia' ), 9 );
 		add_filter( 'woocommerce_sale_flash', array( __CLASS__, 'insignia_oferta' ) );
 		add_filter( 'woocommerce_product_add_to_cart_text', array( __CLASS__, 'texto_boton_listado' ), 10, 2 );
@@ -116,20 +113,45 @@ class Esmalto_Producto {
 		);
 	}
 
+	public static function enganchar_tarjeta() {
+		if ( defined( 'ASTRA_THEME_VERSION' ) ) {
+			add_action( 'astra_woo_shop_price_before', array( __CLASS__, 'meta_listado' ) );
+		} else {
+			add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'meta_listado' ), 5 );
+		}
+	}
+
+	/**
+	 * Dato junto al nombre y línea bajo él, según el listado (como en el diseño):
+	 * tienda → formatos y «familia · estilo»; destacados → familia y descripción corta; relacionados → familia.
+	 */
 	public static function meta_listado() {
 		global $product;
 		if ( ! $product instanceof WC_Product ) {
 			return;
 		}
-		$familia  = $product->get_attribute( 'pa_familia' );
-		$estilo   = $product->get_attribute( 'pa_estilo' );
-		$formatos = wc_get_product_terms( $product->get_id(), 'pa_formato', array( 'fields' => 'names' ) );
-		$formatos = is_wp_error( $formatos ) ? array() : $formatos;
-		$derecha  = 1 === count( $formatos ) ? $formatos[0] : sprintf( _n( '%d formato', '%d formatos', count( $formatos ), 'esmalto-core' ), count( $formatos ) );
+		$familia = $product->get_attribute( 'pa_familia' );
+		$listado = wc_get_loop_prop( 'name' );
+		if ( in_array( $listado, array( 'related', 'up-sells' ), true ) ) {
+			$contexto = 'relacionados';
+			$derecha  = $familia;
+			$linea    = '';
+		} elseif ( wc_get_loop_prop( 'is_shortcode' ) ) {
+			$contexto = 'destacados';
+			$derecha  = $familia;
+			$linea    = wp_strip_all_tags( $product->get_short_description() );
+		} else {
+			$contexto = 'tienda';
+			$formatos = wc_get_product_terms( $product->get_id(), 'pa_formato', array( 'fields' => 'names' ) );
+			$formatos = is_wp_error( $formatos ) ? array() : $formatos;
+			$derecha  = 1 === count( $formatos ) ? $formatos[0] : ( $formatos ? sprintf( _n( '%d formato', '%d formatos', count( $formatos ), 'esmalto-core' ), count( $formatos ) ) : '' );
+			$linea    = implode( ' · ', array_filter( array( $familia, $product->get_attribute( 'pa_estilo' ) ) ) );
+		}
 		printf(
-			'<div class="esm-loop-meta"><span>%s</span><span class="esm-loop-meta__formatos">%s</span></div>',
-			esc_html( implode( ' · ', array_filter( array( $familia, $estilo ) ) ) ),
-			$formatos ? esc_html( $derecha ) : ''
+			'<div class="esm-loop-meta esm-loop-meta--%1$s"><span class="esm-loop-meta__derecha">%2$s</span>%3$s</div>',
+			esc_attr( $contexto ),
+			esc_html( $derecha ),
+			$linea ? '<span class="esm-loop-meta__linea">' . esc_html( $linea ) . '</span>' : ''
 		);
 	}
 

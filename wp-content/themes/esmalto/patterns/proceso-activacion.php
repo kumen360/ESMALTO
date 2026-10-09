@@ -16,14 +16,14 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"fontFamily":"var:preset|font-family|titulos","lineHeight":"1.35","fontWeight":"400"},"spacing":{"margin":{"top":"14px"}}},"textColor":"texto","fontSize":"lg"} -->
-<p class="has-texto-color has-text-color has-lg-font-size" style="margin-top:14px;font-family:var(--wp--preset--font-family--titulos);font-weight:400;line-height:1.35">Verificamos tu perfil y CNAE y activamos tu cuenta con precios profesionales en 24–48 h. Sin compromiso.</p>
+<p class="has-texto-color has-text-color has-lg-font-size" style="margin-top:14px;font-family:var(--wp--preset--font-family--titulos);font-weight:400;line-height:1.35">Verificamos tu perfil y activamos tu cuenta con precios profesionales en 24–48 h. Sin compromiso.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:list {"className":"is-style-guiones"} -->
 <ul class="wp-block-list is-style-guiones"><!-- wp:list-item -->
-<li>Tarifa mayorista según tu categoría (A, B o C)</li>
+<li>Tarifa mayorista personalizada por volumen</li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
@@ -31,11 +31,11 @@
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li>Pedidos por palé completo y envío a obra</li>
+<li>Facturación y envío a obra</li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li>Historial de pedidos y facturación en tu cuenta</li>
+<li>Trato personalizado</li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list --></div>
 <!-- /wp:column --></div>
