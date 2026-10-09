@@ -20,9 +20,9 @@ Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla
 - Sin m²/caja: `ESM-CORALINA-BLANCO-30X60` y `ESM-CORALINA-BLANCO-60X60`. En ellas la calculadora no funciona.
 - Revisar las tablas de estilo y tono (`catalogo/scripts/build_catalog.py`).
 
-## Puesta en marcha
-- Desactivar «Próximamente» cuando esté todo revisado (*WooCommerce → Ajustes → Visibilidad del sitio*).
-- El repositorio de GitHub puede volver a ser privado: las fotos y fichas ya están en la biblioteca de medios. Para reimportar el catálogo tendrá que ser público durante la importación.
+## Repositorio privado
+- Las fotos y fichas ya están en la biblioteca de medios. Las herramientas que descargan del repositorio (*Precargar fotos del catálogo*, *Importar fichas técnicas*) y la importación del CSV solo funcionan si el repositorio es público durante la operación.
+- Para actualizar el tema o el plugin, sube los ZIP de `dist/` desde *Apariencia → Temas* y *Plugins → Añadir → Subir*.
 
 ## Diferencias deliberadas con el diseño
 - Se mantiene «Cesta (0)» también en móvil (el diseño la oculta) para poder llegar a la cesta.
