@@ -50,15 +50,16 @@ class Esmalto_Herramientas {
 	/* ------------------------------------------------------------------ Estado */
 
 	private static function estado() {
+		global $wpdb;
 		$tema       = wp_get_theme();
 		$productos  = function_exists( 'wc_get_products' ) ? count( wc_get_products( array( 'limit' => -1, 'return' => 'ids', 'status' => array( 'publish', 'draft' ) ) ) ) : 0;
 		$con_precio = 0;
 		$sin_ficha  = 0;
 		if ( $productos ) {
-			global $wpdb;
 			$con_precio = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE p.post_type = 'product_variation' AND pm.meta_key = '_regular_price' AND pm.meta_value <> ''" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 			$sin_ficha  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->postmeta} a WHERE a.meta_key = '_ficha_tecnica' AND a.meta_value <> '' AND NOT EXISTS (SELECT 1 FROM {$wpdb->postmeta} b WHERE b.post_id = a.post_id AND b.meta_key = '_ficha_tecnica_id' AND b.meta_value <> '')" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		}
+		$fotos = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key = '_wc_attachment_source'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		$roles = esmalto_ajustes();
 		return array(
 			array( 'WooCommerce activo', class_exists( 'WooCommerce' ) ),
@@ -68,6 +69,7 @@ class Esmalto_Herramientas {
 			array( 'Stripe instalado', class_exists( 'WC_Stripe' ) || defined( 'WC_STRIPE_VERSION' ) ),
 			array( 'Formularios creados', Esmalto_Formularios::id( 'contacto' ) && Esmalto_Formularios::id( 'muestras' ) && Esmalto_Formularios::id( 'presupuesto' ) ),
 			array( 'Páginas creadas', (bool) get_option( 'esmalto_paginas' ) ),
+			array( sprintf( 'Fotos del catálogo en la biblioteca (%d)', $fotos ), $fotos > 0 ),
 			array( sprintf( 'Productos importados (%d)', $productos ), $productos > 0 ),
 			array( sprintf( 'Variaciones con precio (%d)', $con_precio ), $con_precio > 0 ),
 			array( sprintf( 'Fichas técnicas pendientes de importar (%d)', $sin_ficha ), $productos > 0 && 0 === $sin_ficha ),
@@ -115,8 +117,10 @@ class Esmalto_Herramientas {
 				<?php submit_button( __( 'Configurar sitio', 'esmalto-core' ), 'primary', 'submit', true ); ?>
 			</form>
 
-			<h2><?php esc_html_e( '2. Después de importar los productos', 'esmalto-core' ); ?></h2>
-			<p><?php esc_html_e( 'Importa las fichas técnicas (PDF) desde el repositorio del catálogo y aplica los textos ALT, títulos y leyendas SEO a las imágenes importadas.', 'esmalto-core' ); ?></p>
+			<h2><?php esc_html_e( '2. Catálogo', 'esmalto-core' ); ?></h2>
+			<p><?php esc_html_e( 'Antes de importar el CSV en Productos → Importar, precarga sus fotos: se descargan en lotes pequeños, con su texto ALT, y la importación las reutiliza en lugar de descargarlas otra vez.', 'esmalto-core' ); ?></p>
+			<p><button type="button" class="button button-primary" data-esmalto-lote="fotos"><?php esc_html_e( 'Precargar fotos del catálogo', 'esmalto-core' ); ?></button></p>
+			<p><?php esc_html_e( 'Después de importar los productos, importa las fichas técnicas (PDF) desde el repositorio del catálogo. El botón de textos ALT vuelve a aplicarlos a todas las fotos importadas.', 'esmalto-core' ); ?></p>
 			<p>
 				<button type="button" class="button button-primary" data-esmalto-lote="fichas"><?php esc_html_e( 'Importar fichas técnicas', 'esmalto-core' ); ?></button>
 				<button type="button" class="button" data-esmalto-lote="alt"><?php esc_html_e( 'Aplicar textos ALT a las imágenes', 'esmalto-core' ); ?></button>
@@ -142,20 +146,29 @@ class Esmalto_Herramientas {
 		( function () {
 			var log = document.getElementById( 'esmalto-lote-log' );
 			function escribir( t ) { log.style.display = 'block'; log.textContent += t + '\n'; log.scrollTop = log.scrollHeight; }
-			function lote( tarea, desde, boton ) {
+			function lote( tarea, desde, boton, intento ) {
 				var datos = new FormData();
+				intento = intento || 0;
 				datos.append( 'action', 'esmalto_lote' );
 				datos.append( 'tarea', tarea );
 				datos.append( 'desde', desde );
 				datos.append( '_wpnonce', <?php echo wp_json_encode( wp_create_nonce( 'esmalto_lote' ) ); ?> );
 				fetch( ajaxurl, { method: 'POST', body: datos, credentials: 'same-origin' } )
-					.then( function ( r ) { return r.json(); } )
+					.then( function ( r ) { if ( ! r.ok ) { throw new Error( 'HTTP ' + r.status ); } return r.json(); } )
 					.then( function ( r ) {
 						if ( ! r.success ) { escribir( '✖ ' + ( r.data || 'Error' ) ); boton.disabled = false; return; }
 						( r.data.log || [] ).forEach( escribir );
 						if ( r.data.siguiente !== null ) { lote( tarea, r.data.siguiente, boton ); } else { escribir( '✔ Terminado.' ); boton.disabled = false; }
 					} )
-					.catch( function ( e ) { escribir( '✖ ' + e ); boton.disabled = false; } );
+					.catch( function ( e ) {
+						// Un corte del servidor no detiene el proceso: se repite el mismo lote (lo ya hecho se salta).
+						if ( intento < 3 ) {
+							escribir( '… reintentando (' + e.message + ')' );
+							setTimeout( function () { lote( tarea, desde, boton, intento + 1 ); }, 8000 );
+							return;
+						}
+						escribir( '✖ ' + e ); boton.disabled = false;
+					} );
 			}
 			document.querySelectorAll( '[data-esmalto-lote]' ).forEach( function ( b ) {
 				b.addEventListener( 'click', function () { b.disabled = true; escribir( '— ' + b.textContent ); lote( b.getAttribute( 'data-esmalto-lote' ), 0, b ); } );
@@ -459,6 +472,9 @@ class Esmalto_Herramientas {
 		@set_time_limit( 120 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 		$tarea = isset( $_POST['tarea'] ) ? sanitize_key( $_POST['tarea'] ) : '';
 		$desde = isset( $_POST['desde'] ) ? absint( $_POST['desde'] ) : 0;
+		if ( 'fotos' === $tarea ) {
+			wp_send_json_success( self::lote_fotos( $desde ) );
+		}
 		if ( 'fichas' === $tarea ) {
 			wp_send_json_success( self::lote_fichas() );
 		}
@@ -526,9 +542,138 @@ class Esmalto_Herramientas {
 		);
 	}
 
-	private static function lote_alt( $desde ) {
+	/**
+	 * Precarga las fotos del CSV del catálogo en lotes cortos, con su texto ALT.
+	 * WooCommerce reutiliza el adjunto cuyo «_wc_attachment_source» coincide con la URL,
+	 * así la importación no descarga decenas de fotos en una sola petición.
+	 */
+	private static function lote_fotos( $desde ) {
+		$urls = self::urls_catalogo( 0 === $desde );
+		if ( is_wp_error( $urls ) ) {
+			return array(
+				'log'       => array( '✖ ' . $urls->get_error_message() ),
+				'siguiente' => null,
+			);
+		}
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		add_filter( 'intermediate_image_sizes_advanced', array( __CLASS__, 'tamanos_imagen' ) );
+
+		$mapa   = self::mapa_alt();
+		$total  = count( $urls );
+		$inicio = microtime( true );
+		$pos    = $desde;
+		$nuevas = 0;
+		$log    = array();
+		// Hasta 6 fotos o unos 15 s por petición, lejos del límite de 30 s del servidor.
+		while ( $pos < $total && $pos - $desde < 6 && microtime( true ) - $inicio < 15 ) {
+			$url = $urls[ $pos ];
+			++$pos;
+			if ( self::adjunto_de( $url ) ) {
+				continue;
+			}
+			$subida = wc_rest_upload_image_from_url( $url );
+			if ( is_wp_error( $subida ) ) {
+				$log[] = '✖ ' . basename( $url ) . ': ' . $subida->get_error_message();
+				continue;
+			}
+			$id = wc_rest_set_uploaded_image_as_attachment( $subida );
+			if ( ! $id || is_wp_error( $id ) ) {
+				$log[] = '✖ ' . basename( $url ) . ': no se pudo guardar.';
+				continue;
+			}
+			update_post_meta( $id, '_wc_attachment_source', $url );
+			self::aplicar_alt( $id, $url, $mapa );
+			++$nuevas;
+		}
+		$log[] = sprintf( 'Fotos %d–%d de %d: %d descargadas.', $desde + 1, $pos, $total, $nuevas );
+		return array(
+			'log'       => $log,
+			'siguiente' => $pos < $total ? $pos : null,
+		);
+	}
+
+	/**
+	 * URLs únicas de la columna «Images» del CSV del catálogo, tal como las lee el importador.
+	 */
+	private static function urls_catalogo( $refrescar ) {
+		$urls = get_transient( 'esmalto_fotos_catalogo' );
+		if ( ! $refrescar && is_array( $urls ) ) {
+			return $urls;
+		}
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		$tmp = download_url( trailingslashit( esmalto_ajuste( 'catalogo_url' ) ) . 'salida/esmalto-productos.csv', 60 );
+		if ( is_wp_error( $tmp ) ) {
+			return $tmp;
+		}
+		$f    = fopen( $tmp, 'r' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		$cab  = $f ? fgetcsv( $f, 0, ',', '"', '' ) : false;
+		$col  = $cab ? array_search( 'Images', array_map( fn( $c ) => preg_replace( '/^\xEF\xBB\xBF/', '', trim( (string) $c ) ), $cab ), true ) : false;
+		$urls = array();
+		while ( false !== $col && ( $fila = fgetcsv( $f, 0, ',', '"', '' ) ) !== false ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition
+			foreach ( explode( ',', (string) ( $fila[ $col ] ?? '' ) ) as $url ) {
+				$url = esc_url_raw( trim( $url ) );
+				if ( $url ) {
+					$urls[ $url ] = true;
+				}
+			}
+		}
+		if ( $f ) {
+			fclose( $f ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		}
+		wp_delete_file( $tmp );
+		if ( false === $col ) {
+			return new WP_Error( 'esmalto_csv', 'El CSV del catálogo no tiene la columna «Images».' );
+		}
+		$urls = array_keys( $urls );
+		set_transient( 'esmalto_fotos_catalogo', $urls, DAY_IN_SECONDS );
+		return $urls;
+	}
+
+	private static function adjunto_de( $url ) {
+		$ids = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'any',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+					array(
+						'key'   => '_wc_attachment_source',
+						'value' => $url,
+					),
+				),
+			)
+		);
+		return $ids ? (int) $ids[0] : 0;
+	}
+
+	private static function mapa_alt() {
 		$archivo = ESMALTO_CORE_DIR . 'data/imagenes-alt.json';
-		$mapa    = file_exists( $archivo ) ? json_decode( (string) file_get_contents( $archivo ), true ) : array(); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		return file_exists( $archivo ) ? (array) json_decode( (string) file_get_contents( $archivo ), true ) : array(); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	}
+
+	private static function aplicar_alt( $id, $fuente, $mapa ) {
+		$nombre = basename( (string) wp_parse_url( $fuente, PHP_URL_PATH ) );
+		if ( empty( $mapa[ $nombre ] ) ) {
+			return false;
+		}
+		$d = $mapa[ $nombre ];
+		update_post_meta( $id, '_wp_attachment_image_alt', sanitize_text_field( $d['alt'] ) );
+		wp_update_post(
+			array(
+				'ID'           => $id,
+				'post_title'   => sanitize_text_field( $d['title'] ),
+				'post_excerpt' => sanitize_text_field( $d['caption'] ),
+				'post_content' => sanitize_textarea_field( $d['description'] ),
+			)
+		);
+		return true;
+	}
+
+	private static function lote_alt( $desde ) {
+		$mapa    = self::mapa_alt();
 		$por_pag = 80;
 		$ids     = get_posts(
 			array(
@@ -544,22 +689,9 @@ class Esmalto_Herramientas {
 		);
 		$hechas = 0;
 		foreach ( $ids as $id ) {
-			$fuente = (string) get_post_meta( $id, '_wc_attachment_source', true );
-			$nombre = basename( (string) wp_parse_url( $fuente, PHP_URL_PATH ) );
-			if ( ! isset( $mapa[ $nombre ] ) ) {
-				continue;
+			if ( self::aplicar_alt( $id, (string) get_post_meta( $id, '_wc_attachment_source', true ), $mapa ) ) {
+				++$hechas;
 			}
-			$d = $mapa[ $nombre ];
-			update_post_meta( $id, '_wp_attachment_image_alt', sanitize_text_field( $d['alt'] ) );
-			wp_update_post(
-				array(
-					'ID'           => $id,
-					'post_title'   => sanitize_text_field( $d['title'] ),
-					'post_excerpt' => sanitize_text_field( $d['caption'] ),
-					'post_content' => sanitize_textarea_field( $d['description'] ),
-				)
-			);
-			++$hechas;
 		}
 		return array(
 			'log'       => array( sprintf( 'Imágenes %d–%d: %d con ALT aplicado.', $desde + 1, $desde + count( $ids ), $hechas ) ),
