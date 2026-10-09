@@ -87,7 +87,7 @@ function esmalto_astra_defaults( $defaults ) {
 	$defaults['shop-grids']                        = array(
 		'desktop' => 3,
 		'tablet'  => 2,
-		'mobile'  => 2,
+		'mobile'  => 1,
 	);
 	$defaults['shop-no-of-products']               = 12;
 	$defaults['shop-product-structure']            = array( 'title', 'price' );

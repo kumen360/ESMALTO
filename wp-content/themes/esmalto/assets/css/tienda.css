@@ -550,3 +550,18 @@ body.esmalto .woocommerce form.woocommerce-form-register { border: 0; border-rad
 .esm-form__ok { border: 1px solid #fec30c; padding: 30px 28px; background: #002100; margin-top: 22px; }
 .esm-form__ok-titulo { font-family: var(--wp--preset--font-family--titulos); font-size: 24px; color: #fec30c; margin: 0 0 8px; }
 .esm-recordar label { flex: 0 1 auto; display: inline-flex; align-items: center; gap: 8px; margin: 0; text-align: left; font-size: 12px; font-weight: 300; color: #8a968a; }
+/* WooCommerce oculta el desbordamiento de las miniaturas: la fila debe poder desplazarse */
+body.single-product.woocommerce div.product div.images .flex-control-thumbs { overflow-x: auto; overflow-y: hidden; }
+
+/* ---------- Móvil y tableta ---------- */
+/* La tabla de embalaje (7 columnas) se desplaza en horizontal en lugar de ensanchar la página */
+.woocommerce div.product .woocommerce-tabs .panel table { display: block; max-width: 100%; overflow-x: auto; }
+/* Rejillas de producto como el diseño: 2 columnas en tableta y 1 en móvil */
+@media (max-width: 921px) {
+	.woocommerce ul.products,
+	.woocommerce-page ul.products { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 600px) {
+	.woocommerce ul.products,
+	.woocommerce-page ul.products { grid-template-columns: minmax(0, 1fr) !important; }
+}
