@@ -40,7 +40,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"esm-faq__respuesta"} -->
-<p class="esm-faq__respuesta">Construcción, instalaciones y acabados, arquitectura e ingeniería, diseño de interiores, comercio de materiales de construcción y actividades inmobiliarias. Si tu actividad no aparece, escríbenos.</p>
+<p class="esm-faq__respuesta">Usamos el CNAE-2025: construcción de edificios e ingeniería civil, instalaciones y acabados, arquitectura, ingeniería y diseño de interiores, comercio e intermediación de materiales de construcción, inmobiliarias, servicios a edificios y jardinería, y corte de piedra. Si tu actividad no aparece, escríbenos.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 

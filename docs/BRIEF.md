@@ -22,7 +22,7 @@ WordPress 7.1 · Astra (gratis) + tema hijo `esmalto` · Gutenberg (bloques nati
 3. Solo las **33 colecciones del CSV** (AGRA, ALBERI y BLANCO del diseño eran de muestra).
 4. Solo se muestra la marca **Esmalto** (el fabricante queda como dato interno `_fabricante`).
 5. Las imágenes se suben **desde este repositorio** (URLs raw de GitHub) → el repo debe ser público durante la importación.
-6. CNAE válidos: **construcción + proyectos + comercio** (lista editable en *Esmalto → B2B*).
+6. CNAE válidos: **construcción + proyectos + comercio**. Lista definitiva CNAE-2025 de 46 actividades en [`Esmalto_Lista_CNAE-2025.csv`](Esmalto_Lista_CNAE-2025.csv), editable en *Esmalto → Ajustes*.
 7. Envío **por peso** con tramos editables; palé completo para pedidos grandes; recogida en almacén gratis.
 8. Hero de portada **estático** (bloque Portada).
 9. Datos de empresa y textos legales: **placeholders del diseño** (ver `PENDIENTES.md`).

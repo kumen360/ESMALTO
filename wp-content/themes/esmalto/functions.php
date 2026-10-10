@@ -12,7 +12,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ESMALTO_THEME_VERSION', '1.1.1' );
+define( 'ESMALTO_THEME_VERSION', '1.1.2' );
 
 require_once __DIR__ . '/inc/setup.php';
 require_once __DIR__ . '/inc/astra.php';

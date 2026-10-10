@@ -23,6 +23,7 @@ Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla
 ## Repositorio privado
 - Las fotos y fichas ya están en la biblioteca de medios. Las herramientas que descargan del repositorio (*Precargar fotos del catálogo*, *Importar fichas técnicas*) y la importación del CSV solo funcionan si el repositorio es público durante la operación.
 - Para actualizar el tema o el plugin, sube los ZIP de `dist/` desde *Apariencia → Temas* y *Plugins → Añadir → Subir*.
+- En `dist/` están el tema 1.1.2 y el plugin 1.2.1, con la lista CNAE-2025 como lista inicial y la respuesta nueva de «¿Qué CNAE se admiten?». En esmalto.com ya están aplicadas (Ajustes y página Profesionales), así que subirlos no es urgente.
 
 ## Diferencias deliberadas con el diseño
 - Se mantiene «Cesta (0)» también en móvil (el diseño la oculta) para poder llegar a la cesta.
