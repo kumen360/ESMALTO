@@ -38,6 +38,12 @@
 		return isNaN( n ) ? 0 : n;
 	}
 
+	// «1 pieza», «2 piezas» (sin dato: «— piezas»).
+	function piezas( n ) {
+		n = parseInt( n, 10 ) || 0;
+		return n ? sprintf( 1 === n ? txt.pieza : txt.piezas, n ) : sprintf( txt.piezas, '—' );
+	}
+
 	$( function () {
 		var $form = $( 'form.variations_form' );
 		if ( ! $form.length ) {
@@ -115,7 +121,7 @@
 				$nota.text( txt.notaConsultar );
 			}
 			if ( e.m2_caja > 0 ) {
-				html.push( '<div><small>' + sprintf( txt.caja, numeroCorto( e.m2_caja ), e.piezas_caja || '—', numeroCorto( e.kg_caja ) ) + '</small></div>' );
+				html.push( '<div><small>' + sprintf( txt.caja, numeroCorto( e.m2_caja ), piezas( e.piezas_caja ), numeroCorto( e.kg_caja ) ) + '</small></div>' );
 			}
 			if ( e.cajas_palet > 0 ) {
 				html.push( '<div><small>' + sprintf( txt.palet, e.cajas_palet, numeroCorto( e.m2_palet || e.cajas_palet * e.m2_caja ) ) + '</small></div>' );
@@ -130,7 +136,7 @@
 				$( '[data-esm-spec="espesor"]' ).text( e.espesor );
 			}
 			if ( e.m2_caja > 0 ) {
-				var emb = sprintf( txt.embalaje, e.piezas_caja || '—', numeroCorto( e.m2_caja ), numeroCorto( e.kg_caja ) ) + ( e.cajas_palet > 0 ? sprintf( txt.embalajePalet, e.cajas_palet ) : '' );
+				var emb = sprintf( txt.embalaje, piezas( e.piezas_caja ), numeroCorto( e.m2_caja ), numeroCorto( e.kg_caja ) ) + ( e.cajas_palet > 0 ? sprintf( txt.embalajePalet, e.cajas_palet ) : '' );
 				$( '[data-esm-spec="embalaje"]' ).text( emb ).closest( 'li' ).prop( 'hidden', false );
 			}
 		}
