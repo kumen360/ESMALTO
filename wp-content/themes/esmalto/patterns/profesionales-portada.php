@@ -15,11 +15,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":1,"style":{"spacing":{"margin":{"top":"14px","bottom":"0"}},"typography":{"lineHeight":"1.1","fontSize":"clamp(28px, 5vw, 60px)"}}} -->
-<h1 class="wp-block-heading" style="margin-top:14px;margin-bottom:0;font-size:clamp(28px, 5vw, 60px);line-height:1.1">Ventajas para profesionales del sector</h1>
+<h1 class="wp-block-heading" style="margin-top:14px;margin-bottom:0;font-size:clamp(28px, 5vw, 60px);line-height:1.1">Tarifa y servicio para quien trabaja con cerámica</h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"esm-intro","style":{"spacing":{"margin":{"top":"18px"}}},"textColor":"texto-suave"} -->
-<p class="esm-intro has-texto-suave-color has-text-color" style="margin-top:18px">Reformistas, interioristas, constructores, aparejadores, arquitectos, etc.</p>
+<p class="esm-intro has-texto-suave-color has-text-color" style="margin-top:18px">Si reformas, proyectas, construyes o instalas, abre tu cuenta profesional: precios netos, una persona de contacto y entrega en obra.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div></div>
 <!-- /wp:cover -->

@@ -5,7 +5,7 @@
  * Categories: esmalto
  * Keywords: login, registro, alta, profesionales, b2b, cnae
  * Viewport Width: 1400
- * Description: Dos columnas: inicio de sesión y formulario de alta profesional (empresa, CNAE validado, teléfono).
+ * Description: Dos columnas: inicio de sesión y formulario de alta profesional (empresa, CNAE validado, teléfono). El encabezado del alta va en contenedores flex (Pila).
  */
 ?>
 <!-- wp:group {"align":"full","className":"esm-seccion","style":{"spacing":{"padding":{"top":"clamp(48px, 7vw, 80px)","right":"clamp(16px, 4vw, 40px)","left":"clamp(16px, 4vw, 40px)","bottom":"0"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
@@ -27,13 +27,21 @@
 <!-- /wp:column -->
 
 <!-- wp:column {"style":{"spacing":{"padding":{"top":"clamp(28px, 4vw, 44px)","right":"clamp(28px, 4vw, 44px)","bottom":"clamp(28px, 4vw, 44px)","left":"clamp(28px, 4vw, 44px)"}}}} -->
-<div class="wp-block-column" style="padding-top:clamp(28px, 4vw, 44px);padding-right:clamp(28px, 4vw, 44px);padding-bottom:clamp(28px, 4vw, 44px);padding-left:clamp(28px, 4vw, 44px)"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
+<div class="wp-block-column" style="padding-top:clamp(28px, 4vw, 44px);padding-right:clamp(28px, 4vw, 44px);padding-bottom:clamp(28px, 4vw, 44px);padding-left:clamp(28px, 4vw, 44px)"><!-- wp:group {"className":"esm-alta-encabezado","style":{"spacing":{"blockGap":"22px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
+<div class="wp-block-group esm-alta-encabezado"><!-- wp:group {"style":{"spacing":{"blockGap":"12px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
+<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
 <p class="is-style-antetitulo">Alta profesional</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading {"style":{"spacing":{"margin":{"top":"12px"}},"typography":{"lineHeight":"1.25","fontSize":"clamp(22px, 2.6vw, 30px)"}}} -->
-<h2 class="wp-block-heading" style="margin-top:12px;font-size:clamp(22px, 2.6vw, 30px);line-height:1.25">Rellene el siguiente formulario y nos pondremos en contacto</h2>
-<!-- /wp:heading -->
+<!-- wp:heading {"style":{"typography":{"lineHeight":"1.25","fontSize":"clamp(22px, 2.6vw, 30px)"}}} -->
+<h2 class="wp-block-heading" style="font-size:clamp(22px, 2.6vw, 30px);line-height:1.25">Solicita tu cuenta profesional</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
+<p class="has-texto-apagado-color has-text-color has-sm-font-size">Cuéntanos quién eres y a qué te dedicas. Comprobamos tu actividad y te damos acceso a la tarifa en 24–48 h.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
 
 <!-- wp:shortcode -->
 [esmalto_registro_profesional]

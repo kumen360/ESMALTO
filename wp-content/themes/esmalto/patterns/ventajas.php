@@ -34,11 +34,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"14px"}},"typography":{"fontWeight":"400"}},"fontSize":"base"} -->
-<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Somos especialistas</p>
+<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Condiciones solo para profesionales</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
-<p class="has-texto-apagado-color has-text-color has-sm-font-size">Ventajas para los profesionales del sector: descuentos y promociones exclusivas.</p>
+<p class="has-texto-apagado-color has-text-color has-sm-font-size">Promociones y descuentos que no se publican en la tienda abierta.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -48,11 +48,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"14px"}},"typography":{"fontWeight":"400"}},"fontSize":"base"} -->
-<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Trato personalizado</p>
+<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Una persona de contacto</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
-<p class="has-texto-apagado-color has-text-color has-sm-font-size">Comercial especializado y dedicado en su cuenta. Estudio de mejora de precios por volumen.</p>
+<p class="has-texto-apagado-color has-text-color has-sm-font-size">Alguien que conoce tu cuenta y estudia el precio de cada obra según el volumen.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
