@@ -249,6 +249,7 @@ class Esmalto_Paginas {
 			array(
 				self::patron( 'esmalto/portada' ),
 				self::patron( 'esmalto/compra-por-espacio' ),
+				self::patron( 'esmalto/compra-por-formato' ),
 				self::patron( 'esmalto/colecciones-destacadas' ),
 				self::patron( 'esmalto/banner-profesional' ),
 			)
