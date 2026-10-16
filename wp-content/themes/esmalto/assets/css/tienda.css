@@ -204,6 +204,14 @@ body.esmalto .widget_layered_nav_filters ul li.chosen a:focus-visible { backgrou
 }
 .esm-loop-meta--destacados .esm-loop-meta__derecha,
 .esm-loop-meta--relacionados .esm-loop-meta__derecha { text-transform: uppercase; letter-spacing: 0.1em; }
+.esm-loop-meta__medidas {
+	grid-column: 1 / -1;
+	margin-top: 6px;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 10px;
+	letter-spacing: 0.08em;
+	color: #8a968a;
+}
 .esm-loop-meta__linea {
 	grid-column: 1 / -1;
 	margin-top: 6px;

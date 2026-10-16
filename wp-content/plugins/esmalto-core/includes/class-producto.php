@@ -156,8 +156,9 @@ class Esmalto_Producto {
 	}
 
 	/**
-	 * Dato junto al nombre y línea bajo él, según el listado (como en el diseño):
-	 * tienda → formatos y «familia · estilo»; destacados → familia y descripción corta; relacionados → familia.
+	 * Dato junto al nombre, medidas y línea bajo él, según el listado (como en el diseño):
+	 * tienda → «familia · estilo»; destacados → familia y descripción corta; relacionados → familia.
+	 * Todas las tarjetas muestran las medidas de la colección («60x120 · 100x100 · 120x120 cm»).
 	 */
 	public static function meta_listado() {
 		global $product;
@@ -176,17 +177,38 @@ class Esmalto_Producto {
 			$linea    = wp_strip_all_tags( $product->get_short_description() );
 		} else {
 			$contexto = 'tienda';
-			$formatos = wc_get_product_terms( $product->get_id(), 'pa_formato', array( 'fields' => 'names' ) );
-			$formatos = is_wp_error( $formatos ) ? array() : $formatos;
-			$derecha  = 1 === count( $formatos ) ? $formatos[0] : ( $formatos ? sprintf( _n( '%d formato', '%d formatos', count( $formatos ), 'esmalto-core' ), count( $formatos ) ) : '' );
+			$derecha  = '';
 			$linea    = implode( ' · ', array_filter( array( $familia, $product->get_attribute( 'pa_estilo' ) ) ) );
 		}
+		$medidas = self::medidas( $product );
 		printf(
-			'<div class="esm-loop-meta esm-loop-meta--%1$s"><span class="esm-loop-meta__derecha">%2$s</span>%3$s</div>',
+			'<div class="esm-loop-meta esm-loop-meta--%1$s"><span class="esm-loop-meta__derecha">%2$s</span>%3$s%4$s</div>',
 			esc_attr( $contexto ),
 			esc_html( $derecha ),
+			$medidas ? '<span class="esm-loop-meta__medidas">' . esc_html( $medidas ) . '</span>' : '',
 			$linea ? '<span class="esm-loop-meta__linea">' . esc_html( $linea ) . '</span>' : ''
 		);
+	}
+
+	/**
+	 * Formatos de la colección de menor a mayor superficie: «60x60 · 60x120 · 120x120 cm».
+	 */
+	public static function medidas( $product ) {
+		$formatos = wc_get_product_terms( $product->get_id(), 'pa_formato', array( 'fields' => 'names' ) );
+		if ( is_wp_error( $formatos ) || ! $formatos ) {
+			return '';
+		}
+		$superficie = static function ( $formato ) {
+			$lados = array_map( 'esmalto_num', preg_split( '/\s*[x×]\s*/iu', (string) $formato ) );
+			return 2 === count( $lados ) ? $lados[0] * $lados[1] : 0;
+		};
+		usort(
+			$formatos,
+			static function ( $a, $b ) use ( $superficie ) {
+				return array( $superficie( $a ), $a ) <=> array( $superficie( $b ), $b );
+			}
+		);
+		return implode( ' · ', $formatos ) . ' cm';
 	}
 
 	public static function insignia() {
