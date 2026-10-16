@@ -31,6 +31,15 @@
 .esm-barra-tienda .is-style-etiqueta { margin: 0 4px 0 0; font-family: var(--wp--preset--font-family--texto); font-size: 11px !important; letter-spacing: 0.2em; color: #8a968a; }
 /* Filas «Uso» y «Formato»: la etiqueta ocupa siempre lo mismo para que los chips queden alineados */
 .esm-barra-tienda__filas .is-style-etiqueta { min-width: 78px; }
+/* «Filtros» solo en móvil y tableta, donde la barra lateral queda debajo del listado */
+body .wp-block-buttons.esm-boton-filtros { display: none; }
+@media (max-width: 921px) {
+	body .wp-block-buttons.esm-boton-filtros { display: flex; }
+	/* Con JavaScript, los filtros van encima del listado y se abren con «Filtros» */
+	body.woocommerce-js.ast-left-sidebar #content > .ast-container { display: flex; flex-direction: column; }
+	body.woocommerce-js.ast-left-sidebar #secondary { order: -1; display: none; margin: 0 0 28px; border-top: 0; }
+	body.woocommerce-js.esm-filtros-abiertos.ast-left-sidebar #secondary { display: block; }
+}
 .esm-ordenar { display: flex; align-items: center; gap: 10px; }
 .esm-ordenar__etiqueta { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a968a; }
 .esm-ordenar .woocommerce-ordering { margin: 0; float: none; }

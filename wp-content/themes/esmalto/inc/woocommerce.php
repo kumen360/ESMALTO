@@ -101,7 +101,8 @@ function esmalto_migas( $crumbs ) {
 }
 
 /**
- * Marca como activos el enlace del menú y los chips de «Uso» y «Formato» que corresponden a la URL actual.
+ * Marca como activos el enlace del menú y los chips de «Uso» y «Formato» que corresponden a la URL
+ * actual, y hace que «Filtros» (móvil) abra y cierre la barra de filtros.
  */
 add_action( 'wp_footer', 'esmalto_menu_activo', 99 );
 function esmalto_menu_activo() {
@@ -139,6 +140,23 @@ function esmalto_menu_activo() {
 					a.parentNode.classList.add( 'is-activo' );
 					a.setAttribute( 'aria-current', 'page' );
 				}
+			} );
+		} );
+
+		// «Filtros» (móvil): abre y cierra la barra de filtros, que se coloca encima del listado.
+		var lateral = document.getElementById( 'secondary' );
+		var activos = document.querySelectorAll( '.widget_layered_nav_filters li.chosen' ).length;
+		document.querySelectorAll( '.esm-boton-filtros .wp-block-button__link' ).forEach( function ( a ) {
+			if ( activos ) { a.textContent = a.textContent.replace( /\s*\(\d+\)$/, '' ) + ' (' + activos + ')'; }
+			if ( ! lateral ) { return; }
+			a.setAttribute( 'aria-controls', 'secondary' );
+			a.setAttribute( 'aria-expanded', 'false' );
+			a.addEventListener( 'click', function ( e ) {
+				if ( ! window.matchMedia( '(max-width: 921px)' ).matches ) { return; }
+				e.preventDefault();
+				var abierto = document.body.classList.toggle( 'esm-filtros-abiertos' );
+				a.setAttribute( 'aria-expanded', abierto ? 'true' : 'false' );
+				if ( abierto ) { window.scrollTo( { top: lateral.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' } ); }
 			} );
 		} );
 	} )();
