@@ -151,6 +151,44 @@ class Esmalto_Paginas {
 	}
 
 	/**
+	 * Contenedor flex vertical («Pila») con el hueco indicado entre bloques.
+	 */
+	public static function pila( $bloques, $hueco = '22px', $clase = '' ) {
+		$atts = array(
+			'style'  => array( 'spacing' => array( 'blockGap' => $hueco ) ),
+			'layout' => array(
+				'type'           => 'flex',
+				'orientation'    => 'vertical',
+				'justifyContent' => 'stretch',
+			),
+		);
+		if ( $clase ) {
+			$atts = array( 'className' => $clase ) + $atts;
+		}
+		$cls = 'wp-block-group' . ( $clase ? ' ' . $clase : '' );
+		return '<!-- wp:group ' . wp_json_encode( $atts, JSON_UNESCAPED_SLASHES ) . " -->\n" .
+			'<div class="' . esc_attr( $cls ) . '">' . implode( "\n\n", array_filter( (array) $bloques ) ) . "</div>\n<!-- /wp:group -->";
+	}
+
+	/**
+	 * Título de apartado sin margen superior (el hueco lo pone el contenedor flex).
+	 */
+	public static function h_apartado( $texto ) {
+		return "<!-- wp:heading {\"style\":{\"spacing\":{\"margin\":{\"top\":\"0\",\"bottom\":\"0\"}}},\"fontSize\":\"lg\"} -->\n<h2 class=\"wp-block-heading has-lg-font-size\" style=\"margin-top:0;margin-bottom:0\">{$texto}</h2>\n<!-- /wp:heading -->";
+	}
+
+	/**
+	 * Lista numerada.
+	 */
+	public static function lista_numerada( $items ) {
+		$inner = array();
+		foreach ( $items as $item ) {
+			$inner[] = "<!-- wp:list-item -->\n<li>{$item}</li>\n<!-- /wp:list-item -->";
+		}
+		return "<!-- wp:list {\"ordered\":true} -->\n<ol class=\"wp-block-list\">" . implode( "\n\n", $inner ) . "</ol>\n<!-- /wp:list -->";
+	}
+
+	/**
 	 * Pregunta con su respuesta visible (como en el diseño).
 	 */
 	public static function pregunta( $pregunta, $respuesta ) {
@@ -267,16 +305,65 @@ class Esmalto_Paginas {
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
+	/**
+	 * Muestras (textos del repaso del 10/10). Todo el contenido va en contenedores flex («Pila»);
+	 * al final se mantiene el formulario, que es adonde lleva «Solicitar una muestra» en cada ficha.
+	 */
 	public static function muestras() {
-		return self::documento(
-			'Muestras',
-			'Muestras',
-			'Ver y tocar la cerámica es clave para elegir el material de tu proyecto. Por eso enviamos muestras: son gratuitas y solo se cobran los portes. Para envíos fuera de la península, los portes tienen un suplemento.',
+		$cabecera  = self::pila(
 			array(
-				array( '¿Cómo solicitar las muestras gratuitas?', array( 'Ve a la página del producto y elige color y formato.', 'Pulsa «Solicitar una muestra»: el producto se copia en el formulario.', 'Puedes pedir varios productos en la misma solicitud.', 'Te enviamos el importe de los portes y, al confirmarlo, recibes las muestras en casa.' ) ),
-				array( 'Condiciones', array( 'Las muestras tienen un formato máximo de 25 × 25 cm (salvo formatos pequeños). Si el formato pedido no está disponible, enviaremos otro.', 'Las muestras sirven para valorar color, textura y tacto. Si llegan dañadas pero permiten apreciarlos, no se reembolsan los portes.', 'Pide la muestra en el formato que te interesa: el tono puede variar entre formatos por la cocción.', 'Solo una muestra idéntica por cliente. Las que no estén en stock las envía el fabricante y pueden llegar por separado.' ) ),
+				self::p( '<a href="/">Inicio</a> / Muestras', 'is-style-miga' ),
+				"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">Muestras</h1>\n<!-- /wp:heading -->",
+				self::p( 'Una foto no enseña cómo cambia un porcelánico con la luz de tu obra ni cómo es al tacto. Pide la pieza antes de decidir: la muestra no se cobra, solo pagas el transporte.', 'esm-documento__intro', 'texto-suave' ),
+			)
+		);
+		$como      = self::pila(
+			array(
+				self::h_apartado( 'Cómo pedirlas' ),
+				self::lista_numerada(
+					array(
+						'En la ficha del producto, elige color y formato y pulsa «Solicitar una muestra».',
+						'Añade todas las que necesites; van en la misma solicitud.',
+						'Te confirmamos el coste del transporte y, cuando lo aceptes, salen hacia tu dirección.',
+					)
+				),
 			),
-			array( self::h( 'Solicitud de muestras', 2, 'lg' ), self::caja( array( self::shortcode( '[esmalto_formulario tipo="muestras"]' ) ) ) )
+			'18px'
+		);
+		$saber     = self::pila(
+			array(
+				self::h_apartado( 'Lo que conviene saber' ),
+				self::lista(
+					array(
+						'<strong>Tamaño.</strong> Enviamos una pieza o un corte de hasta 25 × 25 cm; los formatos pequeños van enteros. Si no hay corte del formato elegido, te mandamos otro de la misma serie y color.',
+						'<strong>Formato.</strong> Pídela en el formato que vayas a colocar: una misma serie puede variar ligeramente de tono de un formato a otro.',
+						'<strong>Para qué sirve.</strong> Para comprobar color, acabado y tacto. Un golpe en el transporte que no impida esa comprobación no da derecho a devolver los portes.',
+						'<strong>Cantidad.</strong> Una muestra por referencia y cliente.',
+						'<strong>Envío.</strong> Unas muestras salen de nuestro almacén y otras directamente de fábrica, así que pueden llegar en paquetes distintos.',
+						'<strong>Fuera de la península.</strong> El transporte lleva suplemento.',
+					)
+				),
+			),
+			'18px'
+		);
+		$solicitud = self::pila(
+			array(
+				self::h_apartado( 'Solicitud de muestras' ),
+				self::caja( array( self::shortcode( '[esmalto_formulario tipo="muestras"]' ) ) ),
+			),
+			'18px'
+		);
+		// Pie con filete superior (un separador dentro de un contenedor flex se queda sin ancho).
+		$pie       = '<!-- wp:group {"style":{"border":{"top":{"color":"rgba(255,255,255,0.12)","width":"1px"}},"spacing":{"padding":{"top":"24px"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->' . "\n" .
+			'<div class="wp-block-group" style="border-top-color:rgba(255,255,255,0.12);border-top-width:1px;padding-top:24px">' .
+			self::p( 'Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600', 'esm-documento__pie', 'texto-mudo' ) .
+			"</div>\n<!-- /wp:group -->";
+		return self::seccion(
+			array( self::pila( array( $cabecera, $como, $saber, $solicitud, $pie ), '48px', 'esm-muestras' ) ),
+			'820px',
+			'clamp(32px, 5vw, 56px)',
+			'clamp(60px, 9vw, 110px)',
+			'esm-documento'
 		);
 	}
 
