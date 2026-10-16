@@ -98,14 +98,31 @@
 .woocommerce-widget-layered-nav-list__item--chosen a::before { background: #fec30c; border-color: #fec30c; }
 .woocommerce-widget-layered-nav-list__item a:hover { color: #fec30c; }
 .woocommerce-widget-layered-nav-list__item .count { display: none; }
-.widget_layered_nav_filters ul { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; list-style: none; }
-.widget_layered_nav_filters li a {
-	display: inline-block;
+/* Filtros activos: fondo amarillo y texto oscuro, como los chips activos (contraste 11:1, WCAG AA).
+   Astra les ponía un fondo gris claro (rgba 245, 0,75) con el texto claro de la paleta y no se leían. */
+body.esmalto #secondary .widget_layered_nav_filters ul,
+body.esmalto .widget_layered_nav_filters ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; overflow: visible; }
+body.esmalto #secondary .widget_layered_nav_filters ul li.chosen,
+body.esmalto .widget_layered_nav_filters ul li.chosen { float: none; margin: 0; padding: 0; background: none; border-radius: 0; }
+body.esmalto #secondary .widget_layered_nav_filters ul li.chosen a,
+body.esmalto .widget_layered_nav_filters ul li.chosen a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 32px;
 	padding: 6px 10px;
 	border: 1px solid #fec30c;
-	color: #f1f1f1;
+	background: #fec30c;
+	color: #181818;
 	font-size: 12px;
+	line-height: 1.3;
 }
+body.esmalto #secondary .widget_layered_nav_filters ul li.chosen a::before,
+body.esmalto .widget_layered_nav_filters ul li.chosen a::before { color: inherit; margin: 0; top: 0; }
+body.esmalto #secondary .widget_layered_nav_filters ul li.chosen a:hover,
+body.esmalto #secondary .widget_layered_nav_filters ul li.chosen a:focus-visible,
+body.esmalto .widget_layered_nav_filters ul li.chosen a:hover,
+body.esmalto .widget_layered_nav_filters ul li.chosen a:focus-visible { background: #ffd75c; border-color: #ffd75c; color: #181818; }
 .woocommerce .widget_price_filter .ui-slider .ui-slider-range,
 .woocommerce .widget_price_filter .ui-slider .ui-slider-handle { background-color: #fec30c; }
 .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content { background-color: rgba(255, 255, 255, 0.16); }
