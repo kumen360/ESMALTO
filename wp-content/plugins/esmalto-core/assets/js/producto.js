@@ -86,7 +86,24 @@
 					}
 					$chips.append( $chip );
 				} );
+				ocultarSiUnica( $sel );
 			} );
+		}
+
+		// «Tipo de pieza» con una sola opción posible no aporta nada: se oculta y la opción queda elegida.
+		function ocultarSiUnica( $sel ) {
+			if ( 'attribute_pa_tipo-de-pieza' !== $sel.attr( 'name' ) ) {
+				return;
+			}
+			var $opciones = $sel.find( 'option' ).filter( function () {
+				return this.value && ! this.disabled;
+			} );
+			var unica = 1 === $opciones.length;
+			// En línea: el CSS del tema da display:block a las filas y anularía el atributo hidden.
+			$sel.closest( 'tr' ).css( 'display', unica ? 'none' : '' );
+			if ( unica && $sel.val() !== $opciones.val() ) {
+				$sel.val( $opciones.val() ).trigger( 'change' );
+			}
 		}
 
 		$form.on( 'click', '.esm-chip', function () {
