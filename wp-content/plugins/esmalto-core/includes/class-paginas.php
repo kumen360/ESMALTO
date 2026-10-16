@@ -209,7 +209,12 @@ class Esmalto_Paginas {
 		foreach ( $apartados as $apartado ) {
 			$bloques[] = self::h( $apartado[0], 2, 'lg' );
 			foreach ( array_slice( $apartado, 1 ) as $contenido ) {
-				$bloques[] = is_array( $contenido ) ? self::lista( $contenido ) : self::p( $contenido, '', 'texto-apagado' );
+				if ( is_array( $contenido ) ) {
+					$bloques[] = self::lista( $contenido );
+				} else {
+					// Un bloque ya montado («<!-- wp:…») se añade tal cual; el texto, como párrafo.
+					$bloques[] = 0 === strpos( $contenido, '<!-- wp:' ) ? $contenido : self::p( $contenido, '', 'texto-apagado' );
+				}
 			}
 		}
 		foreach ( $extra as $bloque ) {
@@ -388,7 +393,7 @@ class Esmalto_Paginas {
 			'El coste del envío depende del peso total del pedido. Cada producto indica el peso por caja, y lo verás calculado en la cesta antes de pagar.',
 			array(
 				array( 'Entrega a domicilio u obra (península)', array( 'Pedidos pequeños: tarifa por tramos de peso.', 'Pedidos grandes: se envían en palés completos con coste por palé.', 'Entrega a pie de calle; para descarga en obra consúltanos.' ) ),
-				array( 'Recogida en almacén', 'Gratis. Elige «Recogida en almacén» al finalizar la compra y te avisaremos cuando el pedido esté listo.' ),
+				array( 'Recogida en almacén', 'Gratis. Elige «Recogida en almacén» al finalizar la compra y te avisaremos cuando el pedido esté listo.', self::pila( array( self::shortcode( '[esmalto_recogida]' ) ), '12px', 'esm-recogida-datos' ) ),
 				array( 'Baleares, Canarias, Ceuta y Melilla', 'Envíos bajo presupuesto: escríbenos con el pedido y el código postal.' ),
 			)
 		);

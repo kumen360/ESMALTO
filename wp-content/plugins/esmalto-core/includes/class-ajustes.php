@@ -65,6 +65,9 @@ class Esmalto_Ajustes {
 		$salida['b2b_sin_iva']    = empty( $entrada['b2b_sin_iva'] ) ? 0 : 1;
 		$salida['aviso_producto'] = isset( $entrada['aviso_producto'] ) ? sanitize_textarea_field( wp_unslash( $entrada['aviso_producto'] ) ) : $def['aviso_producto'];
 		$salida['catalogo_url']   = isset( $entrada['catalogo_url'] ) ? esc_url_raw( wp_unslash( $entrada['catalogo_url'] ) ) : $def['catalogo_url'];
+		foreach ( array( 'recogida_direccion', 'recogida_horario' ) as $clave ) {
+			$salida[ $clave ] = isset( $entrada[ $clave ] ) ? sanitize_textarea_field( wp_unslash( $entrada[ $clave ] ) ) : $def[ $clave ];
+		}
 
 		// CNAE: se guarda normalizado; si coincide con la lista inicial se deja vacío (= usar la inicial).
 		$cnae = isset( $entrada['cnae'] ) ? sanitize_textarea_field( wp_unslash( $entrada['cnae'] ) ) : '';
@@ -153,6 +156,19 @@ class Esmalto_Ajustes {
 					self::fila_texto( __( 'WhatsApp (con prefijo, solo números)', 'esmalto-core' ), $n . '[comercial_whatsapp]', $a['comercial_whatsapp'] );
 					self::fila_texto( __( 'Email para avisos de altas', 'esmalto-core' ), $n . '[email_avisos]', $a['email_avisos'], 'email', __( 'Vacío = email del administrador.', 'esmalto-core' ) );
 					?>
+				</table>
+
+				<h2><?php esc_html_e( 'Recogida en almacén', 'esmalto-core' ); ?></h2>
+				<p><?php esc_html_e( 'Se muestran en «Cómo calcular gastos de envío» y en los correos y la página de confirmación de los pedidos con «Recogida en almacén». Mientras estén vacíos no se muestra nada (los administradores ven un aviso en la página).', 'esmalto-core' ); ?></p>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Dirección del almacén', 'esmalto-core' ); ?></th>
+						<td><textarea name="<?php echo esc_attr( $n . '[recogida_direccion]' ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $a['recogida_direccion'] ); ?></textarea></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Horario de recogida', 'esmalto-core' ); ?></th>
+						<td><textarea name="<?php echo esc_attr( $n . '[recogida_horario]' ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $a['recogida_horario'] ); ?></textarea></td>
+					</tr>
 				</table>
 
 				<h2><?php esc_html_e( 'CNAE admitidos en el alta profesional', 'esmalto-core' ); ?></h2>

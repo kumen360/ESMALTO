@@ -30,6 +30,8 @@ function esmalto_ajustes_defecto() {
 		'cnae'               => '',
 		'aviso_producto'     => 'Puede haber errores en los detalles de los productos. Para cualquier duda, contacta con el departamento comercial.',
 		'catalogo_url'       => 'https://raw.githubusercontent.com/kumen360/ESMALTO/main/catalogo/',
+		'recogida_direccion' => '',
+		'recogida_horario'   => '',
 	);
 }
 
