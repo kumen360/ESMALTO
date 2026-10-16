@@ -17,6 +17,33 @@ class Esmalto_Formularios {
 
 	public static function init() {
 		add_shortcode( 'esmalto_formulario', array( __CLASS__, 'shortcode' ) );
+		add_action( 'wpforms_frontend_output_before', array( __CLASS__, 'ocultar_campo_trampa' ) );
+	}
+
+	/**
+	 * WPForms inserta un campo trampa antispam (etiqueta hecha con palabras sueltas de las demás) y
+	 * lo oculta con un script en línea. Hasta que el script se ejecuta, o si no llega a ejecutarse,
+	 * se veía su etiqueta («colores colores Productos,»). Se imprime el mismo CSS desde el servidor;
+	 * el número de campo se calcula igual que WPForms (primer hueco en los ID o el siguiente al mayor).
+	 */
+	public static function ocultar_campo_trampa( $form_data ) {
+		if ( empty( $form_data['settings']['antispam_v3'] ) || empty( $form_data['fields'] ) || ! is_array( $form_data['fields'] ) ) {
+			return;
+		}
+		$ids    = array_map( 'intval', array_keys( $form_data['fields'] ) );
+		$mayor  = max( $ids );
+		$trampa = $mayor + 1;
+		for ( $i = 1; $i <= $mayor; $i++ ) {
+			if ( ! in_array( $i, $ids, true ) ) {
+				$trampa = $i;
+				break;
+			}
+		}
+		$selector = sprintf( '#wpforms-%d-field_%d-container', (int) $form_data['id'], $trampa );
+		printf(
+			'<style>%1$s{position:absolute!important;overflow:hidden!important;display:inline!important;height:1px!important;width:1px!important;z-index:-1000!important;padding:0!important}%1$s input{visibility:hidden}</style>',
+			$selector // phpcs:ignore WordPress.Security.EscapeOutput -- solo números.
+		);
 	}
 
 	public static function id( $tipo ) {
