@@ -44,6 +44,20 @@
 		return n ? sprintf( 1 === n ? txt.pieza : txt.piezas, n ) : sprintf( txt.piezas, '—' );
 	}
 
+	// Palés completos y cajas sueltas: «Menos de 1 palé», «1 palé», «2 palés y 14 cajas».
+	function textoPalets( cajas, cajasPalet ) {
+		if ( ! cajas || ! ( cajasPalet > 0 ) ) {
+			return '—';
+		}
+		var completos = Math.floor( cajas / cajasPalet );
+		var sueltas = cajas - completos * cajasPalet;
+		if ( ! completos ) {
+			return txt.paletMenos;
+		}
+		var texto = sprintf( 1 === completos ? txt.palet1 : txt.paletN, completos );
+		return sueltas ? sprintf( txt.paletYCajas, texto, sprintf( 1 === sueltas ? txt.caja1 : txt.cajaN, sueltas ) ) : texto;
+	}
+
 	$( function () {
 		var $form = $( 'form.variations_form' );
 		if ( ! $form.length ) {
@@ -208,7 +222,7 @@
 			$calc.find( '[data-esm-cajas]' ).text( cajas );
 			$calc.find( '[data-esm-m2reales]' ).text( numero( m2Reales, 2 ) + ' m²' );
 			$calc.find( '[data-esm-dato-palets]' ).prop( 'hidden', ! ( e.cajas_palet > 0 ) );
-			$calc.find( '[data-esm-palets]' ).text( e.cajas_palet > 0 ? numero( cajas / e.cajas_palet, 2 ) : '—' );
+			$calc.find( '[data-esm-palets]' ).text( textoPalets( cajas, e.cajas_palet ) );
 
 			if ( e.precio_caja > 0 ) {
 				var total = cajas * e.precio_caja;

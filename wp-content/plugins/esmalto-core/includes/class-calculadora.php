@@ -127,6 +127,12 @@ class Esmalto_Calculadora {
 					'usar'          => __( 'Usar %s cajas', 'esmalto-core' ),
 					'embalaje'      => __( '%1$s/caja · %2$s m²/caja · %3$s kg/caja', 'esmalto-core' ),
 					'embalajePalet' => __( ' · %s cajas/palé', 'esmalto-core' ),
+					'paletMenos'    => __( 'Menos de 1 palé', 'esmalto-core' ),
+					'palet1'        => __( '%s palé', 'esmalto-core' ),
+					'paletN'        => __( '%s palés', 'esmalto-core' ),
+					'caja1'         => __( '%s caja', 'esmalto-core' ),
+					'cajaN'         => __( '%s cajas', 'esmalto-core' ),
+					'paletYCajas'   => __( '%1$s y %2$s', 'esmalto-core' ),
 				),
 			)
 		);
