@@ -161,10 +161,21 @@ ul.is-style-enlaces a:hover { color: var(--wp--preset--color--acento); }
    Cabecera (parts/header.html)
    ========================================================================== */
 .esm-cabecera {
+	position: relative;
+	isolation: isolate;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+/* El fondo translúcido con desenfoque va en una capa propia: un backdrop-filter en la cabecera
+   encerraba el menú móvil (position: fixed) en sus 74 px de alto y no se veía ninguna opción. */
+.esm-cabecera::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
 	background: rgba(0, 26, 0, 0.92);
 	-webkit-backdrop-filter: blur(14px);
 	backdrop-filter: blur(14px);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	pointer-events: none;
 }
 .esm-cabecera .esm-cabecera__fila { min-height: 74px; }
 .esm-cabecera .wp-block-site-logo img { height: clamp(34px, 5vw, 44px); width: auto; }
