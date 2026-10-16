@@ -361,8 +361,10 @@ def main():
             'Meta: _ficha_tecnica': ficha_rel,
             'Meta: _estilo': estilo,
             'Meta: _caracteristicas_tecnicas': limpiar(p['Meta: _caracteristicas_tecnicas']),
-            'Meta: _yoast_wpseo_title': limpiar(p['Meta: _yoast_wpseo_title']),
-            'Meta: _yoast_wpseo_metadesc': limpiar(p['Meta: _yoast_wpseo_metadesc']),
+            # Vacíos a propósito: título y descripción los genera la plantilla de Yoast
+            # (Esmalto → Herramientas → «Aplicar SEO»); un valor fijo aquí la taparía.
+            'Meta: _yoast_wpseo_title': '',
+            'Meta: _yoast_wpseo_metadesc': '',
         }
         out_rows.append(prow)
 

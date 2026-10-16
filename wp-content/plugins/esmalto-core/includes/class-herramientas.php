@@ -17,6 +17,7 @@ class Esmalto_Herramientas {
 		add_action( 'admin_post_esmalto_configurar', array( __CLASS__, 'accion_configurar' ) );
 		add_action( 'admin_post_esmalto_tarifa', array( __CLASS__, 'accion_tarifa' ) );
 		add_action( 'admin_post_esmalto_plantilla', array( __CLASS__, 'accion_plantilla' ) );
+		add_action( 'admin_post_esmalto_seo', array( __CLASS__, 'accion_seo' ) );
 		add_action( 'wp_ajax_esmalto_lote', array( __CLASS__, 'ajax_lote' ) );
 
 		// Importación de productos: lotes pequeños, más tiempo y menos tamaños de imagen.
@@ -141,6 +142,14 @@ class Esmalto_Herramientas {
 				</p>
 				<?php submit_button( __( 'Cargar tarifa', 'esmalto-core' ), 'secondary' ); ?>
 			</form>
+
+			<h2><?php esc_html_e( '4. SEO (Yoast SEO)', 'esmalto-core' ); ?></h2>
+			<p><?php esc_html_e( 'Pone el separador «|», la plantilla de título y descripción de las fichas de producto, los títulos y descripciones de Inicio, Tienda, Profesionales, Muestras, Envíos y Contacto, y quita los títulos fijos que traía la importación del catálogo. Se puede repetir; después todo se edita en Yoast.', 'esmalto-core' ); ?></p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="esmalto_seo">
+				<?php wp_nonce_field( 'esmalto_seo' ); ?>
+				<?php submit_button( __( 'Aplicar SEO de Esmalto', 'esmalto-core' ), 'secondary', 'submit', true, defined( 'WPSEO_VERSION' ) ? array() : array( 'disabled' => 'disabled' ) ); ?>
+			</form>
 		</div>
 		<script>
 		( function () {
@@ -176,6 +185,14 @@ class Esmalto_Herramientas {
 		}() );
 		</script>
 		<?php
+	}
+
+	public static function accion_seo() {
+		if ( ! current_user_can( 'manage_woocommerce' ) || ! check_admin_referer( 'esmalto_seo' ) ) {
+			wp_die( esc_html__( 'Sin permisos.', 'esmalto-core' ) );
+		}
+		$log = Esmalto_SEO::aplicar();
+		self::volver( is_wp_error( $log ) ? array( '⚠ ' . $log->get_error_message() ) : $log );
 	}
 
 	private static function volver( $log ) {
