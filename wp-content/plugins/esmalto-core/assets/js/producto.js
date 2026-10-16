@@ -147,6 +147,8 @@
 				$nota.text( cfg.ivaIncl ? txt.notaIvaIncl : txt.notaIvaExcl );
 				html.push( '<div class="sin-iva">' + dinero( e.precio_caja_sin / e.m2_caja ) + ' <small>' + txt.sinIva + '</small></div>' );
 				html.push( '<div class="con-iva">' + dinero( e.precio_caja_con / e.m2_caja ) + ' <small>' + txt.conIva + '</small></div>' );
+				html.push( '<div class="sin-iva">' + dinero( e.precio_caja_sin ) + ' <small>' + txt.cajaSinIva + '</small></div>' );
+				html.push( '<div class="con-iva">' + dinero( e.precio_caja_con ) + ' <small>' + txt.cajaConIva + '</small></div>' );
 			} else {
 				$principal.text( txt.consultar );
 				$nota.text( txt.notaConsultar );

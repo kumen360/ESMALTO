@@ -24,7 +24,13 @@ class Esmalto_Calculadora {
 	 */
 	public static function datos_variacion( $datos, $product, $variation ) {
 		$e        = esmalto_embalaje( $variation->get_id() );
-		$conPrecio = '' !== $variation->get_price() && (float) $variation->get_price() > 0;
+		$conPrecio = esmalto_precios_visibles() && '' !== $variation->get_price() && (float) $variation->get_price() > 0;
+		if ( ! esmalto_precios_visibles() ) {
+			// Precios ocultos: que no viajen en los datos de la página.
+			$datos['display_price']         = '';
+			$datos['display_regular_price'] = '';
+			$datos['price_html']            = '';
+		}
 		$datos['esm'] = array(
 			'm2_caja'         => $e['m2_caja'],
 			'cajas_palet'     => $e['cajas_palet'],
@@ -117,6 +123,8 @@ class Esmalto_Calculadora {
 					'm2'            => __( '/m²', 'esmalto-core' ),
 					'sinIva'        => __( '/ m² (sin IVA)', 'esmalto-core' ),
 					'conIva'        => __( '/ m² (IVA incluido)', 'esmalto-core' ),
+					'cajaSinIva'    => __( '/ caja (sin IVA)', 'esmalto-core' ),
+					'cajaConIva'    => __( '/ caja (IVA incluido)', 'esmalto-core' ),
 					'caja'          => __( 'Caja de %1$s m² · %2$s · %3$s kg', 'esmalto-core' ),
 					'pieza'         => __( '%s pieza', 'esmalto-core' ),
 					'piezas'        => __( '%s piezas', 'esmalto-core' ),

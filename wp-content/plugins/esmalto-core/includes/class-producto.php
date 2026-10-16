@@ -17,6 +17,12 @@ class Esmalto_Producto {
 		add_filter( 'woocommerce_ajax_variation_threshold', array( __CLASS__, 'umbral_variaciones' ) );
 		add_filter( 'woocommerce_get_price_html', array( __CLASS__, 'precio_html' ), 20, 2 );
 
+		// Precios y compra solo cuando se activan en Esmalto → Ajustes (si no: modo presupuesto).
+		add_filter( 'woocommerce_is_purchasable', array( __CLASS__, 'comprable' ), 20 );
+		add_filter( 'woocommerce_variation_is_purchasable', array( __CLASS__, 'comprable' ), 20 );
+		add_filter( 'woocommerce_structured_data_product', array( __CLASS__, 'datos_estructurados' ), 20 );
+		add_filter( 'widget_display_callback', array( __CLASS__, 'filtro_precio' ), 10, 2 );
+
 		add_filter( 'woocommerce_catalog_orderby', array( __CLASS__, 'ordenacion' ) );
 		add_filter( 'woocommerce_default_catalog_orderby_options', array( __CLASS__, 'ordenacion' ) );
 
@@ -54,10 +60,34 @@ class Esmalto_Producto {
 	}
 
 	/**
+	 * Con los precios ocultos no se puede añadir nada a la cesta (aunque haya tarifa cargada).
+	 */
+	public static function comprable( $comprable ) {
+		return esmalto_precios_visibles() ? $comprable : false;
+	}
+
+	/**
+	 * Con los precios ocultos, los datos para buscadores no llevan oferta (ni precio).
+	 */
+	public static function datos_estructurados( $datos ) {
+		if ( ! esmalto_precios_visibles() && is_array( $datos ) ) {
+			unset( $datos['offers'] );
+		}
+		return $datos;
+	}
+
+	/**
+	 * El filtro «Precio» de la barra lateral solo aparece con los precios visibles.
+	 */
+	public static function filtro_precio( $instancia, $widget ) {
+		return ( ! esmalto_precios_visibles() && $widget instanceof WC_Widget_Price_Filter ) ? false : $instancia;
+	}
+
+	/**
 	 * Precio mínimo por m² (precio de visualización de cada caja / m² por caja).
 	 */
 	public static function precio_m2_minimo( $product ) {
-		if ( ! $product instanceof WC_Product ) {
+		if ( ! $product instanceof WC_Product || ! esmalto_precios_visibles() ) {
 			return null;
 		}
 		if ( $product->is_type( 'variable' ) ) {
@@ -86,7 +116,7 @@ class Esmalto_Producto {
 		}
 		$minimo = self::precio_m2_minimo( $product );
 		if ( null === $minimo ) {
-			return '' === trim( wp_strip_all_tags( (string) $html ) )
+			return ( ! esmalto_precios_visibles() || '' === trim( wp_strip_all_tags( (string) $html ) ) )
 				? '<span class="esm-precio-consultar">' . esc_html__( 'Precio a consultar', 'esmalto-core' ) . '</span>'
 				: $html;
 		}
@@ -104,13 +134,17 @@ class Esmalto_Producto {
 	/* ------------------------------------------------------------------ Listados */
 
 	public static function ordenacion( $opciones ) {
-		return array(
+		$orden = array(
 			'menu_order' => __( 'Relevancia', 'esmalto-core' ),
 			'popularity' => __( 'Más vendidos', 'esmalto-core' ),
 			'date'       => __( 'Novedades', 'esmalto-core' ),
 			'price'      => __( 'Precio más bajo', 'esmalto-core' ),
 			'price-desc' => __( 'Precio más alto', 'esmalto-core' ),
 		);
+		if ( ! esmalto_precios_visibles() ) {
+			unset( $orden['price'], $orden['price-desc'] );
+		}
+		return $orden;
 	}
 
 	public static function enganchar_tarjeta() {

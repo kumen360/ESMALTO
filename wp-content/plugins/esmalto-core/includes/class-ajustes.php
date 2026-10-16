@@ -61,6 +61,7 @@ class Esmalto_Ajustes {
 		foreach ( array( 'comercial_email', 'email_avisos' ) as $clave ) {
 			$salida[ $clave ] = isset( $entrada[ $clave ] ) ? sanitize_email( wp_unslash( $entrada[ $clave ] ) ) : $def[ $clave ];
 		}
+		$salida['precios_visibles'] = empty( $entrada['precios_visibles'] ) ? 0 : 1;
 		$salida['b2b_sin_iva']    = empty( $entrada['b2b_sin_iva'] ) ? 0 : 1;
 		$salida['aviso_producto'] = isset( $entrada['aviso_producto'] ) ? sanitize_textarea_field( wp_unslash( $entrada['aviso_producto'] ) ) : $def['aviso_producto'];
 		$salida['catalogo_url']   = isset( $entrada['catalogo_url'] ) ? esc_url_raw( wp_unslash( $entrada['catalogo_url'] ) ) : $def['catalogo_url'];
@@ -94,6 +95,17 @@ class Esmalto_Ajustes {
 			<h1><?php esc_html_e( 'Esmalto · Ajustes', 'esmalto-core' ); ?></h1>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'esmalto_ajustes_grupo' ); ?>
+
+				<h2><?php esc_html_e( 'Precios y venta online', 'esmalto-core' ); ?></h2>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Mostrar precios y vender online', 'esmalto-core' ); ?></th>
+						<td>
+							<label><input type="checkbox" name="<?php echo esc_attr( $n . '[precios_visibles]' ); ?>" value="1" <?php checked( $a['precios_visibles'], 1 ); ?>> <?php esc_html_e( 'Mostrar el precio por m² y por caja (con y sin IVA) y el botón «Añadir a la cesta».', 'esmalto-core' ); ?></label>
+							<p class="description"><?php esc_html_e( 'Desactivado: la tienda funciona en modo «Solicitar presupuesto» aunque haya precios cargados (no se muestran ni en la ficha, ni en los listados, ni en los datos para buscadores). Carga antes la tarifa en Esmalto → Herramientas → «Tarifa de precios» y revisa un par de productos. El botón «Solicitar presupuesto» se mantiene siempre para obra y pedidos grandes.', 'esmalto-core' ); ?></p>
+						</td>
+					</tr>
+				</table>
 
 				<h2><?php esc_html_e( 'Categorías profesionales (B2B)', 'esmalto-core' ); ?></h2>
 				<p><?php esc_html_e( 'Cada categoría corresponde a un rol de WholesaleX. Al aprobar a un profesional en WholesaleX → Usuarios, asígnale el rol de su categoría. El descuento se aplica sobre el precio de tarifa (PVP).', 'esmalto-core' ); ?></p>

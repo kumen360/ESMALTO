@@ -12,6 +12,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function esmalto_ajustes_defecto() {
 	return array(
+		'precios_visibles'   => 0,
 		'cat_a_pct'          => 20,
 		'cat_b_pct'          => 30,
 		'cat_c_pct'          => 40,
@@ -40,6 +41,14 @@ function esmalto_ajustes() {
 function esmalto_ajuste( $clave ) {
 	$ajustes = esmalto_ajustes();
 	return $ajustes[ $clave ] ?? null;
+}
+
+/**
+ * ¿Se muestran los precios y se puede comprar online? Se activa en Esmalto → Ajustes cuando la tarifa
+ * esté cargada; mientras tanto la tienda funciona en modo «Solicitar presupuesto» aunque haya precios.
+ */
+function esmalto_precios_visibles() {
+	return (bool) apply_filters( 'esmalto_precios_visibles', (bool) esmalto_ajuste( 'precios_visibles' ) );
 }
 
 /**
