@@ -5,7 +5,7 @@
  * Categories: esmalto, woo-commerce
  * Keywords: tienda, catálogo, filtros, chips, ordenar
  * Viewport Width: 1400
- * Description: Ruta, título, texto y barra «Uso / Ordenar» que se muestran a todo el ancho encima del listado de productos.
+ * Description: Ruta, título, texto y barra «Uso / Ordenar» que se muestran a todo el ancho encima del listado de productos. «Piscina» está oculta (Mostrar en el editor para publicarla).
  */
 ?>
 <!-- wp:group {"className":"esm-intro-tienda","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"}} -->
@@ -46,6 +46,14 @@
 
 <!-- wp:button {"className":"is-style-chip"} -->
 <div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=dormitorio">Dormitorio</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-chip"} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_ubicacion=exterior">Exterior</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-chip","metadata":{"blockVisibility":false}} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=piscina">Piscina</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->

@@ -101,7 +101,7 @@ function esmalto_migas( $crumbs ) {
 }
 
 /**
- * Marca como activos el enlace del menú y el chip de «Uso» que corresponden a la URL actual.
+ * Marca como activos el enlace del menú y los chips de «Uso» y «Formato» que corresponden a la URL actual.
  */
 add_action( 'wp_footer', 'esmalto_menu_activo', 99 );
 function esmalto_menu_activo() {
@@ -121,14 +121,25 @@ function esmalto_menu_activo() {
 		}
 		if ( best ) { best.parentNode.classList.add( 'is-activo' ); best.setAttribute( 'aria-current', 'page' ); }
 
-		var actual = new URLSearchParams( window.location.search ).get( 'filter_espacio' ) || '';
-		document.querySelectorAll( '.esm-chips-espacio .wp-block-button__link' ).forEach( function ( a ) {
-			var valor;
-			try { valor = new URL( a.getAttribute( 'href' ) || '', window.location.origin ).searchParams.get( 'filter_espacio' ) || ''; } catch ( e ) { return; }
-			if ( valor === actual && ( valor || document.body.classList.contains( 'woocommerce-shop' ) ) ) {
-				a.parentNode.classList.add( 'is-activo' );
-				a.setAttribute( 'aria-current', 'page' );
-			}
+		// Chip activo: misma ruta y mismos filtros (filter_*). «Todos» (sin filtros) si su fila no filtra.
+		var params = new URLSearchParams( window.location.search );
+		var conjunto = function ( v ) { return ( v || '' ).split( ',' ).filter( Boolean ).sort().join( ',' ); };
+		document.querySelectorAll( '.esm-chips-espacio, .esm-chips-formato' ).forEach( function ( grupo ) {
+			var propios = grupo.classList.contains( 'esm-chips-formato' ) ? [ 'filter_formato' ] : [ 'filter_espacio', 'filter_ubicacion' ];
+			grupo.querySelectorAll( '.wp-block-button__link' ).forEach( function ( a ) {
+				var u;
+				try { u = new URL( a.getAttribute( 'href' ) || '', window.location.origin ); } catch ( e ) { return; }
+				if ( u.pathname.replace( /\/+$/, '/' ) !== path ) { return; }
+				var claves = [];
+				u.searchParams.forEach( function ( v, k ) { if ( 0 === k.indexOf( 'filter_' ) ) { claves.push( k ); } } );
+				var activo = claves.length
+					? claves.every( function ( k ) { return conjunto( u.searchParams.get( k ) ) === conjunto( params.get( k ) ); } )
+					: ! propios.some( function ( k ) { return params.has( k ); } );
+				if ( activo ) {
+					a.parentNode.classList.add( 'is-activo' );
+					a.setAttribute( 'aria-current', 'page' );
+				}
+			} );
 		} );
 	} )();
 	</script>

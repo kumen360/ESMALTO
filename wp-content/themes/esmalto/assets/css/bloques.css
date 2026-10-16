@@ -115,6 +115,14 @@ ul.is-style-enlaces a:hover { color: var(--wp--preset--color--acento); }
 .wp-block-cover.is-style-tarjeta-enlace a::after { content: ""; position: absolute; inset: 0; z-index: 2; }
 .wp-block-cover.is-style-tarjeta-enlace .wp-block-cover__inner-container { width: 100%; }
 
+/* Filas de tarjetas (Compra por espacio y Compra por formato): contenedor flex que se reparte en
+   1, 2 o 3 columnas según el ancho y en una sola fila a partir de 1100 px (sea cual sea el número). */
+.esm-fila-tarjetas { --esm-hueco: 14px; }
+.esm-fila-tarjetas > * { flex: 0 0 100%; min-width: 0; }
+@media (min-width: 480px) { .esm-fila-tarjetas > * { flex-basis: calc((100% - var(--esm-hueco)) / 2); } }
+@media (min-width: 782px) { .esm-fila-tarjetas > * { flex-basis: calc((100% - 2 * var(--esm-hueco)) / 3); } }
+@media (min-width: 1100px) { .esm-fila-tarjetas > * { flex: 1 1 0; } }
+
 .wp-block-image.is-style-llenar,
 .wp-block-image.is-style-llenar img { height: 100%; width: 100%; object-fit: cover; }
 
