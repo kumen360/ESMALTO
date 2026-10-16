@@ -5,7 +5,7 @@
  * Categories: esmalto, woo-commerce
  * Keywords: tienda, catálogo, filtros, chips, ordenar
  * Viewport Width: 1400
- * Description: Ruta, título, texto y barra «Uso / Ordenar» que se muestran a todo el ancho encima del listado de productos. «Piscina» está oculta (Mostrar en el editor para publicarla).
+ * Description: Ruta, título, texto y barra con las filas «Uso» y «Formato» y «Ordenar», a todo el ancho encima del listado. «Piscina» está oculta (Mostrar en el editor para publicarla).
  */
 ?>
 <!-- wp:group {"className":"esm-intro-tienda","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"}} -->
@@ -22,7 +22,8 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"esm-barra-tienda","style":{"spacing":{"margin":{"top":"clamp(24px, 3vw, 32px)"},"padding":{"top":"16px","bottom":"16px"},"blockGap":"16px"},"border":{"top":{"color":"rgba(255,255,255,0.08)","width":"1px"},"bottom":{"color":"rgba(255,255,255,0.08)","width":"1px"}}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
-<div class="wp-block-group esm-barra-tienda" style="border-top-color:rgba(255,255,255,0.08);border-top-width:1px;border-bottom-color:rgba(255,255,255,0.08);border-bottom-width:1px;margin-top:clamp(24px, 3vw, 32px);padding-top:16px;padding-bottom:16px"><!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group esm-barra-tienda" style="border-top-color:rgba(255,255,255,0.08);border-top-width:1px;border-bottom-color:rgba(255,255,255,0.08);border-bottom-width:1px;margin-top:clamp(24px, 3vw, 32px);padding-top:16px;padding-bottom:16px"><!-- wp:group {"className":"esm-barra-tienda__filas","style":{"spacing":{"blockGap":"10px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group esm-barra-tienda__filas"><!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-etiqueta"} -->
 <p class="is-style-etiqueta">Uso</p>
 <!-- /wp:paragraph -->
@@ -56,6 +57,31 @@
 <div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=piscina">Piscina</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-etiqueta"} -->
+<p class="is-style-etiqueta">Formato</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"className":"esm-chips-formato","style":{"spacing":{"blockGap":"8px"}}} -->
+<div class="wp-block-buttons esm-chips-formato"><!-- wp:button {"className":"is-style-chip"} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=100x100,120x120&amp;query_type_formato=or">Gran formato</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-chip"} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=20x120,23x120,25x150,30x180&amp;query_type_formato=or">Lamas</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-chip"} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=60x120">60x120</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-chip"} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=60x60">60x60</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 
 <!-- wp:shortcode -->
