@@ -58,13 +58,44 @@ class Esmalto_Formularios {
 		$id   = self::id( $tipo );
 		$ancla = 'muestras' === $tipo ? 'solicitud' : 'formulario';
 		if ( $id && shortcode_exists( 'wpforms' ) ) {
-			return '<div id="' . esc_attr( $ancla ) . '" class="esm-formulario esm-formulario--' . esc_attr( $tipo ) . '">' . do_shortcode( '[wpforms id="' . $id . '" title="false" description="false"]' ) . '</div>';
+			return '<div id="' . esc_attr( $ancla ) . '" class="esm-formulario esm-formulario--' . esc_attr( $tipo ) . '">' . do_shortcode( '[wpforms id="' . $id . '" title="false" description="false"]' ) . '</div>' .
+				( 'muestras' === $tipo ? self::script_muestras( $id ) : '' );
 		}
 		if ( current_user_can( 'manage_options' ) ) {
 			return '<p class="esm-placeholder">' . esc_html__( 'Formulario pendiente: créalo en Esmalto → Herramientas → «Crear formularios» (requiere WPForms Lite activo).', 'esmalto-core' ) . '</p>';
 		}
 		$email = esmalto_ajuste( 'comercial_email' );
 		return '<p>' . esc_html__( 'Escríbenos a', 'esmalto-core' ) . ' <a href="' . esc_url( 'mailto:' . $email ) . '">' . esc_html( $email ) . '</a></p>';
+	}
+
+	/**
+	 * «Añade todas las que necesites; van en la misma solicitud»: cada «Solicitar una muestra» de una
+	 * ficha se suma a la lista guardada en el navegador en lugar de sustituirla, y el campo «Productos,
+	 * colores y formatos» (campo 4) la muestra entera. La lista se vacía al enviar la solicitud.
+	 * Sin líneas en blanco dentro del script (wpautop).
+	 */
+	private static function script_muestras( $form_id ) {
+		$campo = '#wpforms-' . (int) $form_id . '-field_4';
+		return '<script>
+( function () {
+	var campo = document.querySelector( ' . wp_json_encode( $campo ) . ' );
+	if ( ! campo ) { return; }
+	var clave = "esmalto_muestras", lista = [];
+	try { lista = JSON.parse( window.localStorage.getItem( clave ) || "[]" ) || []; } catch ( e ) { lista = []; }
+	var nuevo = new URLSearchParams( window.location.search ).get( "producto" );
+	if ( nuevo && lista.indexOf( nuevo ) === -1 ) { lista.push( nuevo ); }
+	function guardar() { try { window.localStorage.setItem( clave, JSON.stringify( lista ) ); } catch ( e ) {} }
+	guardar();
+	if ( lista.length ) { campo.value = lista.join( "\n" ); }
+	campo.addEventListener( "input", function () {
+		lista = campo.value.split( "\n" ).map( function ( l ) { return l.trim(); } ).filter( Boolean );
+		guardar();
+	} );
+	if ( window.jQuery && campo.form ) {
+		window.jQuery( campo.form ).on( "wpformsAjaxSubmitSuccess", function () { lista = []; guardar(); } );
+	}
+} )();
+</script>';
 	}
 
 	/* ------------------------------------------------------------------ Creación */
