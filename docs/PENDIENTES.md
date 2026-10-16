@@ -7,7 +7,6 @@ Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla
 - Enlaces de Instagram y LinkedIn (`#`)
 - IBAN para transferencias: *WooCommerce → Ajustes → Pagos → Transferencia bancaria*
 - Textos legales definitivos: Aviso legal, Privacidad, Condiciones generales y Cookies
-- Vídeo de YouTube para «Cómo calcular gastos de envío»
 
 ## Pagos
 - Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*). Las claves las introduces tú.

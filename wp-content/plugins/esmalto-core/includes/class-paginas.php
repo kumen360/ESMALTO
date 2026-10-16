@@ -390,8 +390,7 @@ class Esmalto_Paginas {
 				array( 'Entrega a domicilio u obra (península)', array( 'Pedidos pequeños: tarifa por tramos de peso.', 'Pedidos grandes: se envían en palés completos con coste por palé.', 'Entrega a pie de calle; para descarga en obra consúltanos.' ) ),
 				array( 'Recogida en almacén', 'Gratis. Elige «Recogida en almacén» al finalizar la compra y te avisaremos cuando el pedido esté listo.' ),
 				array( 'Baleares, Canarias, Ceuta y Melilla', 'Envíos bajo presupuesto: escríbenos con el pedido y el código postal.' ),
-			),
-			array( self::patron( 'esmalto/hueco-video' ) )
+			)
 		);
 	}
 
