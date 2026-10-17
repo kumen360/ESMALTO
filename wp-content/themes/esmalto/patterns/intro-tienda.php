@@ -5,7 +5,7 @@
  * Categories: esmalto, woo-commerce
  * Keywords: tienda, catálogo, filtros, chips, ordenar
  * Viewport Width: 1400
- * Description: Ruta, título, texto y barra con las filas «Uso» y «Formato», «Filtros» (solo móvil) y «Ordenar», a todo el ancho encima del listado. «Piscina» está oculta (Mostrar en el editor para publicarla).
+ * Description: Ruta, título, texto y barra con las filas «Uso» y «Formato», «Filtros» (solo móvil) y «Ordenar», a todo el ancho encima del listado.
  */
 ?>
 <!-- wp:group {"className":"esm-intro-tienda","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"}} -->
@@ -34,27 +34,27 @@
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=bano">Baño</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/azulejos-bano/">Baño</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=cocina">Cocina</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/azulejos-cocina/">Cocina</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=salon">Salón</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/suelos-salon/">Salón</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=dormitorio">Dormitorio</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/suelos-dormitorio/">Dormitorio</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_ubicacion=exterior">Exterior</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/porcelanico-exterior/">Exterior</a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"className":"is-style-chip","metadata":{"blockVisibility":false}} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_espacio=piscina">Piscina</a></div>
+<!-- wp:button {"className":"is-style-chip"} -->
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/porcelanico-piscina/">Piscina</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->
@@ -66,19 +66,19 @@
 
 <!-- wp:buttons {"className":"esm-chips-formato","style":{"spacing":{"blockGap":"8px"}}} -->
 <div class="wp-block-buttons esm-chips-formato"><!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=100x100,120x120&amp;query_type_formato=or">Gran formato</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/porcelanico-gran-formato/">Gran formato</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=20x120,23x120,25x150,30x180&amp;query_type_formato=or">Lamas</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/lamas-porcelanicas/">Lamas</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=60x120">60x120</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/porcelanico-60x120/">60x120</a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-chip"} -->
-<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/tienda/?filter_formato=60x60">60x60</a></div>
+<div class="wp-block-button is-style-chip"><a class="wp-block-button__link wp-element-button" href="/porcelanico-60x60/">60x60</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
