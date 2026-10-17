@@ -231,6 +231,63 @@ ul.is-style-enlaces a:hover { color: var(--wp--preset--color--acento); }
 	align-items: center;
 	color: var(--wp--preset--color--texto);
 }
+/* «Tienda»: desplegable con las categorías del catálogo en tres grupos (Aspecto, Espacio, Formato).
+   En escritorio es un panel de tres columnas; en el menú móvil, una lista con los grupos como rótulos.
+   Cada grupo es un submenú sin enlace: su rótulo es un <a> sin href y WordPress repite la clase en el <ul>. */
+@media (min-width: 900px) {
+	body .esm-menu li.esm-menu-tienda > .wp-block-navigation__submenu-container {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 44px;
+		left: -28px;
+		padding: 22px 28px 18px;
+		background: var(--wp--preset--color--fondo-oscuro, #001a00);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	body .esm-menu li.esm-menu-grupo { flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+	body .esm-menu li.esm-menu-grupo > .wp-block-navigation__submenu-container {
+		position: static;
+		visibility: visible;
+		opacity: 1;
+		width: auto;
+		height: auto;
+		min-width: 0;
+		overflow: visible;
+		padding: 0;
+		border: 0;
+		background: none;
+	}
+	body .esm-menu li.esm-menu-grupo > .wp-block-navigation__submenu-container .wp-block-navigation-item__content { padding: 6px 0; white-space: nowrap; }
+}
+/* Rótulo de cada grupo (no es un enlace) y sin flecha */
+body .esm-menu li.esm-menu-grupo > .wp-block-navigation-item__content {
+	padding: 0 0 8px;
+	font-size: 10px;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--acento);
+	border: 0;
+	cursor: default;
+	pointer-events: none;
+}
+body .esm-menu li.esm-menu-grupo > .wp-block-navigation__submenu-icon { display: none; }
+/* Categorías: en minúscula, como los chips, y en claro sobre el fondo oscuro */
+body .esm-menu li.esm-menu-grupo > .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	font-size: 13px;
+	letter-spacing: 0.02em;
+	text-transform: none;
+	color: var(--wp--preset--color--texto-apagado);
+}
+body .esm-menu li.esm-menu-grupo > .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover,
+body .esm-menu li.esm-menu-grupo > .wp-block-navigation__submenu-container .wp-block-navigation-item__content:focus-visible { color: var(--wp--preset--color--texto); }
+/* Menú móvil: menos sangría y rótulos en amarillo */
+body .esm-menu .wp-block-navigation__responsive-container.is-menu-open li.esm-menu-tienda,
+body .esm-menu .wp-block-navigation__responsive-container.is-menu-open li.esm-menu-grupo { align-items: stretch; }
+body .esm-menu .wp-block-navigation__responsive-container.is-menu-open li.esm-menu-tienda > .wp-block-navigation__submenu-container { gap: 0; padding: 0 0 8px 16px !important; }
+body .esm-menu .wp-block-navigation__responsive-container.is-menu-open li.esm-menu-grupo > .wp-block-navigation__submenu-container { gap: 0; padding: 0 0 4px !important; }
+body .esm-menu .wp-block-navigation__responsive-container.is-menu-open li.esm-menu-grupo > .wp-block-navigation-item__content { padding: 12px 0 4px !important; border: 0 !important; color: var(--wp--preset--color--acento) !important; font-size: 10px !important; }
+body .esm-menu .wp-block-navigation__responsive-container.is-menu-open li.esm-menu-grupo > .wp-block-navigation__submenu-container .wp-block-navigation-item__content { padding: 7px 0 !important; border-bottom: 0 !important; font-size: 13px !important; color: var(--wp--preset--color--texto-apagado) !important; }
+
 /* El diseño cambia a menú móvil por debajo de 900 px */
 @media (min-width: 600px) and (max-width: 899px) {
 	.esm-menu .wp-block-navigation__responsive-container-open:not(.always-shown) { display: flex; }

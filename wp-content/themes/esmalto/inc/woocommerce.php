@@ -169,7 +169,8 @@ function esmalto_menu_activo() {
 	( function () {
 		var path = window.location.pathname.replace( /\/+$/, '/' );
 		var best = null, bestLen = 0;
-		document.querySelectorAll( '.esm-menu .wp-block-navigation-item a' ).forEach( function ( a ) {
+		// Solo los enlaces de primer nivel: en una categoría o una ficha se marca «Tienda», no el desplegable.
+		document.querySelectorAll( '.esm-menu .wp-block-navigation__container > .wp-block-navigation-item > a' ).forEach( function ( a ) {
 			var href = a.getAttribute( 'href' ) || '';
 			try { href = new URL( href, window.location.origin ).pathname; } catch ( e ) { return; }
 			var match = href === '/' ? path === '/' : path.indexOf( href ) === 0;
