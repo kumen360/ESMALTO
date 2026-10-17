@@ -24,7 +24,7 @@ Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla
 ## Repositorio privado
 - Las fotos y fichas ya están en la biblioteca de medios. Las herramientas que descargan del repositorio (*Precargar fotos del catálogo*, *Importar fichas técnicas*) y la importación del CSV solo funcionan si el repositorio es público durante la operación.
 - Para actualizar el tema o el plugin, sube los ZIP de `dist/` desde *Apariencia → Temas* y *Plugins → Añadir → Subir*.
-- En `dist/` están el tema 1.2.0 y el plugin 1.3.0 (repaso del 10/10). Al subirlos: borrar el CSS provisional de *Apariencia → Personalizar → CSS adicional* y seguir los pasos de `DESPLIEGUE.md → Después de subir el tema 1.2.0 y el plugin 1.3.0`.
+- El tema 1.2.0 y el plugin 1.3.0 de `dist/` están instalados en esmalto.com (17/10). Para la próxima subida sirve el mismo método: subir los ZIP o hacer público el repositorio durante la operación.
 
 ## Diferencias deliberadas con el diseño
 - Se mantiene «Cesta (0)» también en móvil (el diseño la oculta) para poder llegar a la cesta.

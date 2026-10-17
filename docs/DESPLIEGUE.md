@@ -22,6 +22,7 @@ python -I tools/build_dist.py
 Sube el ZIP nuevo: WordPress pregunta si quieres reemplazar la versión instalada.
 
 ## Después de subir el tema 1.2.0 y el plugin 1.3.0
+Hecho en esmalto.com el 17/10/2026. Se deja como referencia por si hay que reinstalar.
 1. Borrar el CSS provisional de *Apariencia → Personalizar → CSS adicional* (ya va en el tema y el plugin).
 2. Con Yoast SEO activo: *Esmalto → Herramientas → 4. SEO → Aplicar SEO de Esmalto* (separador «|», plantilla de las fichas y títulos y descripciones de las páginas principales).
 3. Categorías: *Esmalto → Herramientas → 5. Categorías del catálogo* (reparto aprobado el 17/10, ya escrito en el cuadro). Una línea por categoría («slug: Colección, …»); solo quedan ocultas las que se queden sin colecciones.
@@ -39,5 +40,5 @@ Para actualizar productos ya importados, vuelve a importar el CSV marcando «Act
 - **Filtros de la tienda**: *Apariencia → Widgets → WooCommerce Sidebar*.
 - **Colores y tipografías**: `wp-content/themes/esmalto/theme.json`.
 - **Formularios**: WPForms → Todos los formularios (Contacto, Solicitud de muestras, Solicitud de presupuesto).
-- **Bloques ocultos** («Piscina»): seleccionar el bloque en el editor → menú ⋮ → «Mostrar».
+- **Bloques ocultos**: seleccionar el bloque en el editor → menú ⋮ → «Mostrar».
 - **Precios y venta online**: *Esmalto → Ajustes → Mostrar precios y vender online*.
