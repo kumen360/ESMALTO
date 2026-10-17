@@ -24,8 +24,8 @@ Sube el ZIP nuevo: WordPress pregunta si quieres reemplazar la versión instalad
 ## Después de subir el tema 1.2.0 y el plugin 1.3.0
 1. Borrar el CSS provisional de *Apariencia → Personalizar → CSS adicional* (ya va en el tema y el plugin).
 2. Con Yoast SEO activo: *Esmalto → Herramientas → 4. SEO → Aplicar SEO de Esmalto* (separador «|», plantilla de las fichas y títulos y descripciones de las páginas principales).
-3. Categorías (cuando esté aprobado el reparto): *Esmalto → Herramientas → 5. Categorías del catálogo*. Una línea por categoría («slug: Colección, …»); las que tienen menos de 3 colecciones y «Piscina» (hasta marcar la casilla) quedan ocultas.
-4. Páginas que usan lo nuevo del tema: Inicio («Compra por espacio» con Exterior y «Compra por formato»), Tienda (filas «Uso» y «Formato» y botón «Filtros») y «Cómo calcular gastos de envío» (datos de recogida). Están en los patrones; en las páginas ya publicadas se aplican sin «Sobrescribir».
+3. Categorías: *Esmalto → Herramientas → 5. Categorías del catálogo* (reparto aprobado el 17/10, ya escrito en el cuadro). Una línea por categoría («slug: Colección, …»); solo quedan ocultas las que se queden sin colecciones.
+4. Páginas que usan lo nuevo del tema: Inicio («Compra por espacio» con Exterior y Piscina y «Compra por formato»), Tienda (filas «Uso» y «Formato», enlazadas a las categorías, y botón «Filtros») y «Cómo calcular gastos de envío» (datos de recogida). Están en los patrones; en las páginas ya publicadas se cambian esos bloques sin «Sobrescribir» (el resto de cada página no se toca).
 
 ## Regenerar el catálogo
 ```
