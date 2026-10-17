@@ -9,7 +9,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * La página «Tienda» se edita con bloques (patrón «Introducción de la tienda»): ruta, título,
- * texto y barra «Uso / Ordenar». Se muestra a todo el ancho, encima de los filtros y del listado.
+ * texto y barra «Uso / Formato / Ordenar». Se muestra a todo el ancho, encima de los filtros y del
+ * listado. Las categorías con página propia usan la misma barra con su título y su texto.
  */
 add_action( 'init', 'esmalto_woo_hooks' );
 function esmalto_woo_hooks() {
@@ -31,30 +32,87 @@ function esmalto_es_tienda() {
 	return function_exists( 'is_shop' ) && is_shop() && ! is_search();
 }
 
+/**
+ * Categoría del catálogo con página propia (las crea Esmalto Core y llevan «esmalto_grupo»).
+ * Las demás categorías de producto se muestran como siempre.
+ */
+function esmalto_categoria_con_pagina() {
+	if ( ! function_exists( 'is_product_category' ) || ! is_product_category() ) {
+		return null;
+	}
+	$term = get_queried_object();
+	return ( $term instanceof WP_Term && '' !== (string) get_term_meta( $term->term_id, 'esmalto_grupo', true ) ) ? $term : null;
+}
+
+/**
+ * Tienda o categoría con página propia: llevan la introducción a todo el ancho.
+ */
+function esmalto_con_intro() {
+	return esmalto_es_tienda() || null !== esmalto_categoria_con_pagina();
+}
+
 function esmalto_shop_intro() {
-	if ( ! esmalto_es_tienda() ) {
+	$page = function_exists( 'wc_get_page_id' ) ? get_post( wc_get_page_id( 'shop' ) ) : null;
+	if ( esmalto_es_tienda() ) {
+		if ( $page && '' !== trim( $page->post_content ) ) {
+			echo '<div class="esmalto-intro-tienda"><div class="esmalto-intro-tienda__in">' . do_shortcode( do_blocks( $page->post_content ) ) . '</div></div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- contenido de bloques del editor.
+		}
 		return;
 	}
-	$page = get_post( wc_get_page_id( 'shop' ) );
-	if ( $page && '' !== trim( $page->post_content ) ) {
-		echo '<div class="esmalto-intro-tienda"><div class="esmalto-intro-tienda__in">' . do_shortcode( do_blocks( $page->post_content ) ) . '</div></div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- contenido de bloques del editor.
+	$term = esmalto_categoria_con_pagina();
+	if ( ! $term ) {
+		return;
 	}
+	// Ruta, título y texto de la categoría; debajo, la misma barra «Uso / Formato / Ordenar» de la página Tienda.
+	$titulo = (string) get_term_meta( $term->term_id, 'esmalto_h1', true );
+	$html   = '<div class="wp-block-group esm-intro-tienda">';
+	$html  .= '<p class="is-style-miga"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Inicio', 'esmalto' ) . '</a> / <a href="' . esc_url( wc_get_page_permalink( 'shop' ) ) . '">' . esc_html__( 'Catálogo', 'esmalto' ) . '</a> / ' . esc_html( $term->name ) . '</p>';
+	$html  .= '<h1 class="wp-block-heading" style="margin-top:12px;margin-bottom:0">' . esc_html( '' !== $titulo ? $titulo : $term->name ) . '</h1>';
+	if ( '' !== trim( $term->description ) ) {
+		$html .= '<p class="esm-intro-categoria has-texto-apagado-color has-text-color" style="margin-top:12px;margin-bottom:0">' . esc_html( $term->description ) . '</p>';
+	}
+	$html .= esmalto_barra_de_la_tienda( $page ) . '</div>';
+	echo '<div class="esmalto-intro-tienda"><div class="esmalto-intro-tienda__in">' . $html . '</div></div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escapado arriba; la barra son bloques del editor.
 }
 
 /**
- * La tienda ya muestra su ruta en la introducción.
+ * Bloque «esm-barra-tienda» de la página Tienda (se edita allí y se reutiliza en las categorías).
+ */
+function esmalto_barra_de_la_tienda( $page ) {
+	if ( ! $page ) {
+		return '';
+	}
+	$buscar = static function ( $bloques ) use ( &$buscar ) {
+		foreach ( $bloques as $bloque ) {
+			if ( false !== strpos( (string) ( $bloque['attrs']['className'] ?? '' ), 'esm-barra-tienda' ) ) {
+				return $bloque;
+			}
+			$dentro = $buscar( $bloque['innerBlocks'] ?? array() );
+			if ( $dentro ) {
+				return $dentro;
+			}
+		}
+		return null;
+	};
+	$barra = $buscar( parse_blocks( $page->post_content ) );
+	return $barra ? do_shortcode( render_block( $barra ) ) : '';
+}
+
+/**
+ * La tienda y las categorías con página propia ya muestran su ruta, título y texto en la introducción.
  */
 function esmalto_sin_ruta_en_tienda() {
-	if ( esmalto_es_tienda() ) {
+	if ( esmalto_con_intro() ) {
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+		remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 	}
 }
 
 /**
- * En la tienda, «Ordenar» va en la barra de la introducción ([esmalto_ordenar]) y no hay recuento.
+ * «Ordenar» va en la barra de la introducción ([esmalto_ordenar]) y no hay recuento.
  */
 function esmalto_barra_en_intro() {
-	if ( esmalto_es_tienda() ) {
+	if ( esmalto_con_intro() ) {
 		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 	}
@@ -75,7 +133,7 @@ function esmalto_ordenar() {
 
 add_filter( 'woocommerce_show_page_title', 'esmalto_shop_title' );
 function esmalto_shop_title( $show ) {
-	return esmalto_es_tienda() ? false : $show;
+	return esmalto_con_intro() ? false : $show;
 }
 
 add_filter( 'woocommerce_breadcrumb_defaults', 'esmalto_breadcrumb_defaults' );

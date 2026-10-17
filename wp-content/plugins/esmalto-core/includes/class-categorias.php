@@ -25,6 +25,22 @@ class Esmalto_Categorias {
 		add_filter( 'wpseo_exclude_from_sitemap_by_term_ids', array( __CLASS__, 'ocultas_fuera_del_mapa' ) );
 		add_action( 'product_cat_edit_form_fields', array( __CLASS__, 'campo_oculta' ), 20 );
 		add_action( 'edited_product_cat', array( __CLASS__, 'guardar_oculta' ) );
+		add_filter( 'woocommerce_get_related_product_cat_terms', array( __CLASS__, 'relacionados' ) );
+	}
+
+	/**
+	 * «También te puede interesar» sigue saliendo por familia: estas categorías (Baño o Salón reúnen
+	 * todo el catálogo) no cuentan para los productos relacionados.
+	 */
+	public static function relacionados( $ids ) {
+		$nuestras = array();
+		foreach ( array_keys( self::definiciones() ) as $slug ) {
+			$term = get_term_by( 'slug', $slug, 'product_cat' );
+			if ( $term ) {
+				$nuestras[] = (int) $term->term_id;
+			}
+		}
+		return array_values( array_diff( array_map( 'intval', (array) $ids ), $nuestras ) );
 	}
 
 	public static function definiciones() {

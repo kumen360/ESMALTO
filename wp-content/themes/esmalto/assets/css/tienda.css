@@ -28,6 +28,8 @@
 	margin: 0 auto;
 	padding: clamp(32px, 5vw, 56px) var(--esm-margen) 0;
 }
+/* Texto de las categorías con página propia: líneas de lectura cómoda */
+.esm-intro-categoria { max-width: 760px; }
 .esm-barra-tienda .is-style-etiqueta { margin: 0 4px 0 0; font-family: var(--wp--preset--font-family--texto); font-size: 11px !important; letter-spacing: 0.2em; color: #8a968a; }
 /* Filas «Uso» y «Formato»: la etiqueta ocupa siempre lo mismo para que los chips queden alineados */
 .esm-barra-tienda__filas .is-style-etiqueta { min-width: 78px; }

@@ -34,6 +34,7 @@ require_once ESMALTO_CORE_DIR . 'includes/class-formularios.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-paginas.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-herramientas.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-seo.php';
+require_once ESMALTO_CORE_DIR . 'includes/class-categorias.php';
 
 add_action( 'plugins_loaded', 'esmalto_core_init', 20 );
 function esmalto_core_init() {
@@ -51,6 +52,7 @@ function esmalto_core_init() {
 	Esmalto_Calculadora::init();
 	Esmalto_Envio::init();
 	Esmalto_SEO::init();
+	Esmalto_Categorias::init();
 }
 
 function esmalto_core_aviso_woocommerce() {

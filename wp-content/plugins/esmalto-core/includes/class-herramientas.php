@@ -18,6 +18,7 @@ class Esmalto_Herramientas {
 		add_action( 'admin_post_esmalto_tarifa', array( __CLASS__, 'accion_tarifa' ) );
 		add_action( 'admin_post_esmalto_plantilla', array( __CLASS__, 'accion_plantilla' ) );
 		add_action( 'admin_post_esmalto_seo', array( __CLASS__, 'accion_seo' ) );
+		add_action( 'admin_post_esmalto_categorias', array( __CLASS__, 'accion_categorias' ) );
 		add_action( 'wp_ajax_esmalto_lote', array( __CLASS__, 'ajax_lote' ) );
 
 		// Importación de productos: lotes pequeños, más tiempo y menos tamaños de imagen.
@@ -150,6 +151,18 @@ class Esmalto_Herramientas {
 				<?php wp_nonce_field( 'esmalto_seo' ); ?>
 				<?php submit_button( __( 'Aplicar SEO de Esmalto', 'esmalto-core' ), 'secondary', 'submit', true, defined( 'WPSEO_VERSION' ) ? array() : array( 'disabled' => 'disabled' ) ); ?>
 			</form>
+
+			<?php if ( class_exists( 'Esmalto_Categorias' ) ) : ?>
+				<h2><?php esc_html_e( '5. Categorías del catálogo', 'esmalto-core' ); ?></h2>
+				<p><?php esc_html_e( 'Crea o actualiza las categorías con página propia (URL en la raíz, texto encima de los productos y título y descripción de Yoast) y les asigna colecciones. Una línea por categoría: «slug: Colección, Colección…» (nombre de la colección tal cual). Las que tengan menos de 3 colecciones quedan ocultas, y «Piscina» también hasta que marques la casilla. Se puede repetir: quita de cada categoría las colecciones que ya no estén en su línea.', 'esmalto-core' ); ?></p>
+				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+					<input type="hidden" name="action" value="esmalto_categorias">
+					<?php wp_nonce_field( 'esmalto_categorias' ); ?>
+					<textarea name="asignacion" rows="16" class="large-text code"><?php echo esc_textarea( Esmalto_Categorias::asignacion_texto() ); ?></textarea>
+					<p><label><input type="checkbox" name="confirmar" value="1"> <?php esc_html_e( 'Publicar también las categorías pendientes de confirmar (Piscina)', 'esmalto-core' ); ?></label></p>
+					<?php submit_button( __( 'Crear categorías y asignar colecciones', 'esmalto-core' ), 'secondary' ); ?>
+				</form>
+			<?php endif; ?>
 		</div>
 		<script>
 		( function () {
@@ -185,6 +198,14 @@ class Esmalto_Herramientas {
 		}() );
 		</script>
 		<?php
+	}
+
+	public static function accion_categorias() {
+		if ( ! current_user_can( 'manage_woocommerce' ) || ! check_admin_referer( 'esmalto_categorias' ) ) {
+			wp_die( esc_html__( 'Sin permisos.', 'esmalto-core' ) );
+		}
+		$texto = isset( $_POST['asignacion'] ) ? sanitize_textarea_field( wp_unslash( $_POST['asignacion'] ) ) : '';
+		self::volver( Esmalto_Categorias::aplicar( $texto, ! empty( $_POST['confirmar'] ) ) );
 	}
 
 	public static function accion_seo() {
