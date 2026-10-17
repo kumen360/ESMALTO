@@ -296,7 +296,7 @@ class Esmalto_Herramientas {
 		return $log;
 	}
 
-	private static function adjuntar_archivo_tema( $ruta, $alt ) {
+	public static function adjuntar_archivo_tema( $ruta, $alt ) {
 		$archivo = get_stylesheet_directory() . '/' . $ruta;
 		if ( ! file_exists( $archivo ) ) {
 			return 0;

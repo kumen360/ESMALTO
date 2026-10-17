@@ -1,7 +1,8 @@
 <?php
 /**
  * SEO con Yoast SEO: variables para la plantilla de las fichas, títulos y descripciones de las
- * páginas principales (repaso del 10/10, Anexo III) y mapa del sitio sin páginas de servicio.
+ * páginas principales (repaso del 10/10, Anexo III), imagen para compartir y mapa del sitio sin
+ * páginas de servicio.
  *
  * Plantilla de producto (Yoast → Ajustes → Tipos de contenido → Productos):
  *   %%title%%: porcelánico efecto %%esm_aspecto%% %%esm_acabado%% %%sep%% %%sitename%%
@@ -149,6 +150,27 @@ class Esmalto_SEO {
 			}
 		}
 		$log[] = sprintf( 'Títulos fijos de la importación quitados en %d productos (usan la plantilla).', $quitados );
+
+		// Imagen para compartir (1200 × 630, aprobada el 17/10): por defecto en Yoast y en la portada.
+		$imagen = (int) get_option( 'esmalto_imagen_compartir', 0 );
+		if ( ! $imagen || ! wp_get_attachment_url( $imagen ) ) {
+			$imagen = Esmalto_Herramientas::adjuntar_archivo_tema( 'assets/img/compartir-portada.jpg', 'Esmalto · Cerámica para profesionales' );
+			update_option( 'esmalto_imagen_compartir', $imagen, false );
+		}
+		if ( $imagen ) {
+			$url    = wp_get_attachment_url( $imagen );
+			$social = get_option( 'wpseo_social', array() );
+			$social = is_array( $social ) ? $social : array();
+			$social['og_default_image']    = $url;
+			$social['og_default_image_id'] = $imagen;
+			update_option( 'wpseo_social', $social );
+			$inicio = (int) get_option( 'page_on_front' );
+			if ( $inicio ) {
+				update_post_meta( $inicio, '_yoast_wpseo_opengraph-image', $url );
+				update_post_meta( $inicio, '_yoast_wpseo_opengraph-image-id', $imagen );
+			}
+			$log[] = 'Imagen para compartir (1200 × 630) por defecto y en la portada.';
+		}
 
 		if ( class_exists( 'WPSEO_Sitemaps_Cache' ) ) {
 			WPSEO_Sitemaps_Cache::clear();
