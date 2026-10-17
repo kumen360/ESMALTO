@@ -4,8 +4,9 @@
  * slug (= URL en la raíz: /slug/) => nombre, grupo, título SEO, texto (va encima de los productos)
  * y la propuesta de colecciones. La asignación definitiva se edita y aplica en Esmalto → Herramientas.
  *
- * Reglas: no se publican las categorías con menos de 3 colecciones; en «Exterior» solo colecciones
- * cuya ficha indica resbaladicidad de clase 3; «Piscina» no se publica hasta que se confirme.
+ * Reglas: en «Exterior» solo colecciones cuya ficha indica resbaladicidad de clase 3. El mínimo para
+ * publicar una categoría es 1 colección y «Piscina» está confirmada (decisión del 17/10/2026).
+ * Una definición con 'oculta' => true no se publica hasta marcar la casilla de confirmación.
  *
  * @package Esmalto_Core
  */
@@ -92,7 +93,6 @@ return array(
 		'titulo'    => 'Porcelánico para piscinas | Esmalto',
 		'texto'     => 'Pavimento antideslizante de clase 3 para el entorno de la piscina: playa, solárium y ducha exterior. Resiste el agua, el cloro y el sol sin perder color.',
 		'propuesta' => array( 'Southwell Cross' ),
-		'oculta'    => true, // No se publica hasta que se confirme.
 	),
 	// Formato.
 	'porcelanico-gran-formato'     => array(

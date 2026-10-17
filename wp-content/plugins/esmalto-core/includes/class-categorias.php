@@ -1,8 +1,8 @@
 <?php
 /**
  * Categorías del catálogo con página propia (data/categorias.php): URL en la raíz (/porcelanico-exterior/),
- * categorías ocultas (menos de 3 colecciones o pendientes de confirmar) y herramienta para crearlas y
- * asignar colecciones. Las demás categorías de producto no cambian.
+ * categorías ocultas (sin el mínimo de colecciones o pendientes de confirmar) y herramienta para crearlas
+ * y asignar colecciones. Las demás categorías de producto no cambian.
  *
  * @package Esmalto_Core
  */
@@ -15,7 +15,7 @@ class Esmalto_Categorias {
 	const META_OCULTA       = 'esmalto_oculta';
 	const META_GRUPO        = 'esmalto_grupo';
 	const META_TITULO       = 'esmalto_h1';
-	const MINIMO            = 3;
+	const MINIMO            = 1;
 
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'reglas' ), 20 );
@@ -144,7 +144,7 @@ class Esmalto_Categorias {
 			<th scope="row"><?php esc_html_e( 'No publicar', 'esmalto-core' ); ?></th>
 			<td>
 				<label><input type="checkbox" name="esmalto_oculta" value="1" <?php checked( self::oculta( $term ) ); ?>> <?php esc_html_e( 'Ocultar esta categoría a los visitantes (página 404, fuera del mapa del sitio y de los menús).', 'esmalto-core' ); ?></label>
-				<p class="description"><?php esc_html_e( 'Esmalto → Herramientas la oculta sola si tiene menos de 3 colecciones o está pendiente de confirmar.', 'esmalto-core' ); ?></p>
+				<p class="description"><?php esc_html_e( 'Esmalto → Herramientas la oculta sola si no tiene colecciones o está pendiente de confirmar.', 'esmalto-core' ); ?></p>
 			</td>
 		</tr>
 		<?php
@@ -194,10 +194,10 @@ class Esmalto_Categorias {
 
 	/**
 	 * Crea o actualiza las categorías (nombre, URL, texto, título y descripción de Yoast) y asigna las
-	 * colecciones. Se ocultan las que tienen menos de 3 colecciones y las pendientes de confirmar.
+	 * colecciones. Se ocultan las que no llegan al mínimo de colecciones y las pendientes de confirmar.
 	 *
 	 * @param string $texto     Asignación «slug: Colección, …».
-	 * @param bool   $confirmar Publicar también las categorías «pendientes de confirmar» (Piscina).
+	 * @param bool   $confirmar Publicar también las categorías «pendientes de confirmar».
 	 * @return array registro.
 	 */
 	public static function aplicar( $texto, $confirmar = false ) {
@@ -267,7 +267,7 @@ class Esmalto_Categorias {
 				$def['nombre'],
 				$slug,
 				$publicadas,
-				$ocultar ? ( $pendiente ? ' · oculta (pendiente de confirmar)' : ' · oculta (menos de 3)' ) : ' · publicada',
+				$ocultar ? ( $pendiente ? ' · oculta (pendiente de confirmar)' : sprintf( ' · oculta (menos de %d)', self::MINIMO ) ) : ' · publicada',
 				$faltan ? ' · no encontradas: ' . implode( ', ', $faltan ) : ''
 			);
 		}

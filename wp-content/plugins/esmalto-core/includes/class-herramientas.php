@@ -154,12 +154,12 @@ class Esmalto_Herramientas {
 
 			<?php if ( class_exists( 'Esmalto_Categorias' ) ) : ?>
 				<h2><?php esc_html_e( '5. Categorías del catálogo', 'esmalto-core' ); ?></h2>
-				<p><?php esc_html_e( 'Crea o actualiza las categorías con página propia (URL en la raíz, texto encima de los productos y título y descripción de Yoast) y les asigna colecciones. Una línea por categoría: «slug: Colección, Colección…» (nombre de la colección tal cual). Las que tengan menos de 3 colecciones quedan ocultas, y «Piscina» también hasta que marques la casilla. Se puede repetir: quita de cada categoría las colecciones que ya no estén en su línea.', 'esmalto-core' ); ?></p>
+				<p><?php esc_html_e( 'Crea o actualiza las categorías con página propia (URL en la raíz, texto encima de los productos y título y descripción de Yoast) y les asigna colecciones. Una línea por categoría: «slug: Colección, Colección…» (nombre de la colección tal cual). Las que se quedan sin colecciones quedan ocultas (y las marcadas como pendientes de confirmar, hasta que marques la casilla). Se puede repetir: quita de cada categoría las colecciones que ya no estén en su línea.', 'esmalto-core' ); ?></p>
 				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<input type="hidden" name="action" value="esmalto_categorias">
 					<?php wp_nonce_field( 'esmalto_categorias' ); ?>
 					<textarea name="asignacion" rows="16" class="large-text code"><?php echo esc_textarea( Esmalto_Categorias::asignacion_texto() ); ?></textarea>
-					<p><label><input type="checkbox" name="confirmar" value="1"> <?php esc_html_e( 'Publicar también las categorías pendientes de confirmar (Piscina)', 'esmalto-core' ); ?></label></p>
+					<p><label><input type="checkbox" name="confirmar" value="1"> <?php esc_html_e( 'Publicar también las categorías pendientes de confirmar', 'esmalto-core' ); ?></label></p>
 					<?php submit_button( __( 'Crear categorías y asignar colecciones', 'esmalto-core' ), 'secondary' ); ?>
 				</form>
 			<?php endif; ?>
