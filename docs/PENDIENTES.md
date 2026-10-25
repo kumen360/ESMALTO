@@ -1,20 +1,20 @@
 # Pendientes (a completar por Esmalto)
 
-Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía».
+Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía»; lo de los ajustes del 25/10, en `AJUSTES-2026-10-25.md` → «Lo que haces tú», «Pendiente de tu confirmación» y «No posible todavía».
 
-## Datos de empresa (placeholders del diseño)
-Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla → Pie*), en Contacto y en las páginas legales.
-- CIF `00000000` · teléfono `600 600 600` · email `hola@esmalto.com` (el diseño también usa `info@esmalto.com`: unificar)
-- Dirección y horario del almacén de recogida: *Esmalto → Ajustes → Recogida en almacén* (salen en «Cómo calcular gastos de envío» y en los pedidos con recogida). En el pie sigue «Castellón (España)».
-- Enlaces de Instagram y LinkedIn (`#`)
+## Datos de empresa
+- Puestos el 25/10: Kumen Tres Sesenta, S.L. (Esmalto Cerámica), NIF B88655014, C/ Bolsa, 44, Sanlúcar de Barrameda, +34 614 05 10 42, info@esmalto.com. Se aplican con *Esmalto → Herramientas → 6*; el pie y Contacto están en el tema.
+- Dirección y horario del almacén de recogida (Víctor): *Esmalto → Ajustes → Recogida en almacén*.
+- Enlaces de Instagram y LinkedIn: los iconos están ocultos (visibilidad de bloque en el pie) hasta tener las URL.
 - IBAN para transferencias: *WooCommerce → Ajustes → Pagos → Transferencia bancaria*
-- Textos legales definitivos: Aviso legal, Privacidad, Condiciones generales y Cookies
+- Textos legales definitivos (asesor): Aviso legal, Privacidad, Condiciones generales y Cookies
 
 ## Pagos
-- Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*). Las claves las introduces tú.
+- Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*), a nombre de Kumen y con «ESMALTO» en el extracto. Las claves las introduces tú.
+- Facturas con Holded (serie ESM-): conectar WooCommerce y comprobar que llegan el NIF (`_billing_nif`) y el recargo de equivalencia (`_esmalto_recargo`).
 
 ## Catálogo
-- **Precios**: ningún producto tiene precio (ver `CATALOGO.md → Precio`). Cuando llegue la tarifa: *Herramientas → Tarifa de precios* y después *Ajustes → Mostrar precios y vender online*.
+- **Precios**: tarifa del Excel de Esmalto cargada el 25/10 (333 de 335; faltan Arenisca 75x75 Marengo y San Francisco 60x120 Aquamarine), **oculta** hasta que Víctor la cierre. Para publicarla: *Ajustes → Mostrar precios y vender online*. El Excel de trabajo es `Esmalto - Tarifa web.xlsx` (no se sube al repositorio).
 - **Lucca**: sin fotos ni ficha → importado como **privado** (no se ve en la tienda).
 - Sin foto de pieza: Southwell Vein (12 variaciones) y Borneo Deck (6). Usan la foto del producto.
 - Datos de palé de Besana, Helsinki, Lucca y Norway y m²/caja de Coralina blanco 30x60 y 60x60: completados el 25/10 con los datos de Esmalto (`build_catalog.py`, `EMBALAJE_FORMATO` y `EMBALAJE_SKU`). Coralina blanco sale de la ficha de Ecoceramic: pendiente de que lo confirme Víctor.
@@ -32,9 +32,11 @@ Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla
 - La ficha añade la pestaña «Descripción y embalaje» con todos los datos técnicos.
 
 ## Envíos
-- Ajustar los tramos de peso y sus precios (*WooCommerce → Ajustes → Envío → España peninsular*).
+- Porte por m² y palé: 2,50 €/m² + 9 €/palé (sin IVA), hasta revisarlo el 31 de marzo (*WooCommerce → Ajustes → Envío → España peninsular*).
 
 ## Técnico
-- Tipografías servidas desde Google Fonts. Para cumplir el RGPD conviene alojarlas en el servidor: cambia `esmalto_fonts_url` o añade los `woff2` en `theme.json`.
-- Analítica: no hay ninguna instalada. Propuesta en `REPASO-2026-10-10.md` (D4); con analítica o publicidad hará falta un aviso de consentimiento de cookies.
+- Tipografías alojadas en el tema desde el 25/10 (sin Google Fonts).
+- Analítica: GA4 + Complianz con el modo de consentimiento v2, cuando exista la cuenta de Google de Esmalto.
+- Correo: crear info@, pedidos@ y clientes.b2b@ en CDmon con DKIM y poner el SMTP en WordPress (WP Mail SMTP o FluentSMTP). Las solicitudes de los formularios se guardan en *Esmalto → Solicitudes*.
+- Servidor de CDmon: el 25/10 estuvo más de una hora muy lento (30-75 s por página, los archivos estáticos 0,1 s) y la prueba de «loopback» de *Herramientas → Salud del sitio* fallaba por tiempo; luego volvió a 1,5-2 s. Si se repite, revisar el consumo de CPU y procesos en el panel de CDmon y consultarlo con su soporte.
 - WholesaleX: **no** configures descuentos en «Wholesale Pricing», porque los aplica Esmalto Core (ver `B2B.md`).

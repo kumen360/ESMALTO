@@ -28,6 +28,13 @@ Hecho en esmalto.com el 17/10/2026. Se deja como referencia por si hay que reins
 3. Categorías: *Esmalto → Herramientas → 5. Categorías del catálogo* (reparto aprobado el 17/10, ya escrito en el cuadro). Una línea por categoría («slug: Colección, …»); solo quedan ocultas las que se queden sin colecciones.
 4. Páginas que usan lo nuevo del tema: Inicio («Compra por espacio» con Exterior y Piscina y «Compra por formato»), Tienda (filas «Uso» y «Formato», enlazadas a las categorías, y botón «Filtros») y «Cómo calcular gastos de envío» (datos de recogida). Están en los patrones; en las páginas ya publicadas se cambian esos bloques sin «Sobrescribir» (el resto de cada página no se toca).
 
+## Después de subir el tema 1.3.0 y el plugin 1.4.0 (1.4.1)
+Hecho en esmalto.com el 25/10/2026. La 1.4.1 solo cambia textos y colores de correo (en esmalto.com los colores se pusieron también a mano); no hace falta repetir nada al subirla.
+1. *Esmalto → Herramientas → 6. Datos de empresa, correos y envíos* (se puede repetir).
+2. Embalaje de las 33 variaciones nuevas: se cargó por la API de WooCommerce (por lotes de producto, el servidor va lento).
+3. Tarifa: *Herramientas → 3. Tarifa de precios*, pegando la hoja «Para WordPress» de `Esmalto - Tarifa web.xlsx` en 4 o 5 lotes (unidad €/m², sin marcar «incluyen IVA»). Los precios siguen ocultos.
+4. Páginas: cambios de texto (datos de empresa, envíos y plazo, términos, cesta vacía) y, en el editor, «Compra por formato» en Inicio y el bloque de datos de Contacto con los patrones nuevos.
+
 ## Regenerar el catálogo
 ```
 python -I catalogo/scripts/build_catalog.py --root .

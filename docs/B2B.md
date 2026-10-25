@@ -4,7 +4,7 @@
 1. El profesional rellena **Profesionales → Alta profesional**. Los campos son nombre, empresa, CIF/NIF, **CNAE**, tipo, teléfono y email (sin contraseña, como en el diseño).
 2. El CNAE se valida en el servidor contra la lista admitida (Esmalto → Ajustes) y admite `4333` o `43.33`. El formulario muestra la descripción en vivo.
 3. La cuenta se crea en WooCommerce con estado **pendiente** de WholesaleX (`__wholesalex_status = pending`). No puede iniciar sesión hasta que se apruebe.
-4. Llegan dos emails: un aviso al equipo, con los datos y un enlace para aprobar, y un acuse al solicitante.
+4. Llegan dos emails: un aviso al equipo (a clientes.b2b@esmalto.com, *Esmalto → Ajustes → Email para avisos de altas*), con los datos y un enlace para aprobar, y un acuse al solicitante.
 5. **Aprobar**: en *WholesaleX → Customers*, cambia el estado a *Active* y asigna el rol **Profesional A, B o C**.
 6. Al pasar a *Active*, el profesional recibe un email (una sola vez) con el enlace para **crear su contraseña**. Después entra en *Mi cuenta* con su email.
 
@@ -18,6 +18,9 @@
 - Los porcentajes y la correspondencia con los roles se cambian en **Esmalto → Ajustes**.
 - El descuento se aplica sobre la tarifa (PVP) en toda la tienda, la cesta y la calculadora. Los profesionales ven los precios **sin IVA**.
 - **No configures descuentos en «Wholesale Pricing» de WholesaleX**: se sumarían a los de Esmalto.
+
+## Recargo de equivalencia
+- Al pagar, la casilla «Soy comercio minorista en recargo de equivalencia» suma un 5,2 % sobre la base imponible (productos, porte y demás líneas) y marca el pedido (`_esmalto_recargo`).
 
 ## Palés
 - En la ficha, la calculadora ofrece a los profesionales «Pedir por palés completos»: redondea a palés enteros con las cajas por palé de cada referencia.
