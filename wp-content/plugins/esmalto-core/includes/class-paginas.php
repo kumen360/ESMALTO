@@ -393,7 +393,7 @@ class Esmalto_Paginas {
 			'El porte depende de los m² del pedido y de los palés que ocupa. Lo verás calculado en la cesta antes de pagar.',
 			array(
 				array( 'Entrega a domicilio u obra (península)', array( 'Porte: 2,50 € por m² (+ IVA).', 'Palés: 9 € por palé, aparte del porte (+ IVA).', 'Entrega a pie de calle; para descarga en obra consúltanos.' ) ),
-				array( 'Plazo de entrega', 'Península: entrega en 3 a 5 días laborables desde la confirmación del pedido. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.' ),
+				array( 'Plazo de entrega', self::pila( array( self::p( 'Península: entrega en 3 a 5 días laborables desde la confirmación del pedido. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.', '', 'texto-apagado' ) ), '12px', 'esm-plazo-datos' ) ),
 				array( 'Recogida en almacén', 'Gratis. Elige «Recogida en almacén» al finalizar la compra y te avisaremos cuando el pedido esté listo.', self::pila( array( self::shortcode( '[esmalto_recogida]' ) ), '12px', 'esm-recogida-datos' ) ),
 				array( 'Baleares, Canarias, Ceuta y Melilla', 'Envíos bajo presupuesto: escríbenos con el pedido y el código postal.' ),
 			)
