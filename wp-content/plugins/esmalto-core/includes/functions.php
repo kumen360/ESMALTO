@@ -81,6 +81,77 @@ function esmalto_email_avisos() {
 }
 
 /**
+ * Correo de contacto: recibe los formularios (contacto, muestras y presupuesto) y firma los correos
+ * de WordPress.
+ */
+function esmalto_email_formularios() {
+	$email = esmalto_ajuste( 'email_formularios' );
+	return is_email( $email ) ? $email : get_option( 'admin_email' );
+}
+
+/**
+ * El remitente por defecto de WordPress (wordpress@dominio) no existe: se usa el correo de contacto.
+ */
+add_filter(
+	'wp_mail_from',
+	static function ( $email ) {
+		return 0 === strpos( (string) $email, 'wordpress@' ) ? esmalto_email_formularios() : $email;
+	}
+);
+add_filter(
+	'wp_mail_from_name',
+	static function ( $nombre ) {
+		return 'WordPress' === $nombre ? get_bloginfo( 'name' ) : $nombre;
+	}
+);
+
+/**
+ * NIF, DNI o NIE sin espacios, puntos ni guiones, en mayúsculas y sin el prefijo «ES».
+ */
+function esmalto_nif_normalizar( $valor ) {
+	$valor = strtoupper( preg_replace( '/[^0-9A-Za-z]/', '', (string) $valor ) );
+	return ( 0 === strpos( $valor, 'ES' ) && strlen( $valor ) > 9 ) ? substr( $valor, 2 ) : $valor;
+}
+
+/**
+ * ¿Es un DNI, NIE o NIF de empresa (CIF) válido? Comprueba la letra o el dígito de control.
+ */
+function esmalto_nif_valido( $valor ) {
+	$v      = esmalto_nif_normalizar( $valor );
+	$letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+	if ( preg_match( '/^(\d{8})([A-Z])$/', $v, $m ) ) { // DNI.
+		return $letras[ (int) $m[1] % 23 ] === $m[2];
+	}
+	if ( preg_match( '/^([XYZ])(\d{7})([A-Z])$/', $v, $m ) ) { // NIE.
+		return $letras[ (int) ( strpos( 'XYZ', $m[1] ) . $m[2] ) % 23 ] === $m[3];
+	}
+	if ( preg_match( '/^[KLM](\d{7})([A-Z])$/', $v, $m ) ) { // NIF de personas sin DNI.
+		return $letras[ (int) $m[1] % 23 ] === $m[2];
+	}
+	if ( preg_match( '/^([ABCDEFGHJNPQRSUVW])(\d{7})([0-9A-J])$/', $v, $m ) ) { // NIF de entidades (CIF).
+		$suma = 0;
+		for ( $i = 0; $i < 7; $i++ ) {
+			$d = (int) $m[2][ $i ];
+			if ( 0 === $i % 2 ) {
+				$d = 2 * $d;
+				$d = intdiv( $d, 10 ) + $d % 10;
+			}
+			$suma += $d;
+		}
+		$control = ( 10 - $suma % 10 ) % 10;
+		$letra   = 'JABCDEFGHI'[ $control ];
+		if ( false !== strpos( 'NPQRSW', $m[1] ) ) {
+			return $m[3] === $letra;
+		}
+		if ( false !== strpos( 'ABEH', $m[1] ) ) {
+			return $m[3] === (string) $control;
+		}
+		return $m[3] === (string) $control || $m[3] === $letra;
+	}
+	return false;
+}
+
+/**
  * WholesaleX: roles definidos (id => título).
  */
 function esmalto_roles_wholesalex() {
