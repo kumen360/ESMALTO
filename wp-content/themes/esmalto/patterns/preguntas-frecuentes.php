@@ -20,7 +20,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"esm-faq__respuesta"} -->
-<p class="esm-faq__respuesta">Rellena el formulario de acceso B2B; verificamos tu perfil y activamos tu cuenta con tarifas personalizadas.</p>
+<p class="esm-faq__respuesta">Rellena el formulario de alta profesional; verificamos tu perfil y activamos tu cuenta con tarifas personalizadas.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 

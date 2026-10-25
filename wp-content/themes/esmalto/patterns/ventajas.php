@@ -62,7 +62,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"14px"}},"typography":{"fontWeight":"400"}},"fontSize":"base"} -->
-<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Logística de pallets</p>
+<p class="has-base-font-size" style="margin-top:14px;font-weight:400">Logística de palés</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"textColor":"texto-apagado","fontSize":"sm"} -->
