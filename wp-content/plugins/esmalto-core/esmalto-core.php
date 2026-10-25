@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Esmalto Core
  * Plugin URI:        https://www.esmalto.com
- * Description:       Lógica de tienda de Esmalto: calculadora de m² (cajas y palés), B2B (alta con CNAE, categorías A/B/C, descuento por palé, contacto comercial), envío por peso, fichas técnicas y herramientas de puesta en marcha.
- * Version:           1.3.0
+ * Description:       Lógica de tienda de Esmalto: calculadora de m² (cajas y palés), B2B (alta con CNAE, categorías A/B/C, descuento por palé, contacto comercial), porte por m² y palé, NIF y recargo de equivalencia en el pago, solicitudes guardadas, fichas técnicas y herramientas de puesta en marcha.
+ * Version:           1.4.0
  * Requires at least: 6.6
  * Requires PHP:      8.0
  * Requires Plugins:  woocommerce
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ESMALTO_CORE_VERSION', '1.3.0' );
+define( 'ESMALTO_CORE_VERSION', '1.4.0' );
 define( 'ESMALTO_CORE_FILE', __FILE__ );
 define( 'ESMALTO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ESMALTO_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -30,6 +30,9 @@ require_once ESMALTO_CORE_DIR . 'includes/class-registro-cliente.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-producto.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-calculadora.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-envio.php';
+require_once ESMALTO_CORE_DIR . 'includes/class-checkout.php';
+require_once ESMALTO_CORE_DIR . 'includes/class-solicitudes.php';
+require_once ESMALTO_CORE_DIR . 'includes/class-empresa.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-formularios.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-paginas.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-herramientas.php';
@@ -42,6 +45,7 @@ function esmalto_core_init() {
 	Esmalto_Herramientas::init();
 	Esmalto_Registro_Pro::init();
 	Esmalto_Formularios::init();
+	Esmalto_Solicitudes::init();
 	if ( ! class_exists( 'WooCommerce' ) ) {
 		add_action( 'admin_notices', 'esmalto_core_aviso_woocommerce' );
 		return;
@@ -51,6 +55,7 @@ function esmalto_core_init() {
 	Esmalto_Producto::init();
 	Esmalto_Calculadora::init();
 	Esmalto_Envio::init();
+	Esmalto_Checkout::init();
 	Esmalto_SEO::init();
 	Esmalto_Categorias::init();
 }
