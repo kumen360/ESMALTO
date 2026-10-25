@@ -21,6 +21,7 @@ class Esmalto_Producto {
 		add_filter( 'woocommerce_is_purchasable', array( __CLASS__, 'comprable' ), 20 );
 		add_filter( 'woocommerce_variation_is_purchasable', array( __CLASS__, 'comprable' ), 20 );
 		add_filter( 'woocommerce_structured_data_product', array( __CLASS__, 'datos_estructurados' ), 20 );
+		add_filter( 'rest_request_after_callbacks', array( __CLASS__, 'store_api_sin_precios' ), 10, 3 );
 		add_filter( 'widget_display_callback', array( __CLASS__, 'filtro_precio' ), 10, 2 );
 
 		add_filter( 'woocommerce_catalog_orderby', array( __CLASS__, 'ordenacion' ) );
@@ -72,6 +73,32 @@ class Esmalto_Producto {
 	public static function datos_estructurados( $datos ) {
 		if ( ! esmalto_precios_visibles() && is_array( $datos ) ) {
 			unset( $datos['offers'] );
+		}
+		return $datos;
+	}
+
+	/**
+	 * Con los precios ocultos, la API pública de la tienda (/wc/store/…/products) tampoco los da: la
+	 * usan los bloques de WooCommerce y cualquiera podría consultarla sin entrar en la web.
+	 */
+	public static function store_api_sin_precios( $respuesta, $handler, $peticion ) {
+		if ( esmalto_precios_visibles() || ! $respuesta instanceof WP_REST_Response || ! preg_match( '#^/wc/store(/v\d+)?/products#', $peticion->get_route() ) ) {
+			return $respuesta;
+		}
+		$respuesta->set_data( self::quitar_precios( $respuesta->get_data() ) );
+		return $respuesta;
+	}
+
+	private static function quitar_precios( $datos ) {
+		if ( ! is_array( $datos ) ) {
+			return $datos;
+		}
+		foreach ( $datos as $clave => $valor ) {
+			if ( in_array( $clave, array( 'prices', 'price_range', 'price_html' ), true ) ) {
+				$datos[ $clave ] = 'price_html' === $clave ? '' : null;
+			} elseif ( is_array( $valor ) ) {
+				$datos[ $clave ] = self::quitar_precios( $valor );
+			}
 		}
 		return $datos;
 	}
