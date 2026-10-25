@@ -433,13 +433,14 @@ class Esmalto_Producto {
 	 */
 	public static function textos( $traduccion, $texto, $dominio ) {
 		static $mapa = array(
-			'Añadir al carrito'      => 'Añadir a la cesta',
-			'Ver carrito'            => 'Ver cesta',
-			'Carrito'                => 'Cesta',
-			'Actualizar carrito'     => 'Actualizar cesta',
-			'Tu carrito está vacío.' => 'Tu cesta está vacía.',
-			'Totales del carrito'    => 'Totales de la cesta',
-			'Volver a la tienda'     => 'Volver a la tienda',
+			'Añadir al carrito'                   => 'Añadir a la cesta',
+			'Ver carrito'                         => 'Ver cesta',
+			'Carrito'                             => 'Cesta',
+			'Actualizar carrito'                  => 'Actualizar cesta',
+			'Tu carrito está vacío.'              => 'Tu cesta está vacía.',
+			'¡Tu carrito está actualmente vacío!' => 'Tu cesta está vacía', // Página Cesta (bloque de WooCommerce).
+			'Totales del carrito'                 => 'Totales de la cesta',
+			'Volver a la tienda'                  => 'Volver a la tienda',
 		);
 		return $mapa[ $traduccion ] ?? $traduccion;
 	}
