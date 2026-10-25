@@ -11,33 +11,43 @@
 <!-- wp:group {"align":"full","className":"esm-seccion","style":{"spacing":{"padding":{"top":"clamp(32px, 5vw, 48px)","right":"clamp(16px, 4vw, 40px)","bottom":"clamp(60px, 9vw, 110px)","left":"clamp(16px, 4vw, 40px)"}}},"layout":{"type":"constrained","contentSize":"1280px"}} -->
 <div class="wp-block-group alignfull esm-seccion" style="padding-top:clamp(32px, 5vw, 48px);padding-right:clamp(16px, 4vw, 40px);padding-bottom:clamp(60px, 9vw, 110px);padding-left:clamp(16px, 4vw, 40px)"><!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"clamp(28px, 4vw, 56px)"}}}} -->
 <div class="wp-block-columns"><!-- wp:column {"style":{"spacing":{"blockGap":"22px"}}} -->
-<div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"default"}} -->
+<div class="wp-block-column"><!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
 <p class="is-style-antetitulo">Dirección</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"lineHeight":"1.65"}}} -->
-<p style="line-height:1.65">Esmalto<br>Castellón (España)<br>CIF 00000000</p>
+<p style="line-height:1.65">Esmalto Cerámica<br>Kumen Tres Sesenta, S.L.<br>C/ Bolsa, 44<br>11540 Sanlúcar de Barrameda (Cádiz)<br>NIF B88655014</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"default"}} -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
 <p class="is-style-antetitulo">Teléfono</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="tel:+34600600600">600 600 600</a></p>
+<p><a href="tel:+34614051042">+34 614 05 10 42</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"default"}} -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
+<p class="is-style-antetitulo">Horario</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"blockGap":"8px"}},"layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"is-style-antetitulo"} -->
 <p class="is-style-antetitulo">Email</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="mailto:hola@esmalto.com">hola@esmalto.com</a></p>
+<p><a href="mailto:info@esmalto.com">info@esmalto.com</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -60,7 +70,7 @@
 <!-- wp:group {"className":"esm-mapa","style":{"dimensions":{"minHeight":"320px"},"border":{"color":"rgba(255,255,255,0.1)","width":"1px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
 <div class="wp-block-group esm-mapa has-border-color" style="border-color:rgba(255,255,255,0.1);border-width:1px;min-height:320px"><!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://www.google.com/maps/search/?api=1&amp;query=Castell%C3%B3n+de+la+Plana" target="_blank" rel="noreferrer noopener">Cómo llegar (Google Maps)</a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://www.google.com/maps/search/?api=1&amp;query=C%2F+Bolsa+44%2C+11540+Sanl%C3%BAcar+de+Barrameda" target="_blank" rel="noreferrer noopener">Cómo llegar (Google Maps)</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>

@@ -34,6 +34,6 @@
 <!-- /wp:separator -->
 
 <!-- wp:paragraph {"textColor":"texto-mudo","fontSize":"xs"} -->
-<p class="has-texto-mudo-color has-text-color has-xs-font-size">Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600</p>
+<p class="has-texto-mudo-color has-text-color has-xs-font-size">Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · info@esmalto.com · +34 614 05 10 42</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
