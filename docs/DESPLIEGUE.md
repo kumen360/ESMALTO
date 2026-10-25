@@ -32,7 +32,7 @@ Hecho en esmalto.com el 17/10/2026. Se deja como referencia por si hay que reins
 Hecho en esmalto.com el 25/10/2026. La 1.4.1 solo cambia textos y colores de correo (en esmalto.com los colores se pusieron también a mano); no hace falta repetir nada al subirla.
 1. *Esmalto → Herramientas → 6. Datos de empresa, correos y envíos* (se puede repetir).
 2. Embalaje de las 33 variaciones nuevas: se cargó por la API de WooCommerce (por lotes de producto, el servidor va lento).
-3. Tarifa: *Herramientas → 3. Tarifa de precios*, pegando la hoja «Para WordPress» de `Esmalto - Tarifa web.xlsx` en 4 o 5 lotes (unidad €/m², sin marcar «incluyen IVA»). Los precios siguen ocultos.
+3. Tarifa: *Herramientas → 3. Tarifa de precios*, pegando la hoja «Para WordPress» de `Esmalto - Tarifa web.xlsx` en 4 o 5 lotes (unidad €/m², sin marcar «incluyen IVA»). Precios visibles desde el 26/10.
 4. Páginas: cambios de texto (datos de empresa, envíos y plazo, términos, cesta vacía) y, en el editor, «Compra por formato» en Inicio y el bloque de datos de Contacto con los patrones nuevos.
 
 ## Regenerar el catálogo

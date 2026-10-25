@@ -14,7 +14,7 @@ Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posib
 - Facturas con Holded (serie ESM-): conectar WooCommerce y comprobar que llegan el NIF (`_billing_nif`) y el recargo de equivalencia (`_esmalto_recargo`).
 
 ## Catálogo
-- **Precios**: tarifa del Excel de Esmalto cargada el 25/10 (333 de 335; faltan Arenisca 75x75 Marengo y San Francisco 60x120 Aquamarine), **oculta** hasta que Víctor la cierre. Para publicarla: *Ajustes → Mostrar precios y vender online*. El Excel de trabajo es `Esmalto - Tarifa web.xlsx` (no se sube al repositorio).
+- **Precios**: tarifa del Excel de Esmalto cargada el 25/10 (333 de 335; faltan Arenisca 75x75 Marengo y San Francisco 60x120 Aquamarine). **Visibles desde el 26/10** (*Esmalto → Ajustes → Mostrar precios y vender online*); esa casilla también activa «Añadir a la cesta». Para pagar solo hay transferencia, y falta el IBAN. El Excel de trabajo es `Esmalto - Tarifa web.xlsx` (no se sube al repositorio).
 - **Lucca**: sin fotos ni ficha → importado como **privado** (no se ve en la tienda).
 - Sin foto de pieza: Southwell Vein (12 variaciones) y Borneo Deck (6). Usan la foto del producto.
 - Datos de palé de Besana, Helsinki, Lucca y Norway y m²/caja de Coralina blanco 30x60 y 60x60: completados el 25/10 con los datos de Esmalto (`build_catalog.py`, `EMBALAJE_FORMATO` y `EMBALAJE_SKU`). Coralina blanco sale de la ficha de Ecoceramic: pendiente de que lo confirme Víctor.
