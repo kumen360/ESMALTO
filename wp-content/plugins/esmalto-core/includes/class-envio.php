@@ -19,6 +19,35 @@ class Esmalto_Envio {
 		add_shortcode( 'esmalto_recogida', array( __CLASS__, 'shortcode_recogida' ) );
 		add_action( 'woocommerce_email_order_details', array( __CLASS__, 'recogida_email' ), 25, 3 );
 		add_action( 'woocommerce_thankyou', array( __CLASS__, 'recogida_gracias' ), 5 );
+		// Plazo de entrega (Esmalto → Ajustes) en los pedidos con entrega.
+		add_action( 'woocommerce_email_order_details', array( __CLASS__, 'plazo_email' ), 26, 3 );
+		add_action( 'woocommerce_thankyou', array( __CLASS__, 'plazo_gracias' ), 6 );
+	}
+
+	private static function plazo_pedido( $order ) {
+		if ( ! $order instanceof WC_Order || ! $order->get_shipping_methods() || self::es_recogida( $order ) ) {
+			return '';
+		}
+		return trim( (string) esmalto_ajuste( 'plazo_entrega' ) );
+	}
+
+	public static function plazo_email( $order, $para_admin, $texto_plano ) {
+		$texto = $para_admin ? '' : self::plazo_pedido( $order );
+		if ( '' === $texto ) {
+			return;
+		}
+		if ( $texto_plano ) {
+			echo "\n" . esc_html__( 'Plazo de entrega', 'esmalto-core' ) . "\n" . esc_html( $texto ) . "\n";
+			return;
+		}
+		echo '<h2>' . esc_html__( 'Plazo de entrega', 'esmalto-core' ) . '</h2><p>' . esc_html( $texto ) . '</p>';
+	}
+
+	public static function plazo_gracias( $order_id ) {
+		$texto = self::plazo_pedido( wc_get_order( $order_id ) );
+		if ( '' !== $texto ) {
+			echo '<section class="esm-plazo-pedido"><h2>' . esc_html__( 'Plazo de entrega', 'esmalto-core' ) . '</h2><p>' . esc_html( $texto ) . '</p></section>';
+		}
 	}
 
 	/**

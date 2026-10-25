@@ -38,6 +38,7 @@ class Esmalto_Producto {
 		add_action( 'woocommerce_before_add_to_cart_form', array( __CLASS__, 'especificaciones' ), 10 );
 		add_action( 'woocommerce_after_add_to_cart_button', array( __CLASS__, 'boton_presupuesto' ) );
 		add_action( 'woocommerce_after_add_to_cart_form', array( __CLASS__, 'acciones' ), 5 );
+		add_action( 'woocommerce_after_add_to_cart_form', array( __CLASS__, 'plazo' ), 20 );
 		add_action( 'woocommerce_after_add_to_cart_form', array( __CLASS__, 'aviso' ), 30 );
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( __CLASS__, 'texto_anadir' ) );
 		add_filter( 'woocommerce_product_tabs', array( __CLASS__, 'pestanas' ), 98 );
@@ -386,6 +387,16 @@ class Esmalto_Producto {
 			printf( '<a class="button esm-boton-ficha" href="%s" target="_blank" rel="noopener">%s</a>', esc_url( $url_pdf ), esc_html__( '↓ Descargar ficha técnica (PDF)', 'esmalto-core' ) );
 		}
 		echo '</div>';
+	}
+
+	/**
+	 * Plazo de entrega (Esmalto → Ajustes).
+	 */
+	public static function plazo() {
+		$texto = trim( (string) esmalto_ajuste( 'plazo_entrega' ) );
+		if ( '' !== $texto ) {
+			echo '<p class="esm-plazo-entrega"><strong>' . esc_html__( 'Plazo de entrega.', 'esmalto-core' ) . '</strong> ' . esc_html( $texto ) . '</p>';
+		}
 	}
 
 	public static function aviso() {

@@ -434,6 +434,24 @@ body.esmalto .widget_layered_nav_filters ul li.chosen a:focus-visible { backgrou
 	color: #c8d2c8;
 	font-weight: 300;
 }
+/* Plazo de entrega bajo los botones de la ficha (Esmalto Core → Ajustes). */
+.esm-plazo-entrega {
+	margin: 18px 0 0;
+	font-size: 12px;
+	line-height: 1.6;
+	color: #c8d2c8;
+	font-weight: 300;
+}
+.esm-plazo-entrega strong { color: #f1f1f1; font-weight: 500; }
+
+/* Pago: nota bajo el campo NIF o DNI. */
+.esm-ayuda-campo {
+	margin: 6px 0 0;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #c8d2c8;
+}
+
 .single-product .product_meta { display: none; }
 
 /* Pestañas y relacionados */
