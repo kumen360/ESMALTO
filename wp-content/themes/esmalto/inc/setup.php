@@ -8,13 +8,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Tipografías del diseño (Google Fonts). Cámbialas aquí si se alojan en local.
+ * Tipografías del diseño (Montserrat y Playfair Display), alojadas en el tema: así la web no
+ * envía a Google la IP de cada visitante. Los archivos y sus licencias están en assets/fonts.
  */
 function esmalto_fonts_url() {
-	return apply_filters(
-		'esmalto_fonts_url',
-		'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap'
-	);
+	return apply_filters( 'esmalto_fonts_url', get_theme_file_uri( 'assets/css/fuentes.css' ) );
 }
 
 add_action( 'after_setup_theme', 'esmalto_setup' );
@@ -36,7 +34,7 @@ function esmalto_setup() {
 
 add_action( 'wp_enqueue_scripts', 'esmalto_enqueue_front', 20 );
 function esmalto_enqueue_front() {
-	wp_enqueue_style( 'esmalto-fuentes', esmalto_fonts_url(), array(), null );
+	wp_enqueue_style( 'esmalto-fuentes', esmalto_fonts_url(), array(), ESMALTO_THEME_VERSION );
 	$parent = wp_style_is( 'astra-theme-css', 'registered' ) ? array( 'astra-theme-css' ) : array();
 	wp_enqueue_style( 'esmalto', get_stylesheet_uri(), $parent, ESMALTO_THEME_VERSION );
 	if ( class_exists( 'WooCommerce' ) ) {
@@ -51,20 +49,18 @@ add_action( 'enqueue_block_assets', 'esmalto_enqueue_block_assets' );
 function esmalto_enqueue_block_assets() {
 	wp_enqueue_style( 'esmalto-bloques', get_theme_file_uri( 'assets/css/bloques.css' ), array(), ESMALTO_THEME_VERSION );
 	if ( is_admin() ) {
-		wp_enqueue_style( 'esmalto-fuentes', esmalto_fonts_url(), array(), null );
+		wp_enqueue_style( 'esmalto-fuentes', esmalto_fonts_url(), array(), ESMALTO_THEME_VERSION );
 	}
 }
 
-add_filter( 'wp_resource_hints', 'esmalto_resource_hints', 10, 2 );
-function esmalto_resource_hints( $urls, $relation ) {
-	if ( 'preconnect' === $relation ) {
-		$urls[] = 'https://fonts.googleapis.com';
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
-		);
+/**
+ * Precarga de las dos tipografías que se ven al abrir cualquier página (texto y títulos).
+ */
+add_action( 'wp_head', 'esmalto_precargar_fuentes', 1 );
+function esmalto_precargar_fuentes() {
+	foreach ( array( 'montserrat-latin.woff2', 'playfair-display-latin.woff2' ) as $archivo ) {
+		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( get_theme_file_uri( 'assets/fonts/' . $archivo ) ) );
 	}
-	return $urls;
 }
 
 /**
