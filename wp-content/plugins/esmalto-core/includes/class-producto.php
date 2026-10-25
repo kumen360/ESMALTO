@@ -439,6 +439,9 @@ class Esmalto_Producto {
 			'Actualizar carrito'                  => 'Actualizar cesta',
 			'Tu carrito está vacío.'              => 'Tu cesta está vacía.',
 			'¡Tu carrito está actualmente vacío!' => 'Tu cesta está vacía', // Página Cesta (bloque de WooCommerce).
+			'Tu carrito'                          => 'Tu cesta', // Cesta desplegable de la cabecera.
+			'Tu carrito de la compra está vacío'  => 'Tu cesta está vacía',
+			'Productos del carrito'               => 'Productos de la cesta',
 			'Totales del carrito'                 => 'Totales de la cesta',
 			'Volver a la tienda'                  => 'Volver a la tienda',
 		);
