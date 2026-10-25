@@ -274,10 +274,10 @@ class Esmalto_Formularios {
 					'notifications'          => array(
 						1 => array(
 							'notification_name' => __( 'Aviso al equipo', 'esmalto-core' ),
-							'email'             => esmalto_email_avisos(),
+							'email'             => esmalto_email_formularios(),
 							'subject'           => $def['asunto'],
 							'sender_name'       => get_bloginfo( 'name' ),
-							'sender_address'    => '{admin_email}',
+							'sender_address'    => esmalto_email_formularios(),
 							'replyto'           => '{field_id="1"}',
 							'message'           => '{all_fields}',
 						),

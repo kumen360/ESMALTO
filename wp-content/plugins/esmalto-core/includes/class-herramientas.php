@@ -19,6 +19,7 @@ class Esmalto_Herramientas {
 		add_action( 'admin_post_esmalto_plantilla', array( __CLASS__, 'accion_plantilla' ) );
 		add_action( 'admin_post_esmalto_seo', array( __CLASS__, 'accion_seo' ) );
 		add_action( 'admin_post_esmalto_categorias', array( __CLASS__, 'accion_categorias' ) );
+		add_action( 'admin_post_esmalto_empresa', array( __CLASS__, 'accion_empresa' ) );
 		add_action( 'wp_ajax_esmalto_lote', array( __CLASS__, 'ajax_lote' ) );
 
 		// Importación de productos: lotes pequeños, más tiempo y menos tamaños de imagen.
@@ -163,6 +164,14 @@ class Esmalto_Herramientas {
 					<?php submit_button( __( 'Crear categorías y asignar colecciones', 'esmalto-core' ), 'secondary' ); ?>
 				</form>
 			<?php endif; ?>
+
+			<h2><?php esc_html_e( '6. Datos de empresa, correos y envíos', 'esmalto-core' ); ?></h2>
+			<p><?php esc_html_e( 'Aplica los datos de Kumen Tres Sesenta, S.L. (Esmalto Cerámica): contacto comercial y avisos de altas a clientes.b2b@esmalto.com, formularios a info@esmalto.com, dirección de la tienda, instrucciones de transferencia, correos de WooCommerce (remitente pedidos@esmalto.com, respuestas a info@esmalto.com, logotipo, colores y pie), avisos de los formularios, sin «Atribución de pedidos», porte por m² y palé en lugar del envío por peso y la página de alta de WholesaleX en borrador. Se puede repetir.', 'esmalto-core' ); ?></p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="esmalto_empresa">
+				<?php wp_nonce_field( 'esmalto_empresa' ); ?>
+				<?php submit_button( __( 'Aplicar datos de empresa, correos y envíos', 'esmalto-core' ), 'secondary' ); ?>
+			</form>
 		</div>
 		<script>
 		( function () {
@@ -206,6 +215,13 @@ class Esmalto_Herramientas {
 		}
 		$texto = isset( $_POST['asignacion'] ) ? sanitize_textarea_field( wp_unslash( $_POST['asignacion'] ) ) : '';
 		self::volver( Esmalto_Categorias::aplicar( $texto, ! empty( $_POST['confirmar'] ) ) );
+	}
+
+	public static function accion_empresa() {
+		if ( ! current_user_can( 'manage_woocommerce' ) || ! check_admin_referer( 'esmalto_empresa' ) ) {
+			wp_die( esc_html__( 'Sin permisos.', 'esmalto-core' ) );
+		}
+		self::volver( Esmalto_Empresa::aplicar() );
 	}
 
 	public static function accion_seo() {
@@ -325,9 +341,10 @@ class Esmalto_Herramientas {
 
 	private static function configurar_woocommerce( $proximamente ) {
 		$opciones = array(
-			'woocommerce_default_country'                      => 'ES:CS',
-			'woocommerce_store_city'                           => 'Castellón de la Plana',
-			'woocommerce_store_postcode'                       => '12001',
+			'woocommerce_default_country'                      => 'ES:CA',
+			'woocommerce_store_address'                        => 'C/ Bolsa, 44',
+			'woocommerce_store_city'                           => 'Sanlúcar de Barrameda',
+			'woocommerce_store_postcode'                       => '11540',
 			'woocommerce_allowed_countries'                    => 'specific',
 			'woocommerce_specific_allowed_countries'           => array( 'ES' ),
 			'woocommerce_ship_to_countries'                    => '',
@@ -402,7 +419,7 @@ class Esmalto_Herramientas {
 				'enabled'      => 'yes',
 				'title'        => 'Transferencia bancaria',
 				'description'  => 'Realiza el pago por transferencia en los 3 días siguientes al pedido. Usa el número de pedido como concepto. Prepararemos tu pedido cuando recibamos el pago.',
-				'instructions' => 'Envía el justificante a hola@esmalto.com. Si no recibimos el pago en 3 días, el pedido se cancelará.',
+				'instructions' => 'Envía el justificante a info@esmalto.com. Si no recibimos el pago en 3 días, el pedido se cancelará.',
 			)
 		);
 		update_option( 'woocommerce_bacs_settings', $bacs );

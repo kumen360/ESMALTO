@@ -221,7 +221,7 @@ class Esmalto_Paginas {
 			$bloques[] = $bloque;
 		}
 		$bloques[] = self::separador();
-		$bloques[] = self::p( 'Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600', 'esm-documento__pie', 'texto-mudo' );
+		$bloques[] = self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · info@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' );
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
@@ -292,7 +292,7 @@ class Esmalto_Paginas {
 			array( '¿Cómo accedo a los precios profesionales?', 'Rellena el <a href="/profesionales/">formulario de alta profesional</a> con tu CNAE. Verificamos tu perfil y activamos tu cuenta con tu categoría de precios en 24–48 h.' ),
 			array( '¿Cómo calculo cuántas cajas necesito?', 'En cada producto tienes una calculadora: escribe los m² y te indica las cajas (siempre completas), los m² reales y el coste total. Te recomendamos añadir un 10 % de merma por cortes.' ),
 			array( '¿Por qué se venden por cajas?', 'La cerámica se sirve en cajas completas para garantizar el mismo lote y tono en toda la superficie. Pide todo el material de una vez.' ),
-			array( '¿Enviáis a obra en toda la península?', 'Sí. Coordinamos la entrega a domicilio o a pie de obra según el peso y el número de palés. Consulta <a href="/gastos-de-envio/">cómo se calculan los gastos de envío</a>.' ),
+			array( '¿Enviáis a obra en toda la península?', 'Sí. Entregamos a domicilio o a pie de obra en 3 a 5 días laborables desde la confirmación del pedido. El porte se calcula por m² y por palé: consulta <a href="/gastos-de-envio/">cómo se calculan los gastos de envío</a>.' ),
 			array( '¿Puedo recoger el pedido en vuestro almacén?', 'Sí, elige «Recogida en almacén» al finalizar la compra. Es gratis y te avisamos cuando esté preparado.' ),
 			array( '¿Puedo pedir muestras antes de comprar?', 'Sí. Las muestras son gratuitas y solo se pagan los portes. Consulta la página de <a href="/muestras/">Muestras</a>.' ),
 			array( '¿Qué formas de pago aceptáis?', 'Tarjeta de crédito o débito (pago seguro con Stripe) y transferencia bancaria.' ),
@@ -305,7 +305,7 @@ class Esmalto_Paginas {
 		$bloques = array(
 			self::p( '<a href="/">Inicio</a> / FAQ', 'is-style-miga' ),
 			"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">Preguntas frecuentes</h1>\n<!-- /wp:heading -->",
-			self::p( '¿Tienes otra duda? Escríbenos a <a href="mailto:hola@esmalto.com">hola@esmalto.com</a> o llama al 600 600 600.', 'esm-documento__intro', 'texto-suave' ),
+			self::p( '¿Tienes otra duda? Escríbenos a <a href="mailto:info@esmalto.com">info@esmalto.com</a> o llama al <a href="tel:+34614051042">+34 614 05 10 42</a> (de lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00).', 'esm-documento__intro', 'texto-suave' ),
 			"<!-- wp:group {\"className\":\"esm-faq esm-faq--pagina\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group esm-faq esm-faq--pagina\">" . implode( "\n\n", $items ) . "</div>\n<!-- /wp:group -->",
 		);
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
@@ -362,7 +362,7 @@ class Esmalto_Paginas {
 		// Pie con filete superior (un separador dentro de un contenedor flex se queda sin ancho).
 		$pie       = '<!-- wp:group {"style":{"border":{"top":{"color":"rgba(255,255,255,0.12)","width":"1px"}},"spacing":{"padding":{"top":"24px"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->' . "\n" .
 			'<div class="wp-block-group" style="border-top-color:rgba(255,255,255,0.12);border-top-width:1px;padding-top:24px">' .
-			self::p( 'Esmalto · CIF 00000000 · Castellón (España) · hola@esmalto.com · 600 600 600', 'esm-documento__pie', 'texto-mudo' ) .
+			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · info@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
 			"</div>\n<!-- /wp:group -->";
 		return self::seccion(
 			array( self::pila( array( $cabecera, $como, $saber, $solicitud, $pie ), '48px', 'esm-muestras' ) ),
@@ -380,7 +380,7 @@ class Esmalto_Paginas {
 			'En Esmalto puedes pagar tus pedidos de forma segura con estos métodos:',
 			array(
 				array( 'Tarjeta de crédito o débito', 'Pago seguro con Stripe. Aceptamos Visa, Mastercard, American Express y, según tu dispositivo, Apple Pay y Google Pay. Los datos de la tarjeta los gestiona Stripe: Esmalto no los almacena.' ),
-				array( 'Transferencia bancaria', 'Tras realizar el pedido te mostramos los datos bancarios. Mantenemos el pedido reservado 3 días: si en ese plazo no recibimos el pago ni el justificante en hola@esmalto.com, el pedido se cancela. Los pedidos por transferencia se preparan cuando se confirma el cobro.' ),
+				array( 'Transferencia bancaria', 'Tras realizar el pedido te mostramos los datos bancarios. Mantenemos el pedido reservado 3 días: si en ese plazo no recibimos el pago ni el justificante en info@esmalto.com, el pedido se cancela. Los pedidos por transferencia se preparan cuando se confirma el cobro.' ),
 				array( 'Profesionales', 'Las cuentas profesionales pueden acordar condiciones de pago con su comercial.' ),
 			)
 		);
@@ -390,9 +390,10 @@ class Esmalto_Paginas {
 		return self::documento(
 			'Gastos de envío',
 			'Cómo calcular gastos de envío',
-			'El coste del envío depende del peso total del pedido. Cada producto indica el peso por caja, y lo verás calculado en la cesta antes de pagar.',
+			'El porte depende de los m² del pedido y de los palés que ocupa. Lo verás calculado en la cesta antes de pagar.',
 			array(
-				array( 'Entrega a domicilio u obra (península)', array( 'Pedidos pequeños: tarifa por tramos de peso.', 'Pedidos grandes: se envían en palés completos con coste por palé.', 'Entrega a pie de calle; para descarga en obra consúltanos.' ) ),
+				array( 'Entrega a domicilio u obra (península)', array( 'Porte: 2,50 € por m² (+ IVA).', 'Palés: 9 € por palé, aparte del porte (+ IVA).', 'Entrega a pie de calle; para descarga en obra consúltanos.' ) ),
+				array( 'Plazo de entrega', 'Península: entrega en 3 a 5 días laborables desde la confirmación del pedido. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.' ),
 				array( 'Recogida en almacén', 'Gratis. Elige «Recogida en almacén» al finalizar la compra y te avisaremos cuando el pedido esté listo.', self::pila( array( self::shortcode( '[esmalto_recogida]' ) ), '12px', 'esm-recogida-datos' ) ),
 				array( 'Baleares, Canarias, Ceuta y Melilla', 'Envíos bajo presupuesto: escríbenos con el pedido y el código postal.' ),
 			)
@@ -403,7 +404,7 @@ class Esmalto_Paginas {
 		return self::documento(
 			'Condiciones generales',
 			'Condiciones generales',
-			'Condiciones generales de contratación de Esmalto, CIF 00000000, con domicilio en Castellón (España). [Texto pendiente de redacción legal definitiva].',
+			'Condiciones generales de contratación de Esmalto Cerámica, marca comercial de Kumen Tres Sesenta, S.L. (NIF B88655014), con domicilio en C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). [Texto pendiente de redacción legal definitiva].',
 			array(
 				array( 'Objeto', 'Estas condiciones regulan la compra de productos a través de la tienda online de Esmalto.' ),
 				array( 'Pedidos y precios', 'Los productos se venden por cajas completas. Los precios para particulares incluyen IVA y no incluyen portes. Los clientes profesionales con cuenta activada ven su tarifa neta sin IVA.' ),
@@ -417,7 +418,7 @@ class Esmalto_Paginas {
 		return self::documento(
 			'Aviso legal',
 			'Aviso legal',
-			'Titular del sitio web: Esmalto, CIF 00000000, Castellón (España). Email: hola@esmalto.com. Teléfono: 600 600 600. [Texto pendiente de redacción legal definitiva].',
+			'Titular del sitio web: Kumen Tres Sesenta, S.L. · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz) · Registro Mercantil de Cádiz, hoja CA-69375. Email: info@esmalto.com. Teléfono: +34 614 05 10 42. Esmalto Cerámica es una marca comercial de Kumen Tres Sesenta, S.L. [Texto pendiente de redacción legal definitiva].',
 			array(
 				array( 'Condiciones de uso', 'El acceso y uso de este sitio web atribuye la condición de usuario y supone la aceptación de este aviso legal.' ),
 				array( 'Propiedad intelectual', 'Los contenidos, imágenes de producto y marcas son propiedad de Esmalto o de sus respectivos titulares.' ),
@@ -429,11 +430,11 @@ class Esmalto_Paginas {
 		return self::documento(
 			'Política de privacidad',
 			'Política de privacidad',
-			'Responsable del tratamiento: Esmalto, CIF 00000000, Castellón (España). Contacto: hola@esmalto.com. [Texto pendiente de redacción legal definitiva].',
+			'Responsable del tratamiento: Kumen Tres Sesenta, S.L. (Esmalto Cerámica) · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Contacto: info@esmalto.com. [Texto pendiente de redacción legal definitiva].',
 			array(
-				array( 'Datos que tratamos', 'Los que nos facilitas en los formularios de contacto, muestras, presupuesto, alta de cliente o profesional y en tus pedidos, para gestionar tu solicitud, tu cuenta y tus compras. En el alta profesional tratamos también los datos de tu empresa y su CNAE para verificar tu acceso a la tarifa profesional.' ),
+				array( 'Datos que tratamos', 'Los que nos facilitas en los formularios de contacto, muestras, presupuesto, alta de cliente o profesional y en tus pedidos, para gestionar tu solicitud, tu cuenta y tus compras. En los pedidos te pedimos el NIF o DNI para emitir la factura. En el alta profesional tratamos también los datos de tu empresa y su CNAE para verificar tu acceso a la tarifa profesional.' ),
 				array( 'Pagos', 'Los pagos con tarjeta los procesa Stripe; Esmalto no almacena los datos de tu tarjeta.' ),
-				array( 'Derechos', 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a hola@esmalto.com.' ),
+				array( 'Derechos', 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a info@esmalto.com.' ),
 			)
 		);
 	}

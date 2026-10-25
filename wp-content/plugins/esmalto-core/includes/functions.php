@@ -23,15 +23,17 @@ function esmalto_ajustes_defecto() {
 		'palet_pct'          => 5,
 		'b2b_sin_iva'        => 1,
 		'comercial_nombre'   => 'Departamento comercial',
-		'comercial_email'    => 'hola@esmalto.com',
-		'comercial_tel'      => '600 600 600',
+		'comercial_email'    => 'clientes.b2b@esmalto.com',
+		'comercial_tel'      => '+34 614 05 10 42',
 		'comercial_whatsapp' => '',
-		'email_avisos'       => '',
+		'email_avisos'       => 'clientes.b2b@esmalto.com',
+		'email_formularios'  => 'info@esmalto.com',
 		'cnae'               => '',
 		'aviso_producto'     => 'Puede haber errores en los detalles de los productos. Para cualquier duda, contacta con el departamento comercial.',
 		'catalogo_url'       => 'https://raw.githubusercontent.com/kumen360/ESMALTO/main/catalogo/',
 		'recogida_direccion' => '',
 		'recogida_horario'   => '',
+		'plazo_entrega'      => 'Península: entrega en 3 a 5 días laborables desde la confirmación del pedido. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.',
 	);
 }
 

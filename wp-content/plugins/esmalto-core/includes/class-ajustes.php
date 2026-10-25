@@ -58,14 +58,14 @@ class Esmalto_Ajustes {
 		foreach ( array( 'cat_a_rol', 'cat_b_rol', 'cat_c_rol', 'rol_alta', 'comercial_nombre', 'comercial_tel', 'comercial_whatsapp' ) as $clave ) {
 			$salida[ $clave ] = isset( $entrada[ $clave ] ) ? sanitize_text_field( wp_unslash( $entrada[ $clave ] ) ) : $def[ $clave ];
 		}
-		foreach ( array( 'comercial_email', 'email_avisos' ) as $clave ) {
+		foreach ( array( 'comercial_email', 'email_avisos', 'email_formularios' ) as $clave ) {
 			$salida[ $clave ] = isset( $entrada[ $clave ] ) ? sanitize_email( wp_unslash( $entrada[ $clave ] ) ) : $def[ $clave ];
 		}
 		$salida['precios_visibles'] = empty( $entrada['precios_visibles'] ) ? 0 : 1;
 		$salida['b2b_sin_iva']    = empty( $entrada['b2b_sin_iva'] ) ? 0 : 1;
 		$salida['aviso_producto'] = isset( $entrada['aviso_producto'] ) ? sanitize_textarea_field( wp_unslash( $entrada['aviso_producto'] ) ) : $def['aviso_producto'];
 		$salida['catalogo_url']   = isset( $entrada['catalogo_url'] ) ? esc_url_raw( wp_unslash( $entrada['catalogo_url'] ) ) : $def['catalogo_url'];
-		foreach ( array( 'recogida_direccion', 'recogida_horario' ) as $clave ) {
+		foreach ( array( 'recogida_direccion', 'recogida_horario', 'plazo_entrega' ) as $clave ) {
 			$salida[ $clave ] = isset( $entrada[ $clave ] ) ? sanitize_textarea_field( wp_unslash( $entrada[ $clave ] ) ) : $def[ $clave ];
 		}
 
@@ -157,6 +157,15 @@ class Esmalto_Ajustes {
 					self::fila_texto( __( 'Email para avisos de altas', 'esmalto-core' ), $n . '[email_avisos]', $a['email_avisos'], 'email', __( 'Vacío = email del administrador.', 'esmalto-core' ) );
 					?>
 				</table>
+
+				<h2><?php esc_html_e( 'Correo de contacto', 'esmalto-core' ); ?></h2>
+				<table class="form-table" role="presentation">
+					<?php self::fila_texto( __( 'Email de contacto', 'esmalto-core' ), $n . '[email_formularios]', $a['email_formularios'], 'email', __( 'Recibe los formularios de contacto, muestras y presupuesto (desde «Aplicar datos de empresa» en Herramientas) y firma los correos de WordPress. Los de pedidos salen con el remitente de WooCommerce → Ajustes → Correos electrónicos.', 'esmalto-core' ) ); ?>
+				</table>
+
+				<h2><?php esc_html_e( 'Plazo de entrega', 'esmalto-core' ); ?></h2>
+				<p><?php esc_html_e( 'Se muestra en la ficha de producto y en el correo y la página de confirmación de los pedidos con entrega.', 'esmalto-core' ); ?></p>
+				<textarea name="<?php echo esc_attr( $n . '[plazo_entrega]' ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $a['plazo_entrega'] ); ?></textarea>
 
 				<h2><?php esc_html_e( 'Recogida en almacén', 'esmalto-core' ); ?></h2>
 				<p><?php esc_html_e( 'Se muestran en «Cómo calcular gastos de envío» y en los correos y la página de confirmación de los pedidos con «Recogida en almacén». Mientras estén vacíos no se muestra nada (los administradores ven un aviso en la página).', 'esmalto-core' ); ?></p>
