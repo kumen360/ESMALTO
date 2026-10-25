@@ -3,7 +3,7 @@
  * Plugin Name:       Esmalto Core
  * Plugin URI:        https://www.esmalto.com
  * Description:       Lógica de tienda de Esmalto: calculadora de m² (cajas y palés), B2B (alta con CNAE, categorías A/B/C, descuento por palé, contacto comercial), porte por m² y palé, NIF y recargo de equivalencia en el pago, solicitudes guardadas, fichas técnicas y herramientas de puesta en marcha.
- * Version:           1.4.0
+ * Version:           1.4.1
  * Requires at least: 6.6
  * Requires PHP:      8.0
  * Requires Plugins:  woocommerce
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ESMALTO_CORE_VERSION', '1.4.0' );
+define( 'ESMALTO_CORE_VERSION', '1.4.1' );
 define( 'ESMALTO_CORE_FILE', __FILE__ );
 define( 'ESMALTO_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ESMALTO_CORE_URL', plugin_dir_url( __FILE__ ) );
