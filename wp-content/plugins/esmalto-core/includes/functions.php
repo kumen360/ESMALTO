@@ -108,6 +108,23 @@ add_filter(
 );
 
 /**
+ * En los textos de los correos de WooCommerce («escríbenos a {store_email}») va el correo de contacto,
+ * no el remitente: pedidos@ solo envía los correos de pedidos.
+ */
+add_filter(
+	'woocommerce_email_classes',
+	static function ( $emails ) {
+		foreach ( $emails as $email ) {
+			if ( $email instanceof WC_Email ) {
+				$email->placeholders['{store_email}'] = esmalto_email_formularios();
+			}
+		}
+		return $emails;
+	},
+	99
+);
+
+/**
  * NIF, DNI o NIE sin espacios, puntos ni guiones, en mayúsculas y sin el prefijo «ES».
  */
 function esmalto_nif_normalizar( $valor ) {
