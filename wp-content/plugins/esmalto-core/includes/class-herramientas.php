@@ -110,7 +110,7 @@ class Esmalto_Herramientas {
 			</table>
 
 			<h2><?php esc_html_e( '1. Puesta en marcha', 'esmalto-core' ); ?></h2>
-			<p><?php esc_html_e( 'Configura WooCommerce (España, euros, IVA 21 %, envíos por peso y recogida, transferencia), enlaces permanentes, logo e icono, filtros de la tienda, formularios y páginas. Se puede repetir: no sobrescribe el contenido de las páginas ya creadas salvo que marques la casilla.', 'esmalto-core' ); ?></p>
+			<p><?php esc_html_e( 'Configura WooCommerce (España, euros, IVA 21 %, porte por m² y palé y recogida, transferencia), enlaces permanentes, logo e icono, filtros de la tienda, formularios y páginas. Se puede repetir: no sobrescribe el contenido de las páginas ya creadas salvo que marques la casilla.', 'esmalto-core' ); ?></p>
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 				<input type="hidden" name="action" value="esmalto_configurar">
 				<?php wp_nonce_field( 'esmalto_configurar' ); ?>
@@ -430,7 +430,7 @@ class Esmalto_Herramientas {
 				'orden'      => 1,
 				'ubicacion'  => array( 'ES' ),
 				'tipo'       => 'country',
-				'metodos'    => array( 'esmalto_peso', 'local_pickup' ),
+				'metodos'    => array( 'esmalto_m2', 'local_pickup' ),
 			),
 		);
 		$existentes = array();

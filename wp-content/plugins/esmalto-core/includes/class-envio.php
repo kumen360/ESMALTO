@@ -1,7 +1,9 @@
 <?php
 /**
- * Método de envío «Envío por peso (Esmalto)»: tramos de kg editables y coste por palé
- * para pedidos que superan el último tramo. Se añade en WooCommerce → Ajustes → Envío → zona.
+ * Métodos de envío de Esmalto (se añaden en WooCommerce → Ajustes → Envío → zona):
+ * - «Porte por m² y palé»: el que se usa desde el 25/10/2026 (2,50 €/m² + 9 €/palé, revisable).
+ * - «Envío por peso»: tramos de kg y coste por palé (se mantiene por compatibilidad).
+ * También: datos de recogida en almacén y plazo de entrega en correos y confirmación.
  *
  * @package Esmalto_Core
  */
@@ -81,11 +83,42 @@ class Esmalto_Envio {
 
 	public static function cargar() {
 		require_once ESMALTO_CORE_DIR . 'includes/class-envio-peso.php';
+		require_once ESMALTO_CORE_DIR . 'includes/class-envio-m2.php';
 	}
 
 	public static function registrar( $metodos ) {
+		$metodos['esmalto_m2']   = 'Esmalto_Envio_M2';
 		$metodos['esmalto_peso'] = 'Esmalto_Envio_Peso';
 		return $metodos;
+	}
+
+	/**
+	 * m², peso y palés de un paquete. Cada referencia ocupa cajas / cajas por palé de un palé;
+	 * sin datos de palé se estima por peso (1.000 kg por palé). Con algo que enviar, mínimo 1 palé.
+	 */
+	public static function medir( $contenido ) {
+		$m2        = 0.0;
+		$kg        = 0.0;
+		$ocupacion = 0.0;
+		$hay       = false;
+		foreach ( $contenido as $item ) {
+			$producto = $item['data'] ?? null;
+			if ( ! $producto instanceof WC_Product || ! $producto->needs_shipping() ) {
+				continue;
+			}
+			$hay    = true;
+			$cajas  = (int) $item['quantity'];
+			$e      = esmalto_embalaje( $producto->get_id() );
+			$peso   = (float) $producto->get_weight() * $cajas;
+			$m2    += $e['m2_caja'] * $cajas;
+			$kg    += $peso;
+			$ocupacion += $e['cajas_palet'] > 0 ? $cajas / $e['cajas_palet'] : $peso / 1000;
+		}
+		return array(
+			'm2'     => $m2,
+			'kg'     => $kg,
+			'palets' => $hay ? max( 1, (int) ceil( $ocupacion - 1e-9 ) ) : 0,
+		);
 	}
 
 	/**
