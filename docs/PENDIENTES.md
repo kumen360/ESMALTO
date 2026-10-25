@@ -17,8 +17,7 @@ Se editan en el pie (*Apariencia → Editor → Patrones → Partes de plantilla
 - **Precios**: ningún producto tiene precio (ver `CATALOGO.md → Precio`). Cuando llegue la tarifa: *Herramientas → Tarifa de precios* y después *Ajustes → Mostrar precios y vender online*.
 - **Lucca**: sin fotos ni ficha → importado como **privado** (no se ve en la tienda).
 - Sin foto de pieza: Southwell Vein (12 variaciones) y Borneo Deck (6). Usan la foto del producto.
-- Sin datos de palé: 31 variaciones de Besana, Helsinki, Lucca y Norway. En ellas no aparece la opción de palé.
-- Sin m²/caja: `ESM-CORALINA-BLANCO-30X60` y `ESM-CORALINA-BLANCO-60X60`. En ellas la calculadora no funciona.
+- Datos de palé de Besana, Helsinki, Lucca y Norway y m²/caja de Coralina blanco 30x60 y 60x60: completados el 25/10 con los datos de Esmalto (`build_catalog.py`, `EMBALAJE_FORMATO` y `EMBALAJE_SKU`). Coralina blanco sale de la ficha de Ecoceramic: pendiente de que lo confirme Víctor.
 - Revisar las tablas de estilo y tono (`catalogo/scripts/build_catalog.py`).
 
 ## Repositorio privado

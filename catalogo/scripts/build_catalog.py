@@ -75,6 +75,24 @@ USO = {
 
 VARIATION_ATTRS = ['Color', 'Formato', 'Tipo de pieza', 'Espesor', 'Acabado']
 
+# Embalaje que faltaba en el origen (datos de Esmalto, 25/10/2026). Va por formato y vale para todos
+# los colores (también el relieve). Solo se aplica a las variaciones sin datos de palé: no pisa el origen.
+# (piezas/caja, m²/caja, kg/caja, cajas/palé, m²/palé, kg/palé)
+EMBALAJE_FORMATO = {
+    ('Besana', '33.3x100'): (6, 2.00, 24, 48, 96.00, 1174),
+    ('Helsinki', '60x120'): (2, 1.44, 28.62, 36, 51.84, 1050),
+    ('Lucca', '60x120'): (2, 1.44, 28.62, 36, 51.84, 1050),
+    ('Lucca', '100x100'): (2, 2.00, 38.8, 27, 54.00, 1068),
+    ('Lucca', '33.3x100'): (6, 2.00, 25, 48, 96.00, 1220),
+    ('Norway', '60x120'): (2, 1.44, 29, 36, 51.84, 1064),
+}
+# Variaciones sin m²/caja (ficha de Ecoceramic; pendiente de que lo confirme Víctor).
+EMBALAJE_SKU = {
+    'ESM-CORALINA-BLANCO-30X60': (6, 1.08, 23.6, 48, 51.84, 1152),
+    'ESM-CORALINA-BLANCO-60X60': (4, 1.44, 31.5, 30, 43.20, 965),
+}
+CAMPOS_EMBALAJE = ['_piezas_por_caja', '_m2_por_caja', '_kg_por_caja', '_cajas_por_pallet', '_m2_por_pallet', '_kg_por_pallet']
+
 # --------------------------------------------------------------------------- utilidades
 
 
@@ -382,6 +400,14 @@ def main():
                 vimg = imgs.url(new) if new else ''
             else:
                 incid['Variación sin foto de pieza'].append(v['SKU'])
+            extra = EMBALAJE_SKU.get(v['SKU'])
+            if not extra and not num(v['Meta: _cajas_por_pallet']):
+                extra = EMBALAJE_FORMATO.get((name, norm_formato(v['Meta: _formato'])))
+            if extra:
+                v = dict(v)
+                for campo, valor in zip(CAMPOS_EMBALAJE, extra):
+                    v['Meta: ' + campo] = format(valor, 'g')
+                v['Weight (kg)'] = format(extra[2], 'g')
             if not num(v['Meta: _m2_por_caja']):
                 incid['Variación sin m²/caja (sin calculadora)'].append(v['SKU'])
             if not num(v['Meta: _cajas_por_pallet']):
