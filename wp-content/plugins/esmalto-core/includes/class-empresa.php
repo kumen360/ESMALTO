@@ -26,13 +26,14 @@ class Esmalto_Empresa {
 	const EMAIL_B2B     = 'clientes.b2b@esmalto.com';
 
 	/**
-	 * Colores de las plantillas de correo de WooCommerce (los del tema).
+	 * Colores de las plantillas de correo de WooCommerce (los del tema: fondo, superficie, texto y
+	 * amarillo para los enlaces). Sobre blanco no se leía el logotipo amarillo.
 	 */
 	const COLORES_CORREO = array(
-		'woocommerce_email_base_color'            => '#154734',
+		'woocommerce_email_base_color'            => '#fec30c',
 		'woocommerce_email_background_color'      => '#002100',
-		'woocommerce_email_body_background_color' => '#ffffff',
-		'woocommerce_email_text_color'            => '#1e1e1e',
+		'woocommerce_email_body_background_color' => '#00330f',
+		'woocommerce_email_text_color'            => '#f1f1f1',
 		'woocommerce_email_footer_text_color'     => '#c8d2c8',
 	);
 
