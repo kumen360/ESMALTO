@@ -188,7 +188,7 @@ class Esmalto_Formularios {
 				'titulo'  => __( 'Solicitud de muestras', 'esmalto-core' ),
 				'enviar'  => __( 'Solicitar muestras', 'esmalto-core' ),
 				'asunto'  => __( 'Solicitud de muestras: {field_id="4"}', 'esmalto-core' ),
-				'gracias' => __( 'Hemos recibido tu solicitud. Te enviaremos el importe de los portes para confirmar el envío de las muestras.', 'esmalto-core' ),
+				'gracias' => __( 'Hemos recibido tu solicitud. Te confirmaremos el importe de las muestras para preparar el envío.', 'esmalto-core' ),
 				'campos'  => array(
 					self::campo( 0, 'name', __( 'Nombre y apellidos', 'esmalto-core' ), array( 'format' => 'simple', 'required' => '1' ) ),
 					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1' ) + self::mitad( true ) ),

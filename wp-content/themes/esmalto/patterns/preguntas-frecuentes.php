@@ -30,7 +30,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"esm-faq__respuesta"} -->
-<p class="esm-faq__respuesta">Sí. Coordinamos la entrega a pie de obra con plazos según disponibilidad de stock y formato.</p>
+<p class="esm-faq__respuesta">Sí. Entregamos a domicilio o en obra, a pie de calle. Material en stock con destino en la Península: de 3 a 5 días laborables desde la confirmación del pago. Porte: 2,50 € + IVA por m² y 9,00 € + IVA por palé.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 

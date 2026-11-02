@@ -389,12 +389,12 @@ class Esmalto_Paginas {
 		$preguntas = array(
 			array( '¿Cómo accedo a los precios profesionales?', 'Rellena el <a href="/profesionales/">formulario de alta profesional</a> con tu CNAE. Verificamos tu perfil y activamos tu cuenta con tu categoría de precios en 24–48 h.' ),
 			array( '¿Cómo calculo cuántas cajas necesito?', 'En cada producto tienes una calculadora: escribe los m² y te indica las cajas (siempre completas), los m² reales y el coste total. Te recomendamos añadir un 10 % de merma por cortes.' ),
-			array( '¿Por qué se venden por cajas?', 'La cerámica se sirve en cajas completas para garantizar el mismo lote y tono en toda la superficie. Pide todo el material de una vez.' ),
-			array( '¿Enviáis a obra en toda la península?', 'Sí. Entregamos a domicilio o a pie de obra en 3 a 5 días laborables desde la confirmación del pedido. El porte se calcula por m² y por palé: consulta <a href="/gastos-de-envio/">cómo se calculan los gastos de envío</a>.' ),
-			array( '¿Puedo recoger el pedido en vuestro almacén?', 'Sí, elige «Recogida en almacén» al finalizar la compra. Es gratis y te avisamos cuando esté preparado.' ),
-			array( '¿Puedo pedir muestras antes de comprar?', 'Sí. Las muestras son gratuitas y solo se pagan los portes. Consulta la página de <a href="/muestras/">Muestras</a>.' ),
-			array( '¿Qué formas de pago aceptáis?', 'Tarjeta de crédito o débito (pago seguro con Stripe) y transferencia bancaria.' ),
-			array( '¿Hacéis envíos a Baleares, Canarias, Ceuta o Melilla?', 'Sí, bajo presupuesto. <a href="/contacto/">Escríbenos</a> con el pedido y el código postal.' ),
+			array( '¿Por qué se venden por cajas?', 'Los productos cerámicos se venden por caja completa. Te recomendamos comprar todo el material de una obra en un mismo pedido y añadir un 10 % para cortes, mermas y futuras reparaciones: no podemos garantizar que un pedido posterior sea del mismo lote.' ),
+			array( '¿Enviáis a obra en toda la península?', 'Sí. Entregamos a domicilio o en obra, a pie de calle. Material en stock con destino en la Península: de 3 a 5 días laborables desde la confirmación del pago. El porte es de 2,50 € + IVA por m² (3,03 € IVA incluido) y los palés se cobran aparte, a 9,00 € + IVA por palé (10,89 € IVA incluido). Consulta <a href="/gastos-de-envio/">cómo se calculan los gastos de envío</a>.' ),
+			array( '¿Puedo recoger el pedido en vuestro almacén?', 'Sí, elige «Recogida en almacén» al finalizar la compra, sin coste de porte. El punto de recogida está en la provincia de Castellón y depende del fabricante de cada producto: te lo comunicamos después de la compra, junto con el día y la hora concertados.' ),
+			array( '¿Puedo pedir muestras antes de comprar?', 'Sí. Cada muestra cuesta 9,00 € + IVA (10,89 € IVA incluido), con la pieza y el envío incluidos. Su importe no se descuenta de pedidos posteriores. Consulta la página de <a href="/muestras/">Muestras</a>.' ),
+			array( '¿Qué formas de pago aceptáis?', 'Tarjeta de crédito o débito (pago seguro con Stripe) y transferencia bancaria. Con transferencia, el pedido queda reservado durante 5 días hábiles.' ),
+			array( '¿Hacéis envíos a Baleares, Canarias, Ceuta o Melilla?', 'Solo bajo presupuesto previo, igual que Andorra y el resto de destinos. Pídelo en <a href="mailto:hola@esmalto.com">hola@esmalto.com</a> con el pedido y el código postal.' ),
 		);
 		$items = array();
 		foreach ( $preguntas as $q ) {
@@ -418,7 +418,7 @@ class Esmalto_Paginas {
 			array(
 				self::p( '<a href="/">Inicio</a> / Muestras', 'is-style-miga' ),
 				"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">Muestras</h1>\n<!-- /wp:heading -->",
-				self::p( 'Una foto no enseña cómo cambia un porcelánico con la luz de tu obra ni cómo es al tacto. Pide la pieza antes de decidir: la muestra no se cobra, solo pagas el transporte.', 'esm-documento__intro', 'texto-suave' ),
+				self::p( 'Una foto no enseña cómo cambia un porcelánico con la luz de tu obra ni cómo es al tacto. Pide la pieza antes de decidir: cada muestra cuesta 9,00 € + IVA (10,89 € IVA incluido), con la pieza y el envío incluidos. Su importe no se descuenta de pedidos posteriores.', 'esm-documento__intro', 'texto-suave' ),
 			)
 		);
 		$como      = self::pila(
@@ -428,7 +428,7 @@ class Esmalto_Paginas {
 					array(
 						'En la ficha del producto, elige color y formato y pulsa «Solicitar una muestra».',
 						'Añade todas las que necesites; van en la misma solicitud.',
-						'Te confirmamos el coste del transporte y, cuando lo aceptes, salen hacia tu dirección.',
+						'Te confirmamos el importe y, cuando lo aceptes, salen hacia tu dirección.',
 					)
 				),
 			),
@@ -441,10 +441,10 @@ class Esmalto_Paginas {
 					array(
 						'<strong>Tamaño.</strong> Enviamos una pieza o un corte de hasta 25 × 25 cm; los formatos pequeños van enteros. Si no hay corte del formato elegido, te mandamos otro de la misma serie y color.',
 						'<strong>Formato.</strong> Pídela en el formato que vayas a colocar: una misma serie puede variar ligeramente de tono de un formato a otro.',
-						'<strong>Para qué sirve.</strong> Para comprobar color, acabado y tacto. Un golpe en el transporte que no impida esa comprobación no da derecho a devolver los portes.',
+						'<strong>Para qué sirve.</strong> Para comprobar color, acabado y tacto. La muestra es representativa de la serie, pero puede presentar diferencias de tono con el lote que se sirva en el pedido definitivo. Un golpe en el transporte que no impida esa comprobación no da derecho a devolver su importe.',
 						'<strong>Cantidad.</strong> Una muestra por referencia y cliente.',
 						'<strong>Envío.</strong> Unas muestras salen de nuestro almacén y otras directamente de fábrica, así que pueden llegar en paquetes distintos.',
-						'<strong>Fuera de la península.</strong> El transporte lleva suplemento.',
+						'<strong>Fuera de la península.</strong> Solo bajo presupuesto previo: pídelo en <a href="mailto:hola@esmalto.com">hola@esmalto.com</a>.',
 					)
 				),
 			),
@@ -473,7 +473,7 @@ class Esmalto_Paginas {
 			'En Esmalto puedes pagar tus pedidos de forma segura con estos métodos:',
 			array(
 				array( 'Tarjeta de crédito o débito', 'Pago seguro con Stripe. Aceptamos Visa, Mastercard, American Express y, según tu dispositivo, Apple Pay y Google Pay. Los datos de la tarjeta los gestiona Stripe: Esmalto no los almacena.' ),
-				array( 'Transferencia bancaria', 'Tras realizar el pedido te mostramos los datos bancarios. Mantenemos el pedido reservado 3 días: si en ese plazo no recibimos el pago ni el justificante en hola@esmalto.com, el pedido se cancela. Los pedidos por transferencia se preparan cuando se confirma el cobro.' ),
+				array( 'Transferencia bancaria', 'Tras realizar el pedido te mostramos los datos bancarios. Tu pedido queda reservado durante 5 días hábiles: si el pago no se recibe en ese plazo, se anula sin coste para ti. Envía el justificante a hola@esmalto.com. Los pedidos por transferencia se preparan cuando se confirma el cobro.' ),
 				array( 'Profesionales', 'Las cuentas profesionales pueden acordar condiciones de pago con su comercial.' ),
 			)
 		);
@@ -486,8 +486,8 @@ class Esmalto_Paginas {
 			'El porte depende de los m² del pedido y de los palés que ocupa. Lo verás calculado en la cesta antes de pagar.',
 			array(
 				array( 'Entrega a domicilio u obra (península)', array( 'Porte: 2,50 € por m² (+ IVA).', 'Palés: 9 € por palé, aparte del porte (+ IVA).', 'Entrega a pie de calle; para descarga en obra consúltanos.' ) ),
-				array( 'Plazo de entrega', self::pila( array( self::p( 'Península: entrega en 3 a 5 días laborables desde la confirmación del pedido. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.', '', 'texto-apagado' ) ), '12px', 'esm-plazo-datos' ) ),
-				array( 'Recogida en almacén', 'Gratis. Elige «Recogida en almacén» al finalizar la compra y te avisaremos cuando el pedido esté listo.', self::pila( array( self::shortcode( '[esmalto_recogida]' ) ), '12px', 'esm-recogida-datos' ) ),
+				array( 'Plazo de entrega', self::pila( array( self::p( 'Material en stock con destino en la Península: de 3 a 5 días laborables desde la confirmación del pago. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.', '', 'texto-apagado' ) ), '12px', 'esm-plazo-datos' ) ),
+				array( 'Recogida en almacén', 'Sin coste de porte. Elige «Recogida en almacén» al finalizar la compra. El punto de recogida está en la provincia de Castellón y depende del fabricante de cada producto: te lo comunicamos después de la compra, junto con el día y la hora concertados.', self::pila( array( self::shortcode( '[esmalto_recogida]' ) ), '12px', 'esm-recogida-datos' ) ),
 				array( 'Baleares, Canarias, Ceuta y Melilla', 'Envíos bajo presupuesto: escríbenos con el pedido y el código postal.' ),
 			)
 		);

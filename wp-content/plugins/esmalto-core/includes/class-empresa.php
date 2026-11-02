@@ -54,7 +54,8 @@ class Esmalto_Empresa {
 		$ajustes['comercial_tel']     = self::TELEFONO;
 		$ajustes['email_avisos']      = self::EMAIL_B2B;
 		$ajustes['email_formularios'] = self::EMAIL;
-		if ( '' === trim( (string) ( $ajustes['plazo_entrega'] ?? '' ) ) ) {
+		// Vacío o con el texto anterior a las condiciones generales («desde la confirmación del pedido»).
+		if ( '' === trim( (string) ( $ajustes['plazo_entrega'] ?? '' ) ) || false !== strpos( $ajustes['plazo_entrega'], 'confirmación del pedido' ) ) {
 			$ajustes['plazo_entrega'] = esmalto_ajustes_defecto()['plazo_entrega'];
 		}
 		update_option( Esmalto_Ajustes::OPCION, $ajustes );
@@ -73,12 +74,13 @@ class Esmalto_Empresa {
 		update_option( 'woocommerce_default_country', 'ES:' . self::PROVINCIA );
 		$log[] = sprintf( 'Dirección de la tienda: %s, %s %s (Cádiz).', self::DIRECCION, self::CODIGO_POSTAL, self::POBLACION );
 
-		// 3. Transferencia: el justificante va al correo de contacto.
+		// 3. Transferencia: reserva de 5 días hábiles (condiciones generales); el justificante va al correo de contacto.
 		$bacs = get_option( 'woocommerce_bacs_settings', array() );
 		$bacs = is_array( $bacs ) ? $bacs : array();
-		$bacs['instructions'] = sprintf( 'Envía el justificante a %s. Si no recibimos el pago en 3 días, el pedido se cancelará.', self::EMAIL );
+		$bacs['description']  = 'Tu pedido queda reservado durante 5 días hábiles; si el pago no se recibe en ese plazo, se anula sin coste para ti. Usa el número de pedido como concepto. Prepararemos tu pedido cuando recibamos el pago.';
+		$bacs['instructions'] = sprintf( 'Tu pedido queda reservado durante 5 días hábiles; si el pago no se recibe en ese plazo, se anula sin coste para ti. Envía el justificante a %s.', self::EMAIL );
 		update_option( 'woocommerce_bacs_settings', $bacs );
-		$log[] = sprintf( 'Transferencia: el justificante se envía a %s.', self::EMAIL );
+		$log[] = sprintf( 'Transferencia: pedido reservado 5 días hábiles y justificante a %s.', self::EMAIL );
 
 		// 4. Correos de WooCommerce: remitente, respuestas, logotipo, colores y pie.
 		update_option( 'woocommerce_email_from_name', 'Esmalto' );
@@ -226,6 +228,11 @@ class Esmalto_Empresa {
 				$datos['settings']['notifications'][ $n ]['email']          = self::EMAIL;
 				$datos['settings']['notifications'][ $n ]['sender_address'] = self::EMAIL;
 				$datos['settings']['notifications'][ $n ]['sender_name']    = 'Esmalto';
+			}
+			// Mensaje al enviar: el vigente (el de muestras ya no habla de portes).
+			$definicion = Esmalto_Formularios::definiciones()[ $tipo ] ?? null;
+			if ( $definicion && ! empty( $datos['settings']['confirmations'][1] ) ) {
+				$datos['settings']['confirmations'][1]['message'] = '<p>' . esc_html( $definicion['gracias'] ) . '</p>';
 			}
 			// Email y teléfono obligatorios: si uno está mal escrito, aún se puede contactar por el otro.
 			foreach ( (array) $datos['fields'] as $f => $campo ) {

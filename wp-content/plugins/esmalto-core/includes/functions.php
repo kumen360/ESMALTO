@@ -33,7 +33,7 @@ function esmalto_ajustes_defecto() {
 		'catalogo_url'       => 'https://raw.githubusercontent.com/kumen360/ESMALTO/main/catalogo/',
 		'recogida_direccion' => '',
 		'recogida_horario'   => '',
-		'plazo_entrega'      => 'Península: entrega en 3 a 5 días laborables desde la confirmación del pedido. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.',
+		'plazo_entrega'      => 'Material en stock con destino en la Península: de 3 a 5 días laborables desde la confirmación del pago. Baleares, Canarias, Ceuta y Melilla: bajo presupuesto.',
 	);
 }
 

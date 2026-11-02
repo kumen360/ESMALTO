@@ -167,7 +167,7 @@ class Esmalto_Herramientas {
 			<?php endif; ?>
 
 			<h2><?php esc_html_e( '6. Datos de empresa, correos y envíos', 'esmalto-core' ); ?></h2>
-			<p><?php esc_html_e( 'Aplica los datos de Kumen Tres Sesenta, S.L. (Esmalto Cerámica): contacto comercial y avisos de altas a clientes.b2b@esmalto.com, formularios a hola@esmalto.com, dirección de la tienda, instrucciones de transferencia, correos de WooCommerce (remitente pedidos@esmalto.com, respuestas a hola@esmalto.com, logotipo, colores y pie), avisos de los formularios, sin «Atribución de pedidos», porte por m² y palé en lugar del envío por peso y la página de alta de WholesaleX en borrador. Se puede repetir.', 'esmalto-core' ); ?></p>
+			<p><?php esc_html_e( 'Aplica los datos de Kumen Tres Sesenta, S.L. (Esmalto Cerámica): contacto comercial y avisos de altas a clientes.b2b@esmalto.com, formularios a hola@esmalto.com, dirección de la tienda, instrucciones de transferencia (5 días hábiles), teléfono obligatorio al pagar, botones de cesta y pago, correos de WooCommerce (remitente pedidos@esmalto.com, respuestas a hola@esmalto.com, logotipo, colores y pie), avisos de los formularios, sin «Atribución de pedidos», porte por m² y palé en lugar del envío por peso y la página de alta de WholesaleX en borrador. Se puede repetir.', 'esmalto-core' ); ?></p>
 			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 				<input type="hidden" name="action" value="esmalto_empresa">
 				<?php wp_nonce_field( 'esmalto_empresa' ); ?>
@@ -435,8 +435,8 @@ class Esmalto_Herramientas {
 			array(
 				'enabled'      => 'yes',
 				'title'        => 'Transferencia bancaria',
-				'description'  => 'Realiza el pago por transferencia en los 3 días siguientes al pedido. Usa el número de pedido como concepto. Prepararemos tu pedido cuando recibamos el pago.',
-				'instructions' => 'Envía el justificante a hola@esmalto.com. Si no recibimos el pago en 3 días, el pedido se cancelará.',
+				'description'  => 'Tu pedido queda reservado durante 5 días hábiles; si el pago no se recibe en ese plazo, se anula sin coste para ti. Usa el número de pedido como concepto. Prepararemos tu pedido cuando recibamos el pago.',
+				'instructions' => 'Tu pedido queda reservado durante 5 días hábiles; si el pago no se recibe en ese plazo, se anula sin coste para ti. Envía el justificante a hola@esmalto.com.',
 			)
 		);
 		update_option( 'woocommerce_bacs_settings', $bacs );
