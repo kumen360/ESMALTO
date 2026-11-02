@@ -376,6 +376,19 @@ body.esmalto .esm-cabecera form.esm-buscador:not(.wp-block-search__searchfield-h
 .esm-legal p, .esm-legal a { font-size: 11px; color: var(--wp--preset--color--texto-mudo); letter-spacing: 0.04em; }
 .esm-legal a:hover { color: var(--wp--preset--color--acento); }
 .esm-legal p a + a { margin-left: 14px; }
+/* «Configurar cookies» reabre el banner: es un botón (lo pide Complianz), con aspecto de enlace */
+.esm-legal .esm-configurar-cookies { all: unset; margin-left: 14px; font-size: 11px; color: var(--wp--preset--color--texto-mudo); letter-spacing: 0.04em; cursor: pointer; }
+.esm-legal .esm-configurar-cookies:hover { color: var(--wp--preset--color--acento); }
+.esm-legal .esm-configurar-cookies:focus-visible { outline: 1px solid var(--wp--preset--color--acento); outline-offset: 2px; }
+/* Banner de cookies (Complianz): categorías con los colores de la web */
+.cmplz-cookiebanner .cmplz-categories .cmplz-category,
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-category-header { background: #154734; }
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-category-title,
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-description { color: #f1f1f1; }
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-always-active { color: #fec30c !important; }
+.cmplz-cookiebanner .cmplz-categories .cmplz-category .cmplz-icon svg { fill: #f1f1f1; }
+/* El botón de subir no tapa los últimos enlaces del pie */
+#ast-scroll-top { bottom: 64px; }
 .esm-pie ul.esm-pie__contacto > li { color: var(--wp--preset--color--texto-apagado); }
 .esm-pie ul.esm-pie__contacto a { color: var(--wp--preset--color--acento); }
 .esm-pie ul.esm-pie__contacto a:hover { color: var(--wp--preset--color--acento-claro); }
