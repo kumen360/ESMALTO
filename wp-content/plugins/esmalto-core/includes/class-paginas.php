@@ -221,7 +221,7 @@ class Esmalto_Paginas {
 			$bloques[] = $bloque;
 		}
 		$bloques[] = self::separador();
-		$bloques[] = self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · info@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' );
+		$bloques[] = self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' );
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
@@ -305,7 +305,7 @@ class Esmalto_Paginas {
 		$bloques = array(
 			self::p( '<a href="/">Inicio</a> / FAQ', 'is-style-miga' ),
 			"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">Preguntas frecuentes</h1>\n<!-- /wp:heading -->",
-			self::p( '¿Tienes otra duda? Escríbenos a <a href="mailto:info@esmalto.com">info@esmalto.com</a> o llama al <a href="tel:+34614051042">+34 614 05 10 42</a> (de lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00).', 'esm-documento__intro', 'texto-suave' ),
+			self::p( '¿Tienes otra duda? Escríbenos a <a href="mailto:hola@esmalto.com">hola@esmalto.com</a> o llama al <a href="tel:+34614051042">+34 614 05 10 42</a> (de lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00).', 'esm-documento__intro', 'texto-suave' ),
 			"<!-- wp:group {\"className\":\"esm-faq esm-faq--pagina\",\"layout\":{\"type\":\"default\"}} -->\n<div class=\"wp-block-group esm-faq esm-faq--pagina\">" . implode( "\n\n", $items ) . "</div>\n<!-- /wp:group -->",
 		);
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
@@ -362,7 +362,7 @@ class Esmalto_Paginas {
 		// Pie con filete superior (un separador dentro de un contenedor flex se queda sin ancho).
 		$pie       = '<!-- wp:group {"style":{"border":{"top":{"color":"rgba(255,255,255,0.12)","width":"1px"}},"spacing":{"padding":{"top":"24px"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->' . "\n" .
 			'<div class="wp-block-group" style="border-top-color:rgba(255,255,255,0.12);border-top-width:1px;padding-top:24px">' .
-			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · info@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
+			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
 			"</div>\n<!-- /wp:group -->";
 		return self::seccion(
 			array( self::pila( array( $cabecera, $como, $saber, $solicitud, $pie ), '48px', 'esm-muestras' ) ),
@@ -380,7 +380,7 @@ class Esmalto_Paginas {
 			'En Esmalto puedes pagar tus pedidos de forma segura con estos métodos:',
 			array(
 				array( 'Tarjeta de crédito o débito', 'Pago seguro con Stripe. Aceptamos Visa, Mastercard, American Express y, según tu dispositivo, Apple Pay y Google Pay. Los datos de la tarjeta los gestiona Stripe: Esmalto no los almacena.' ),
-				array( 'Transferencia bancaria', 'Tras realizar el pedido te mostramos los datos bancarios. Mantenemos el pedido reservado 3 días: si en ese plazo no recibimos el pago ni el justificante en info@esmalto.com, el pedido se cancela. Los pedidos por transferencia se preparan cuando se confirma el cobro.' ),
+				array( 'Transferencia bancaria', 'Tras realizar el pedido te mostramos los datos bancarios. Mantenemos el pedido reservado 3 días: si en ese plazo no recibimos el pago ni el justificante en hola@esmalto.com, el pedido se cancela. Los pedidos por transferencia se preparan cuando se confirma el cobro.' ),
 				array( 'Profesionales', 'Las cuentas profesionales pueden acordar condiciones de pago con su comercial.' ),
 			)
 		);
@@ -418,7 +418,7 @@ class Esmalto_Paginas {
 		return self::documento(
 			'Aviso legal',
 			'Aviso legal',
-			'Titular del sitio web: Kumen Tres Sesenta, S.L. · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz) · Registro Mercantil de Cádiz, hoja CA-69375. Email: info@esmalto.com. Teléfono: +34 614 05 10 42. Esmalto Cerámica es una marca comercial de Kumen Tres Sesenta, S.L. [Texto pendiente de redacción legal definitiva].',
+			'Titular del sitio web: Kumen Tres Sesenta, S.L. · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz) · Registro Mercantil de Cádiz, hoja CA-69375. Email: hola@esmalto.com. Teléfono: +34 614 05 10 42. Esmalto Cerámica es una marca comercial de Kumen Tres Sesenta, S.L. [Texto pendiente de redacción legal definitiva].',
 			array(
 				array( 'Condiciones de uso', 'El acceso y uso de este sitio web atribuye la condición de usuario y supone la aceptación de este aviso legal.' ),
 				array( 'Propiedad intelectual', 'Los contenidos, imágenes de producto y marcas son propiedad de Esmalto o de sus respectivos titulares.' ),
@@ -430,11 +430,11 @@ class Esmalto_Paginas {
 		return self::documento(
 			'Política de privacidad',
 			'Política de privacidad',
-			'Responsable del tratamiento: Kumen Tres Sesenta, S.L. (Esmalto Cerámica) · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Contacto: info@esmalto.com. [Texto pendiente de redacción legal definitiva].',
+			'Responsable del tratamiento: Kumen Tres Sesenta, S.L. (Esmalto Cerámica) · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Contacto: hola@esmalto.com. [Texto pendiente de redacción legal definitiva].',
 			array(
 				array( 'Datos que tratamos', 'Los que nos facilitas en los formularios de contacto, muestras, presupuesto, alta de cliente o profesional y en tus pedidos, para gestionar tu solicitud, tu cuenta y tus compras. En los pedidos te pedimos el NIF o DNI para emitir la factura. En el alta profesional tratamos también los datos de tu empresa y su CNAE para verificar tu acceso a la tarifa profesional.' ),
 				array( 'Pagos', 'Los pagos con tarjeta los procesa Stripe; Esmalto no almacena los datos de tu tarjeta.' ),
-				array( 'Derechos', 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a info@esmalto.com.' ),
+				array( 'Derechos', 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a hola@esmalto.com.' ),
 			)
 		);
 	}

@@ -47,7 +47,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="mailto:info@esmalto.com">info@esmalto.com</a></p>
+<p><a href="mailto:hola@esmalto.com">hola@esmalto.com</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 

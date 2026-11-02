@@ -27,7 +27,7 @@ function esmalto_ajustes_defecto() {
 		'comercial_tel'      => '+34 614 05 10 42',
 		'comercial_whatsapp' => '',
 		'email_avisos'       => 'clientes.b2b@esmalto.com',
-		'email_formularios'  => 'info@esmalto.com',
+		'email_formularios'  => 'hola@esmalto.com',
 		'cnae'               => '',
 		'aviso_producto'     => 'Puede haber errores en los detalles de los productos. Para cualquier duda, contacta con el departamento comercial.',
 		'catalogo_url'       => 'https://raw.githubusercontent.com/kumen360/ESMALTO/main/catalogo/',

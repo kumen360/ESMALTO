@@ -21,7 +21,7 @@ class Esmalto_Empresa {
 	const REGISTRO      = 'Registro Mercantil de Cádiz, hoja CA-69375';
 	const TELEFONO      = '+34 614 05 10 42';
 	const HORARIO       = 'Lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00';
-	const EMAIL         = 'info@esmalto.com';
+	const EMAIL         = 'hola@esmalto.com';
 	const EMAIL_PEDIDOS = 'pedidos@esmalto.com';
 	const EMAIL_B2B     = 'clientes.b2b@esmalto.com';
 
