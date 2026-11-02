@@ -432,7 +432,7 @@ body.esmalto .esm-pie .wp-block-buttons .wp-block-button.is-style-outline > .wp-
 @media (max-width: 600px) {
 	.esm-tabla-cookies thead { display: none; }
 	.esm-tabla-cookies tr { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-	.esm-tabla-cookies td { display: block; padding: 2px 0; border: 0; }
+	.wp-block-table.esm-tabla-cookies td { display: block; padding: 2px 0; border: 0; }
 	.esm-tabla-cookies td:first-child { color: var(--wp--preset--color--texto); }
 	.esm-tabla-cookies td:nth-child(2)::before { content: "Titular: "; }
 	.esm-tabla-cookies td:nth-child(4)::before { content: "Duración: "; }

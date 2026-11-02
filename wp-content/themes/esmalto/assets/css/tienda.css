@@ -524,6 +524,12 @@ body.esmalto .widget_layered_nav_filters ul li.chosen a:focus-visible { backgrou
 .wc-block-components-checkbox .wc-block-components-checkbox__mark { fill: #181818; }
 .wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"]:checked { background: #fec30c; border-color: #fec30c; }
 
+/* ---------- Cesta y pago en móvil: Astra da margen negativo a los bloques «alignwide» y cortaba el texto ---------- */
+@media (max-width: 921px) {
+	.wp-block-woocommerce-cart.alignwide,
+	.wp-block-woocommerce-checkout.alignwide { margin-left: 0 !important; margin-right: 0 !important; }
+}
+
 /* ---------- Cesta: «Seguir comprando» bajo «Finalizar compra» ---------- */
 .esm-seguir-comprando { margin-top: 10px; }
 .esm-seguir-comprando .wp-block-button { width: 100%; }
