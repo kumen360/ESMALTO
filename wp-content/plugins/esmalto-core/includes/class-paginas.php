@@ -225,6 +225,104 @@ class Esmalto_Paginas {
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
+	/**
+	 * Pie con filete superior (un separador dentro de un contenedor flex se queda sin ancho).
+	 */
+	private static function pie_documento() {
+		return '<!-- wp:group {"style":{"border":{"top":{"color":"rgba(255,255,255,0.12)","width":"1px"}},"spacing":{"padding":{"top":"24px"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->' . "\n" .
+			'<div class="wp-block-group" style="border-top-color:rgba(255,255,255,0.12);border-top-width:1px;padding-top:24px">' .
+			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
+			"</div>\n<!-- /wp:group -->";
+	}
+
+	/**
+	 * Cookies que instala la web de verdad (comprobadas el 02/11/2026 navegando como visitante y como
+	 * cliente). Si se activan Google Analytics o Stripe hay que añadir aquí las suyas.
+	 */
+	public static function cookies_instaladas() {
+		return array(
+			array( 'cmplz_banner-status, cmplz_consented_services, cmplz_policy_id, cmplz_functional, cmplz_statistics, cmplz_preferences, cmplz_marketing', 'Propia', 'Registran tu elección sobre cookies.', '1 año' ),
+			array( 'wp_woocommerce_session_*', 'Propia', 'Recuerda tu cesta y tu sesión de compra.', '2 días' ),
+			array( 'woocommerce_cart_hash, woocommerce_items_in_cart', 'Propia', 'Indican si hay productos en la cesta y detectan cambios en ella.', 'Sesión' ),
+			array( 'wordpress_logged_in_*, wordpress_sec_*', 'Propia', 'Mantienen la sesión iniciada en el área de cliente y la protegen.', 'Sesión (14 días si marcas «Recuérdame»)' ),
+			array( 'wordpress_test_cookie', 'Propia', 'Comprueba que tu navegador acepta cookies al iniciar sesión.', 'Sesión' ),
+			array( 'wp-settings-*, wp-settings-time-*', 'Propia', 'Preferencias del panel de administración (solo para quien gestiona la web).', '1 año' ),
+		);
+	}
+
+	private static function tabla_cookies() {
+		$filas = '';
+		foreach ( self::cookies_instaladas() as $fila ) {
+			$filas .= '<tr><td>' . implode( '</td><td>', array_map( 'esc_html', $fila ) ) . '</td></tr>';
+		}
+		return '<!-- wp:table {"className":"esm-tabla-cookies"} -->' . "\n" .
+			'<figure class="wp-block-table esm-tabla-cookies"><table class="has-fixed-layout"><thead><tr><th>Cookie</th><th>Titular</th><th>Finalidad</th><th>Duración</th></tr></thead><tbody>' . $filas . '</tbody></table></figure>' . "\n" .
+			'<!-- /wp:table -->' . "\n\n" .
+			self::p( 'Ahora mismo la web no instala cookies analíticas ni de terceros. En el navegador también se guardan, sin ser cookies, la cesta (wc_cart_hash_*, wc_fragments_*, storeApi*) y tu lista de muestras (esmalto_muestras), hasta que se vacían o borras los datos del navegador.', '', 'texto-apagado' );
+	}
+
+	/**
+	 * Página legal con el texto literal de data/textos-legales.json (se genera desde los Word con
+	 * tools/build_legales.py). Todo va en contenedores flex («Pila»).
+	 */
+	public static function documento_legal( $miga, $titulo, $clave ) {
+		static $textos = null;
+		if ( null === $textos ) {
+			$textos = json_decode( (string) file_get_contents( ESMALTO_CORE_DIR . 'data/textos-legales.json' ), true );
+		}
+		$doc    = $textos[ $clave ];
+		$partes = array(
+			self::pila(
+				array(
+					self::p( '<a href="/">Inicio</a> / ' . esc_html( $miga ), 'is-style-miga' ),
+					"<!-- wp:heading {\"level\":1} -->\n<h1 class=\"wp-block-heading\">" . esc_html( $titulo ) . "</h1>\n<!-- /wp:heading -->",
+					self::p( esc_html( $doc['version'] ), 'esm-documento__intro', 'texto-suave' ),
+				)
+			),
+		);
+		foreach ( $doc['apartados'] as $apartado ) {
+			$bloques = array( self::h_apartado( $apartado['titulo'] ) );
+			foreach ( $apartado['bloques'] as $bloque ) {
+				if ( isset( $bloque['lista'] ) ) {
+					$bloques[] = self::lista( $bloque['lista'] );
+				} elseif ( isset( $bloque['tabla_cookies'] ) ) {
+					$bloques[] = self::tabla_cookies();
+				} else {
+					$bloques[] = self::p( $bloque['p'], '', 'texto-apagado' );
+				}
+			}
+			$partes[] = self::pila( $bloques, '14px' );
+		}
+		$partes[] = self::pie_documento();
+		return self::seccion(
+			array( self::pila( $partes, '40px', 'esm-texto-legal' ) ),
+			'820px',
+			'clamp(32px, 5vw, 56px)',
+			'clamp(60px, 9vw, 110px)',
+			'esm-documento'
+		);
+	}
+
+	/**
+	 * Sustituye el contenido de las cuatro páginas legales (Herramientas → 7).
+	 *
+	 * @return string[] registro.
+	 */
+	public static function actualizar_legales() {
+		$log = array();
+		foreach ( array( 'condiciones-generales', 'aviso-legal', 'politica-de-privacidad', 'politica-de-cookies' ) as $slug ) {
+			$def    = self::definiciones()[ $slug ];
+			$pagina = get_page_by_path( $slug );
+			if ( ! $pagina ) {
+				$log[] = sprintf( '⚠ Página «%s» no encontrada.', $def['titulo'] );
+				continue;
+			}
+			wp_update_post( wp_slash( array( 'ID' => $pagina->ID, 'post_content' => call_user_func( $def['contenido'] ) ) ) );
+			$log[] = sprintf( 'Página «%s» sustituida por el texto legal vigente.', $def['titulo'] );
+		}
+		return $log;
+	}
+
 	/* ------------------------------------------------------------------ Páginas */
 
 	public static function definiciones() {
@@ -359,13 +457,8 @@ class Esmalto_Paginas {
 			),
 			'18px'
 		);
-		// Pie con filete superior (un separador dentro de un contenedor flex se queda sin ancho).
-		$pie       = '<!-- wp:group {"style":{"border":{"top":{"color":"rgba(255,255,255,0.12)","width":"1px"}},"spacing":{"padding":{"top":"24px"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->' . "\n" .
-			'<div class="wp-block-group" style="border-top-color:rgba(255,255,255,0.12);border-top-width:1px;padding-top:24px">' .
-			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
-			"</div>\n<!-- /wp:group -->";
 		return self::seccion(
-			array( self::pila( array( $cabecera, $como, $saber, $solicitud, $pie ), '48px', 'esm-muestras' ) ),
+			array( self::pila( array( $cabecera, $como, $saber, $solicitud, self::pie_documento() ), '48px', 'esm-muestras' ) ),
 			'820px',
 			'clamp(32px, 5vw, 56px)',
 			'clamp(60px, 9vw, 110px)',
@@ -401,54 +494,19 @@ class Esmalto_Paginas {
 	}
 
 	public static function condiciones() {
-		return self::documento(
-			'Condiciones generales',
-			'Condiciones generales',
-			'Condiciones generales de contratación de Esmalto Cerámica, marca comercial de Kumen Tres Sesenta, S.L. (NIF B88655014), con domicilio en C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). [Texto pendiente de redacción legal definitiva].',
-			array(
-				array( 'Objeto', 'Estas condiciones regulan la compra de productos a través de la tienda online de Esmalto.' ),
-				array( 'Pedidos y precios', 'Los productos se venden por cajas completas. Los precios para particulares incluyen IVA y no incluyen portes. Los clientes profesionales con cuenta activada ven su tarifa neta sin IVA.' ),
-				array( 'Entrega', 'Entrega a domicilio u obra según la tarifa de envío vigente, o recogida gratuita en almacén.' ),
-				array( 'Devoluciones', 'Pendiente de redacción legal definitiva.' ),
-			)
-		);
+		return self::documento_legal( 'Condiciones generales', 'Condiciones generales de contratación', 'condiciones' );
 	}
 
 	public static function aviso_legal() {
-		return self::documento(
-			'Aviso legal',
-			'Aviso legal',
-			'Titular del sitio web: Kumen Tres Sesenta, S.L. · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz) · Registro Mercantil de Cádiz, hoja CA-69375. Email: hola@esmalto.com. Teléfono: +34 614 05 10 42. Esmalto Cerámica es una marca comercial de Kumen Tres Sesenta, S.L. [Texto pendiente de redacción legal definitiva].',
-			array(
-				array( 'Condiciones de uso', 'El acceso y uso de este sitio web atribuye la condición de usuario y supone la aceptación de este aviso legal.' ),
-				array( 'Propiedad intelectual', 'Los contenidos, imágenes de producto y marcas son propiedad de Esmalto o de sus respectivos titulares.' ),
-			)
-		);
+		return self::documento_legal( 'Aviso legal', 'Aviso legal', 'aviso_legal' );
 	}
 
 	public static function privacidad() {
-		return self::documento(
-			'Política de privacidad',
-			'Política de privacidad',
-			'Responsable del tratamiento: Kumen Tres Sesenta, S.L. (Esmalto Cerámica) · NIF B88655014 · C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Contacto: hola@esmalto.com. [Texto pendiente de redacción legal definitiva].',
-			array(
-				array( 'Datos que tratamos', 'Los que nos facilitas en los formularios de contacto, muestras, presupuesto, alta de cliente o profesional y en tus pedidos, para gestionar tu solicitud, tu cuenta y tus compras. En los pedidos te pedimos el NIF o DNI para emitir la factura. En el alta profesional tratamos también los datos de tu empresa y su CNAE para verificar tu acceso a la tarifa profesional.' ),
-				array( 'Pagos', 'Los pagos con tarjeta los procesa Stripe; Esmalto no almacena los datos de tu tarjeta.' ),
-				array( 'Derechos', 'Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a hola@esmalto.com.' ),
-			)
-		);
+		return self::documento_legal( 'Política de privacidad', 'Política de privacidad', 'privacidad' );
 	}
 
 	public static function cookies() {
-		return self::documento(
-			'Política de cookies',
-			'Política de cookies',
-			'Esta web usa únicamente cookies técnicas necesarias para su funcionamiento (sesión, cesta, inicio de sesión y pago seguro). [Revisar si se añaden herramientas de analítica o publicidad: en ese caso hará falta un banner de consentimiento].',
-			array(
-				array( 'Cookies técnicas', array( 'WordPress: inicio de sesión y preferencias.', 'WooCommerce: cesta y sesión de compra.', 'Stripe: prevención del fraude en el pago con tarjeta.' ) ),
-				array( 'Cómo desactivarlas', 'Puedes bloquear o borrar las cookies desde la configuración de tu navegador; algunas funciones de la tienda podrían dejar de funcionar.' ),
-			)
-		);
+		return self::documento_legal( 'Política de cookies', 'Política de cookies', 'cookies' );
 	}
 
 	public static function mi_cuenta() {

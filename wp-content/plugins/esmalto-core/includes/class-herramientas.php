@@ -20,6 +20,7 @@ class Esmalto_Herramientas {
 		add_action( 'admin_post_esmalto_seo', array( __CLASS__, 'accion_seo' ) );
 		add_action( 'admin_post_esmalto_categorias', array( __CLASS__, 'accion_categorias' ) );
 		add_action( 'admin_post_esmalto_empresa', array( __CLASS__, 'accion_empresa' ) );
+		add_action( 'admin_post_esmalto_legales', array( __CLASS__, 'accion_legales' ) );
 		add_action( 'wp_ajax_esmalto_lote', array( __CLASS__, 'ajax_lote' ) );
 
 		// Importación de productos: lotes pequeños, más tiempo y menos tamaños de imagen.
@@ -172,6 +173,14 @@ class Esmalto_Herramientas {
 				<?php wp_nonce_field( 'esmalto_empresa' ); ?>
 				<?php submit_button( __( 'Aplicar datos de empresa, correos y envíos', 'esmalto-core' ), 'secondary' ); ?>
 			</form>
+
+			<h2><?php esc_html_e( '7. Textos legales', 'esmalto-core' ); ?></h2>
+			<p><?php esc_html_e( 'Sustituye el contenido de Condiciones generales, Aviso legal, Política de privacidad y Política de cookies por el texto legal vigente (data/textos-legales.json). Lo que se haya cambiado a mano en esas cuatro páginas se pierde; WordPress guarda la versión anterior en las revisiones.', 'esmalto-core' ); ?></p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="esmalto_legales">
+				<?php wp_nonce_field( 'esmalto_legales' ); ?>
+				<?php submit_button( __( 'Sustituir los textos legales', 'esmalto-core' ), 'secondary' ); ?>
+			</form>
 		</div>
 		<script>
 		( function () {
@@ -222,6 +231,13 @@ class Esmalto_Herramientas {
 			wp_die( esc_html__( 'Sin permisos.', 'esmalto-core' ) );
 		}
 		self::volver( Esmalto_Empresa::aplicar() );
+	}
+
+	public static function accion_legales() {
+		if ( ! current_user_can( 'manage_woocommerce' ) || ! check_admin_referer( 'esmalto_legales' ) ) {
+			wp_die( esc_html__( 'Sin permisos.', 'esmalto-core' ) );
+		}
+		self::volver( Esmalto_Paginas::actualizar_legales() );
 	}
 
 	public static function accion_seo() {

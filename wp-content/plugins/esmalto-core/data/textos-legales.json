@@ -1,0 +1,438 @@
+{
+ "condiciones": {
+  "version": "Versión 1.0 · noviembre de 2026",
+  "apartados": [
+   {
+    "titulo": "1. Quiénes somos",
+    "bloques": [
+     {
+      "p": "Esmalto Cerámica es una marca comercial de Kumen Tres Sesenta, S.L., titular de la tienda online esmalto.com y vendedora de los productos que se ofrecen en ella."
+     },
+     {
+      "lista": [
+       "Kumen Tres Sesenta, S.L. · NIF B88655014",
+       "Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz)",
+       "Inscrita en el Registro Mercantil de Cádiz, hoja CA-69375, inscripción 1ª",
+       "Correo electrónico: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>",
+       "Horario de atención: lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00"
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "2. Objeto",
+    "bloques": [
+     {
+      "p": "Estas condiciones regulan todas las compras que se hacen en esmalto.com, tanto de particulares como de empresas y profesionales. Para comprar es necesario aceptarlas durante el pedido. Se aplica la versión publicada en el momento de confirmar el pedido, y se envía una copia con el correo de confirmación. Nada de lo que dicen limita los derechos que la ley reconoce a los consumidores. El contrato se formaliza en castellano."
+     }
+    ]
+   },
+   {
+    "titulo": "3. Cómo se hace un pedido",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Selección del producto.</strong> Los productos cerámicos se venden por caja completa. La web indica los metros cuadrados que cubre cada caja y redondea la cantidad solicitada a cajas enteras.",
+       "<strong>Datos del cliente.</strong> Se piden nombre, NIF o DNI, dirección de facturación, dirección de entrega, teléfono y correo electrónico. El NIF o DNI es obligatorio porque todas las ventas se facturan con factura completa.",
+       "<strong>Forma de entrega.</strong> Se elige entre envío a domicilio u obra, o recogida en almacén (apartado 9).",
+       "<strong>Revisión del pedido.</strong> Antes de pagar se muestra un resumen con productos, cantidades, precio, portes, impuestos e importe total. Desde ese resumen se puede volver atrás y corregir cualquier dato.",
+       "<strong>Confirmación.</strong> El pedido se confirma con el botón «Confirmar pedido con obligación de pago», después de aceptar estas condiciones.",
+       "<strong>Acuse de recibo.</strong> En cuanto se recibe el pedido se envía un correo de confirmación. El contrato queda formalizado con ese correo. Kumen Tres Sesenta, S.L. conserva el documento electrónico del pedido, del que el cliente puede pedir copia."
+      ]
+     },
+     {
+      "p": "Tras el pedido revisamos el stock y los datos de entrega. Si hay alguna incidencia, contactamos con el cliente antes de enviar."
+     }
+    ]
+   },
+   {
+    "titulo": "4. Precios",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Moneda e impuestos.</strong> Los precios se expresan en euros. Al particular se le muestran con el IVA incluido. En el área profesional pueden mostrarse sin IVA, que se desglosa antes de pagar.",
+       "<strong>Precio aplicable.</strong> Se aplica el precio publicado en el momento de confirmar el pedido. Los portes, el precio de los palés y cualquier otro coste se indican por separado antes de pagar.",
+       "<strong>Errores.</strong> Si un precio publicado contiene un error evidente (por ejemplo, un importe claramente desproporcionado), avisaremos al cliente antes de enviar. Podrá confirmar la compra con el precio correcto o anularla, con devolución íntegra de lo pagado.",
+       "<strong>Formatos.</strong> En la web el formato se indica con su medida nominal redondeada (por ejemplo, 60x60). La medida exacta de fabricación figura en la ficha técnica y en el pedido."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "5. Formas de pago",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Tarjeta.</strong> El pago se procesa a través de Stripe en un entorno seguro. Esmalto no tiene acceso a los datos de la tarjeta.",
+       "<strong>Transferencia bancaria.</strong> El pedido queda reservado durante 5 días hábiles. Si el pago no se recibe en ese plazo, el pedido se anula sin coste para el cliente."
+      ]
+     },
+     {
+      "p": "La mercancía solo se envía o se entrega una vez cobrado el pedido completo. Si un pago se cobra por duplicado por error, se devuelve el importe duplicado de inmediato."
+     }
+    ]
+   },
+   {
+    "titulo": "6. Facturación",
+    "bloques": [
+     {
+      "p": "Cada pedido se factura con factura completa a nombre de los datos fiscales facilitados. La factura se emite electrónicamente y se envía por correo electrónico."
+     },
+     {
+      "p": "Los comerciantes minoristas acogidos al régimen especial del recargo de equivalencia deben indicarlo en el pedido para que se les aplique en la factura."
+     }
+    ]
+   },
+   {
+    "titulo": "7. Zonas de envío y portes",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Zonas.</strong> Península: envío con la tarifa de portes de la web. Baleares, Canarias, Ceuta, Melilla, Andorra y resto de destinos: solo bajo presupuesto previo, que puede solicitarse a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>.",
+       "<strong>Portes.</strong> Para pavimentos y revestimientos, 2,50 € + IVA por metro cuadrado (3,03 € IVA incluido). Los palés se cobran aparte, a 9,00 € + IVA por palé (10,89 € IVA incluido). Para productos que no se venden por metro cuadrado, el porte figura en la ficha del producto o en el presupuesto.",
+       "<strong>Entrega.</strong> Las entregas de palés se hacen con camión con plataforma o grúa de autodescarga, a pie de calle y en el punto accesible más cercano a la dirección indicada. El transportista no sube la mercancía a viviendas ni la introduce en el inmueble.",
+       "<strong>Accesos difíciles.</strong> Si la dirección tiene accesos difíciles (calles estrechas, restricciones de circulación, zonas peatonales, falta de espacio para descargar), debe indicarse al hacer el pedido. Cualquier coste adicional se comunicará antes de aplicarlo y solo se cobrará si el cliente lo acepta. Si no lo acepta, podrá anular el pedido con devolución íntegra de lo pagado.",
+       "<strong>Entrega fallida.</strong> Si la entrega no puede hacerse por causa imputable al cliente (dirección errónea, ausencia sin aviso, acceso no comunicado), el segundo transporte y, en su caso, el almacenaje correrán a su cargo por su coste real, que se le comunicará antes."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "8. Plazos de entrega y disponibilidad",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Plazo habitual.</strong> Material en stock con destino en la Península: de 3 a 5 días laborables desde la confirmación del pago.",
+       "<strong>Piezas especiales.</strong> Rodapiés, peldaños, piezas especiales y material fabricado bajo pedido: el plazo indicado en la ficha o en el presupuesto, en general alrededor de 20 días hábiles.",
+       "<strong>Falta de stock.</strong> Si un producto ya pagado no está disponible, avisaremos al cliente antes del envío. Podrá elegir entre esperar a la nueva fabricación manteniendo el precio pagado, sustituirlo por otro producto que acepte expresamente, recibir un envío parcial o anular el pedido, en todo o en parte, con devolución de lo pagado en un máximo de 14 días naturales.",
+       "<strong>Envíos parciales.</strong> Cuando Esmalto decida dividir un pedido en varios envíos, el cliente no paga porte adicional.",
+       "<strong>Retrasos.</strong> Si hay retraso, se comunicará la nueva fecha prevista. El consumidor podrá fijar un plazo adicional razonable y, si tampoco se cumple, resolver el contrato con devolución de todo lo pagado, conforme al TRLGDCU. Si no se fijó fecha, el plazo máximo de entrega es de 30 días naturales."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "9. Recogida en almacén",
+    "bloques": [
+     {
+      "p": "El cliente puede recoger el pedido sin coste de porte. El punto de recogida está en la provincia de Castellón y depende del fabricante de cada producto. Se comunica después de la compra, junto con el día y la hora concertados. La recogida debe hacerla el cliente o la persona que autorice, con su documento de identidad y el número de pedido. El riesgo de la mercancía pasa al cliente en el momento de la carga."
+     }
+    ]
+   },
+   {
+    "titulo": "10. Recepción de la mercancía y daños de transporte",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Al recibir.</strong> Antes de firmar el albarán, compruebe el número de bultos y el estado del embalaje. Si observa cualquier daño, anótelo en el albarán. Si no puede revisar la mercancía en ese momento, escriba «pendiente de revisión».",
+       "<strong>Aviso en 48 horas.</strong> Comunique cualquier daño, falta de material o referencia equivocada en un plazo de 48 horas desde la entrega, a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>, con el número de pedido, fotografías claras de los daños y de las etiquetas de las cajas (con el lote) y una foto del albarán.",
+       "<strong>Avisos posteriores.</strong> Este plazo sirve para poder reclamar al transportista y al seguro a tiempo. Si se avisa más tarde, se estudiará igualmente, pero el cliente deberá acreditar que el daño ya existía en la entrega.",
+       "<strong>Conservación.</strong> Conserve el material dañado, las cajas y los palés hasta que se resuelva la incidencia.",
+       "<strong>Solución.</strong> Si el daño, la falta o el error se deben al transporte o a Esmalto, el cliente elige entre la reposición del material, sin coste alguno, o la devolución de su importe. Como la venta es por caja completa, la reposición de piezas sueltas se resuelve con su abono proporcional o, si el cliente lo prefiere, con el envío de una caja completa."
+      ]
+     },
+     {
+      "p": "Responderemos a cada incidencia lo antes posible y mantendremos informado al cliente si intervienen el seguro o el fabricante."
+     }
+    ]
+   },
+   {
+    "titulo": "11. Tono, calibre y lotes de fabricación",
+    "bloques": [
+     {
+      "p": "La cerámica presenta variaciones naturales de tono y de calibre (medida) entre lotes de fabricación. Por eso:"
+     },
+     {
+      "lista": [
+       "Las fotografías de la web son orientativas. Para ver el color y el acabado reales recomendamos pedir muestras.",
+       "Recomendamos comprar todo el material de una obra en un mismo pedido y añadir un 10 % para cortes, mermas y futuras reparaciones.",
+       "No podemos garantizar que un pedido posterior sea del mismo lote que uno anterior.",
+       "Las pequeñas diferencias de calibre dentro de las tolerancias del fabricante no constituyen un defecto."
+      ]
+     },
+     {
+      "p": "Revise el material antes de colocarlo. Si detecta un defecto visible, no lo coloque y avísenos. El material colocado con un defecto visible que el cliente conocía no podrá reclamarse por ese defecto. Esto no afecta a los defectos ocultos, que solo se manifiestan después de la colocación."
+     }
+    ]
+   },
+   {
+    "titulo": "12. Muestras",
+    "bloques": [
+     {
+      "p": "Las muestras cuestan 9,00 € + IVA por unidad (10,89 € IVA incluido), con la pieza y el envío incluidos. Su importe no se descuenta de pedidos posteriores. La muestra es representativa de la serie, pero puede presentar diferencias de tono con el lote que se sirva en el pedido definitivo."
+     }
+    ]
+   },
+   {
+    "titulo": "13. Garantía",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Garantía legal.</strong> Los productos tienen la garantía legal que establece la normativa vigente. Para los consumidores es de 3 años desde la entrega. Ante un defecto de fabricación se repondrá el producto o, si no es posible, se devolverá su importe.",
+       "<strong>Cómo reclamar.</strong> Para tramitarla, escriba a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> con el número de pedido o la factura, la descripción del defecto, fotografías y, si los tiene, los datos del lote. Si fuera necesario, solicitaremos el informe técnico del fabricante.",
+       "<strong>Exclusiones.</strong> No son faltas de conformidad los daños causados por una colocación incorrecta, por no seguir las indicaciones del fabricante, por un mantenimiento inadecuado, por el desgaste normal o por accidentes.",
+       "<strong>Garantía del fabricante.</strong> Las garantías comerciales que ofrezca el fabricante se suman a la garantía legal y no la sustituyen."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "14. Devoluciones y derecho de desistimiento",
+    "bloques": [
+     {
+      "p": "El particular que compra como consumidor puede desistir de la compra en un plazo de 14 días naturales desde que él, o un tercero que él indique distinto del transportista, recibe la mercancía, sin necesidad de justificación."
+     },
+     {
+      "lista": [
+       "<strong>Cómo ejercerlo.</strong> Comuníquelo por correo a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> o por carta a Kumen Tres Sesenta, S.L., C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Puede usar el formulario que figura al final de estas condiciones, aunque no es obligatorio. Le confirmaremos la recepción por correo electrónico.",
+       "<strong>Reembolso.</strong> Le devolveremos todos los pagos recibidos, incluidos los gastos de entrega ordinarios, en un máximo de 14 días naturales desde que nos comunique su decisión, por el mismo medio de pago que utilizó. Podremos retener el reembolso hasta recibir la mercancía o hasta que acredite haberla enviado.",
+       "<strong>Devolución de la mercancía.</strong> El consumidor debe devolver la mercancía en un plazo de 14 días naturales desde que comunique el desistimiento y asume el coste directo de la devolución. Por el peso y el volumen de la cerámica, ese coste depende de la cantidad y del destino. Se le indicará antes de organizar la recogida, y el cliente también puede devolverla por sus propios medios.",
+       "<strong>Estado de la mercancía.</strong> El consumidor solo responde de la pérdida de valor causada por una manipulación distinta de la necesaria para comprobar el producto.",
+       "<strong>Excepciones.</strong> No hay derecho de desistimiento en los productos fabricados o cortados según las indicaciones del cliente o claramente personalizados, como rodapiés o peldaños fabricados a medida y piezas especiales hechas bajo pedido. Esta circunstancia se indica en la ficha del producto antes de la compra.",
+       "<strong>Empresas y profesionales.</strong> Las compras de empresas y profesionales no tienen derecho de desistimiento. Si quieren devolver material sin abrir y en su embalaje original, pueden pedirlo a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>. Si lo aceptamos, se descuentan los portes de ida y vuelta y, en su caso, la penalización del fabricante, que se indicará antes."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "Formulario de desistimiento",
+    "bloques": [
+     {
+      "p": "A la atención de Kumen Tres Sesenta, S.L. (Esmalto Cerámica), C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz) · <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>"
+     },
+     {
+      "p": "Por la presente le comunico/comunicamos (*) que desisto/desistimos (*) de mi/nuestro (*) contrato de venta de los siguientes bienes: ……………………………"
+     },
+     {
+      "p": "Pedido el / recibido el (*): ………… · Número de pedido: ………… · Nombre del consumidor o consumidores: ………… · Domicilio: ………… · Firma (solo si se presenta en papel): ………… · Fecha: …………"
+     },
+     {
+      "p": "(*) Táchese lo que no proceda."
+     }
+    ]
+   },
+   {
+    "titulo": "15. Responsabilidad",
+    "bloques": [
+     {
+      "p": "No respondemos de los retrasos o incumplimientos causados por fuerza mayor ni por circunstancias ajenas a nuestro control razonable. Avisaremos al cliente lo antes posible y, si la situación se prolonga, el consumidor podrá anular el pedido con devolución de lo pagado. Nada de lo establecido en estas condiciones limita los derechos que la ley reconoce al consumidor."
+     }
+    ]
+   },
+   {
+    "titulo": "16. Reclamaciones y resolución de conflictos",
+    "bloques": [
+     {
+      "p": "Puede presentar cualquier reclamación en <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> o en nuestro domicilio, y le responderemos por escrito."
+     },
+     {
+      "p": "Disponemos de hojas de quejas y reclamaciones de la Junta de Andalucía a disposición de los consumidores, que pueden solicitarse en <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>. El consumidor también puede acudir a los servicios de consumo de su comunidad autónoma o a la Junta Arbitral de Consumo."
+     },
+     {
+      "p": "Estas condiciones se rigen por la legislación española. Los consumidores pueden reclamar ante los juzgados de su domicilio; en el resto de casos serán competentes los de Sanlúcar de Barrameda (Cádiz)."
+     }
+    ]
+   },
+   {
+    "titulo": "17. Menores de edad",
+    "bloques": [
+     {
+      "p": "Para comprar en esmalto.com es necesario ser mayor de 18 años."
+     }
+    ]
+   },
+   {
+    "titulo": "18. Modificación de estas condiciones",
+    "bloques": [
+     {
+      "p": "Podemos actualizar estas condiciones. Cada pedido se rige por la versión vigente en el momento de confirmarlo."
+     }
+    ]
+   }
+  ]
+ },
+ "aviso_legal": {
+  "version": "Versión 1.0 · noviembre de 2026",
+  "apartados": [
+   {
+    "titulo": "1. Titular del sitio web",
+    "bloques": [
+     {
+      "p": "En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI), se informa de que el sitio web esmalto.com es titularidad de:"
+     },
+     {
+      "lista": [
+       "Kumen Tres Sesenta, S.L. · NIF B88655014",
+       "Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz)",
+       "Inscrita en el Registro Mercantil de Cádiz, hoja CA-69375, inscripción 1ª",
+       "Correo electrónico: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>"
+      ]
+     },
+     {
+      "p": "Esmalto Cerámica es una marca comercial de Kumen Tres Sesenta, S.L."
+     }
+    ]
+   },
+   {
+    "titulo": "2. Uso del sitio web",
+    "bloques": [
+     {
+      "p": "El acceso a la web es libre y no exige registro. Para comprar o acceder al área profesional es necesario crear una cuenta. El usuario se compromete a hacer un uso lícito de la web, a no dañar su funcionamiento y a facilitar datos veraces. Es responsable de la confidencialidad de su contraseña y de la actividad de su cuenta."
+     },
+     {
+      "p": "Podemos suspender o cancelar las cuentas que se usen de forma fraudulenta o contraria a estas condiciones."
+     }
+    ]
+   },
+   {
+    "titulo": "3. Propiedad intelectual e industrial",
+    "bloques": [
+     {
+      "p": "Los textos, el diseño, los logotipos y la estructura de la web son propiedad de Kumen Tres Sesenta, S.L. Las fotografías y las fichas técnicas de los productos son propiedad de sus fabricantes y se utilizan con su autorización. No está permitida su reproducción, distribución ni transformación sin autorización expresa por escrito."
+     }
+    ]
+   },
+   {
+    "titulo": "4. Responsabilidad",
+    "bloques": [
+     {
+      "p": "Procuramos que la información de la web sea exacta y esté actualizada, pero puede contener errores puntuales, que corregiremos en cuanto los detectemos. No respondemos de las interrupciones del servicio por mantenimiento o causas técnicas ajenas a nuestro control, ni de los contenidos de las webs de terceros a las que se acceda mediante enlaces."
+     }
+    ]
+   },
+   {
+    "titulo": "5. Legislación aplicable",
+    "bloques": [
+     {
+      "p": "Este aviso legal se rige por la legislación española. Para los consumidores, son competentes los juzgados de su domicilio."
+     }
+    ]
+   }
+  ]
+ },
+ "privacidad": {
+  "version": "Versión 1.0 · noviembre de 2026",
+  "apartados": [
+   {
+    "titulo": "1. Responsable del tratamiento",
+    "bloques": [
+     {
+      "p": "Kumen Tres Sesenta, S.L. (NIF B88655014), C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Contacto en materia de protección de datos: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>."
+     }
+    ]
+   },
+   {
+    "titulo": "2. Qué datos tratamos, para qué y con qué base legal",
+    "bloques": [
+     {
+      "lista": [
+       "<strong>Pedidos y clientes.</strong> Datos identificativos, NIF o DNI, direcciones, teléfono, correo electrónico e historial de compras. Los usamos para tramitar el pedido, la entrega, el cobro, las incidencias y la garantía. Base legal: la ejecución del contrato (art. 6.1.b RGPD).",
+       "<strong>Facturación.</strong> Datos fiscales y de facturación. Base legal: el cumplimiento de obligaciones legales fiscales y mercantiles (art. 6.1.c RGPD). El NIF o DNI es obligatorio porque todas las ventas se facturan con factura completa.",
+       "<strong>Cuentas profesionales.</strong> Datos de la empresa, CNAE y persona de contacto, para verificar la actividad y gestionar la cuenta profesional. Base legal: la aplicación de medidas precontractuales y la ejecución del contrato (art. 6.1.b RGPD).",
+       "<strong>Consultas.</strong> Datos que nos envía por formulario, correo o teléfono, para responderle. Base legal: la aplicación de medidas precontractuales a petición del interesado o, en su caso, el consentimiento (art. 6.1.a y b RGPD).",
+       "<strong>Newsletter.</strong> Correo electrónico, para enviar novedades y ofertas solo si lo ha autorizado marcando la casilla correspondiente y confirmando la suscripción. Base legal: el consentimiento (art. 6.1.a RGPD). Puede retirarlo en cualquier momento con el enlace de baja que incluye cada envío.",
+       "<strong>Histórico de clientes.</strong> Mantenemos un histórico de compras de cada cliente para atender garantías y reclamaciones y facilitar nuevos pedidos. Base legal: el interés legítimo en la gestión de la relación comercial (art. 6.1.f RGPD)."
+      ]
+     },
+     {
+      "p": "No tomamos decisiones automatizadas ni elaboramos perfiles con efectos jurídicos sobre los interesados."
+     }
+    ]
+   },
+   {
+    "titulo": "3. Cuánto tiempo conservamos los datos",
+    "bloques": [
+     {
+      "lista": [
+       "Datos de clientes y pedidos: mientras dure la relación comercial y, después, durante los plazos legales de prescripción. La documentación contable y las facturas se conservan 6 años (art. 30 del Código de Comercio).",
+       "Consultas que no terminan en compra: 12 meses.",
+       "Newsletter: hasta que el interesado se dé de baja.",
+       "Cuentas profesionales no activadas: 12 meses desde la solicitud."
+      ]
+     }
+    ]
+   },
+   {
+    "titulo": "4. A quién se comunican los datos",
+    "bloques": [
+     {
+      "p": "No vendemos ni cedemos datos a terceros con fines comerciales. Solo acceden a ellos los proveedores que necesitamos para prestar el servicio, con contrato de encargo de tratamiento:"
+     },
+     {
+      "lista": [
+       "Proveedor logístico y empresas de transporte, para preparar y entregar los pedidos.",
+       "Stripe, para el cobro con tarjeta.",
+       "Holded, para la facturación.",
+       "cdmon, para el alojamiento de la web y del correo.",
+       "Brevo, para el envío de la newsletter.",
+       "Google, para la analítica web, solo si se aceptan las cookies analíticas."
+      ]
+     },
+     {
+      "p": "También se comunican a la Administración Tributaria y a otras autoridades cuando lo exige la ley."
+     },
+     {
+      "p": "Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo (en particular, en Estados Unidos). En esos casos, la transferencia se ampara en el Marco de Privacidad de Datos UE-EE. UU. o en las cláusulas contractuales tipo aprobadas por la Comisión Europea."
+     }
+    ]
+   },
+   {
+    "titulo": "5. Derechos",
+    "bloques": [
+     {
+      "p": "Puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar en cualquier momento el consentimiento prestado, escribiendo a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> o a nuestro domicilio. Indique el derecho que ejerce y acredite su identidad. Responderemos en el plazo de un mes."
+     },
+     {
+      "p": "Si considera que no hemos atendido correctamente su solicitud, puede presentar una reclamación ante la Agencia Española de Protección de Datos (<a href=\"https://www.aepd.es\" target=\"_blank\" rel=\"noreferrer noopener\">www.aepd.es</a>)."
+     }
+    ]
+   },
+   {
+    "titulo": "6. Seguridad",
+    "bloques": [
+     {
+      "p": "Aplicamos medidas técnicas y organizativas adecuadas para proteger los datos, entre ellas la conexión cifrada (HTTPS) y el acceso restringido a la información. Si se produjera una brecha de seguridad que suponga un alto riesgo para los interesados, se lo comunicaremos sin dilación indebida."
+     }
+    ]
+   }
+  ]
+ },
+ "cookies": {
+  "version": "Versión 1.0 · noviembre de 2026",
+  "apartados": [
+   {
+    "titulo": "1. Qué son y cuáles usamos",
+    "bloques": [
+     {
+      "p": "Las cookies son pequeños archivos que la web guarda en su navegador. Usamos dos tipos:"
+     },
+     {
+      "lista": [
+       "<strong>Técnicas.</strong> Imprescindibles para que la web funcione: sesión, cesta de la compra, área de cliente, pago seguro y registro de su elección sobre cookies. Están exentas de consentimiento.",
+       "<strong>Analíticas.</strong> Nos permiten conocer de forma agregada cómo se usa la web (Google Analytics). Solo se instalan si las acepta."
+      ]
+     },
+     {
+      "p": "No usamos cookies publicitarias."
+     }
+    ]
+   },
+   {
+    "titulo": "2. Cookies instaladas",
+    "bloques": [
+     {
+      "tabla_cookies": true
+     }
+    ]
+   },
+   {
+    "titulo": "3. Cómo gestionarlas",
+    "bloques": [
+     {
+      "p": "Al entrar por primera vez en la web, un aviso le permite aceptar todas las cookies, rechazar las no necesarias o configurarlas. Rechazar es tan sencillo como aceptar. Puede cambiar su elección en cualquier momento desde el enlace «Configurar cookies» del pie de página, o borrarlas desde la configuración de su navegador. Le volveremos a pedir el consentimiento como máximo cada 24 meses."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -4,6 +4,7 @@
 /*.xlsx
 /*.csv
 /_muestra.png
+/REVISION*/
 # Python / Node
 __pycache__/
 *.pyc

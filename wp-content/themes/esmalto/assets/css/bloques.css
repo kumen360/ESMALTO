@@ -416,6 +416,27 @@ body.esmalto .esm-pie .wp-block-buttons .wp-block-button.is-style-outline > .wp-
 }
 .esm-placeholder--video { aspect-ratio: 16 / 9; }
 .esm-documento h2 { margin-top: 40px; }
+/* Textos legales: la separación la pone el contenedor flex */
+.esm-texto-legal h2 { margin-top: 0; }
+.esm-texto-legal p,
+.esm-texto-legal ul { margin-top: 0; margin-bottom: 0; }
+.esm-texto-legal ul { padding-left: 20px; color: var(--wp--preset--color--texto-apagado); }
+.esm-texto-legal li { margin-bottom: 8px; }
+.esm-texto-legal li strong,
+.esm-texto-legal p strong { color: var(--wp--preset--color--texto-suave); font-weight: 500; }
+.esm-tabla-cookies table { font-size: 13px; }
+.esm-tabla-cookies thead { border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+.esm-tabla-cookies th { text-align: left; }
+.esm-tabla-cookies td:first-child { overflow-wrap: anywhere; }
+/* En móvil, cada cookie en bloque: la tabla no cabe a lo ancho */
+@media (max-width: 600px) {
+	.esm-tabla-cookies thead { display: none; }
+	.esm-tabla-cookies tr { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+	.esm-tabla-cookies td { display: block; padding: 2px 0; border: 0; }
+	.esm-tabla-cookies td:first-child { color: var(--wp--preset--color--texto); }
+	.esm-tabla-cookies td:nth-child(2)::before { content: "Titular: "; }
+	.esm-tabla-cookies td:nth-child(4)::before { content: "Duración: "; }
+}
 
 /* Formulario de acceso profesional (bloque «Iniciar/cerrar sesión»), como el diseño */
 .esm-login form { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }

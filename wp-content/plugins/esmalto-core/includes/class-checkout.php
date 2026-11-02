@@ -20,6 +20,19 @@ class Esmalto_Checkout {
 		add_filter( 'woocommerce_get_default_value_for_' . self::CAMPO_NIF, array( __CLASS__, 'nif_por_defecto' ), 10, 3 );
 		add_action( 'woocommerce_set_additional_field_value', array( __CLASS__, 'copiar_campo' ), 10, 4 );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'recursos' ) );
+		add_filter( 'woocommerce_email_attachments', array( __CLASS__, 'copia_condiciones' ), 10, 2 );
+	}
+
+	/**
+	 * Las condiciones generales prometen una copia con el correo de confirmación del pedido.
+	 * El PDF se genera junto con los textos legales (tools/build_legales.py).
+	 */
+	public static function copia_condiciones( $adjuntos, $correo ) {
+		$pdf = ESMALTO_CORE_DIR . 'assets/docs/esmalto-condiciones-generales.pdf';
+		if ( in_array( $correo, array( 'customer_on_hold_order', 'customer_processing_order' ), true ) && file_exists( $pdf ) ) {
+			$adjuntos[] = $pdf;
+		}
+		return $adjuntos;
 	}
 
 	public static function registrar_campos() {
