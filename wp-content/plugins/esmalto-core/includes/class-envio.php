@@ -51,15 +51,14 @@ class Esmalto_Envio {
 	}
 
 	/**
-	 * Dirección y horario del almacén. Vacíos: nada (o un aviso solo para administradores).
+	 * Dirección y horario del almacén, si se han puesto en Esmalto → Ajustes. Si no, nada: las condiciones
+	 * generales dicen que el punto de recogida se comunica después de la compra.
 	 */
-	public static function recogida_html( $aviso = true ) {
+	public static function recogida_html() {
 		$direccion = trim( (string) esmalto_ajuste( 'recogida_direccion' ) );
 		$horario   = trim( (string) esmalto_ajuste( 'recogida_horario' ) );
 		if ( '' === $direccion && '' === $horario ) {
-			return ( $aviso && current_user_can( 'manage_woocommerce' ) )
-				? '<p class="esm-placeholder">' . esc_html__( 'Dirección y horario de recogida pendientes: añádelos en Esmalto → Ajustes → Recogida en almacén. Este aviso solo lo ven los administradores.', 'esmalto-core' ) . '</p>'
-				: '';
+			return '';
 		}
 		$html = '<div class="esm-recogida">';
 		if ( '' !== $direccion ) {
@@ -91,7 +90,7 @@ class Esmalto_Envio {
 		if ( $para_admin || ! self::es_recogida( $order ) ) {
 			return;
 		}
-		$html = self::recogida_html( false );
+		$html = self::recogida_html();
 		if ( '' === $html ) {
 			return;
 		}
@@ -104,7 +103,7 @@ class Esmalto_Envio {
 
 	public static function recogida_gracias( $order_id ) {
 		$order = wc_get_order( $order_id );
-		$html  = self::es_recogida( $order ) ? self::recogida_html( false ) : '';
+		$html  = self::es_recogida( $order ) ? self::recogida_html() : '';
 		if ( '' !== $html ) {
 			echo '<section class="esm-recogida-pedido"><h2>' . esc_html__( 'Recogida en almacén', 'esmalto-core' ) . '</h2>' . $html . '</section>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escapado en recogida_html().
 		}

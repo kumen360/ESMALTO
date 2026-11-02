@@ -31,8 +31,8 @@ class Esmalto_SEO {
 			'inicio'          => array( 'Esmalto | Porcelánico y cerámica para profesionales', 'Porcelánico de gran formato y cerámica para obra, reforma e interiorismo. Tarifa profesional, muestras y entrega en obra en toda la península.' ),
 			'tienda'          => array( 'Catálogo de porcelánico y azulejos | Esmalto', 'Todas las colecciones de Esmalto: madera, mármol, piedra y cemento, de 30x60 a 120x120. Filtra por uso, familia y formato y pide tu muestra.' ),
 			'profesionales'   => array( 'Tarifa profesional de cerámica | Esmalto', 'Cuenta profesional para reformistas, estudios y constructoras: precios netos, una persona de contacto y entrega en obra. Alta en 24–48 h.' ),
-			'muestras'        => array( 'Muestras de porcelánico y azulejos | Esmalto', 'Pide una muestra antes de decidir: la pieza no se cobra, solo el transporte. Elige color y formato en la ficha del producto.' ),
-			'gastos-de-envio' => array( 'Envíos y entrega en obra | Esmalto', 'Cómo calculamos el transporte: por peso en pedidos pequeños y por palé en los grandes. Entrega a domicilio o en obra y recogida en almacén.' ),
+			'muestras'        => array( 'Muestras de porcelánico y azulejos | Esmalto', 'Pide una muestra antes de decidir: 9 € + IVA con la pieza y el envío incluidos. Elige color y formato en la ficha del producto.' ),
+			'gastos-de-envio' => array( 'Envíos y entrega en obra | Esmalto', 'Cómo calculamos el transporte: por metro cuadrado y por palé. Entrega a domicilio o en obra y recogida en almacén.' ),
 			'contacto'        => array( 'Contacto | Esmalto', 'Escríbenos o llámanos para presupuestos, información de producto, muestras o pedidos en curso.' ),
 		);
 	}
