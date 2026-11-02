@@ -524,6 +524,11 @@ body.esmalto .widget_layered_nav_filters ul li.chosen a:focus-visible { backgrou
 .wc-block-components-checkbox .wc-block-components-checkbox__mark { fill: #181818; }
 .wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"]:checked { background: #fec30c; border-color: #fec30c; }
 
+/* ---------- Cesta: «Seguir comprando» bajo «Finalizar compra» ---------- */
+.esm-seguir-comprando { margin-top: 10px; }
+.esm-seguir-comprando .wp-block-button { width: 100%; }
+.esm-seguir-comprando .wp-block-button__link { display: block; width: 100%; text-align: center; }
+
 /* ---------- Mi cuenta ---------- */
 .woocommerce-account .woocommerce-MyAccount-navigation ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
 .woocommerce-account .woocommerce-MyAccount-navigation li { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }

@@ -255,6 +255,15 @@ button.wc-block-components-panel__button,
 .wc-block-components-notice-banner.is-error { border-left-color: #ff7b6b; }
 .woocommerce-message::before,
 .woocommerce-info::before { color: #fec30c; }
+/* Aviso al añadir a la cesta: seguir comprando o finalizar la compra */
+.woocommerce-message .esm-aviso-botones { float: right; display: inline-flex; flex-wrap: wrap; gap: 10px; margin: 0 0 0 16px; }
+.woocommerce-message .esm-aviso-botones .button { float: none; margin: 0; }
+.woocommerce-message .esm-aviso-botones .esm-boton-secundario { background: transparent; color: #f1f1f1; border: 1px solid rgba(255, 255, 255, 0.3); }
+.woocommerce-message .esm-aviso-botones .esm-boton-secundario:hover { background: transparent; color: #fec30c; border-color: #fec30c; }
+@media (max-width: 600px) {
+	.woocommerce-message .esm-aviso-botones { float: none; display: flex; margin: 12px 0 0; }
+	.woocommerce-message .esm-aviso-botones .button { flex: 1 1 auto; text-align: center; }
+}
 
 /* Tablas */
 table, th, td { border-color: rgba(255, 255, 255, 0.1); }

@@ -46,6 +46,7 @@ class Esmalto_Producto {
 		add_filter( 'woocommerce_output_related_products_args', array( __CLASS__, 'args_relacionados' ) );
 
 		add_filter( 'gettext_woocommerce', array( __CLASS__, 'textos' ), 10, 3 );
+		add_filter( 'wc_add_to_cart_message_html', array( __CLASS__, 'aviso_cesta' ) );
 	}
 
 	/* ------------------------------------------------------------------ Precio */
@@ -426,6 +427,21 @@ class Esmalto_Producto {
 		$args['posts_per_page'] = 3;
 		$args['columns']        = 3;
 		return $args;
+	}
+
+	/**
+	 * Aviso al añadir a la cesta: «cesta» en lugar de «carrito» y dos salidas claras, seguir comprando
+	 * o finalizar la compra, en lugar de «Ver cesta» (la cesta sigue a mano en la cabecera).
+	 */
+	public static function aviso_cesta( $mensaje ) {
+		$mensaje = preg_replace( '#<a\b[^>]*\bwc-forward\b[^>]*>.*?</a>#s', '', (string) $mensaje );
+		return str_replace( 'carrito', 'cesta', trim( $mensaje ) ) . sprintf(
+			' <span class="esm-aviso-botones"><a href="%1$s" class="button esm-boton-secundario">%2$s</a> <a href="%3$s" class="button wc-forward">%4$s</a></span>',
+			esc_url( wc_get_page_permalink( 'shop' ) ),
+			esc_html__( 'Seguir comprando', 'esmalto-core' ),
+			esc_url( wc_get_checkout_url() ),
+			esc_html__( 'Finalizar compra', 'esmalto-core' )
+		);
 	}
 
 	/**

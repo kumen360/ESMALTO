@@ -118,7 +118,66 @@ class Esmalto_Empresa {
 		} else {
 			$log[] = 'Página de alta de WholesaleX: no está publicada.';
 		}
+
+		// 9. Bloques de cesta y pago: textos y botones.
+		return array_merge( $log, self::cesta_y_pago() );
+	}
+
+	/**
+	 * Textos y botones que guardan los bloques de cesta y pago en sus páginas de WooCommerce:
+	 * «Seguir comprando» bajo «Finalizar compra», «Totales de la cesta», el botón de confirmar con el
+	 * texto de las condiciones generales y «Volver a la cesta».
+	 */
+	private static function cesta_y_pago() {
+		$log   = array();
+		$cesta = get_post( wc_get_page_id( 'cart' ) );
+		if ( $cesta && has_block( 'woocommerce/cart', $cesta ) ) {
+			$contenido = self::atributos_bloque( $cesta->post_content, 'woocommerce/cart-order-summary-heading-block', array( 'content' => 'Totales de la cesta' ) );
+			if ( false === strpos( $contenido, 'esm-seguir-comprando' ) ) {
+				$fin       = '<!-- /wp:woocommerce/proceed-to-checkout-block -->';
+				$boton     = '<!-- wp:buttons {"className":"esm-seguir-comprando"} -->' . "\n" .
+					'<div class="wp-block-buttons esm-seguir-comprando"><!-- wp:button {"className":"is-style-outline"} -->' . "\n" .
+					'<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/tienda/">Seguir comprando</a></div>' . "\n" .
+					'<!-- /wp:button --></div>' . "\n" . '<!-- /wp:buttons -->';
+				$contenido = str_replace( $fin, $fin . "\n\n" . $boton, $contenido );
+			}
+			wp_update_post( wp_slash( array( 'ID' => $cesta->ID, 'post_content' => $contenido ) ) );
+			$log[] = 'Cesta: «Seguir comprando» bajo «Finalizar compra» y «Totales de la cesta».';
+		} else {
+			$log[] = '⚠ Cesta: la página no usa el bloque de WooCommerce (sin cambios).';
+		}
+		$pago = get_post( wc_get_page_id( 'checkout' ) );
+		if ( $pago && has_block( 'woocommerce/checkout', $pago ) ) {
+			$contenido = self::atributos_bloque(
+				$pago->post_content,
+				'woocommerce/checkout-actions-block',
+				array(
+					'placeOrderButtonLabel'   => 'Confirmar pedido con obligación de pago',
+					'showReturnToCart'        => true,
+					'returnToCartButtonLabel' => 'Volver a la cesta',
+				)
+			);
+			wp_update_post( wp_slash( array( 'ID' => $pago->ID, 'post_content' => $contenido ) ) );
+			$log[] = 'Pago: botón «Confirmar pedido con obligación de pago» y «Volver a la cesta».';
+		} else {
+			$log[] = '⚠ Pago: la página no usa el bloque de WooCommerce (sin cambios).';
+		}
 		return $log;
+	}
+
+	/**
+	 * Añade o cambia atributos en el comentario de un bloque, sin tocar el resto de la página.
+	 */
+	private static function atributos_bloque( $contenido, $bloque, $atributos ) {
+		return preg_replace_callback(
+			'#<!-- wp:' . preg_quote( $bloque, '#' ) . '(\s+\{.*?\})?\s*(/?)-->#s',
+			static function ( $m ) use ( $bloque, $atributos ) {
+				$actuales = empty( $m[1] ) ? array() : (array) json_decode( trim( $m[1] ), true );
+				$json     = wp_json_encode( array_merge( $actuales, $atributos ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+				return '<!-- wp:' . $bloque . ' ' . $json . ' ' . $m[2] . '-->';
+			},
+			$contenido
+		);
 	}
 
 	private static function url_logo() {
