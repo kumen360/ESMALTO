@@ -527,10 +527,16 @@ body.esmalto .widget_layered_nav_filters ul li.chosen a:focus-visible { backgrou
 /* ---------- Mi cuenta ---------- */
 .woocommerce-account .woocommerce-MyAccount-navigation ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
 .woocommerce-account .woocommerce-MyAccount-navigation li { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
-.woocommerce-account .woocommerce-MyAccount-navigation li a { display: block; padding: 12px 0; color: #a9b5a9; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.woocommerce-account .woocommerce-MyAccount-navigation li a { display: block; padding: 12px 0; color: #a9b5a9; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; }
 .woocommerce-account .woocommerce-MyAccount-navigation li.is-active a,
 .woocommerce-account .woocommerce-MyAccount-navigation li a:hover { color: #fec30c; }
 .woocommerce-account .woocommerce-MyAccount-content { color: #c8d2c8; }
+/* Títulos del pedido y las direcciones (Mi cuenta y pedido recibido): Astra les pone fondo blanco */
+.woocommerce-Address-title,
+.woocommerce-column__title,
+.woocommerce-order-details__title,
+.woocommerce-order-downloads__title,
+.woocommerce-Address-title h3 { background: transparent !important; color: #f1f1f1 !important; }
 .woocommerce-account .u-columns.col2-set { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid rgba(255, 255, 255, 0.1); background: #00330f; }
 /* El «clearfix» de WooCommerce ocuparía una celda de la rejilla */
 .woocommerce-account .u-columns.col2-set::before,

@@ -161,6 +161,16 @@ select { background-image: linear-gradient(45deg, transparent 50%, #c8d2c8 50%),
 .select2-dropdown { background: #00330f; color: #f1f1f1; border-color: rgba(255, 255, 255, 0.16); }
 .select2-container--default .select2-results__option--highlighted[aria-selected] { background: #fec30c; color: #181818; }
 input[type="checkbox"], input[type="radio"] { accent-color: #fec30c; }
+/* Casillas de WPForms: sin el alto ni el relleno de los campos de texto (al marcarlas salía un rectángulo amarillo) */
+.wpforms-container .wpforms-field input[type="checkbox"],
+.wpforms-container .wpforms-field input[type="radio"] {
+	width: 14px;
+	height: 14px;
+	min-height: 0;
+	padding: 0;
+	border: 0;
+	background: transparent !important;
+}
 label, legend { color: #c8d2c8; font-weight: 400; }
 fieldset { border-color: rgba(255, 255, 255, 0.12); }
 
