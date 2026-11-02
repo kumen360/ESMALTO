@@ -99,6 +99,10 @@ class Esmalto_Empresa {
 		// 5. Formularios de WPForms: avisos al correo de contacto, firmados con él.
 		$log = array_merge( $log, self::formularios() );
 
+		// Pago: teléfono obligatorio, como el correo (lo piden también las condiciones generales).
+		update_option( 'woocommerce_checkout_phone_field', 'required' );
+		$log[] = 'Pago: teléfono obligatorio.';
+
 		// 6. Sin cookies de «Atribución de pedidos» (sbjs_*).
 		update_option( 'woocommerce_feature_order_attribution_enabled', 'no' );
 		$log[] = 'Atribución de pedidos de WooCommerce desactivada (sin cookies sbjs_*).';
@@ -143,6 +147,12 @@ class Esmalto_Empresa {
 				$datos['settings']['notifications'][ $n ]['sender_address'] = self::EMAIL;
 				$datos['settings']['notifications'][ $n ]['sender_name']    = 'Esmalto';
 			}
+			// Email y teléfono obligatorios: si uno está mal escrito, aún se puede contactar por el otro.
+			foreach ( (array) $datos['fields'] as $f => $campo ) {
+				if ( 'email' === $campo['type'] || 'Teléfono' === $campo['label'] ) {
+					$datos['fields'][ $f ]['required'] = '1';
+				}
+			}
 			wp_update_post(
 				array(
 					'ID'           => $post->ID,
@@ -153,7 +163,7 @@ class Esmalto_Empresa {
 		}
 		return array(
 			$hechos
-				? sprintf( 'Formularios (%1$s): avisos a %2$s, enviados desde %2$s.', implode( ', ', $hechos ), self::EMAIL )
+				? sprintf( 'Formularios (%1$s): avisos a %2$s, enviados desde %2$s; email y teléfono obligatorios.', implode( ', ', $hechos ), self::EMAIL )
 				: '⚠ Formularios: no se ha encontrado ninguno de Esmalto.',
 		);
 	}

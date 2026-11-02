@@ -170,7 +170,7 @@ class Esmalto_Formularios {
 				'campos'  => array(
 					self::campo( 0, 'name', __( 'Nombre y apellidos', 'esmalto-core' ), array( 'format' => 'simple', 'required' => '1' ) ),
 					self::campo( 1, 'email', __( 'Email', 'esmalto-core' ), array( 'required' => '1' ) + self::mitad( true ) ),
-					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), $prefijo + self::mitad() ),
+					self::campo( 2, 'text', __( 'Teléfono', 'esmalto-core' ), array( 'required' => '1' ) + $prefijo + self::mitad() ),
 					self::campo(
 						3,
 						'select',
