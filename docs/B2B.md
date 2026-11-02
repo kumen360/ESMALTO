@@ -5,7 +5,7 @@
 2. El CNAE se valida en el servidor contra la lista admitida (Esmalto → Ajustes) y admite `4333` o `43.33`. El formulario muestra la descripción en vivo.
 3. La cuenta se crea en WooCommerce con estado **pendiente** de WholesaleX (`__wholesalex_status = pending`). No puede iniciar sesión hasta que se apruebe.
 4. Llegan dos emails: un aviso al equipo (a clientes.b2b@esmalto.com, *Esmalto → Ajustes → Email para avisos de altas*), con los datos y un enlace para aprobar, y un acuse al solicitante.
-5. **Aprobar**: en *WholesaleX → Customers*, cambia el estado a *Active* y asigna el rol **Profesional A, B o C**.
+5. **Aprobar**: en *WholesaleX → Customers*, cambia el estado a *Active* y asigna el rol **Profesional A, B o C**. Si no le asignas ninguno, recibe el de *Esmalto → Ajustes → Rol al aprobar el alta* (o el de la categoría A).
 6. Al pasar a *Active*, el profesional recibe un email (una sola vez) con el enlace para **crear su contraseña**. Después entra en *Mi cuenta* con su email.
 
 ## Categorías y descuentos

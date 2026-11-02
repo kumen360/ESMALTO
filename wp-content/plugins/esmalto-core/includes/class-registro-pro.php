@@ -145,10 +145,8 @@ class Esmalto_Registro_Pro {
 			'billing_country'     => 'ES',
 			'__wholesalex_status' => 'pending',
 		);
-		$rol = esmalto_ajuste( 'rol_alta' ) ? esmalto_ajuste( 'rol_alta' ) : esmalto_ajuste( 'cat_a_rol' );
-		if ( $rol ) {
-			$meta['__wholesalex_registration_role'] = $rol;
-		}
+		// No se guarda __wholesalex_registration_role: WholesaleX exige verificarlo contra su propio formulario
+		// de alta y, sin eso, no deja aprobar la cuenta. El rol se asigna al aprobar (al_activar).
 		foreach ( $meta as $clave => $valor ) {
 			update_user_meta( $user_id, $clave, $valor );
 		}
@@ -211,13 +209,18 @@ class Esmalto_Registro_Pro {
 	}
 
 	/**
-	 * Cuando se aprueba la cuenta, envía al profesional el enlace para crear su contraseña (una sola vez).
+	 * Cuando se aprueba la cuenta: le asigna el rol del alta si aún no tiene otro y envía al profesional
+	 * el enlace para crear su contraseña (una sola vez).
 	 */
 	public static function al_activar( $meta_id, $user_id, $clave, $valor ) {
-		if ( '__wholesalex_status' !== $clave || 'active' !== $valor ) {
+		if ( '__wholesalex_status' !== $clave || 'active' !== $valor || ! get_user_meta( $user_id, 'esmalto_alta_pro', true ) ) {
 			return;
 		}
-		if ( ! get_user_meta( $user_id, 'esmalto_alta_pro', true ) || get_user_meta( $user_id, 'esmalto_acceso_enviado', true ) ) {
+		$rol = esmalto_ajuste( 'rol_alta' ) ? esmalto_ajuste( 'rol_alta' ) : esmalto_ajuste( 'cat_a_rol' );
+		if ( $rol && ! get_user_meta( $user_id, '__wholesalex_role', true ) && function_exists( 'wholesalex' ) ) {
+			wholesalex()->change_role( $user_id, $rol );
+		}
+		if ( get_user_meta( $user_id, 'esmalto_acceso_enviado', true ) ) {
 			return;
 		}
 		$usuario = get_userdata( $user_id );

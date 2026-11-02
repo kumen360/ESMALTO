@@ -128,10 +128,10 @@ class Esmalto_Ajustes {
 						</tr>
 					<?php endforeach; ?>
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Rol al solicitar el alta', 'esmalto-core' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Rol al aprobar el alta', 'esmalto-core' ); ?></th>
 						<td>
 							<?php self::campo_rol( $n . '[rol_alta]', $a['rol_alta'], $roles ); ?>
-							<p class="description"><?php esc_html_e( 'Rol propuesto a WholesaleX para las solicitudes nuevas (quedan pendientes hasta que las apruebes). Si se deja vacío se usa el de la categoría A.', 'esmalto-core' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Rol que recibe la cuenta al aprobarla si no le has asignado otro. Si se deja vacío se usa el de la categoría A.', 'esmalto-core' ); ?></p>
 						</td>
 					</tr>
 					<tr>

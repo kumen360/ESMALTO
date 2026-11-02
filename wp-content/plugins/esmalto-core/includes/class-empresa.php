@@ -120,7 +120,28 @@ class Esmalto_Empresa {
 		}
 
 		// 9. Bloques de cesta y pago: textos y botones.
-		return array_merge( $log, self::cesta_y_pago() );
+		$log = array_merge( $log, self::cesta_y_pago() );
+
+		// 10. Altas profesionales pendientes: sin el «rol solicitado» que bloquea la aprobación en WholesaleX.
+		$log[] = self::altas_pendientes();
+		return $log;
+	}
+
+	/**
+	 * Las altas pendientes hechas antes de la 1.5.0 guardan __wholesalex_registration_role sin el contexto
+	 * que WholesaleX exige para verificarlo («The requested registration role can no longer be verified…»).
+	 */
+	private static function altas_pendientes() {
+		$arregladas = 0;
+		foreach ( get_users( array( 'meta_key' => 'esmalto_alta_pro', 'fields' => 'ID' ) ) as $id ) { // phpcs:ignore WordPress.DB.SlowDBQuery
+			if ( 'pending' === get_user_meta( $id, '__wholesalex_status', true )
+				&& get_user_meta( $id, '__wholesalex_registration_role', true )
+				&& ! get_user_meta( $id, '__wholesalex_registration_context', true )
+				&& delete_user_meta( $id, '__wholesalex_registration_role' ) ) {
+				++$arregladas;
+			}
+		}
+		return sprintf( 'Altas profesionales pendientes: %d lista(s) para aprobar en WholesaleX.', $arregladas );
 	}
 
 	/**
