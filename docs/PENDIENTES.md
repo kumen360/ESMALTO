@@ -1,13 +1,13 @@
 # Pendientes (a completar por Esmalto)
 
-Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía»; lo de los ajustes del 25/10, en `AJUSTES-2026-10-25.md` → «Lo que haces tú», «Pendiente de tu confirmación» y «No posible todavía».
+Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía»; lo de los ajustes del 25/10, en `AJUSTES-2026-10-25.md` → «Lo que haces tú», «Pendiente de tu confirmación» y «No posible todavía»; lo de la revisión del 29/10, en `REVISION-2026-10-29.md`.
 
 ## Datos de empresa
 - Puestos el 25/10: Kumen Tres Sesenta, S.L. (Esmalto Cerámica), NIF B88655014, C/ Bolsa, 44, Sanlúcar de Barrameda, +34 614 05 10 42, hola@esmalto.com. Se aplican con *Esmalto → Herramientas → 6*; el pie y Contacto están en el tema.
-- Dirección y horario del almacén de recogida (Víctor): *Esmalto → Ajustes → Recogida en almacén*.
+- Recogida en almacén: según las condiciones generales, el punto se comunica después de la compra. Si algún día se quiere publicar, se pone en *Esmalto → Ajustes → Recogida en almacén*.
 - Enlaces de Instagram y LinkedIn: los iconos están ocultos (visibilidad de bloque en el pie) hasta tener las URL.
 - IBAN para transferencias: *WooCommerce → Ajustes → Pagos → Transferencia bancaria*
-- Textos legales definitivos (asesor): Aviso legal, Privacidad, Condiciones generales y Cookies
+- Textos legales: publicados el 02/11 (versión 1.0). Dudas para el asesor en `REVISION-2026-10-29.md`. Si se activan Google Analytics o Stripe, añadir sus cookies a la tabla (`Esmalto_Paginas::cookies_instaladas()`).
 
 ## Pagos
 - Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*), a nombre de Kumen y con «ESMALTO» en el extracto. Las claves las introduces tú.
@@ -36,7 +36,7 @@ Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posib
 
 ## Técnico
 - Tipografías alojadas en el tema desde el 25/10 (sin Google Fonts).
-- Analítica: GA4 + Complianz con el modo de consentimiento v2, cuando exista la cuenta de Google de Esmalto.
+- Banner de cookies: Complianz instalado el 02/11. Analítica: GA4 con el modo de consentimiento v2, cuando exista la cuenta de Google de Esmalto (el ID se pone en Complianz).
 - Correo: crear hola@, pedidos@ y clientes.b2b@ con DKIM y poner el SMTP en WordPress (WP Mail SMTP o FluentSMTP). Las solicitudes de los formularios se guardan en *Esmalto → Solicitudes*.
 - Servidor de CDmon: el 25/10 estuvo más de una hora muy lento (30-75 s por página, los archivos estáticos 0,1 s) y la prueba de «loopback» de *Herramientas → Salud del sitio* fallaba por tiempo; luego volvió a 1,5-2 s. Si se repite, revisar el consumo de CPU y procesos en el panel de CDmon y consultarlo con su soporte.
 - WholesaleX: **no** configures descuentos en «Wholesale Pricing», porque los aplica Esmalto Core (ver `B2B.md`).

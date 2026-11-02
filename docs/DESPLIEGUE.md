@@ -35,6 +35,14 @@ Hecho en esmalto.com el 25/10/2026. La 1.4.1 solo cambia textos y colores de cor
 3. Tarifa: *Herramientas → 3. Tarifa de precios*, pegando la hoja «Para WordPress» de `Esmalto - Tarifa web.xlsx` en 4 o 5 lotes (unidad €/m², sin marcar «incluyen IVA»). Precios visibles desde el 26/10.
 4. Páginas: cambios de texto (datos de empresa, envíos y plazo, términos, cesta vacía) y, en el editor, «Compra por formato» en Inicio y el bloque de datos de Contacto con los patrones nuevos.
 
+## Después de subir el tema 1.3.2 y el plugin 1.5.0
+Hecho en esmalto.com el 02/11/2026.
+1. *Esmalto → Herramientas → 6* (hola@, transferencia a 5 días hábiles, teléfono obligatorio, botones de cesta y pago, altas pendientes).
+2. *Esmalto → Herramientas → 7* (textos legales).
+3. *Esmalto → Herramientas → 4* (descripciones SEO de Muestras y Envíos).
+4. Páginas: FAQ, Muestras, Formas de pago, Gastos de envío, Profesionales y Contacto (frases sueltas, ya en los generadores).
+5. Complianz: instalado y configurado (solo Europa, políticas de la web, banner con los colores de la web y sin el botón flotante).
+
 ## Regenerar el catálogo
 ```
 python -I catalogo/scripts/build_catalog.py --root .
