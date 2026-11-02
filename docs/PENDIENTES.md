@@ -11,7 +11,7 @@ Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posib
 
 ## Pagos
 - Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*), a nombre de Kumen y con «ESMALTO» en el extracto. Las claves las introduces tú.
-- Facturas con Holded (serie ESM-): conectar WooCommerce y comprobar que llegan el NIF (`_billing_nif`) y el recargo de equivalencia (`_esmalto_recargo`).
+- Facturas con Holded (serie ESM-): conectar WooCommerce y comprobar que llega el NIF (`_billing_nif`).
 
 ## Catálogo
 - **Precios**: tarifa del Excel de Esmalto cargada el 25/10 (333 de 335; faltan Arenisca 75x75 Marengo y San Francisco 60x120 Aquamarine). **Visibles desde el 26/10** (*Esmalto → Ajustes → Mostrar precios y vender online*); esa casilla también activa «Añadir a la cesta». Para pagar solo hay transferencia, y falta el IBAN. El Excel de trabajo es `Esmalto - Tarifa web.xlsx` (no se sube al repositorio).

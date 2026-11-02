@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Esmalto Core
  * Plugin URI:        https://www.esmalto.com
- * Description:       Lógica de tienda de Esmalto: calculadora de m² (cajas y palés), B2B (alta con CNAE, categorías A/B/C, descuento por palé, contacto comercial), porte por m² y palé, NIF y recargo de equivalencia en el pago, solicitudes guardadas, fichas técnicas y herramientas de puesta en marcha.
+ * Description:       Lógica de tienda de Esmalto: calculadora de m² (cajas y palés), B2B (alta con CNAE, categorías A/B/C, descuento por palé, contacto comercial), porte por m² y palé, NIF en el pago, solicitudes guardadas, fichas técnicas y herramientas de puesta en marcha.
  * Version:           1.4.1
  * Requires at least: 6.6
  * Requires PHP:      8.0

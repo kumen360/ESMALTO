@@ -19,9 +19,6 @@
 - El descuento se aplica sobre la tarifa (PVP) en toda la tienda, la cesta y la calculadora. Los profesionales ven los precios **sin IVA**.
 - **No configures descuentos en «Wholesale Pricing» de WholesaleX**: se sumarían a los de Esmalto.
 
-## Recargo de equivalencia
-- Al pagar, la casilla «Soy comercio minorista en recargo de equivalencia» suma un 5,2 % sobre la base imponible (productos, porte y demás líneas) y marca el pedido (`_esmalto_recargo`).
-
 ## Palés
 - En la ficha, la calculadora ofrece a los profesionales «Pedir por palés completos»: redondea a palés enteros con las cajas por palé de cada referencia.
 - En la cesta, las cajas que completan palés reciben un **descuento adicional** (5 % por defecto, ajustable). Aparece como línea «Descuento palé completo».
