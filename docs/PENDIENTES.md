@@ -1,13 +1,13 @@
 # Pendientes (a completar por Esmalto)
 
-Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía»; lo de los ajustes del 25/10, en `AJUSTES-2026-10-25.md` → «Lo que haces tú», «Pendiente de tu confirmación» y «No posible todavía»; lo de la revisión del 29/10, en `REVISION-2026-10-29.md`.
+Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía»; lo de los ajustes del 25/10, en `AJUSTES-2026-10-25.md` → «Lo que haces tú», «Pendiente de tu confirmación» y «No posible todavía»; lo de la revisión del 29/10, en `REVISION-2026-10-29.md`; lo de la del 03/11, en `REVISION-2026-11-03.md`.
 
 ## Datos de empresa
-- Puestos el 25/10: Kumen Tres Sesenta, S.L. (Esmalto Cerámica), NIF B88655014, C/ Bolsa, 44, Sanlúcar de Barrameda, +34 614 05 10 42, hola@esmalto.com. Se aplican con *Esmalto → Herramientas → 6*; el pie y Contacto están en el tema.
+- Kumen Tres Sesenta, S.L. (Esmalto Cerámica), NIF B88655014, Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana (desde el 03/11), +34 614 05 10 42, hola@esmalto.com. Se aplican con *Esmalto → Herramientas → 6*; el pie y Contacto están en el tema.
 - Recogida en almacén: según las condiciones generales, el punto se comunica después de la compra. Si algún día se quiere publicar, se pone en *Esmalto → Ajustes → Recogida en almacén*.
 - Enlaces de Instagram y LinkedIn: los iconos están ocultos (visibilidad de bloque en el pie) hasta tener las URL.
 - IBAN para transferencias: *WooCommerce → Ajustes → Pagos → Transferencia bancaria*
-- Textos legales: publicados el 02/11 (versión 1.0). Dudas para el asesor en `REVISION-2026-10-29.md`. Si se activan Google Analytics o Stripe, añadir sus cookies a la tabla (`Esmalto_Paginas::cookies_instaladas()`).
+- Textos legales: versión 1.1, publicada el 03/11. Lo que debe validar el asesor está en `REVISION-2026-11-03.md`. Si se activan Google Analytics o Stripe, añadir sus cookies a la tabla (`Esmalto_Paginas::cookies_instaladas()`).
 
 ## Pagos
 - Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*), a nombre de Kumen y con «ESMALTO» en el extracto. Las claves las introduces tú.
@@ -21,9 +21,13 @@ Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posib
 - Revisar las tablas de estilo y tono (`catalogo/scripts/build_catalog.py`).
 
 ## Repositorio privado
-- Las fotos y fichas ya están en la biblioteca de medios. Las herramientas que descargan del repositorio (*Precargar fotos del catálogo*, *Importar fichas técnicas*) y la importación del CSV solo funcionan si el repositorio es público durante la operación.
-- Para actualizar el tema o el plugin, sube los ZIP de `dist/` desde *Apariencia → Temas* y *Plugins → Añadir → Subir*.
-- El tema 1.2.0 y el plugin 1.3.0 de `dist/` están instalados en esmalto.com (17/10). Para la próxima subida sirve el mismo método: subir los ZIP o hacer público el repositorio durante la operación.
+- Privado desde el 03/11.
+- Las fotos y fichas ya están en la biblioteca de medios. Las herramientas que descargan del repositorio solo funcionan si es público durante la operación:
+  - *Precargar fotos del catálogo*;
+  - *Importar fichas técnicas*;
+  - la importación del CSV.
+- Para actualizar el tema o el plugin, sube los ZIP de `dist/` desde *Apariencia → Temas* y *Plugins → Añadir → Subir*, o con `tools/build_subida.py` (ver `DESPLIEGUE.md`).
+- Instalados en esmalto.com: tema 1.3.3 y Esmalto Core 1.6.0 (03/11).
 
 ## Diferencias deliberadas con el diseño
 - Se mantiene «Cesta (0)» también en móvil (el diseño la oculta) para poder llegar a la cesta.

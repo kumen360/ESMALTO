@@ -21,6 +21,12 @@ python -I tools/build_dist.py
 ```
 Sube el ZIP nuevo: WordPress pregunta si quieres reemplazar la versión instalada.
 
+Con el repositorio privado, esmalto.com no puede descargar los ZIP de GitHub. Si la subida la hace Claude desde su navegador integrado:
+```
+python -I tools/build_subida.py <carpeta temporal fuera del repositorio>
+```
+Genera una página local que lleva el ZIP a la página de subida de wp-admin y comprueba su SHA-256. Los pasos están al principio del script.
+
 ## Después de subir el tema 1.2.0 y el plugin 1.3.0
 Hecho en esmalto.com el 17/10/2026. Se deja como referencia por si hay que reinstalar.
 1. Borrar el CSS provisional de *Apariencia → Personalizar → CSS adicional* (ya va en el tema y el plugin).
@@ -43,6 +49,16 @@ Hecho en esmalto.com el 02/11/2026.
 4. Páginas: FAQ, Muestras, Formas de pago, Gastos de envío, Profesionales y Contacto (frases sueltas, ya en los generadores).
 5. Complianz: instalado y configurado (solo Europa, políticas de la web, banner con los colores de la web y sin el botón flotante).
 
+## Después de subir el tema 1.3.3 y el plugin 1.6.0
+Hecho en esmalto.com el 03/11/2026, con los ZIP subidos con `tools/build_subida.py`.
+1. *Esmalto → Herramientas → 6*: dirección nueva, cuenta obligatoria para comprar y producto oculto «Muestra».
+2. *Esmalto → Herramientas → 7*: textos legales 1.1.
+3. Páginas (ya en los generadores):
+   - Contacto: dirección y «Cómo llegar»;
+   - Muestras: pasos nuevos y sin formulario;
+   - pie de Muestras, Formas de pago y Gastos de envío.
+4. Complianz: dirección de la empresa.
+
 ## Regenerar el catálogo
 ```
 python -I catalogo/scripts/build_catalog.py --root .
@@ -54,6 +70,7 @@ Para actualizar productos ya importados, vuelve a importar el CSV marcando «Act
 - **Cabecera y pie**: *Apariencia → Editor → Patrones → Partes de plantilla* (Cabecera, Pie).
 - **Filtros de la tienda**: *Apariencia → Widgets → WooCommerce Sidebar*.
 - **Colores y tipografías**: `wp-content/themes/esmalto/theme.json`.
-- **Formularios**: WPForms → Todos los formularios (Contacto, Solicitud de muestras, Solicitud de presupuesto).
+- **Formularios**: WPForms → Todos los formularios (Contacto y Solicitud de presupuesto; el de Solicitud de muestras ya no se usa).
+- **Muestras**: producto oculto «Muestra» (SKU `ESM-MUESTRA`). El precio lo fija *Herramientas → 6* (9 € + IVA, condiciones, apartado 12).
 - **Bloques ocultos**: seleccionar el bloque en el editor → menú ⋮ → «Mostrar».
 - **Precios y venta online**: *Esmalto → Ajustes → Mostrar precios y vender online*.
