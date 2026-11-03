@@ -138,6 +138,9 @@ class Esmalto_Empresa {
 
 		// 10. Altas profesionales pendientes: sin el «rol solicitado» que bloquea la aprobación en WholesaleX.
 		$log[] = self::altas_pendientes();
+
+		// 11. Muestras de pago (9 € + IVA, envío incluido).
+		$log[] = Esmalto_Muestras::crear();
 		return $log;
 	}
 

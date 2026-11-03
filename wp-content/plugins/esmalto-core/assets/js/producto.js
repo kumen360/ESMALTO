@@ -262,7 +262,12 @@
 			}
 			if ( hrefMuestra && producto ) {
 				var urlM = new URL( hrefMuestra, window.location.href );
-				urlM.searchParams.set( 'producto', producto );
+				if ( urlM.searchParams.has( 'esmalto_muestra' ) ) {
+					// Muestra de pago: se añade a la cesta la variación elegida.
+					urlM.searchParams.set( 'esmalto_muestra', actual.variation_id );
+				} else {
+					urlM.searchParams.set( 'producto', producto );
+				}
 				$muestra.attr( 'href', urlM.toString() );
 			}
 		}

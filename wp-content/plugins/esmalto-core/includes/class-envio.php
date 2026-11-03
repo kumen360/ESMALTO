@@ -131,7 +131,7 @@ class Esmalto_Envio {
 		$hay       = false;
 		foreach ( $contenido as $item ) {
 			$producto = $item['data'] ?? null;
-			if ( ! $producto instanceof WC_Product || ! $producto->needs_shipping() ) {
+			if ( ! $producto instanceof WC_Product || ! $producto->needs_shipping() || Esmalto_Muestras::es_muestra( $producto ) ) {
 				continue;
 			}
 			$hay    = true;

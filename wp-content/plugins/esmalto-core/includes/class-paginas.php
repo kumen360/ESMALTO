@@ -258,7 +258,7 @@ class Esmalto_Paginas {
 		return '<!-- wp:table {"className":"esm-tabla-cookies"} -->' . "\n" .
 			'<figure class="wp-block-table esm-tabla-cookies"><table class="has-fixed-layout"><thead><tr><th>Cookie</th><th>Titular</th><th>Finalidad</th><th>Duración</th></tr></thead><tbody>' . $filas . '</tbody></table></figure>' . "\n" .
 			'<!-- /wp:table -->' . "\n\n" .
-			self::p( 'Ahora mismo la web no instala cookies analíticas ni de terceros. En el navegador también se guardan, sin ser cookies, la cesta (wc_cart_hash_*, wc_fragments_*, storeApi*) y tu lista de muestras (esmalto_muestras), hasta que se vacían o borras los datos del navegador.', '', 'texto-apagado' );
+			self::p( 'Ahora mismo la web no instala cookies analíticas ni de terceros. En el navegador también se guardan, sin ser cookies, la cesta (wc_cart_hash_*, wc_fragments_*, storeApi*), hasta que se vacía o borras los datos del navegador.', '', 'texto-apagado' );
 	}
 
 	/**
@@ -410,8 +410,8 @@ class Esmalto_Paginas {
 	}
 
 	/**
-	 * Muestras (textos del repaso del 10/10). Todo el contenido va en contenedores flex («Pila»);
-	 * al final se mantiene el formulario, que es adonde lleva «Solicitar una muestra» en cada ficha.
+	 * Muestras. Todo el contenido va en contenedores flex («Pila»). Se piden desde la ficha («Solicitar una
+	 * muestra» la añade a la cesta) y se pagan como un pedido: 9,00 € + IVA, con el envío incluido.
 	 */
 	public static function muestras() {
 		$cabecera  = self::pila(
@@ -426,9 +426,9 @@ class Esmalto_Paginas {
 				self::h_apartado( 'Cómo pedirlas' ),
 				self::lista_numerada(
 					array(
-						'En la ficha del producto, elige color y formato y pulsa «Solicitar una muestra».',
-						'Añade todas las que necesites; van en la misma solicitud.',
-						'Te confirmamos el importe y, cuando lo aceptes, salen hacia tu dirección.',
+						'En la <a href="/tienda/">ficha del producto</a>, elige color y formato y pulsa «Solicitar una muestra»: se añade a tu cesta.',
+						'Añade todas las que necesites, solas o junto con tu pedido.',
+						'Págalas al finalizar la compra, como cualquier pedido: el envío de las muestras va incluido.',
 					)
 				),
 			),
@@ -450,15 +450,8 @@ class Esmalto_Paginas {
 			),
 			'18px'
 		);
-		$solicitud = self::pila(
-			array(
-				self::h_apartado( 'Solicitud de muestras' ),
-				self::caja( array( self::shortcode( '[esmalto_formulario tipo="muestras"]' ) ) ),
-			),
-			'18px'
-		);
 		return self::seccion(
-			array( self::pila( array( $cabecera, $como, $saber, $solicitud, self::pie_documento() ), '48px', 'esm-muestras' ) ),
+			array( self::pila( array( $cabecera, $como, $saber, self::pie_documento() ), '48px', 'esm-muestras' ) ),
 			'820px',
 			'clamp(32px, 5vw, 56px)',
 			'clamp(60px, 9vw, 110px)',

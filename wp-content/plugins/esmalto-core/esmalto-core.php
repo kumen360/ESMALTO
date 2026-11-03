@@ -31,6 +31,7 @@ require_once ESMALTO_CORE_DIR . 'includes/class-producto.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-calculadora.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-envio.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-checkout.php';
+require_once ESMALTO_CORE_DIR . 'includes/class-muestras.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-solicitudes.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-empresa.php';
 require_once ESMALTO_CORE_DIR . 'includes/class-formularios.php';
@@ -56,6 +57,7 @@ function esmalto_core_init() {
 	Esmalto_Calculadora::init();
 	Esmalto_Envio::init();
 	Esmalto_Checkout::init();
+	Esmalto_Muestras::init();
 	Esmalto_SEO::init();
 	Esmalto_Categorias::init();
 }

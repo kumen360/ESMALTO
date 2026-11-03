@@ -96,7 +96,7 @@ class Esmalto_B2B {
 	/* ------------------------------------------------------------------ Precios */
 
 	public static function precio( $precio, $producto = null ) {
-		if ( '' === $precio || null === $precio ) {
+		if ( '' === $precio || null === $precio || Esmalto_Muestras::es_muestra( $producto ) ) {
 			return $precio;
 		}
 		$descuento = self::descuento();

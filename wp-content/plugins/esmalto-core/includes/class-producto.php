@@ -379,11 +379,23 @@ class Esmalto_Producto {
 		if ( ! $product instanceof WC_Product ) {
 			return;
 		}
-		$muestra = add_query_arg( 'producto', rawurlencode( self::nombre_para_formulario( $product ) ), esmalto_url_pagina( 'muestras' ) );
+		// Con la tienda vendiendo, la muestra se añade a la cesta (la variación la pone el script al elegir).
+		$id_muestra = Esmalto_Muestras::id();
+		if ( $id_muestra && esmalto_precios_visibles() ) {
+			$muestra = add_query_arg(
+				array(
+					'add-to-cart'           => $id_muestra,
+					Esmalto_Muestras::CLAVE => $product->is_type( 'variable' ) ? '' : $product->get_id(),
+				),
+				get_permalink( $product->get_id() )
+			);
+		} else {
+			$muestra = add_query_arg( 'producto', rawurlencode( self::nombre_para_formulario( $product ) ), esmalto_url_pagina( 'muestras' ) ) . '#solicitud';
+		}
 		$ficha   = (int) get_post_meta( $product->get_id(), '_ficha_tecnica_id', true );
 		$url_pdf = $ficha ? wp_get_attachment_url( $ficha ) : '';
 		echo '<div class="esm-acciones">';
-		printf( '<a class="button esm-boton-muestra" data-esm-muestra href="%s">%s</a>', esc_url( $muestra . '#solicitud' ), esc_html__( 'Solicitar una muestra', 'esmalto-core' ) );
+		printf( '<a class="button esm-boton-muestra" data-esm-muestra href="%s" rel="nofollow">%s</a>', esc_url( $muestra ), esc_html__( 'Solicitar una muestra', 'esmalto-core' ) );
 		if ( $url_pdf ) {
 			printf( '<a class="button esm-boton-ficha" href="%s" target="_blank" rel="noopener">%s</a>', esc_url( $url_pdf ), esc_html__( '↓ Descargar ficha técnica (PDF)', 'esmalto-core' ) );
 		}

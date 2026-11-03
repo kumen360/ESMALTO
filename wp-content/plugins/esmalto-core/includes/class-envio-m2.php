@@ -63,6 +63,18 @@ class Esmalto_Envio_M2 extends WC_Shipping_Method {
 	}
 
 	public function calculate_shipping( $package = array() ) {
+		// Solo muestras: el envío va incluido en su precio (condiciones generales, apartado 12).
+		if ( Esmalto_Muestras::solo_muestras( $package['contents'] ?? array() ) ) {
+			$this->add_rate(
+				array(
+					'id'      => $this->get_rate_id(),
+					'label'   => __( 'Envío de muestras (incluido)', 'esmalto-core' ),
+					'cost'    => 0,
+					'package' => $package,
+				)
+			);
+			return;
+		}
 		$medida = Esmalto_Envio::medir( $package['contents'] ?? array() );
 		if ( ! $medida['palets'] ) {
 			return;
