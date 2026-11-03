@@ -14,10 +14,11 @@ class Esmalto_Empresa {
 	const RAZON_SOCIAL  = 'Kumen Tres Sesenta, S.L.';
 	const MARCA         = 'Esmalto Cerámica';
 	const NIF           = 'B88655014';
-	const DIRECCION     = 'C/ Bolsa, 44';
-	const CODIGO_POSTAL = '11540';
-	const POBLACION     = 'Sanlúcar de Barrameda';
-	const PROVINCIA     = 'CA'; // Cádiz.
+	const DIRECCION     = 'Calle La Llosa, 3';
+	const DIRECCION_2   = 'Planta 3, puerta 16';
+	const CODIGO_POSTAL = '12003';
+	const POBLACION     = 'Castellón de la Plana';
+	const PROVINCIA     = 'CS'; // Castellón.
 	const REGISTRO      = 'Registro Mercantil de Cádiz, hoja CA-69375';
 	const TELEFONO      = '+34 614 05 10 42';
 	const HORARIO       = 'Lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00';
@@ -37,9 +38,16 @@ class Esmalto_Empresa {
 		'woocommerce_email_footer_text_color'     => '#c8d2c8',
 	);
 
+	/**
+	 * «Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana».
+	 */
+	public static function direccion() {
+		return self::DIRECCION . ', ' . lcfirst( self::DIRECCION_2 ) . ', ' . self::CODIGO_POSTAL . ' ' . self::POBLACION;
+	}
+
 	public static function pie_correo() {
 		return self::MARCA . ' es una marca comercial de ' . self::RAZON_SOCIAL . ' · NIF ' . self::NIF . '<br />' .
-			self::DIRECCION . ', ' . self::CODIGO_POSTAL . ' ' . self::POBLACION . ' (Cádiz) · ' . self::EMAIL . ' · ' . self::TELEFONO;
+			self::direccion() . ' · ' . self::EMAIL . ' · ' . self::TELEFONO;
 	}
 
 	/**
@@ -68,11 +76,11 @@ class Esmalto_Empresa {
 
 		// 2. Dirección de la tienda (sale en los correos y es la base del IVA).
 		update_option( 'woocommerce_store_address', self::DIRECCION );
-		update_option( 'woocommerce_store_address_2', '' );
+		update_option( 'woocommerce_store_address_2', self::DIRECCION_2 );
 		update_option( 'woocommerce_store_city', self::POBLACION );
 		update_option( 'woocommerce_store_postcode', self::CODIGO_POSTAL );
 		update_option( 'woocommerce_default_country', 'ES:' . self::PROVINCIA );
-		$log[] = sprintf( 'Dirección de la tienda: %s, %s %s (Cádiz).', self::DIRECCION, self::CODIGO_POSTAL, self::POBLACION );
+		$log[] = sprintf( 'Dirección de la tienda: %s.', self::direccion() );
 
 		// 3. Transferencia: reserva de 5 días hábiles (condiciones generales); el justificante va al correo de contacto.
 		$bacs = get_option( 'woocommerce_bacs_settings', array() );

@@ -1,6 +1,6 @@
 {
  "condiciones": {
-  "version": "Versión 1.0 · noviembre de 2026",
+  "version": "Versión 1.1 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Quiénes somos",
@@ -11,7 +11,7 @@
      {
       "lista": [
        "Kumen Tres Sesenta, S.L. · NIF B88655014",
-       "Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz)",
+       "Domicilio social: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana",
        "Inscrita en el Registro Mercantil de Cádiz, hoja CA-69375, inscripción 1ª",
        "Correo electrónico: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>",
        "Horario de atención: lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00"
@@ -77,9 +77,6 @@
     "bloques": [
      {
       "p": "Cada pedido se factura con factura completa a nombre de los datos fiscales facilitados. La factura se emite electrónicamente y se envía por correo electrónico."
-     },
-     {
-      "p": "Los comerciantes minoristas acogidos al régimen especial del recargo de equivalencia deben indicarlo en el pedido para que se les aplique en la factura."
      }
     ]
    },
@@ -184,7 +181,7 @@
      },
      {
       "lista": [
-       "<strong>Cómo ejercerlo.</strong> Comuníquelo por correo a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> o por carta a Kumen Tres Sesenta, S.L., C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Puede usar el formulario que figura al final de estas condiciones, aunque no es obligatorio. Le confirmaremos la recepción por correo electrónico.",
+       "<strong>Cómo ejercerlo.</strong> Comuníquelo por correo a <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> o por carta a Kumen Tres Sesenta, S.L., Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana. Puede usar el formulario que figura al final de estas condiciones, aunque no es obligatorio. Le confirmaremos la recepción por correo electrónico.",
        "<strong>Reembolso.</strong> Le devolveremos todos los pagos recibidos, incluidos los gastos de entrega ordinarios, en un máximo de 14 días naturales desde que nos comunique su decisión, por el mismo medio de pago que utilizó. Podremos retener el reembolso hasta recibir la mercancía o hasta que acredite haberla enviado.",
        "<strong>Devolución de la mercancía.</strong> El consumidor debe devolver la mercancía en un plazo de 14 días naturales desde que comunique el desistimiento y asume el coste directo de la devolución. Por el peso y el volumen de la cerámica, ese coste depende de la cantidad y del destino. Se le indicará antes de organizar la recogida, y el cliente también puede devolverla por sus propios medios.",
        "<strong>Estado de la mercancía.</strong> El consumidor solo responde de la pérdida de valor causada por una manipulación distinta de la necesaria para comprobar el producto.",
@@ -198,7 +195,7 @@
     "titulo": "Formulario de desistimiento",
     "bloques": [
      {
-      "p": "A la atención de Kumen Tres Sesenta, S.L. (Esmalto Cerámica), C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz) · <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>"
+      "p": "A la atención de Kumen Tres Sesenta, S.L. (Esmalto Cerámica), Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana · <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>"
      },
      {
       "p": "Por la presente le comunico/comunicamos (*) que desisto/desistimos (*) de mi/nuestro (*) contrato de venta de los siguientes bienes: ……………………………"
@@ -252,7 +249,7 @@
   ]
  },
  "aviso_legal": {
-  "version": "Versión 1.0 · noviembre de 2026",
+  "version": "Versión 1.1 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Titular del sitio web",
@@ -263,7 +260,7 @@
      {
       "lista": [
        "Kumen Tres Sesenta, S.L. · NIF B88655014",
-       "Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz)",
+       "Domicilio social: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana",
        "Inscrita en el Registro Mercantil de Cádiz, hoja CA-69375, inscripción 1ª",
        "Correo electrónico: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>"
       ]
@@ -311,13 +308,13 @@
   ]
  },
  "privacidad": {
-  "version": "Versión 1.0 · noviembre de 2026",
+  "version": "Versión 1.1 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Responsable del tratamiento",
     "bloques": [
      {
-      "p": "Kumen Tres Sesenta, S.L. (NIF B88655014), C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Contacto en materia de protección de datos: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>."
+      "p": "Kumen Tres Sesenta, S.L. (NIF B88655014), Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana. Contacto en materia de protección de datos: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>."
      }
     ]
    },
@@ -330,7 +327,6 @@
        "<strong>Facturación.</strong> Datos fiscales y de facturación. Base legal: el cumplimiento de obligaciones legales fiscales y mercantiles (art. 6.1.c RGPD). El NIF o DNI es obligatorio porque todas las ventas se facturan con factura completa.",
        "<strong>Cuentas profesionales.</strong> Datos de la empresa, CNAE y persona de contacto, para verificar la actividad y gestionar la cuenta profesional. Base legal: la aplicación de medidas precontractuales y la ejecución del contrato (art. 6.1.b RGPD).",
        "<strong>Consultas.</strong> Datos que nos envía por formulario, correo o teléfono, para responderle. Base legal: la aplicación de medidas precontractuales a petición del interesado o, en su caso, el consentimiento (art. 6.1.a y b RGPD).",
-       "<strong>Newsletter.</strong> Correo electrónico, para enviar novedades y ofertas solo si lo ha autorizado marcando la casilla correspondiente y confirmando la suscripción. Base legal: el consentimiento (art. 6.1.a RGPD). Puede retirarlo en cualquier momento con el enlace de baja que incluye cada envío.",
        "<strong>Histórico de clientes.</strong> Mantenemos un histórico de compras de cada cliente para atender garantías y reclamaciones y facilitar nuevos pedidos. Base legal: el interés legítimo en la gestión de la relación comercial (art. 6.1.f RGPD)."
       ]
      },
@@ -346,7 +342,6 @@
       "lista": [
        "Datos de clientes y pedidos: mientras dure la relación comercial y, después, durante los plazos legales de prescripción. La documentación contable y las facturas se conservan 6 años (art. 30 del Código de Comercio).",
        "Consultas que no terminan en compra: 12 meses.",
-       "Newsletter: hasta que el interesado se dé de baja.",
        "Cuentas profesionales no activadas: 12 meses desde la solicitud."
       ]
      }
@@ -364,7 +359,6 @@
        "Stripe, para el cobro con tarjeta.",
        "Holded, para la facturación.",
        "cdmon, para el alojamiento de la web y del correo.",
-       "Brevo, para el envío de la newsletter.",
        "Google, para la analítica web, solo si se aceptan las cookies analíticas."
       ]
      },
@@ -398,7 +392,7 @@
   ]
  },
  "cookies": {
-  "version": "Versión 1.0 · noviembre de 2026",
+  "version": "Versión 1.1 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Qué son y cuáles usamos",

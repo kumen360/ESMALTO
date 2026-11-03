@@ -221,7 +221,7 @@ class Esmalto_Paginas {
 			$bloques[] = $bloque;
 		}
 		$bloques[] = self::separador();
-		$bloques[] = self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' );
+		$bloques[] = self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Castellón de la Plana · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' );
 		return self::seccion( $bloques, '820px', 'clamp(32px, 5vw, 56px)', 'clamp(60px, 9vw, 110px)', 'esm-documento' );
 	}
 
@@ -231,7 +231,7 @@ class Esmalto_Paginas {
 	private static function pie_documento() {
 		return '<!-- wp:group {"style":{"border":{"top":{"color":"rgba(255,255,255,0.12)","width":"1px"}},"spacing":{"padding":{"top":"24px"}}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->' . "\n" .
 			'<div class="wp-block-group" style="border-top-color:rgba(255,255,255,0.12);border-top-width:1px;padding-top:24px">' .
-			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Sanlúcar de Barrameda (Cádiz) · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
+			self::p( 'Esmalto Cerámica · Kumen Tres Sesenta, S.L. · NIF B88655014 · Castellón de la Plana · hola@esmalto.com · +34 614 05 10 42', 'esm-documento__pie', 'texto-mudo' ) .
 			"</div>\n<!-- /wp:group -->";
 	}
 

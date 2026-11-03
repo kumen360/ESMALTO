@@ -357,10 +357,11 @@ class Esmalto_Herramientas {
 
 	private static function configurar_woocommerce( $proximamente ) {
 		$opciones = array(
-			'woocommerce_default_country'                      => 'ES:CA',
-			'woocommerce_store_address'                        => 'C/ Bolsa, 44',
-			'woocommerce_store_city'                           => 'Sanlúcar de Barrameda',
-			'woocommerce_store_postcode'                       => '11540',
+			'woocommerce_default_country'                      => 'ES:CS',
+			'woocommerce_store_address'                        => 'Calle La Llosa, 3',
+			'woocommerce_store_address_2'                      => 'Planta 3, puerta 16',
+			'woocommerce_store_city'                           => 'Castellón de la Plana',
+			'woocommerce_store_postcode'                       => '12003',
 			'woocommerce_allowed_countries'                    => 'specific',
 			'woocommerce_specific_allowed_countries'           => array( 'ES' ),
 			'woocommerce_ship_to_countries'                    => '',

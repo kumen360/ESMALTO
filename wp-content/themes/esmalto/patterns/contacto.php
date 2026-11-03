@@ -17,7 +17,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"style":{"typography":{"lineHeight":"1.65"}}} -->
-<p style="line-height:1.65">Esmalto Cerámica<br>Kumen Tres Sesenta, S.L.<br>C/ Bolsa, 44<br>11540 Sanlúcar de Barrameda (Cádiz)<br>NIF B88655014</p>
+<p style="line-height:1.65">Esmalto Cerámica<br>Kumen Tres Sesenta, S.L.<br>Calle La Llosa, 3, planta 3, puerta 16<br>12003 Castellón de la Plana<br>NIF B88655014</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -70,7 +70,7 @@
 <!-- wp:group {"className":"esm-mapa","style":{"dimensions":{"minHeight":"320px"},"border":{"color":"rgba(255,255,255,0.1)","width":"1px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center"}} -->
 <div class="wp-block-group esm-mapa has-border-color" style="border-color:rgba(255,255,255,0.1);border-width:1px;min-height:320px"><!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://www.google.com/maps/search/?api=1&amp;query=C%2F+Bolsa+44%2C+11540+Sanl%C3%BAcar+de+Barrameda" target="_blank" rel="noreferrer noopener">Cómo llegar (Google Maps)</a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+La+Llosa+3%2C+12003+Castell%C3%B3n+de+la+Plana" target="_blank" rel="noreferrer noopener">Cómo llegar (Google Maps)</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
