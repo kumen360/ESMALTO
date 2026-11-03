@@ -111,7 +111,11 @@ class Esmalto_Empresa {
 
 		// Pago: teléfono obligatorio, como el correo (lo piden también las condiciones generales).
 		update_option( 'woocommerce_checkout_phone_field', 'required' );
-		$log[] = 'Pago: teléfono obligatorio.';
+		// Para comprar hay que tener cuenta (aviso legal, apartado 2): se crea al pagar o se inicia sesión.
+		update_option( 'woocommerce_enable_guest_checkout', 'no' );
+		update_option( 'woocommerce_enable_signup_and_login_from_checkout', 'yes' );
+		update_option( 'woocommerce_enable_checkout_login_reminder', 'yes' );
+		$log[] = 'Pago: teléfono obligatorio y hay que crear cuenta (o iniciar sesión) para comprar.';
 
 		// 6. Sin cookies de «Atribución de pedidos» (sbjs_*).
 		update_option( 'woocommerce_feature_order_attribution_enabled', 'no' );

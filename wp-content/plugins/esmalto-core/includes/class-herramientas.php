@@ -381,7 +381,7 @@ class Esmalto_Herramientas {
 			'woocommerce_tax_total_display'                    => 'single',
 			'woocommerce_manage_stock'                         => 'no',
 			'woocommerce_enable_reviews'                       => 'no',
-			'woocommerce_enable_guest_checkout'                => 'yes',
+			'woocommerce_enable_guest_checkout'                => 'no',
 			'woocommerce_checkout_phone_field'                 => 'required',
 			'woocommerce_enable_checkout_login_reminder'       => 'yes',
 			'woocommerce_enable_signup_and_login_from_checkout' => 'yes',
