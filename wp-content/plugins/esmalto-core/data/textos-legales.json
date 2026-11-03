@@ -1,6 +1,6 @@
 {
  "condiciones": {
-  "version": "Versión 1.1 · noviembre de 2026",
+  "version": "Versión 1.2 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Quiénes somos",
@@ -11,9 +11,10 @@
      {
       "lista": [
        "Kumen Tres Sesenta, S.L. · NIF B88655014",
-       "Domicilio social: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana",
+       "Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz)",
+       "Oficina técnica de ventas: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana",
        "Inscrita en el Registro Mercantil de Cádiz, hoja CA-69375, inscripción 1ª",
-       "Correo electrónico: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>",
+       "Correo: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>",
        "Horario de atención: lunes a viernes, de 9:00 a 14:00 y de 16:00 a 19:00"
       ]
      }
@@ -249,7 +250,7 @@
   ]
  },
  "aviso_legal": {
-  "version": "Versión 1.1 · noviembre de 2026",
+  "version": "Versión 1.2 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Titular del sitio web",
@@ -260,9 +261,10 @@
      {
       "lista": [
        "Kumen Tres Sesenta, S.L. · NIF B88655014",
-       "Domicilio social: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana",
+       "Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz)",
+       "Oficina técnica de ventas: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana",
        "Inscrita en el Registro Mercantil de Cádiz, hoja CA-69375, inscripción 1ª",
-       "Correo electrónico: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>"
+       "Correo: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a> · Teléfono: <a href=\"tel:+34614051042\">+34 614 05 10 42</a>"
       ]
      },
      {
@@ -308,13 +310,13 @@
   ]
  },
  "privacidad": {
-  "version": "Versión 1.1 · noviembre de 2026",
+  "version": "Versión 1.2 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Responsable del tratamiento",
     "bloques": [
      {
-      "p": "Kumen Tres Sesenta, S.L. (NIF B88655014), Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana. Contacto en materia de protección de datos: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>."
+      "p": "Kumen Tres Sesenta, S.L. (NIF B88655014). Domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz). Oficina técnica de ventas: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana. Contacto en materia de protección de datos: <a href=\"mailto:hola@esmalto.com\">hola@esmalto.com</a>."
      }
     ]
    },
@@ -392,7 +394,7 @@
   ]
  },
  "cookies": {
-  "version": "Versión 1.1 · noviembre de 2026",
+  "version": "Versión 1.2 · noviembre de 2026",
   "apartados": [
    {
     "titulo": "1. Qué son y cuáles usamos",
