@@ -59,6 +59,9 @@ Hecho en esmalto.com el 03/11/2026, con los ZIP subidos con `tools/build_subida.
    - pie de Muestras, Formas de pago y Gastos de envío.
 4. Complianz: dirección de la empresa.
 
+## Después de subir el plugin 1.6.1
+Hecho en esmalto.com el 03/11/2026: *Esmalto → Herramientas → 7* (textos legales 1.2, con domicilio social y oficina técnica de ventas).
+
 ## Regenerar el catálogo
 ```
 python -I catalogo/scripts/build_catalog.py --root .

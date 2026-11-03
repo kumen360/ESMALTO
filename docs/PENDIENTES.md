@@ -3,11 +3,14 @@
 Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posible todavía»; lo de los ajustes del 25/10, en `AJUSTES-2026-10-25.md` → «Lo que haces tú», «Pendiente de tu confirmación» y «No posible todavía»; lo de la revisión del 29/10, en `REVISION-2026-10-29.md`; lo de la del 03/11, en `REVISION-2026-11-03.md`.
 
 ## Datos de empresa
-- Kumen Tres Sesenta, S.L. (Esmalto Cerámica), NIF B88655014, Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana (desde el 03/11), +34 614 05 10 42, hola@esmalto.com. Se aplican con *Esmalto → Herramientas → 6*; el pie y Contacto están en el tema.
+- Kumen Tres Sesenta, S.L. (Esmalto Cerámica), NIF B88655014, +34 614 05 10 42, hola@esmalto.com. Se aplican con *Esmalto → Herramientas → 6*; el pie y Contacto están en el tema.
+- Desde el 03/11:
+  - oficina técnica de ventas: Calle La Llosa, 3, planta 3, puerta 16, 12003 Castellón de la Plana, la dirección que sale en la web;
+  - domicilio social: C/ Bolsa, 44, 11540 Sanlúcar de Barrameda (Cádiz), en el bloque del titular de los textos legales.
 - Recogida en almacén: según las condiciones generales, el punto se comunica después de la compra. Si algún día se quiere publicar, se pone en *Esmalto → Ajustes → Recogida en almacén*.
 - Enlaces de Instagram y LinkedIn: los iconos están ocultos (visibilidad de bloque en el pie) hasta tener las URL.
 - IBAN para transferencias: *WooCommerce → Ajustes → Pagos → Transferencia bancaria*
-- Textos legales: versión 1.1, publicada el 03/11. Lo que debe validar el asesor está en `REVISION-2026-11-03.md`. Si se activan Google Analytics o Stripe, añadir sus cookies a la tabla (`Esmalto_Paginas::cookies_instaladas()`).
+- Textos legales: versión 1.2, publicada el 03/11. Lo que debe validar el asesor está en `REVISION-2026-11-03.md`. Si se activan Google Analytics o Stripe, añadir sus cookies a la tabla (`Esmalto_Paginas::cookies_instaladas()`).
 
 ## Pagos
 - Conectar Stripe con tu cuenta (*WooCommerce → Ajustes → Pagos → Stripe*), a nombre de Kumen y con «ESMALTO» en el extracto. Las claves las introduces tú.
@@ -27,7 +30,7 @@ Lo pendiente del repaso del 10/10 está en `REPASO-2026-10-10.md` → «No posib
   - *Importar fichas técnicas*;
   - la importación del CSV.
 - Para actualizar el tema o el plugin, sube los ZIP de `dist/` desde *Apariencia → Temas* y *Plugins → Añadir → Subir*, o con `tools/build_subida.py` (ver `DESPLIEGUE.md`).
-- Instalados en esmalto.com: tema 1.3.3 y Esmalto Core 1.6.0 (03/11).
+- Instalados en esmalto.com: tema 1.3.3 y Esmalto Core 1.6.1 (03/11).
 
 ## Diferencias deliberadas con el diseño
 - Se mantiene «Cesta (0)» también en móvil (el diseño la oculta) para poder llegar a la cesta.
